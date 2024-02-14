@@ -1,6 +1,6 @@
-CREATE DATABASE proyect_bar;
+CREATE DATABASE project_bar;
 
-USE proyect_bar;
+USE project_bar;
 
 
 CREATE TABLE IF NOT EXISTS rol(
