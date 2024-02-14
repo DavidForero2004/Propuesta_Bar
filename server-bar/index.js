@@ -23,12 +23,12 @@ app.use(function(req, res, next) {
 app.use(body_parser.json())
 
 app.listen(port, () => {
-    console.log(`Servidor arriba en el puerto: ${port}`)
+    console.log(`Servidor encendido con puerto: ${port}`)
 })
 
 conection.connect(error => {
     if(error) throw error
-    console.log('Conexion exitosa a la bd')
+    console.log('Conexion exitosa a la base de datos!')
 })
 
 app.get('/', (req, res) => {
