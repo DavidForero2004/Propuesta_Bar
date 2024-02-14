@@ -13,7 +13,9 @@ const conection = mysql.createConnection({
     password: ''
 })
 
-//header configuration, api permissions
+
+////////////////////////
+
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', '*')
