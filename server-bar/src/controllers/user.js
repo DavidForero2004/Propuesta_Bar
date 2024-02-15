@@ -21,7 +21,7 @@ const newUser = async (req, res) => {
     const query = `INSERT INTO user(name, email, password, status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", "${status}", ${id_rol})`
 
     try {
-        connection.query(query, (error, result) => {
+        connection.query(query, (errorq) => {
             if(!error) 
                 res.json({
                     msg: 'New User',
