@@ -1,11 +1,11 @@
 
- const getProducts = (req, res ) =>{
+const getProducts = (req, res ) =>{
     res.json({
-        msg:"get product"
+        msg:"Get product"
     })
 }
 
-module.exports = {getProducts}
+module.exports = { getProducts }
 
 
 

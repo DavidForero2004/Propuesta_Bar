@@ -22,7 +22,7 @@ app.use('/users', userRoutes); // mount the routes on '/users'
 app.use('/products', productRoutes) // mount the routes on '/products'
 
 app.listen(process.env.PORT || port, () => {
-    console.log(`Server onn in port: ${port}`);
+    console.log(`Server on in port: ${port}`);
 });
 
 // Connect bd

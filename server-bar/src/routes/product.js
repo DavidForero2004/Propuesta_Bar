@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {getProducts} = require ('../controllers/product');
+const { getProducts } = require ('../controllers/product');
 
 
 //routes call all methos
