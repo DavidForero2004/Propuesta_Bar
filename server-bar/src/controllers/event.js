@@ -7,7 +7,6 @@ const insertEvent = async (req, res) => {
     const { name_event, date} = req.body;
     const query = 'CALL insertEvent (?,?)';
     
-    
     try {
         connection.query(query, [name_event, date], (error, result) => {
             if (error) {
