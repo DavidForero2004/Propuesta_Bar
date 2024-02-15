@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const connection = require('../db/connection.js');
 
+//List User
 const getUser = (_req, res ) =>{
     res.json({
         msg:"Get users"
