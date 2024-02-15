@@ -11,17 +11,11 @@ const getUser = (req, res ) =>{
 const newUser = async (req, res) => {
     const { name, email, password, status, id_rol } = req.body
     const hashPassword = await bcrypt.hash(password, 10)
-
-    // console.log(name)
-    // console.log(email)
-    // console.log(hashPassword)
-    // console.log(status)
-    // console.log(id_rol) 
-
+   
     const query = `INSERT INTO user(name, email, password, status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", "${status}", ${id_rol})`
 
     try {
-        connection.query(query, (errorq) => {
+        connection.query(query, (error) => {
             if(!error) 
                 res.json({
                     msg: 'New User',

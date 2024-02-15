@@ -58,3 +58,25 @@ CREATE TABLE IF NOT EXISTS order_product(
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
 	FOREIGN KEY(id_product) REFERENCES product(id)
 );
+
+
+
+
+/*Procedures*/
+
+
+--EVENTS
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertEvent (
+	IN name_event VARCHAR(255),
+	IN date DATETIME 
+)
+BEGIN 
+	INSERT INTO event(name_event, date) values (name_event, date);
+END //
+DELIMITER ;
+
+
+
+
