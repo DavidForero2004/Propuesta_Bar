@@ -2,39 +2,45 @@
 const bcrypt = require('bcrypt');
 const connection = require('../db/connection.js');
 
-const getUser = (req, res ) =>{
+const getUser = (_req, res ) =>{
     res.json({
         msg:"Get users"
     })
 }
 
+//Create User
 const newUser = async (req, res) => {
     const { name, email, password, status, id_rol } = req.body
     const hashPassword = await bcrypt.hash(password, 10)
 
-    // console.log(name)
-    // console.log(email)
-    // console.log(hashPassword)
-    // console.log(status)
-    // console.log(id_rol) 
+    /////////////////////////////////////////////////////////////////////////////////////
 
-    const query = `INSERT INTO user(name, email, password, status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", "${status}", ${id_rol})`
+    const userExist = `SELECT COUNT(*) FROM user WHERE email = ${email}`
 
-    try {
-        connection.query(query, (errorq) => {
-            if(!error) 
+    if (userExist > 0) {
+        res.status(400).json({
+            msg: `There is already a user with this email ${email}`
+        })
+    } else {
+        const query = `INSERT INTO user(name, email, password, status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", "${status}", ${id_rol})`
+
+        connection.query(query ,(error, result) => {
+            if (error) {
+                res.json({
+                    msg: 'Error to insert',
+                    error
+                })
+            } else {
                 res.json({
                     msg: 'New User',
+                    result
                 })
-        })
-    } catch (error) {
-        res.status(400).json({
-            msg: 'An error was found',
-            error
+            }
         })
     }
 };
 
+//Login User
 const loginUser = (req, res) => {
     const { body } = req;
     res.json({
