@@ -10,7 +10,7 @@ const getUser = (_req, res ) =>{
 
 //Create User
 const newUser = async (req, res) => {
-    const { name, email, password, status, id_rol } = req.body
+    const { name, email, password, id_status, id_rol } = req.body
     const hashPassword = await bcrypt.hash(password, 10)
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ const newUser = async (req, res) => {
             msg: `There is already a user with this email ${email}`
         })
     } else {
-        const query = `INSERT INTO user(name, email, password, status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", "${status}", ${id_rol})`
+        const query = `INSERT INTO user(name, email, password, id_status, id_rol) VALUES("${name}", "${email}", "${hashPassword}", ${id_status}, ${id_rol})`
 
         connection.query(query ,(error, result) => {
             if (error) {
