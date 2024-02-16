@@ -19,7 +19,6 @@ const validateToken = (req, res, next) => {
             msg: 'Acceso denegado'
         })
     }
-
 }
 
 module.exports = { validateToken }

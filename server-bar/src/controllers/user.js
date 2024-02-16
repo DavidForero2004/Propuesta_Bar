@@ -56,7 +56,7 @@ const newUser = async (req, res) => {
             error
         })
     }
-};
+}
 
 //Login User
 const loginUser = async (req, res) => {
@@ -107,6 +107,6 @@ const loginUser = async (req, res) => {
             error
         })
     }
-};
+}
 
-module.exports = { newUser, loginUser, getUser };
+module.exports = { newUser, loginUser, getUser }
