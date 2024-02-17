@@ -1,4 +1,6 @@
-CREATE DATABASE project_bar;
+CREATE DATABASE  project_bar
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
 
 USE project_bar;
 
@@ -69,12 +71,20 @@ CREATE TABLE IF NOT EXISTS order_product(
 );
 
 
+INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
+INSERT INTO status(name) VALUES ('Active'), ('inactive');
+
+
+
+
+
+
 
 
 /*Procedures*/
 
 
-----------------------------EVENTS
+------------------------------------------------------------EVENTS
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertEvent (
@@ -86,6 +96,7 @@ BEGIN
 END //
 DELIMITER ;
 
+--------
 
 --SELECT ACTIVE
 DELIMITER //
@@ -95,6 +106,8 @@ BEGIN
 	SELECT name_event, date from event where date >= now();
 END //
 DELIMITER ;
+
+--------
 
 --UPDATE
 DELIMITER //
@@ -108,6 +121,7 @@ BEGIN
 END //
 DELIMITER ;
 
+---------
 
 --DELETE
 DELIMITER //
@@ -120,10 +134,60 @@ END //
 DELIMITER ;
 
 
+-----------------------------------------------------------PRODUCTS
+--INSERT
+DELIMITER //
+CREATE PROCEDURE selectProduct ()
+BEGIN 
+	SELECT * FROM product ;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertProduct (
+		IN name_product_p VARCHAR(255),
+		IN price_p DECIMAL(65, 2),
+		IN Stock_P INTEGER,	
+		IN id_status_P INTEGER
+)
+BEGIN 
+	INSERT INTO product(name_product, price, Stock, id_status) VALUES(name_product_p, price_p, Stock_P, id_status_P);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateProduct(
+		IN id_p INTEGER,
+		IN name_product_p VARCHAR(255),
+		IN price_p DECIMAL(65, 2),
+		IN Stock_P INTEGER,	
+		IN id_status_P INTEGER
+)
+BEGIN 
+	UPDATE product set name_product = name_product_p, price = price_p, Stock = Stock_P, id_status= id_status_P WHERE id = id_p;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteProduct(
+		IN id_p INTEGER
+)
+BEGIN 
+	DELETE FROM product WHERE id = id_p;
+END //
+DELIMITER ;
 
 
-
---------------------------------USERS
+---------------------------------------------------------------USERS
 --SELECT
 DELIMITER //
 CREATE PROCEDURE selectUser()
@@ -131,6 +195,36 @@ BEGIN
 	Select user.id, user.name, user.email, Status.name AS Status, rol.name AS rol from user inner join status on user.id_status = Status.id INNER JOIN rol on rol.id = user.id_rol;
 END //
 DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+/*Procedure for update status where stock is 0 or less*/
+
+DELIMITER //
+CREATE PROCEDURE updateAllProductStatus()
+BEGIN
+    UPDATE product
+    SET id_status = 2
+    WHERE Stock <= 0;
+END //
+
+DELIMITER ;
+  
+CREATE EVENT updateProductStatusEvent
+    ON SCHEDULE EVERY 1 HOUR
+    DO
+        CALL updateAllProductStatus();
+
+SHOW VARIABLES LIKE 'event_scheduler';
+
+SET GLOBAL event_scheduler = ON;
 
 
 
