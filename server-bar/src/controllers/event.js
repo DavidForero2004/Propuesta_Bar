@@ -59,6 +59,63 @@ const insertEvent = async (req, res) => {
 };
 
 
+//update event
 
 
-module.exports = {insertEvent, getEventActive};
+const updateEvent = async(req, res)=>{
+
+    const{name_event_p, date_p, id_p } = req.body
+    const query = 'call updateEvent(?,?,?)'
+
+    try {
+        connection.query(query,[id_p,name_event_p, date_p],(error, result)=>{
+            if (error) {
+                res.status(500).json({
+                    msg:"error to update",
+                    error
+                })
+            } else {
+                res.json({
+                    msg:"event updated",
+                    result
+                })
+            }
+        });
+        
+    } catch (error) {
+        res.error(error)
+    }
+    
+
+}
+
+
+//delete event
+const deleteEvent = async(req, res) =>{
+    const {id_p}= req.body;
+    const  query = 'CALL daleteEvent(?)';
+
+    try {
+        connection.query(query, id_p, (error, result)=>{
+            if (error) {
+                res.status(500).json({
+                    msg: "error to delete",
+                    error
+                })
+            } else {
+                res.json({
+                    msg:"daleted",
+                    result
+                })
+            }
+        })
+    } catch (error) {
+        
+    }
+   
+
+}
+
+
+
+module.exports = {insertEvent, getEventActive, updateEvent,deleteEvent};

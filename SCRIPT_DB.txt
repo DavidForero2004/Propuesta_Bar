@@ -87,7 +87,7 @@ END //
 DELIMITER ;
 
 
---SELECT ACTIIVE
+--SELECT ACTIVE
 DELIMITER //
 CREATE PROCEDURE selectEventActive (
 )
@@ -95,6 +95,30 @@ BEGIN
 	SELECT name_event, date from event where date >= now();
 END //
 DELIMITER ;
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateEvent (
+    IN id_p INTEGER,
+    IN name_event_p VARCHAR(255),
+    IN date_p DATETIME
+)
+BEGIN 
+    UPDATE event SET name_event = name_event_p, date = date_p WHERE id = id_p;
+END //
+DELIMITER ;
+
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE daleteEvent (
+    IN id_p INTEGER
+)
+BEGIN 
+    DELETE FROM event WHERE id = id_p;
+END //
+DELIMITER ;
+
 
 
 
