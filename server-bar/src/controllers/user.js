@@ -72,9 +72,7 @@ const loginUser = async (req, res) => {
             const passwordvalidate = await bcrypt.compare(password, user.password)
             const token = jwt.sign({
                 username: email
-            }, process.env.SECRET_K || 'contrasena123', {
-                expiresIn: '10000'
-            })
+            }, process.env.SECRET_K || 'contrasena123')
 
             /////////////////////////////////////////////////////////////////////////////////////
             if (error) {

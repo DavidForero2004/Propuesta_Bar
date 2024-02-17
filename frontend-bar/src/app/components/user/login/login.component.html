@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div class="body">
+    <div class="form-floating mb-3">
+        <input type="email" [(ngModel)]="email" class="form-control" placeholder="Ingresa el usuario">
+        <label>Correo electronico</label>
+    </div>
+    
+    <div class="form-floating mb-3">
+        <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingresa la contraseña">
+        <label>Contraseña</label>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
+</div>
