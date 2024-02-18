@@ -10,9 +10,9 @@ const routes: Routes = [{
   path: '', children: [
     //USERS
     {path: 'login', component: LoginComponent},
-    {path: 'event', component: EventComponent},
-    ///EVENTS
     {path: 'dashboard', component: DashboardComponent},
+    ///EVENTS
+    {path: 'event', component: EventComponent},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 
