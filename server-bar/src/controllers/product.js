@@ -1,16 +1,19 @@
-
-const connection = require('../db/connection');
+//controllers/products.js
+const connection = require('../db/connection')
 
 
 //show all products
-const getProducts = async (req, res ) =>{
-   const query = 'call selectProduct';
-    try{
-        connection.query(query,(error, result)=>{
+const getProducts = async (req, res ) => {
+   const query = 'CALL selectProduct'
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
             if (error) {
                 res.json({
-                    error,
-                    msg:"error to select"
+                    msg: "Error to select",
+                    error
                 })
             } else {
                 res.json({
@@ -18,42 +21,47 @@ const getProducts = async (req, res ) =>{
                 })
             }
         })
-    }catch(error){
-        res.error(error);
+    } catch(error) {
+        res.error(error)
     }
 }
 
+
 //insert products
-const insertProduct = async (req, res ) =>{
-    const {name_product_p, price_p, Stock_p, id_status_p} = req.body;
-    const query = 'CALL insertProduct(?,?,?,?)';
+const insertProduct = async (req, res ) => {
+    const {name_product_p, price_p, Stock_p, id_status_p} = req.body
+    const query = 'CALL insertProduct(?,?,?,?)'
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     try {
-        connection.query(query, [name_product_p, price_p, Stock_p, id_status_p], (error, result)=>{
+        connection.query(query, [name_product_p, price_p, Stock_p, id_status_p], (error, result) => {
             if (error) {
                 res.json({
-                    error,
-                    msg:"prodct exist"
+                    msg: "Product exist",
+                    error
                 });
             } else {
                 res.json({
                     result
                 })
             }
-
         })
-    } catch (error) {
-     res.error(error)   
+    } catch(error) {
+        res.error(error)   
     }
 }
 
 
 //update product
-const updateProduct = async (req, res) =>{
-    const {id_p, name_product_p, price_p, Stock_p, id_status_p} = req.body;
-    const query = 'CALL updateProduct(?,?,?,?,?)';
+const updateProduct = async (req, res) => {
+    const {id_p, name_product_p, price_p, Stock_p, id_status_p} = req.body
+    const query = 'CALL updateProduct(?,?,?,?,?)'
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id_p, name_product_p, price_p, Stock_p, id_status_p], (error, result)=>{
+        connection.query(query, [id_p, name_product_p, price_p, Stock_p, id_status_p], (error, result) => {
             if (error) {
                 res.json({
                     error
@@ -64,37 +72,41 @@ const updateProduct = async (req, res) =>{
                 })
             }
         })
-    } catch (error) {
+    } catch(error) {
         res.error(error);
     }
 }
 
 
-
-const deletepProduct = async (req, res) =>{
+//delete product
+const deletepProduct = async (req, res) => {
     //when need id ever use {} to collect info id_p
-    const {id_p} = req.body; 
-    const query = 'CALL deleteProduct(?)';
+    const {id_p} = req.body
+    const query = 'CALL deleteProduct(?)'
+
+    ///////////////////////////////////////////////////////////////////////////////
+
     try {
-        connection.query(query, id_p, (error, result)=>{
+        connection.query(query, id_p, (error, result) => {
             if (error) {
                 res.json({
-                    error,
-                    msg:"delete product error", result
+                    msg:"Delete product error", result,
+                    error
                 })
             } else {
                 res.json({
                     result,
-                    msg: "deleted product"
+                    msg: "Deleted product"
                 })
             }
         })
-    } catch (error) {
+    } catch(error) {
         res.error(error)
     }
 }
 
-module.exports = { getProducts,insertProduct,updateProduct,deletepProduct}
+
+module.exports = { getProducts,insertProduct,updateProduct,deletepProduct }
 
 
 

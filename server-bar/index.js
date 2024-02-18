@@ -11,8 +11,11 @@ const port = 3000
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', '*')
-    next();
-});
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    res.header('Access-Control-Allow-Credentials', true)
+
+    next()
+})
 
 //midleware, this allow use json structure
 app.use(bodyParser.json())
@@ -21,10 +24,6 @@ app.use(bodyParser.json())
 app.use('/users', userRoutes); // mount the routes on '/users'
 app.use('/products', productRoutes) // mount the routes on '/products'
 app.use('/events', eventsRoutes) // mount the routes on '/events'
-
-app.use(cors({
-    allowedHeaders: ['Content-Type'] // Permitir Content-Type en la solicitud CORS
-}));
 
 app.listen(process.env.PORT || port, () => {
     console.log(`Server on in port: ${port}`)

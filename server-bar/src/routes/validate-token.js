@@ -11,12 +11,12 @@ const validateToken = (req, res, next) => {
             next()
         } catch (error) {
             res.status(401).json({
-                msg: 'Token no valido'
+                msg: 'Invalid token'
             })
         }
     } else {
         res.status(401).json({
-            msg: 'Acceso denegado'
+            msg: 'Access denied'
         })
     }
 }

@@ -1,14 +1,15 @@
+//routes/product.js
 const express = require('express')
 const router = express.Router()
 
 const { getProducts, insertProduct, updateProduct, deletepProduct } = require ('../controllers/product');
 
 
-//routes call all methos
+//Routes call all methods
 router.get('/', getProducts);
-router.post('/insertProduct', insertProduct);
-router.put('/updateProduct', updateProduct);
-router.delete('/deleteProduct', deletepProduct);
+router.post('/insertproduct', insertProduct);
+router.put('/updateproduct', updateProduct);
+router.delete('/deleteproduct', deletepProduct);
 
 
 module.exports =  router;

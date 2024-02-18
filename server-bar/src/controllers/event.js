@@ -1,12 +1,15 @@
-const connection = require('../db/connection');
-
+//controllers/event.js
+const connection = require('../db/connection')
 
 
 //Get event
-const getEventActive = async(req,res)=>{
-    const query = 'call selectEventActive';
+const getEventActive = async (req, res) => {
+    const query = 'CALL selectEventActive'
+
+    //////////////////////////////////////////////////////////////////////
+
     try {
-        connection.query(query, (error, result) =>{
+        connection.query(query, (error, result) => {
             if(error){
                 res.status(500).json({
                     msg: "Error",
@@ -14,27 +17,26 @@ const getEventActive = async(req,res)=>{
                 })
             }else{
                 res.json({
-                    msg: "all ok",
+                    msg: "All ok",
                     result
                 })
             }
         })
-    } catch (error) {
-             res.status(400).json({
-                msg: 'error not found',
-                error
-             })
-         }
-};
-
-
-
+    } catch(error) {
+        res.status(400).json({
+            msg: 'Error not found',
+            error
+        })
+    }
+}
 
 
 //insert a new event
 const insertEvent = async (req, res) => {
-    const { name_event, date} = req.body;
-    const query = 'CALL insertEvent (?,?)';
+    const { name_event, date} = req.body
+    const query = 'CALL insertEvent (?,?)'
+
+    //////////////////////////////////////////////////////////////////////////
     
     try {
         connection.query(query, [name_event, date], (error, result) => {
@@ -49,73 +51,74 @@ const insertEvent = async (req, res) => {
                     result
                 });
             }
-        });
-    } catch (error) {
+        })
+    } catch(error) {
         res.status(400).json({
-            msg: 'error not found',
+            msg: 'Error not found',
             error
-        });
+        })
     }
-};
-
-
-//update event
-
-
-const updateEvent = async(req, res)=>{
-
-    const{name_event_p, date_p, id_p } = req.body
-    const query = 'call updateEvent(?,?,?)'
-
-    try {
-        connection.query(query,[id_p,name_event_p, date_p],(error, result)=>{
-            if (error) {
-                res.status(500).json({
-                    msg:"error to update",
-                    error
-                })
-            } else {
-                res.json({
-                    msg:"event updated",
-                    result
-                })
-            }
-        });
-        
-    } catch (error) {
-        res.error(error)
-    }
-    
-
 }
 
 
-//delete event
-const deleteEvent = async(req, res) =>{
-    const {id_p}= req.body;
-    const  query = 'CALL daleteEvent(?)';
+//update event
+const updateEvent = async (req, res) => {
+    const{name_event_p, date_p, id_p } = req.body
+    const query = 'CALL updateEvent(?,?,?)'
+
+    ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, id_p, (error, result)=>{
+        connection.query(query,[id_p,name_event_p, date_p],(error, result) => {
             if (error) {
                 res.status(500).json({
-                    msg: "error to delete",
+                    msg:"Error to update",
                     error
                 })
             } else {
                 res.json({
-                    msg:"daleted",
+                    msg:"Event updated",
                     result
                 })
             }
         })
-    } catch (error) {
-        
+    } catch(error) {
+        res.status(400).json({
+            msg: 'Error not found',
+            error
+        })
     }
-   
-
 }
 
 
+//delete event
+const deleteEvent = async (req, res) => {
+    const {id_p}= req.body
+    const  query = 'CALL daleteEvent(?)'
 
-module.exports = {insertEvent, getEventActive, updateEvent,deleteEvent};
+    ///////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, id_p, (error, result) => {
+            if (error) {
+                res.status(500).json({
+                    msg: "Error to delete",
+                    error
+                })
+            } else {
+                res.json({
+                    msg:"Deleted",
+                    result
+                })
+            }
+        })
+    } catch(error) {
+        res.status(400).json({
+            msg: 'Error not found',
+            error
+        })
+    }
+}
+
+
+module.exports = { insertEvent, getEventActive, updateEvent,deleteEvent }

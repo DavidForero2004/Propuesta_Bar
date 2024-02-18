@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,9 @@ export class LoginComponent implements OnInit {
   password : string = '';
 
   constructor(private toastr: ToastrService,
-    private _userService: UserService) {}
+    private _userService: UserService,
+    private router: Router,
+    private _errorService: ErrorService) {}
 
   ngOnInit(): void {
     
@@ -21,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.email == '' || this.password == '') {
-      this.toastr.error('Todos los campos son obligatorios', 'Error');
+      this.toastr.error('Todos los campos son obligatorios', 'Error')
       return
     }
 
@@ -31,8 +36,12 @@ export class LoginComponent implements OnInit {
     }
 
     this._userService.login(user).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: (token) => {
+        this.router.navigate(['/dashboard'])
+        localStorage.setItem('token', token)
+      },
+      error: (e: HttpErrorResponse) => {
+        this._errorService.msjError(e)
       }
     })
   }

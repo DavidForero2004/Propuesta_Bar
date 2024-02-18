@@ -1,3 +1,4 @@
+//db/connection.js
 const mysql = require('mysql')
 
 
@@ -7,7 +8,6 @@ const connection = mysql.createConnection({
     user: 'root',
     password: ''
 })
-
 
 
 module.exports = connection;

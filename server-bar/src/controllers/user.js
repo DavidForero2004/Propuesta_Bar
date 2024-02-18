@@ -1,17 +1,18 @@
-// user.js
+//controllers/user.js
 const bcrypt = require('bcrypt')
 const connection = require('../db/connection.js')
 const jwt = require('jsonwebtoken')
 
-//List User
+//show all user
 const getUser = (_req, res ) =>{
     res.json({
         msg:"Get users"
     })
 }
 
-//Create User
-const newUser = async (req, res) => {
+
+//insert user
+const insertUser = async (req, res) => {
     const { name, email, password, id_status, id_rol } = req.body
     const hashPassword = await bcrypt.hash(password, 10)
 
@@ -58,7 +59,18 @@ const newUser = async (req, res) => {
     }
 }
 
-//Login User
+//update user
+const updateUser = async (req, res) => {
+
+}
+
+
+//delete user
+const deleteUser = async (req, res) => {
+
+}
+
+//login user
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -68,13 +80,13 @@ const loginUser = async (req, res) => {
         const userExist = `SELECT * FROM user WHERE email = '${email}'`
 
         connection.query(userExist, async (error, result) => {
-            const user = result[0];
-            const passwordvalidate = await bcrypt.compare(password, user.password)
+            const user = result[0]
             const token = jwt.sign({
                 username: email
             }, process.env.SECRET_K || 'contrasena123')
 
             /////////////////////////////////////////////////////////////////////////////////////
+
             if (error) {
                 res.status(500).json({
                     msg: 'Database server error',
@@ -85,18 +97,21 @@ const loginUser = async (req, res) => {
                     res.status(400).json({
                         msg: `There is no user with this email ${email}`
                     })
+                    return
                 }
+
+                const passwordvalidate = await bcrypt.compare(password, user.password)
 
                 if (!passwordvalidate) {
                     res.status(400).json({
                         msg: 'Incorrect password'
                     })
+                    return
                 }
 
                 res.json({
                     token
                 })
-                
             }
         })
     } catch (error) {
@@ -107,4 +122,4 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { newUser, loginUser, getUser }
+module.exports = { insertUser, loginUser, getUser, deleteUser, updateUser }
