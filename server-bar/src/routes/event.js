@@ -7,9 +7,9 @@ const {insertEvent, getEventActive, updateEvent,deleteEvent} = require('../contr
 
 //Routes call all methods
 router.get('/', getEventActive);
-router.post('/newEvent', insertEvent);
-router.put('/updateEvent', updateEvent);
-router.delete('/deleteEvent', deleteEvent);
+router.post('/newevent', insertEvent);
+router.put('/updateevent', updateEvent);
+router.delete('/deleteevent', deleteEvent);
 
 
 module.exports = router;
