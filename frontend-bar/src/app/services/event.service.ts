@@ -17,7 +17,7 @@ export class EventService {
    }
 
    selectEvent(): Observable<any>{
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/selectevent`)
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/`)
    }
 
    insertEvent(event: Event): Observable<any> {

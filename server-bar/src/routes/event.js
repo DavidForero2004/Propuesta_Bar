@@ -6,7 +6,7 @@ const {insertEvent, getEventActive, updateEvent,deleteEvent} = require('../contr
 
 
 //Routes call all methods
-router.get('/selectevent', getEventActive);
+router.get('/', getEventActive);
 router.post('/insertevent', insertEvent);
 router.put('/updateevent', updateEvent);
 router.delete('/deleteevent', deleteEvent);
