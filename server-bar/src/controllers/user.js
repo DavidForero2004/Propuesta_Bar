@@ -80,8 +80,8 @@ const loginUser = async (req, res) => {
         const userExist = 'CALL selectUserLogin(?)'
 
         connection.query(userExist, [ email ], async (error, result) => {
-            const userData = result[0]; // Accede al primer elemento de result
-            const user = userData[0]; // El primer elemento de userData contiene el objeto RowDataPacket con los datos del usuario
+            const userData = result[0]; // access the first element of result
+            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
             const token = jwt.sign({
                 username: email
             }, process.env.SECRET_K || 'contrasena123');
