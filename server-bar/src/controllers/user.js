@@ -1,7 +1,7 @@
 //controllers/user.js
-const bcrypt = require('bcrypt')
-const connection = require('../db/connection.js')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const connection = require('../db/connection.js');
+const jwt = require('jsonwebtoken');
 
 //show all user
 const getUser = (_req, res ) =>{
@@ -77,13 +77,14 @@ const loginUser = async (req, res) => {
     /////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        const userExist = `SELECT * FROM user WHERE email = '${email}'`
+        const userExist = 'CALL selectUserLogin(?)'
 
-        connection.query(userExist, async (error, result) => {
-            const user = result[0]
+        connection.query(userExist, [ email ], async (error, result) => {
+            const userData = result[0]; // Accede al primer elemento de result
+            const user = userData[0]; // El primer elemento de userData contiene el objeto RowDataPacket con los datos del usuario
             const token = jwt.sign({
                 username: email
-            }, process.env.SECRET_K || 'contrasena123')
+            }, process.env.SECRET_K || 'contrasena123');
 
             /////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,11 +97,11 @@ const loginUser = async (req, res) => {
                 if (!result.length) {
                     res.status(400).json({
                         msg: `There is no user with this email ${email}`
-                    })
-                    return
+                    });
+                    return;
                 }
 
-                const passwordvalidate = await bcrypt.compare(password, user.password)
+                const passwordvalidate = await bcrypt.compare(password, user.password);
 
                 if (!passwordvalidate) {
                     res.status(400).json({

@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 
 
 INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
-INSERT INTO status(name) VALUES ('Active'), ('inactive');
+INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paied');
 
 
 
@@ -192,7 +192,18 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectUser()
 BEGIN 
-	Select user.id, user.name, user.email, Status.name AS Status, rol.name AS rol from user inner join status on user.id_status = Status.id INNER JOIN rol on rol.id = user.id_rol;
+	SELECT user.id, user.name, user.email, status.name AS status, rol.name AS rol from user inner join status on user.id_status = status.id INNER JOIN rol on rol.id = user.id_rol;
+END //
+DELIMITER ;
+
+
+--SELECT email
+DELIMITER //
+CREATE PROCEDURE selectUserLogin(
+	IN email_u VARCHAR(250)
+)
+BEGIN
+	SELECT email, password FROM user WHERE email = email_u;
 END //
 DELIMITER ;
 
