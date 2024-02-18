@@ -13,6 +13,8 @@ import { EventService } from '../../services/event.service';
   export class EventComponent implements OnInit{
     name_event: string = '';
     date: Date;
+    data: any[] = [];
+
 
   constructor(private toastr: ToastrService, private _eventService : EventService, private router :Router){
     this.date = new Date();
@@ -21,6 +23,15 @@ import { EventService } from '../../services/event.service';
   ngOnInit(): void {
   }
 
+  //get events
+  selectEvent(){
+    this._eventService.selectEvent().subscribe(data=>{
+      this.data = this.data;
+      console.log(this.data)
+    })
+  }
+
+  //insert even
   insertEvent(){
     //validate  empity
     if (this.name_event == '' || !this.date ) {
