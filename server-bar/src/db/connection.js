@@ -1,5 +1,5 @@
 //db/connection.js
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 
 const connection = mysql.createConnection({
@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     database: 'project_bar',
     user: 'root',
     password: ''
-})
+});
 
 
 module.exports = connection;

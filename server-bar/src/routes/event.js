@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 const {insertEvent, getEventActive, updateEvent,deleteEvent} = require('../controllers/event');
 
 

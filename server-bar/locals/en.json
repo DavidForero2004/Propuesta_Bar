@@ -1,0 +1,10 @@
+{
+	"errorDatabaseServer": "Database server error",
+	"existUser": "There is already a user with this email",
+	"errorInsert": "Error to insert",
+	"errorUpdate": "Error to update",
+	"newUser": "New user created",
+	"updateUser": "Updated user",
+	"incorrectPassword": "Incorrect password",
+	"notExistUser": "There is no user with this email"
+}

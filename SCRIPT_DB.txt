@@ -170,7 +170,7 @@ CREATE PROCEDURE updateProduct(
 		IN id_status_P INTEGER
 )
 BEGIN 
-	UPDATE product set name_product = name_product_p, price = price_p, Stock = Stock_P, id_status= id_status_P WHERE id = id_p;
+	UPDATE product SET name_product = name_product_p, price = price_p, Stock = Stock_P, id_status= id_status_P WHERE id = id_p;
 END //
 DELIMITER ;
 
@@ -196,10 +196,11 @@ BEGIN
 END //
 DELIMITER ;
 
+---------------
 
---SELECT email
+--SELECT whereemail
 DELIMITER //
-CREATE PROCEDURE selectUserLogin(
+CREATE PROCEDURE selectUserEmail(
 	IN email_u VARCHAR(250)
 )
 BEGIN
@@ -207,6 +208,38 @@ BEGIN
 END //
 DELIMITER ;
 
+-------------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertUser (
+		IN name_u VARCHAR(255),
+		IN email_u VARCHAR(255),
+		IN password_u VARCHAR(255),	
+		IN id_status_u INTEGER,
+		IN id_rol_u INTEGER
+)
+BEGIN 
+	INSERT INTO user(name, email, password, id_status, id_rol) VALUES(name_u, email_u, password_u, id_status_u, id_rol_u);
+END //
+DELIMITER ;
+
+----------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateUser(
+		IN id_u INTEGER,
+		IN name_u VARCHAR(255),
+		IN email_u VARCHAR(255),
+		IN password_u VARCHAR(255),	
+		IN id_status_u INTEGER,
+		IN id_rol_u INTEGER
+)
+BEGIN 
+	UPDATE user SET name = name_u, email = email_u, password = password_u, id_status = id_status_u, id_rol = id_rol_u WHERE id = id_u;
+END //
+DELIMITER ;
 
 
 
