@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { UserLogin } from '../interfaces/user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GetUser, UserLogin, UserResponse } from '../interfaces/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class UserService {
 
   login(user: UserLogin): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, user);
+  }
+
+  getUser(): Observable<UserResponse[]> {
+    return this.http.get<UserResponse[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
 }

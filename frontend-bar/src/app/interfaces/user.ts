@@ -3,6 +3,15 @@ export interface UserLogin {
     password: string
 }
 
-export interface ShowUser{
+export interface GetUser {
+    name: string,
+    email: string,
+    status: string,
+    rol: string
+}
 
+export interface UserResponse {
+    result: {
+        users: GetUser[];
+    }
 }

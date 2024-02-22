@@ -6,5 +6,7 @@
     "errorUpdate": "Error al actualizar",
     "newUser": "Nuevo usuario creado",
     "updateUser": "Usuario actualizado",
-    "incorrectPassword": "Contraseña incorrecta"
+    "incorrectPassword": "Contraseña incorrecta",
+    "invalidToken": "Token invalido",
+	"acessDeneged": "Acceso denegado"
 }

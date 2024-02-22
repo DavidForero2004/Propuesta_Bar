@@ -4,13 +4,14 @@ const router = express.Router();
 
 
 const {insertEvent, getEventActive, updateEvent,deleteEvent} = require('../controllers/event');
+const { validateToken } = require('../routes/validate-token.js');
 
 
 //Routes call all methods
-router.get('/', getEventActive);
-router.post('/insertevent', insertEvent);
-router.put('/updateevent', updateEvent);
-router.delete('/deleteevent', deleteEvent);
+router.get('/',validateToken, getEventActive);
+router.post('/insertevent',validateToken, insertEvent);
+router.put('/updateevent',validateToken, updateEvent);
+router.delete('/deleteevent',validateToken, deleteEvent);
 
 
 module.exports = router;

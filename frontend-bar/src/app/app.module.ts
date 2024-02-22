@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Moduls
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -14,13 +14,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './components/user/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventComponent } from './components/event/event.component';
+import { ListComponent } from './components/user/list/list.component';
+import { AddTokenInterceptor } from './utils/add-token.interceptor';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    EventComponent
+    EventComponent,
+    ListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,8 @@ import { EventComponent } from './components/event/event.component';
     })
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

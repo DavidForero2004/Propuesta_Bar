@@ -1,5 +1,6 @@
 //routes/validate-token.js
 const jwt = require('jsonwebtoken');
+const i18n = require('i18n');
 
 const validateToken = (req, res, next) => {
     const headerToken = req.headers['authorization'];
@@ -12,12 +13,12 @@ const validateToken = (req, res, next) => {
             next();
         } catch (error) {
             res.status(401).json({
-                msg: 'Invalid token'
+                msg: i18n.__('invalidToken')
             });
         }
     } else {
         res.status(401).json({
-            msg: 'Access denied'
+            msg: i18n.__('acessDeneged')
         });
     }
 }

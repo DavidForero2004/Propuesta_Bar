@@ -36,13 +36,14 @@ export class LoginComponent implements OnInit {
     }
 
     this._userService.login(user).subscribe({
-      next: (token) => {
-        this.router.navigate(['/dashboard'])
-        localStorage.setItem('token', token)
+      next: (response: any) => {
+        this.router.navigate(['/users']);
+        const token = response.token; // Access the 'token' property of the response object
+        localStorage.setItem('token', token); // Here we save only the token
       },
       error: (e: HttpErrorResponse) => {
-        this._errorService.msjError(e)
+        this._errorService.msjError(e);
       }
-    })
+    });
   }
 }

@@ -4,13 +4,14 @@ const router = express.Router();
 
 
 const { getProducts, insertProduct, updateProduct, deletepProduct } = require ('../controllers/product');
+const { validateToken } = require('../routes/validate-token.js');
 
 
 //Routes call all methods
-router.get('/', getProducts);
-router.post('/insertproduct', insertProduct);
-router.put('/updateproduct', updateProduct);
-router.delete('/deleteproduct', deletepProduct);
+router.get('/',validateToken, getProducts);
+router.post('/insertproduct',validateToken, insertProduct);
+router.put('/updateproduct',validateToken, updateProduct);
+router.delete('/deleteproduct',validateToken, deletepProduct);
 
 
 module.exports =  router;

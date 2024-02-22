@@ -6,5 +6,7 @@
 	"newUser": "New user created",
 	"updateUser": "Updated user",
 	"incorrectPassword": "Incorrect password",
-	"notExistUser": "There is no user with this email"
+	"notExistUser": "There is no user with this email",
+	"invalidToken": "Invalid token",
+	"acessDeneged": "Access denied"
 }
