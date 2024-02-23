@@ -1,0 +1,12 @@
+colors = {    
+    Dark-brown: #552d2e,
+    orange: #e97404,
+    Skin-color(piel): #f7c685
+},
+
+
+
+fonts = {
+    @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Patua+One&family=Protest+Revolution&display=swap');
+    font-family: "EB Garamond", serif;
+}
