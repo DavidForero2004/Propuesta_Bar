@@ -13,19 +13,21 @@ import { ToastrModule } from 'ngx-toastr';
 //Components
 import { LoginComponent } from './components/user/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { EventComponent } from './components/event/event.component';
 import { ListComponent } from './components/user/list/list.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ListEventComponent } from './components/event/list-event/list-event.component';
+import { InsertEventComponent } from './components/event/insert-event/insert-event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    EventComponent,
     ListComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListEventComponent,
+    InsertEventComponent
   ],
   imports: [
     BrowserModule,

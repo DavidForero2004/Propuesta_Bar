@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Protest+Revolution&display=swap');
+.container_{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../../../assets//img/Back-gorunds/login-background.webp');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;
+ 
+}
+.back{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.589);
+}
+
+.login_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 75%;
+  width: 500px;
+  background: rgb(58,7,9);
+  background: linear-gradient(90deg, rgba(58,7,9,1) 0%, rgba(233,116,4,1) 52%, rgba(247,198,133,1) 100%);
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 2px 24px 1px rgba(240,237,240,1);
+  -moz-box-shadow: 0px 2px 24px 1px rgba(240,237,240,1);
+  box-shadow: 0px 2px 24px 1px rgba(240,237,240,1);
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:10px;
+  padding: 55px 55px 37px;
+  width: 100%;
+  height: 100%;
+}
+.information{
+  width: 80%;
+}
+.logo{
+  width: 40%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(206, 198, 198, 0.205);
+  background-color: white;
+  margin-top: -5px;
+}
+.logo img{
+  width: 100%;
+  height: auto;
+}
+.title h1{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+}
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 3px solid #ffffff;
+  background-color: transparent;
+  color: #fff;
+  font-size: 16px;
+  right: 0px;
+  -webkit-transition: border-bottom-color 1.5s;
+  -o-transition: border-bottom-color 1.5s;
+  -moz-transition: border-bottom-color 1.5s;
+  transition: border-bottom-color 1.5s;
+}
+
+.input-container input:focus {
+  outline: none;
+  right: 0px;
+  border-bottom-color: #ffffff;
+}
+
+.input-container label {
+  position: absolute;
+  left: 0;
+  bottom: 20px; /* Ajusta este valor para cambiar la distancia entre el label y el borde inferior del input */
+  color: #ccc;
+  font-size: 16px;
+  pointer-events: none;
+  transition: bottom 0.3s, font-size 0.3s, color 0.3s;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  bottom: 35px; /* Ajusta este valor para cambiar la distancia cuando el input tiene contenido */
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+}
