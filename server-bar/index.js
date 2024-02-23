@@ -15,7 +15,7 @@ const port = 3000;
 i18n.configure({
     locales: ['en', 'es'], // list of supported languages
     directory: __dirname + '/locals/', // directory where the translation files are located
-    defaultLocale: 'es', // default language
+    defaultLocale: 'en', // default language
     objectNotation: true // allows you to use object notation to access translations
 });
 
