@@ -1,12 +1,22 @@
 {
     "errorDatabaseServer": "Error del servidor de base de datos",
-    "existUser": "Ya existe un usuario con este correo electronico",
-    "notExistUser": "No existe ningún usuario con este correo electronico",
-    "errorInsert": "Error al insertar",
-    "errorUpdate": "Error al actualizar",
-    "newUser": "Nuevo usuario creado",
-    "updateUser": "Usuario actualizado",
     "incorrectPassword": "Contraseña incorrecta",
     "invalidToken": "Token invalido",
-	"acessDeneged": "Acceso denegado"
+	"acessDeneged": "Acceso denegado",
+    "serverport": "Servidor encendido en el puerto:",
+    "connectionBD": "¡Conexión exitosa a la base de datos!",
+
+    "errorInsert": "Error al insertar",
+    "errorUpdate": "Error al actualizar",
+    "errorDelete": "Error al eliminar",
+
+    "existUser": "Ya existe un usuario con este correo electronico",
+    "notExistUser": "No existe ningún usuario con este correo electronico",
+    "newUser": "Nuevo usuario creado",
+    "updateUser": "Usuario actualizado",
+	"deleteUser": "Usuario eliminado",
+
+    "newEvent": "Nuevo evento creado",
+    "updateEvent": "Evento actualizado",
+	"deleteEvent": "Evento eliminado"
 }

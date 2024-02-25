@@ -44,12 +44,12 @@ app.use('/events', eventsRoutes); // mount the routes on '/events'
 
 
 app.listen(process.env.PORT || port, () => {
-    console.log(`Server on in port: ${port}`);
+    console.log(i18n.__('serverport') + ` ${port}`);
 });
 
 
 //connect bd
 connection.connect(error => {
     if (error) throw error;
-    console.log('connection success to DB!');
+    console.log(i18n.__('connectionBD'));
 });

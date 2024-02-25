@@ -1,12 +1,26 @@
 {
 	"errorDatabaseServer": "Database server error",
-	"existUser": "There is already a user with this email",
+	"incorrectPassword": "Incorrect password",
+	"invalidToken": "Invalid token",
+	"acessDeneged": "Access denied",
+	"serverport": "Server on in port:",
+	"connectionBD": "Connection success to DB!",
+
 	"errorInsert": "Error to insert",
 	"errorUpdate": "Error to update",
+	"errorDelete": "Error to delete",
+
+	"notExistUser": "There is no user with this email",
+	"existUser": "There is already a user with this email",
 	"newUser": "New user created",
 	"updateUser": "Updated user",
-	"incorrectPassword": "Incorrect password",
-	"notExistUser": "There is no user with this email",
-	"invalidToken": "Invalid token",
-	"acessDeneged": "Access denied"
+	"deleteUser": "Deleted user",
+
+	"newEvent": "New event created",
+	"updateEvent": "Updated event",
+	"deleteEvent": "Deleted event",
+
+	"newProduct": "New event created",
+	"updateProduct": "Updated event",
+	"deleteProduct": "Deleted event"
 }
