@@ -23,4 +23,8 @@ export class UserService {
   getUser(): Observable<User[]> {
     return this.http.get<User[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
+
+  updateServerLanguage(lang: string): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}language`, { lang });
+  }
 }
