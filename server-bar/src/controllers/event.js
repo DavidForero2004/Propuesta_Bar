@@ -77,13 +77,13 @@ const insertEvent = async (req, res) => {
 
 //update event
 const updateEvent = async (req, res) => {
-    const { name_event_p, date_p, id_p } = req.body;
+    const { name_event, date, id } = req.body;
     const query = 'CALL updateEvent(?,?,?)';
 
     ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [ id_p, name_event_p, date_p ], (error, result) => {
+        connection.query(query, [ id, name_event, date ], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({

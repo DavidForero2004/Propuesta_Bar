@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -23,6 +23,7 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
 import { InsertEventComponent } from './components/event/insert-event/insert-event.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,13 @@ import { InsertEventComponent } from './components/event/insert-event/insert-eve
     ToastrModule.forRoot({
       timeOut: 3500,
       preventDuplicates: true,
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     })
   ],
   providers: [
