@@ -10,8 +10,6 @@ export class ErrorService {
 
   constructor(private toastr: ToastrService,
     private translate: TranslateService) {
-      this.translate.addLangs(['es', 'en']);
-      this.translate.setDefaultLang('es');
     }
 
   msjError(e: HttpErrorResponse) {

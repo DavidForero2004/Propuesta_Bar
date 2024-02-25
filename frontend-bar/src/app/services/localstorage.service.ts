@@ -21,6 +21,7 @@ export class LocalStorageService {
       localStorage.removeItem(key);
     }
   }
+  
 
   clear(): void {
     if (this.isLocalStorageAvailable) {
