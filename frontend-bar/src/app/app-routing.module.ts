@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
 import { ListComponent } from './components/user/list/list.component';
 import { AuthGuard } from './utils/auth.guard';
+import { InsertEventComponent } from './components/event/insert-event/insert-event.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -16,6 +17,7 @@ const routes: Routes = [{
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     ///EVENTS
     {path: 'event', component: ListEventComponent, canActivate: [AuthGuard]},
+    {path: 'event/insert', component: InsertEventComponent, canActivate: [AuthGuard]},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 

@@ -115,7 +115,7 @@ const updateEvent = async (req, res) => {
 //delete event
 const deleteEvent = async (req, res) => {
     const { id_p }= req.body;
-    const query = 'CALL daleteEvent(?)';
+    const query = 'CALL deleteEvent(?)';
 
     ///////////////////////////////////////////////////////////
 

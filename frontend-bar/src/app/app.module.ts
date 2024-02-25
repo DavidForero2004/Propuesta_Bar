@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 //Moduls
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr';
 
 //Components
@@ -34,6 +35,7 @@ import { InsertEventComponent } from './components/event/insert-event/insert-eve
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3500,
