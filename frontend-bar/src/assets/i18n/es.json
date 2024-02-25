@@ -14,7 +14,8 @@
     "cancel": "Cancelar",
     "confirm": "Confirmar",
     "alertConfirm": "¿Estás seguro de eliminar este evento?",
-    "alertDelete": "Esta acción no se puede deshacer",
+    "alertDelete": "!Esta acción no se puede deshacer¡",
     "successDelete": "El evento se elimino correctamente",
-    "errorDelete": "El evento no se pudo eliminar"
+    "errorDelete": "El evento no se pudo eliminar",
+    "addEvent": "Agregar evento"
 }

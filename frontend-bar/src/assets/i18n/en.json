@@ -14,7 +14,8 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "alertConfirm": "¿Are u sure to delete this event?",
-    "alertDelete":  "This action  can't be undone",
+    "alertDelete":  "!This action  can't be undone¡",
     "successDelete": "Event deleted",
-    "errorDelete": "Error to delete event"
+    "errorDelete": "Error to delete event",
+    "addEvent": "Add event"
 }

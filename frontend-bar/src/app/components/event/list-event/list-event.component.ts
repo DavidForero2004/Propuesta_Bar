@@ -76,6 +76,8 @@ export class ListEventComponent implements OnInit {
 
 
 
+
+  
   es() {
     this.translate.use('es');
     this._eventService.updateServerLanguage('es').subscribe(() => {
