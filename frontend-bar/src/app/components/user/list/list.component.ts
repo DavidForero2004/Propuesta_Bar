@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { GetUser, UserResponse } from '../../../interfaces/user';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +9,7 @@ import { GetUser, UserResponse } from '../../../interfaces/user';
 })
 
 export class ListComponent implements OnInit{
-  listUser: GetUser[] = [];
+  listUser: User[] = [];
 
   constructor(private _userService: UserService) {}
 
@@ -19,12 +19,12 @@ export class ListComponent implements OnInit{
 
   getUser() {
     this._userService.getUser().subscribe((data: any) => {
-      if (data && data.result) {
-        const result = data.result;
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
         // Check if the first element of result is an array of users
-        if (Array.isArray(result[0])) {
+        if (Array.isArray(result)) {
           // Assign users to listUser
-          this.listUser = result[0];
+          this.listUser = result;
         } 
       }
     });

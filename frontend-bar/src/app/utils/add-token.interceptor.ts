@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorService } from '../services/error.service';
-import { LocalStorageService } from '../services/localstorage.service'; // Importa tu servicio personalizado
+import { LocalStorageService } from '../services/localstorage.service';
 
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
     constructor(
         private router: Router,
         private _errorService: ErrorService,
-        private localStorageService: LocalStorageService // Inyecta tu servicio
+        private localStorageService: LocalStorageService
     ) { }
 
     intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

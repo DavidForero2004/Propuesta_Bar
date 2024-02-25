@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserLogin } from '../../../interfaces/user';
+import { User } from '../../../interfaces/user';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const user: UserLogin = {
+    const user: User = {
       email: this.email,
       password: this.password
     }

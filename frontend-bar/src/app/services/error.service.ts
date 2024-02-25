@@ -9,14 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 export class ErrorService {
 
   constructor(private toastr: ToastrService,
-    private translate: TranslateService) {
-      this.translate.addLangs(['es', 'en']);
-      this.translate.setDefaultLang('es');
-    }
+    private translate: TranslateService) { }
 
   msjError(e: HttpErrorResponse) {
-    console.log(e);
-    
     if (e.error.msg) {
       this.toastr.error(e.error.msg, 'Error')
     } else {
