@@ -15,7 +15,7 @@ const port = 3000;
 i18n.configure({
     locales: ['en', 'es'], // list of supported languages
     directory: __dirname + '/locals/', // directory where the translation files are located
-    defaultLocale: 'en', // default language
+    defaultLocale: 'es', // default language
     objectNotation: true // allows you to use object notation to access translations
 });
 
@@ -44,12 +44,12 @@ app.use('/events', eventsRoutes); // mount the routes on '/events'
 
 
 app.listen(process.env.PORT || port, () => {
-    console.log(`Server on in port: ${port}`);
+    console.log(i18n.__('serverport') + ` ${port}`);
 });
 
 
 //connect bd
 connection.connect(error => {
     if (error) throw error;
-    console.log('connection success to DB!');
+    console.log(i18n.__('connectionBD'));
 });

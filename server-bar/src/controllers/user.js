@@ -12,14 +12,21 @@ const getUser = (_req, res ) =>{
 
     try {
         connection.query(query, (error, result) => {
-            if(error){
-                res.status(500).json({
-                    msg: "Error",
+            try {
+                if(error){
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                }else{
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
                     error
-                });
-            }else{
-                res.json({
-                    result
                 });
             }
         });

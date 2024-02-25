@@ -1,5 +1,6 @@
 //controllers/event.js
 const connection = require('../db/connection');
+const i18n = require('i18n');
 
 
 //Get event
@@ -18,20 +19,19 @@ const getEventActive = async (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: "All ok",
                         result
                     });
                 }
             } catch (error) {
                 res.status(400).json({
-                    msg: 'Error not found',
+                    msg: 'Error',
                     error
                 });
             }
         });
     } catch (error) {
         res.status(400).json({
-            msg: 'Error not found',
+            msg: 'Error',
             error
         });
     }
@@ -50,25 +50,25 @@ const insertEvent = async (req, res) => {
             try {
                 if (error) {
                     res.status(500).json({
-                        msg: 'Error inserting event',
+                        msg: i18n.__('errorInsert'),
                         error
                     });
                 } else {
                     res.json({
-                        msg: 'New event inserted',
+                        msg: i18n.__('newEvent'),
                         result
                     });
                 }
             } catch (error) {
                 res.status(400).json({
-                    msg: 'Error not found',
+                    msg: 'Error',
                     error
                 });
             }
         });
     } catch (error) {
         res.status(400).json({
-            msg: 'Error not found',
+            msg: 'Error',
             error
         });
     }
@@ -83,29 +83,29 @@ const updateEvent = async (req, res) => {
     ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [ id_p, name_event_p, date_p ],(error, result) => {
+        connection.query(query, [ id_p, name_event_p, date_p ], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
-                        msg:"Error to update",
+                        msg: i18n.__('errorUpdate'),
                         error
                     });
                 } else {
                     res.json({
-                        msg:"Event updated",
+                        msg: i18n.__('updateEvent'),
                         result
                     });
                 }
             } catch (error) {
                 res.status(400).json({
-                    msg: 'Error not found',
+                    msg: 'Error',
                     error
                 });
             }
         })
     } catch (error) {
         res.status(400).json({
-            msg: 'Error not found',
+            msg: 'Error',
             error
         });
     }
@@ -115,7 +115,7 @@ const updateEvent = async (req, res) => {
 //delete event
 const deleteEvent = async (req, res) => {
     const { id_p }= req.body;
-    const query = 'CALL daleteEvent(?)';
+    const query = 'CALL deleteEvent(?)';
 
     ///////////////////////////////////////////////////////////
 
@@ -124,25 +124,25 @@ const deleteEvent = async (req, res) => {
             try {
                 if (error) {
                     res.status(500).json({
-                        msg: "Error to delete",
+                        msg: i18n.__('errorDelete'),
                         error
                     });
                 } else {
                     res.json({
-                        msg:"Deleted",
+                        msg: i18n.__('deleteEvent'),
                         result
                     });
                 }
             } catch (error) {
                 res.status(400).json({
-                    msg: 'Error not found',
+                    msg: 'Error',
                     error
                 });
             }
         });
     } catch (error) {
         res.status(400).json({
-            msg: 'Error not found',
+            msg: 'Error',
             error
         });
     }
