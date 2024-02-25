@@ -23,4 +23,13 @@ export class EventService {
   insertEvent(event: Event): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertevent`, event);
   }
+
+  deleteEvent(id?: number){
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/deleteevent/${id}`);
+  }
+
+  updateServerLanguage(lang: string): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}language`, { lang });
+  }
+
 }

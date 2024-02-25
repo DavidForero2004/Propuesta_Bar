@@ -4,5 +4,17 @@
     "password": "Password",
     "required": "All fields are required",
     "accessDeneged": "Access deneged",
-    "errorOccurred": "An error occurred, contact the Administrator"
+    "errorOccurred": "An error occurred, contact the Administrator",
+    "events": "Events",
+    "name": "Name",
+    "date": "Date",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "alertConfirm": "¿Are u sure to delete this event?",
+    "alertDelete":  "This action  can't be undone",
+    "successDelete": "Event deleted",
+    "errorDelete": "Error to delete event"
 }

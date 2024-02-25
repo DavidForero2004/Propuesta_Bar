@@ -4,25 +4,29 @@
     <button class="btn btn-primary" routerLink="/event/insert">Add event</button>
 </div>
 
+    <div class="language-buttons">
+        <button class="ESEN" (click)="es()">ES</button>|<button class="ESEN" (click)="en()">EN</button>
+    </div>
+
 <div class="container mt-2 text-center">
-    <h1>Events</h1>
+    <h1>{{"events" | translate}}</h1>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">{{ "name" | translate}}</th>
+                <th scope="col">{{ "date" | translate}}</th>
+                <th scope="col">{{ "actions" | translate}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let event of listEvent">
-                <td>{{ event.id }}</td>
+            <tr *ngFor="let event of listEvent; let i=index">
+                <td>{{ counter + i }}</td>
                 <td>{{ event.name_event }}</td>
-                <td>{{ event.date | date }}</td>
+                <td>{{ event.date | date: 'short' }}</td>
                 <td>
-                    <button class="btn btn-info">Edit</button> 
-                    <button class="btn btn-secondary">delete</button>
+                    <button class="btn btn-info">{{ "edit" | translate}}</button> 
+                    <button class="btn btn-secondary" (click)="deleteEvent(event.id)">{{"delete" | translate}}</button>
                 </td>
             </tr>
         </tbody>

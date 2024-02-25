@@ -114,13 +114,13 @@ const updateEvent = async (req, res) => {
 
 //delete event
 const deleteEvent = async (req, res) => {
-    const { id_p }= req.body;
+    const { id }= req.params;
     const query = 'CALL deleteEvent(?)';
 
     ///////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, id_p, (error, result) => {
+        connection.query(query, id, (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { LocalStorageService } from '../services/localstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthGuard implements CanActivate {
   constructor(private router: Router,
     private toastr: ToastrService,
-    private translate: TranslateService) { 
-      this.translate.addLangs(['es', 'en']);
-      this.translate.setDefaultLang('es');
+    private translate: TranslateService,
+    private localStorageService: LocalStorageService) {
     }
 
   canActivate(): boolean {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = this.localStorageService.getItem('token'); // Usa el servicio para obtener el token
     if (!storedToken) {
       this.router.navigate(['/login']);
       this.translate.get('accessDeneged').subscribe((res: string) => {
