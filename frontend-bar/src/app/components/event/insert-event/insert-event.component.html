@@ -1,1 +1,15 @@
-<p>insert-event works!</p>
+<form [formGroup] = "form" (ngSubmit)="insertEvent()">
+
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Name Event</label>
+        <input formControlName="name_event" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Time</label>
+        <input formControlName="date" type="datetime-local" class="form-control" id="formGroupExampleInput2">
+    </div>
+
+    <button  type="submit">Create</button>
+    <button type="button" routerLink="/event">Return</button>
+
+</form>

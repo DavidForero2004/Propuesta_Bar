@@ -103,7 +103,7 @@ DELIMITER //
 CREATE PROCEDURE selectEventActive (
 )
 BEGIN 
-	SELECT name_event, date from event where date >= now();
+	SELECT id, name_event, date from event where date >= now();
 END //
 DELIMITER ;
 
@@ -125,7 +125,7 @@ DELIMITER ;
 
 --DELETE
 DELIMITER //
-CREATE PROCEDURE daleteEvent (
+CREATE PROCEDURE deleteEvent (
     IN id_p INTEGER
 )
 BEGIN 

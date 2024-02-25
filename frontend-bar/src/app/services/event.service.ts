@@ -10,18 +10,20 @@ import { Observable } from 'rxjs';
 export class EventService {
   private myAppUrl: string;
   private myApiUrl: string;
-  constructor(private http:HttpClient) {
-        this.myAppUrl = environment.endpoint;
-        this.myApiUrl = 'events';
+  constructor(private http: HttpClient) {
+    this.myAppUrl = environment.endpoint;
+    this.myApiUrl = 'events';
 
-   }
+  }
 
-   selectEvent(): Observable<any>{
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/`)
-   }
+  selectEvent(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/`)
+  }
 
-   insertEvent(event: Event): Observable<any> {
+  insertEvent(event: Event): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertevent`, event);
-   }
+  }
+
+
 
 }

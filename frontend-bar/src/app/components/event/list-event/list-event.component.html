@@ -1,1 +1,54 @@
-<p>list-event works!</p>
+
+
+<div class="title">
+    <button class="btn btn-primary" routerLink="/event/insert">Add event</button>
+</div>
+
+<div class="container mt-2 text-center">
+    <h1>Events</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of listEvent">
+                <td>{{ event.id }}</td>
+                <td>{{ event.name_event }}</td>
+                <td>{{ event.date | date }}</td>
+                <td>
+                    <button class="btn btn-info">Edit</button> 
+                    <button class="btn btn-secondary">delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
