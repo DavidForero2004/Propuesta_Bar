@@ -2,5 +2,7 @@
     "login": "Iniciar sesión",
     "email": "Correo electronico",
     "password": "Contraseña",
-    "required": "Todos los campos son obligatorios"
+    "required": "Todos los campos son obligatorios",
+    "accessDeneged": "Acceso denegado",
+    "errorOccurred": "Ocurrió un error, contacte al Administrador"
 }

@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -7,7 +8,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ErrorService {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService,
+    private translate: TranslateService) {
+      this.translate.addLangs(['es', 'en']);
+      this.translate.setDefaultLang('es');
+    }
 
   msjError(e: HttpErrorResponse) {
     console.log(e);
@@ -15,7 +20,9 @@ export class ErrorService {
     if (e.error.msg) {
       this.toastr.error(e.error.msg, 'Error')
     } else {
-      this.toastr.error('An error occurred, contact the Administrator', 'Error')
+      this.translate.get('errorOccurred').subscribe((res: string) => {
+        this.toastr.error(res, 'Error');
+      });
     }
   }
 }

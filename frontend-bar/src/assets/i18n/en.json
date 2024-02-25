@@ -2,5 +2,7 @@
     "login": "Login",
     "email": "Email",
     "password": "Password",
-    "required": "All fields are required"
+    "required": "All fields are required",
+    "accessDeneged": "Access deneged",
+    "errorOccurred": "An error occurred, contact the Administrator"
 }
