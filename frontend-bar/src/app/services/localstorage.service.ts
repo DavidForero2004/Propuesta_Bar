@@ -4,28 +4,41 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private isLocalStorageAvailable = typeof localStorage !== 'undefined';
+  constructor() {}
 
   getItem(key: string): string | null {
-    return this.isLocalStorageAvailable ? localStorage.getItem(key) : null;
+    if (this.isLocalStorageAvailable()) {
+      return localStorage.getItem(key);
+    }
+    return null;
   }
 
   setItem(key: string, value: string): void {
-    if (this.isLocalStorageAvailable) {
+    if (this.isLocalStorageAvailable()) {
       localStorage.setItem(key, value);
     }
   }
 
   removeItem(key: string): void {
-    if (this.isLocalStorageAvailable) {
+    if (this.isLocalStorageAvailable()) {
       localStorage.removeItem(key);
     }
   }
-  
 
   clear(): void {
-    if (this.isLocalStorageAvailable) {
+    if (this.isLocalStorageAvailable()) {
       localStorage.clear();
+    }
+  }
+
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const testKey = '__test__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

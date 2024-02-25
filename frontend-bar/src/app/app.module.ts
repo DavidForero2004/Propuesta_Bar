@@ -48,6 +48,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     ToastrModule.forRoot({
       timeOut: 3500,
       preventDuplicates: true,
+      progressBar: true,
+      tapToDismiss: true
     }),
     TranslateModule.forRoot({
       loader: {

@@ -3,7 +3,7 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "required": "Todos los campos son obligatorios",
-    "accessDenied": "Acceso denegado",
+    "accessDeneged": "Acceso denegado",
     "errorOccurred": "Ocurrió un error, contacte al Administrador",
     "events": "Eventos",
     "name": "Nombre",

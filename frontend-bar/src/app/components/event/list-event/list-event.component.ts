@@ -20,7 +20,8 @@ export class ListEventComponent implements OnInit {
     private toastr: ToastrService,
     private translate: TranslateService
   ) {
-
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setDefaultLang('es');
   }
 
   ngOnInit(): void {
@@ -77,7 +78,7 @@ export class ListEventComponent implements OnInit {
 
 
 
-  
+
   es() {
     this.translate.use('es');
     this._eventService.updateServerLanguage('es').subscribe(() => {

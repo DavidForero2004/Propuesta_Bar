@@ -6,11 +6,16 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../../services/error.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from '../../../services/localstorage.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: [
+    './login.component.css',
+    '../../../../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css',
+    '../../../../assets/fonts/iconic/css/material-design-iconic-font.min.css'
+  ]
 })
 export class LoginComponent implements OnInit {
   email: string = '';
@@ -19,14 +24,15 @@ export class LoginComponent implements OnInit {
   constructor(private toastr: ToastrService,
     private _userService: UserService,
     private router: Router,
-    private _errorService: ErrorService, 
-    private translate: TranslateService) {
+    private _errorService: ErrorService,
+    private translate: TranslateService,
+    private localStorageService: LocalStorageService) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
   }
 
   ngOnInit(): void {
-
+    this.localStorageService.clear();
   }
 
   login() {
@@ -46,7 +52,7 @@ export class LoginComponent implements OnInit {
       next: (response: any) => {
         this.router.navigate(['/users']);
         const token = response.token; // Access the 'token' property of the response object
-        localStorage.setItem('token', token); // Here we save only the token
+        this.localStorageService.setItem('token', token);// Here we save only the token
       },
       error: (e: HttpErrorResponse) => {
         this._errorService.msjError(e);
@@ -60,7 +66,7 @@ export class LoginComponent implements OnInit {
       console.log('Idioma del servidor actualizado a español.');
     });
   }
-  
+
   en() {
     this.translate.use('en');
     this._userService.updateServerLanguage('en').subscribe(() => {
