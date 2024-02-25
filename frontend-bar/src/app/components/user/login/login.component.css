@@ -482,6 +482,21 @@ iframe {
   opacity: 0;
 }
 
+.language-buttons {
+  position: sticky;
+  display: flex;
+  justify-content: end;
+  margin-top: -35px;
+  margin-right: -35px;
+  color: #ffffff;
+  gap: 2px;
+}
+
+.ESEN {
+  color: #ffffff;
+}
+
+
 
 /*------------------------------------------------------------------
 [ Responsive ]*/

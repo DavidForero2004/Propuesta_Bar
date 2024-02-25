@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../../services/error.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -13,21 +14,27 @@ import { ErrorService } from '../../../services/error.service';
 })
 export class LoginComponent implements OnInit {
   email: string = '';
-  password : string = '';
+  password: string = '';
 
   constructor(private toastr: ToastrService,
     private _userService: UserService,
     private router: Router,
-    private _errorService: ErrorService) {}
+    private _errorService: ErrorService, 
+    private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setDefaultLang('es');
+  }
 
   ngOnInit(): void {
-    
+
   }
 
   login() {
     if (this.email == '' || this.password == '') {
-      this.toastr.error('Todos los campos son obligatorios', 'Error')
-      return
+      this.translate.get('required').subscribe((res: string) => {
+        this.toastr.error(res, 'Error');
+      });
+      return;
     }
 
     const user: UserLogin = {
@@ -45,5 +52,13 @@ export class LoginComponent implements OnInit {
         this._errorService.msjError(e);
       }
     });
+  }
+
+  es() {
+    this.translate.use('es');
+  }
+
+  en() {
+    this.translate.use('en');
   }
 }
