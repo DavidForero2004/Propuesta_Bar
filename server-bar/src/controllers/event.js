@@ -149,4 +149,51 @@ const deleteEvent = async (req, res) => {
 }
 
 
-module.exports = { insertEvent, getEventActive, updateEvent,deleteEvent };
+//show event id
+const getEventId = async (req, res) => {
+    const { id } = req.params;
+
+    ////////////////////////////////////////////////////////////////////
+
+    try {
+        const query = 'CALL selectEventId(?)'
+
+        connection.query(query, id, async (error, result) => {
+            const eventData = result[0]; // access the first element of result
+            const event = eventData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            try {
+                if (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    if (!user) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistProduct'),
+                            result
+                        });
+                    } else {
+                        res.json({
+                            event
+                        });
+                    }
+                }
+            } catch (error) {
+                res.status(500).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+
+module.exports = { insertEvent, getEventActive, updateEvent,deleteEvent, getEventId };
