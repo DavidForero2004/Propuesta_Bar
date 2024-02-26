@@ -24,16 +24,16 @@ CREATE TABLE IF NOT EXISTS user(
 	id_status INTEGER,
 	id_rol INTEGER,
 	FOREIGN KEY(id_rol) REFERENCES rol(id),
-	FOREIGN KEY(id_status) REFERENCES Status(id)
+	FOREIGN KEY(id_status) REFERENCES status(id)
 );
 
 CREATE TABLE IF NOT EXISTS product(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name_product VARCHAR(255) UNIQUE NOT NULL,
 	price DECIMAL(65, 2) NOT NULL,
-	Stock INTEGER NOT NULL,	
+	stock INTEGER NOT NULL,	
 	id_status INTEGER,
-	FOREIGN KEY(id_status) REFERENCES Status(id)
+	FOREIGN KEY(id_status) REFERENCES status(id)
 );
 
 CREATE TABLE IF NOT EXISTS event(
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `table`(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name_table VARCHAR(20) NOT NULL,
 	id_status INTEGER,
-	FOREIGN KEY(id_status) REFERENCES Status(id)
+	FOREIGN KEY(id_status) REFERENCES status(id)
 );
 
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 	id_status INTEGER,
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
 	FOREIGN KEY(id_product) REFERENCES product(id),
-	FOREIGN KEY(id_status) REFERENCES Status(id)
+	FOREIGN KEY(id_status) REFERENCES status(id)
 );
 
 
