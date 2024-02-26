@@ -4,23 +4,29 @@ const connection = require('../db/connection.js');
 const jwt = require('jsonwebtoken');
 const i18n = require('i18n');
 
+
 //show all user
-const getUser = (_req, res ) =>{
+const getUser = (_req, res) => {
     const query = 'CALL selectUser';
 
     //////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, (error, result) => {
+            const userData = result[0]; // access the first element of result
+            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            ////////////////////////////////////////////////////////////////////
+            
             try {
-                if(error){
+                if (error) {
                     res.status(500).json({
                         msg: 'Error',
                         error
                     });
-                }else{
+                } else {
                     res.json({
-                        result
+                        user
                     });
                 }
             } catch (error) {
@@ -30,7 +36,7 @@ const getUser = (_req, res ) =>{
                 });
             }
         });
-    } catch(error) {
+    } catch (error) {
         res.status(400).json({
             msg: 'Error',
             error
@@ -46,7 +52,7 @@ const insertUser = async (req, res) => {
     const userExist = 'CALL selectUserEmail(?)';
 
     /////////////////////////////////////////////////////////////////////////////////////
-    
+
     connection.query(userExist, email, (error, result) => {
         try {
             const userData = result[0]; // access the first element of result
@@ -60,14 +66,14 @@ const insertUser = async (req, res) => {
             } else {
                 if (user) {
                     res.status(400).json({
-                        msg: i18n.__('existUser') + ` ${email}`
+                        msg: i18n.__('existUserEmail') + ` ${email}`
                     });
                     return;
                 }
 
                 const query = 'CALL insertUser(?,?,?,?,?)';
-        
-                connection.query(query , [ name, email, hashPassword, id_status, id_rol ],(error, result) => {
+
+                connection.query(query, [name, email, hashPassword, id_status, id_rol], (error, result) => {
                     try {
                         if (error) {
                             res.json({
@@ -98,15 +104,16 @@ const insertUser = async (req, res) => {
     });
 }
 
+
 //update user
 const updateUser = async (req, res) => {
-    const { name, email, password, id_status, id_rol, id } = req.body;
+    const { id, name, email, password, id_status, id_rol } = req.body;
     const query = 'CALL updateUser(?,?,?,?,?,?)';
 
     ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [ name, email, password, id_status, id_rol, id ],(error, result) => {
+        connection.query(query, [id, name, email, password, id_status, id_rol], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -137,8 +144,40 @@ const updateUser = async (req, res) => {
 
 //delete user
 const deleteUser = async (req, res) => {
+    const { id } = req.params;
+    const query = 'CALL deleteUser(?)';
 
+    ///////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, id, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: i18n.__('errorDelete'),
+                        error
+                    });
+                } else {
+                    res.json({
+                        msg: i18n.__('deleteUser'),
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
 }
+
 
 //login user
 const loginUser = async (req, res) => {
@@ -160,7 +199,7 @@ const loginUser = async (req, res) => {
             } else {
                 if (!user) {
                     res.status(400).json({
-                        msg: i18n.__('notExistUser') + ` ${email}`
+                        msg: i18n.__('notExistUserEmail') + ` ${email}`
                     });
                     return;
                 }
@@ -191,4 +230,52 @@ const loginUser = async (req, res) => {
     });
 }
 
-module.exports = { insertUser, loginUser, getUser, deleteUser, updateUser };
+
+//show user id
+const getUserId = async (req, res) => {
+    const { id } = req.params;
+
+    ////////////////////////////////////////////////////////////////////
+
+    try {
+        const query = 'CALL selectUserId(?)'
+
+        connection.query(query, id, async (error, result) => {
+            const userData = result[0]; // access the first element of result
+            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            try {
+                if (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    if (!user) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistUser'),
+                            result
+                        });
+                    } else {
+                        res.json({
+                            user
+                        });
+                    }
+                }
+            } catch (error) {
+                res.status(500).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+
+module.exports = { insertUser, loginUser, getUser, deleteUser, updateUser, getUserId };

@@ -88,15 +88,27 @@ INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paied');
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertEvent (
-	IN name_event VARCHAR(255),
-	IN date DATETIME 
+	IN name_event_e VARCHAR(255),
+	IN date_e DATETIME 
 )
 BEGIN 
-	INSERT INTO event(name_event, date) values (name_event, date);
+	INSERT INTO event(name_event, date) values (name_event_e, date_e);
 END //
 DELIMITER ;
 
 --------
+
+--SELECT eventid
+DELIMITER //
+CREATE PROCEDURE selectEventId(
+	IN id_e INTEGER
+)
+BEGIN
+	SELECT * FROM event WHERE id = id_e;
+END //
+DELIMITER ;
+
+-------------
 
 --SELECT ACTIVE
 DELIMITER //
@@ -112,12 +124,12 @@ DELIMITER ;
 --UPDATE
 DELIMITER //
 CREATE PROCEDURE updateEvent (
-    IN id_p INTEGER,
-    IN name_event_p VARCHAR(255),
-    IN date_p DATETIME
+    IN id_e INTEGER,
+    IN name_event_e VARCHAR(255),
+    IN date_e DATETIME
 )
 BEGIN 
-    UPDATE event SET name_event = name_event_p, date = date_p WHERE id = id_p;
+    UPDATE event SET name_event = name_event_e, date = date_e WHERE id = id_e;
 END //
 DELIMITER ;
 
@@ -126,20 +138,32 @@ DELIMITER ;
 --DELETE
 DELIMITER //
 CREATE PROCEDURE deleteEvent (
-    IN id_p INTEGER
+    IN id_e INTEGER
 )
 BEGIN 
-    DELETE FROM event WHERE id = id_p;
+    DELETE FROM event WHERE id = id_e;
 END //
 DELIMITER ;
 
 
 -----------------------------------------------------------PRODUCTS
---INSERT
+--SELECT
 DELIMITER //
 CREATE PROCEDURE selectProduct ()
 BEGIN 
 	SELECT * FROM product ;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT productid
+DELIMITER //
+CREATE PROCEDURE selectProductId(
+	IN id_p INTEGER
+)
+BEGIN
+	SELECT * FROM product WHERE id = id_p;
 END //
 DELIMITER ;
 
@@ -150,11 +174,11 @@ DELIMITER //
 CREATE PROCEDURE insertProduct (
 		IN name_product_p VARCHAR(255),
 		IN price_p DECIMAL(65, 2),
-		IN Stock_P INTEGER,	
-		IN id_status_P INTEGER
+		IN stock_p INTEGER,	
+		IN id_status_p INTEGER
 )
 BEGIN 
-	INSERT INTO product(name_product, price, Stock, id_status) VALUES(name_product_p, price_p, Stock_P, id_status_P);
+	INSERT INTO product(name_product, price, stock, id_status) VALUES(name_product_p, price_p, stock_p, id_status_p);
 END //
 DELIMITER ;
 
@@ -166,11 +190,11 @@ CREATE PROCEDURE updateProduct(
 		IN id_p INTEGER,
 		IN name_product_p VARCHAR(255),
 		IN price_p DECIMAL(65, 2),
-		IN Stock_P INTEGER,	
-		IN id_status_P INTEGER
+		IN stock_p INTEGER,	
+		IN id_status_p INTEGER
 )
 BEGIN 
-	UPDATE product SET name_product = name_product_p, price = price_p, Stock = Stock_P, id_status= id_status_P WHERE id = id_p;
+	UPDATE product SET name_product = name_product_p, price = price_p, stock = stock_p, id_status= id_status_p WHERE id = id_p;
 END //
 DELIMITER ;
 
@@ -196,9 +220,21 @@ BEGIN
 END //
 DELIMITER ;
 
+------------------
+
+--SELECT userid
+DELIMITER //
+CREATE PROCEDURE selectUserId(
+	IN id_u INTEGER
+)
+BEGIN
+	SELECT * FROM user WHERE id = id_u;
+END //
+DELIMITER ;
+
 ---------------
 
---SELECT whereemail
+--SELECT useremail
 DELIMITER //
 CREATE PROCEDURE selectUserEmail(
 	IN email_u VARCHAR(250)
@@ -241,7 +277,17 @@ BEGIN
 END //
 DELIMITER ;
 
+-----------
 
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteUser (
+    IN id_u INTEGER
+)
+BEGIN 
+    DELETE FROM user WHERE id = id_u;
+END //
+DELIMITER ;
 
 
 
