@@ -9,7 +9,12 @@ const getProducts = async (req, res) => {
     //////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, (error, result) => {
+        connection.query(query, async (error, result) => {
+            const productData = result[0]; // access the first element of result
+            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            ////////////////////////////////////////////////////////////
+
             try {
                 if (error) {
                     res.status(500).json({
@@ -18,7 +23,7 @@ const getProducts = async (req, res) => {
                     });
                 } else {
                     res.json({
-                        result
+                        product
                     });
                 }
             } catch (error) {
@@ -39,13 +44,14 @@ const getProducts = async (req, res) => {
 
 //insert products
 const insertProduct = async (req, res) => {
-    const { name_product_p, price_p, Stock_p, id_status_p } = req.body;
+    const { name_product, price, stock, id_status } = req.body;
     const query = 'CALL insertProduct(?,?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [name_product_p, price_p, Stock_p, id_status_p], (error, result) => {
+        connection.query(query, [name_product, price, stock, id_status], (error, result) => {
+            console.log(error);
             try {
                 if (error) {
                     res.status(500).json({
@@ -54,13 +60,15 @@ const insertProduct = async (req, res) => {
                     });
                 } else {
                     res.json({
+                        msg: i18n.__('newProduct'),
                         result
                     });
                 }
             } catch (error) {
                 res.status(400).json({
                     msg: 'Error',
-                    error
+                    error,
+                    result
                 });
             }
         });
@@ -75,13 +83,13 @@ const insertProduct = async (req, res) => {
 
 //update product
 const updateProduct = async (req, res) => {
-    const { id_p, name_product_p, price_p, Stock_p, id_status_p } = req.body;
+    const { id, name_product, price, stock, id_status } = req.body;
     const query = 'CALL updateProduct(?,?,?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id_p, name_product_p, price_p, Stock_p, id_status_p], (error, result) => {
+        connection.query(query, [id, name_product, price, stock, id_status], async (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -90,7 +98,7 @@ const updateProduct = async (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('updateEvent'),
+                        msg: i18n.__('updateProduct'),
                         result
                     });
                 }
@@ -112,28 +120,83 @@ const updateProduct = async (req, res) => {
 
 //delete product
 const deletepProduct = async (req, res) => {
-    //when need id ever use {} to collect info id_p
-    const { id_p } = req.body;
+    const { id } = req.parameters;
     const query = 'CALL deleteProduct(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, id_p, (error, result) => {
-            if (error) {
-                res.json({
-                    msg: "Delete product error", result,
+        connection.query(query, id, async (error, result) => {
+            try {
+                if (error) {
+                    res.json({
+                        msg: i18n.__('errorDelete'),
+                        error
+                    });
+                } else {
+                    res.json({
+                        msg: i18n.__('deleteProduct'),
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
                     error
-                });
-            } else {
-                res.json({
-                    result,
-                    msg: "Deleted product"
                 });
             }
         });
     } catch (error) {
-        res.error(error);
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+//show product id
+const getProductId = async (req, res) => {
+    const { id } = req.params;
+
+    ////////////////////////////////////////////////////////////////////
+
+    try {
+        const query = 'CALL selectProductId(?)'
+
+        connection.query(query, id, async (error, result) => {
+            const productData = result[0]; // access the first element of result
+            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            try {
+                if (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    if (!user) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistProduct'),
+                            result
+                        });
+                    } else {
+                        res.json({
+                            product
+                        });
+                    }
+                }
+            } catch (error) {
+                res.status(500).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
     }
 }
 

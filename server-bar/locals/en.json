@@ -10,8 +10,9 @@
 	"errorUpdate": "Error to update",
 	"errorDelete": "Error to delete",
 
-	"notExistUser": "There is no user with this email",
-	"existUser": "There is already a user with this email",
+	"notExistUserEmail": "There is no user with this email",
+	"notExistUser": "No user found",
+	"existUserEmail": "There is already a user with this email",
 	"newUser": "New user created",
 	"updateUser": "Updated user",
 	"deleteUser": "Deleted user",
@@ -20,7 +21,8 @@
 	"updateEvent": "Updated event",
 	"deleteEvent": "Deleted event",
 
-	"newProduct": "New event created",
-	"updateProduct": "Updated event",
-	"deleteProduct": "Deleted event"
+	"notExistProduct": "No product found",
+	"newProduct": "New product created",
+	"updateProduct": "Updated product",
+	"deleteProduct": "Deleted product"
 }
