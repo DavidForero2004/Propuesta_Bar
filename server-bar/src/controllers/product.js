@@ -51,7 +51,7 @@ const insertProduct = async (req, res) => {
 
     try {
         connection.query(query, [name_product, price, stock, id_status], (error, result) => {
-            console.log(error);
+            console.log(result);
             try {
                 if (error) {
                     res.status(500).json({
