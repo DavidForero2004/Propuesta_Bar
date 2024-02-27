@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../../../interfaces/event';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-insert-event',
@@ -17,9 +18,14 @@ export class InsertEventComponent implements OnInit {
   constructor(
     private _eventService: EventService,
     private toastr: ToastrService,
+    private translate: TranslateService,
     private fb: FormBuilder,
     private router: Router
   ) {
+    
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setDefaultLang('es');
+
     this.form = this.fb.group({
       name_event: ['', Validators.required],
       date: ['', Validators.required]
