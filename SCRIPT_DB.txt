@@ -88,25 +88,33 @@ INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paied');
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertEvent (
-	IN name_event_e VARCHAR(255),
-	IN date_e DATETIME 
+    IN name_event_e VARCHAR(255),
+    IN date_e DATETIME 
 )
 BEGIN 
-	INSERT INTO event(name_event, date) values (name_event_e, date_e);
+    SET @maxId = (SELECT MAX(id) FROM `event`);
+    SET @sql = CONCAT('ALTER TABLE `event` AUTO_INCREMENT = ', @maxId + 1);
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    INSERT INTO `event`(name_event, date) VALUES (name_event_e, date_e);
 END //
 DELIMITER ;
+
 
 --------
 
 --SELECT eventid
 DELIMITER //
 CREATE PROCEDURE selectEventId(
-	IN id_e INTEGER
+    IN id_e INTEGER
 )
 BEGIN
-	SELECT * FROM event WHERE id = id_e;
+    SELECT id, name_event, DATE_FORMAT(date, '%Y-%m-%d %H:%i') AS date
+    FROM event WHERE id = id_e;
 END //
 DELIMITER ;
+
 
 -------------
 
@@ -178,6 +186,11 @@ CREATE PROCEDURE insertProduct (
 		IN id_status_p INTEGER
 )
 BEGIN 
+	SET @maxId = (SELECT MAX(id) FROM product);
+	SET @sql = CONCAT('ALTER TABLE product AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
 	INSERT INTO product(name_product, price, stock, id_status) VALUES(name_product_p, price_p, stock_p, id_status_p);
 END //
 DELIMITER ;
@@ -249,15 +262,21 @@ DELIMITER ;
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertUser (
-		IN name_u VARCHAR(255),
-		IN email_u VARCHAR(255),
-		IN password_u VARCHAR(255),	
-		IN id_status_u INTEGER,
-		IN id_rol_u INTEGER
+    IN name_u VARCHAR(255),
+    IN email_u VARCHAR(255),
+    IN password_u VARCHAR(255),    
+    IN id_status_u INTEGER,
+    IN id_rol_u INTEGER
 )
 BEGIN 
-	INSERT INTO user(name, email, password, id_status, id_rol) VALUES(name_u, email_u, password_u, id_status_u, id_rol_u);
+    SET @maxId = (SELECT MAX(id) FROM user);
+    SET @sql = CONCAT('ALTER TABLE user AUTO_INCREMENT = ', @maxId + 1);
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    INSERT INTO user(name, email, password, id_status, id_rol) VALUES(name_u, email_u, password_u, id_status_u, id_rol_u);
 END //
+
 DELIMITER ;
 
 ----------
@@ -288,11 +307,6 @@ BEGIN
     DELETE FROM user WHERE id = id_u;
 END //
 DELIMITER ;
-
-
-
-
-
 
 
 /*Procedure for update status where stock is 0 or less*/

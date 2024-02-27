@@ -1,6 +1,6 @@
 //controllers/products.js
 const connection = require('../db/connection');
-
+const i18n = require('i18n');
 
 //show all products
 const getProducts = async (req, res) => {
@@ -51,7 +51,6 @@ const insertProduct = async (req, res) => {
 
     try {
         connection.query(query, [name_product, price, stock, id_status], (error, result) => {
-            console.log(result);
             try {
                 if (error) {
                     res.status(500).json({
@@ -67,8 +66,7 @@ const insertProduct = async (req, res) => {
             } catch (error) {
                 res.status(400).json({
                     msg: 'Error',
-                    error,
-                    result
+                    error
                 });
             }
         });

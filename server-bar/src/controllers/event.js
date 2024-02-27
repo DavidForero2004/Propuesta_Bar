@@ -40,13 +40,13 @@ const getEventActive = async (req, res) => {
 
 //insert a new event
 const insertEvent = async (req, res) => {
-    const { name_event, date} = req.body;
+    const { name_event, date } = req.body;
     const query = 'CALL insertEvent (?,?)';
 
     //////////////////////////////////////////////////////////////////////////
-    
+
     try {
-        connection.query(query, [ name_event, date ], (error, result) => {
+        connection.query(query, [name_event, date], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -77,13 +77,13 @@ const insertEvent = async (req, res) => {
 
 //update event
 const updateEvent = async (req, res) => {
-    const { name_event, date, id } = req.body;
+    const {id, name_event, date } = req.body;
     const query = 'CALL updateEvent(?,?,?)';
 
     ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [ id, name_event, date ], (error, result) => {
+        connection.query(query, [id, name_event, date], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -114,7 +114,7 @@ const updateEvent = async (req, res) => {
 
 //delete event
 const deleteEvent = async (req, res) => {
-    const { id }= req.params;
+    const { id } = req.params;
     const query = 'CALL deleteEvent(?)';
 
     ///////////////////////////////////////////////////////////
@@ -149,4 +149,47 @@ const deleteEvent = async (req, res) => {
 }
 
 
-module.exports = { insertEvent, getEventActive, updateEvent,deleteEvent };
+//show event id
+const getEventId = async (req, res) => {
+    const { id } = req.params;
+    const query = 'CALL selectEventId(?)';
+
+    ////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, id, async (error, result) => {
+            try {
+                if (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    if (!result) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistProduct'),
+                            result
+                        });
+                    } else {
+                        res.json({
+                            result
+                        });
+                    }
+                }
+            } catch (error) {
+                res.status(500).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+
+module.exports = { insertEvent, getEventActive, updateEvent, deleteEvent, getEventId };
