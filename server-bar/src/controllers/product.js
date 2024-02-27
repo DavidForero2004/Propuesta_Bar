@@ -11,11 +11,6 @@ const getProduct = (req, res) => {
 
     try {
         connection.query(query, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////
-
             try {
                 if (error) {
                     res.status(500).json({
@@ -24,7 +19,7 @@ const getProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        product
+                        result
                     });
                 }
             } catch (error) {
@@ -153,6 +148,7 @@ const deleteProduct = (req, res) => {
     }
 }
 
+
 //show product id
 const getProductId = (req, res) => {
     const { id } = req.params;
@@ -163,9 +159,6 @@ const getProductId = (req, res) => {
         const query = 'CALL selectProductId(?)'
 
         connection.query(query, id, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
             try {
                 if (error) {
                     res.status(400).json({
@@ -180,7 +173,7 @@ const getProductId = (req, res) => {
                         });
                     } else {
                         res.json({
-                            product
+                            result
                         });
                     }
                 }

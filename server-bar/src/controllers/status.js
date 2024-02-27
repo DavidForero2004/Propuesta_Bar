@@ -11,11 +11,6 @@ const getStatus = (req, res) => {
 
     try {
         connection.query(query, (error, result) => {
-            const statusData = result[0]; // access the first element of result
-            const status = statusData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////
-
             try {
                 if (error) {
                     res.status(500).json({
@@ -24,7 +19,7 @@ const getStatus = (req, res) => {
                     });
                 } else {
                     res.json({
-                        status
+                        result
                     });
                 }
             } catch (error) {
@@ -164,9 +159,6 @@ const getStatusId = (req, res) => {
         const query = 'CALL selectStatusId(?)'
 
         connection.query(query, id, (error, result) => {
-            const statusData = result[0]; // access the first element of result
-            const status = statusData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
             try {
                 if (error) {
                     res.status(400).json({
@@ -181,7 +173,7 @@ const getStatusId = (req, res) => {
                         });
                     } else {
                         res.json({
-                            status
+                            result
                         });
                     }
                 }

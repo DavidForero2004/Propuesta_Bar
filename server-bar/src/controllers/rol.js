@@ -11,11 +11,6 @@ const getRol = (req, res) => {
 
     try {
         connection.query(query, (error, result) => {
-            const rolData = result[0]; // access the first element of result
-            const rol = rolData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////
-
             try {
                 if (error) {
                     res.status(500).json({
@@ -24,7 +19,7 @@ const getRol = (req, res) => {
                     });
                 } else {
                     res.json({
-                        rol
+                        result
                     });
                 }
             } catch (error) {
@@ -164,9 +159,6 @@ const getRolId = (req, res) => {
         const query = 'CALL selectRolId(?)'
 
         connection.query(query, id, (error, result) => {
-            const rolData = result[0]; // access the first element of result
-            const rol = rolData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
             try {
                 if (error) {
                     res.status(400).json({

@@ -11,11 +11,6 @@ const getEventActive = (req, res) => {
 
     try {
         connection.query(query, (error, result) => {
-            const eventData = result[0]; // access the first element of result
-            const event = eventData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////////
-
             try {
                 if (error) {
                     res.status(500).json({
@@ -24,7 +19,7 @@ const getEventActive = (req, res) => {
                     });
                 } else {
                     res.json({
-                        event
+                        result
                     });
                 }
             } catch (error) {
@@ -163,8 +158,6 @@ const getEventId = (req, res) => {
 
     try {
         connection.query(query, id, (error, result) => {
-            const eventData = result[0]; // access the first element of result
-            const event = eventData[0]; // the first element of userData contains the RowDataPacket object with the user data
             try {
                 if (error) {
                     res.status(400).json({
@@ -179,7 +172,7 @@ const getEventId = (req, res) => {
                         });
                     } else {
                         res.json({
-                            event
+                            result
                         });
                     }
                 }

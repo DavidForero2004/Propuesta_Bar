@@ -13,11 +13,6 @@ const getUser = (req, res) => {
 
     try {
         connection.query(query, (error, result) => {
-            const userData = result[0]; // access the first element of result
-            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////////////
-
             try {
                 if (error) {
                     res.status(500).json({
@@ -26,7 +21,7 @@ const getUser = (req, res) => {
                     });
                 } else {
                     res.json({
-                        user
+                        result
                     });
                 }
             } catch (error) {
@@ -242,9 +237,6 @@ const getUserId = (req, res) => {
         const query = 'CALL selectUserId(?)'
 
         connection.query(query, id, (error, result) => {
-            const userData = result[0]; // access the first element of result
-            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
             try {
                 if (error) {
                     res.status(400).json({
@@ -259,7 +251,7 @@ const getUserId = (req, res) => {
                         });
                     } else {
                         res.json({
-                            user
+                            result
                         });
                     }
                 }

@@ -63,14 +63,14 @@ export class LoginComponent implements OnInit {
   es() {
     this.translate.use('es');
     this._userService.updateServerLanguage('es').subscribe(() => {
-      console.log('Idioma del servidor actualizado a español.');
+
     });
   }
 
   en() {
     this.translate.use('en');
     this._userService.updateServerLanguage('en').subscribe(() => {
-      console.log('Server language updated to English.');
+      
     });
   }
 }
