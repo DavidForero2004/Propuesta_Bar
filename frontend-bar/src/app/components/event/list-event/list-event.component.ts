@@ -131,7 +131,7 @@ export class ListEventComponent implements OnInit {
     if (this.form.invalid) {
       this.toastr.error('Por favor completa todos los campos', 'Error');
       return;
-    }
+    };
     const event: Event = {
       id: this.form.value.id,
       name_event: this.form.value.name_event,
@@ -141,9 +141,8 @@ export class ListEventComponent implements OnInit {
     this._eventService.updateEvent(event).subscribe({
       next: () => {
         this.toastr.success('El evento se actualizó correctamente', 'Éxito');
-        this.getEvent();
         this.form.reset();
-        this.router.navigate(['/event']);
+        this.getEvent();
       },
       error: (error) => {
         this.toastr.error('Ocurrió un error al actualizar el evento', 'Error');
