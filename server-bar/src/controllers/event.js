@@ -3,14 +3,19 @@ const connection = require('../db/connection');
 const i18n = require('i18n');
 
 
-//Get event
-const getEventActive = async (req, res) => {
+//show all event active
+const getEventActive = (req, res) => {
     const query = 'CALL selectEventActive';
 
     //////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, (error, result) => {
+            const eventData = result[0]; // access the first element of result
+            const event = eventData[0]; // the first element of userData contains the RowDataPacket object with the user data
+
+            ////////////////////////////////////////////////////////////////
+
             try {
                 if (error) {
                     res.status(500).json({
@@ -19,7 +24,7 @@ const getEventActive = async (req, res) => {
                     });
                 } else {
                     res.json({
-                        result
+                        event
                     });
                 }
             } catch (error) {
@@ -38,8 +43,8 @@ const getEventActive = async (req, res) => {
 }
 
 
-//insert a new event
-const insertEvent = async (req, res) => {
+//insert event
+const insertEvent = (req, res) => {
     const { name_event, date } = req.body;
     const query = 'CALL insertEvent (?,?)';
 
@@ -76,8 +81,8 @@ const insertEvent = async (req, res) => {
 
 
 //update event
-const updateEvent = async (req, res) => {
-    const {id, name_event, date } = req.body;
+const updateEvent = (req, res) => {
+    const { id, name_event, date } = req.body;
     const query = 'CALL updateEvent(?,?,?)';
 
     ///////////////////////////////////////////////////////////////////////////
@@ -113,7 +118,7 @@ const updateEvent = async (req, res) => {
 
 
 //delete event
-const deleteEvent = async (req, res) => {
+const deleteEvent = (req, res) => {
     const { id } = req.params;
     const query = 'CALL deleteEvent(?)';
 
@@ -150,14 +155,16 @@ const deleteEvent = async (req, res) => {
 
 
 //show event id
-const getEventId = async (req, res) => {
+const getEventId = (req, res) => {
     const { id } = req.params;
     const query = 'CALL selectEventId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, id, async (error, result) => {
+        connection.query(query, id, (error, result) => {
+            const eventData = result[0]; // access the first element of result
+            const event = eventData[0]; // the first element of userData contains the RowDataPacket object with the user data
             try {
                 if (error) {
                     res.status(400).json({
@@ -167,12 +174,12 @@ const getEventId = async (req, res) => {
                 } else {
                     if (!result) {
                         res.status(400).json({
-                            msg: i18n.__('notExistProduct'),
+                            msg: i18n.__('notExistEvent'),
                             result
                         });
                     } else {
                         res.json({
-                            result
+                            event
                         });
                     }
                 }

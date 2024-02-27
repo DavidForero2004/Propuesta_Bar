@@ -1,18 +1,18 @@
-//controllers/products.js
+//controllers/status.js
 const connection = require('../db/connection');
 const i18n = require('i18n');
 
 
-//show all products
-const getProduct = (req, res) => {
-    const query = 'CALL selectProduct';
+//show all status
+const getStatus = (req, res) => {
+    const query = 'CALL selectStatus';
 
     //////////////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+            const statusData = result[0]; // access the first element of result
+            const status = statusData[0]; // the first element of userData contains the RowDataPacket object with the user data
 
             ////////////////////////////////////////////////////////////
 
@@ -24,7 +24,7 @@ const getProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        product
+                        status
                     });
                 }
             } catch (error) {
@@ -43,15 +43,15 @@ const getProduct = (req, res) => {
 }
 
 
-//insert products
-const insertProduct = (req, res) => {
-    const { name_product, price, stock, id_status } = req.body;
-    const query = 'CALL insertProduct(?,?,?,?)';
+//insert status
+const insertStatus = (req, res) => {
+    const { name } = req.body;
+    const query = 'CALL insertStatus(?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [name_product, price, stock, id_status], (error, result) => {
+        connection.query(query, name, (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -60,7 +60,7 @@ const insertProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('newProduct'),
+                        msg: i18n.__('newStatus'),
                         result
                     });
                 }
@@ -80,15 +80,15 @@ const insertProduct = (req, res) => {
 }
 
 
-//update product
-const updateProduct = (req, res) => {
-    const { id, name_product, price, stock, id_status } = req.body;
-    const query = 'CALL updateProduct(?,?,?,?,?)';
+//update status
+const updateStatus = (req, res) => {
+    const { id, name } = req.body;
+    const query = 'CALL updateStatus(?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name_product, price, stock, id_status], (error, result) => {
+        connection.query(query, [id, name], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -97,7 +97,7 @@ const updateProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('updateProduct'),
+                        msg: i18n.__('updateStatus'),
                         result
                     });
                 }
@@ -117,10 +117,10 @@ const updateProduct = (req, res) => {
 }
 
 
-//delete product
-const deleteProduct = (req, res) => {
+//delete status
+const deleteStatus = (req, res) => {
     const { id } = req.parameters;
-    const query = 'CALL deleteProduct(?)';
+    const query = 'CALL deleteStatus(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +134,7 @@ const deleteProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('deleteProduct'),
+                        msg: i18n.__('deleteStatus'),
                         result
                     });
                 }
@@ -153,18 +153,19 @@ const deleteProduct = (req, res) => {
     }
 }
 
-//show product id
-const getProductId = (req, res) => {
+
+//show status id
+const getStatusId = (req, res) => {
     const { id } = req.params;
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectProductId(?)'
+        const query = 'CALL selectStatusId(?)'
 
         connection.query(query, id, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+            const statusData = result[0]; // access the first element of result
+            const status = statusData[0]; // the first element of userData contains the RowDataPacket object with the user data
 
             try {
                 if (error) {
@@ -175,12 +176,12 @@ const getProductId = (req, res) => {
                 } else {
                     if (!user) {
                         res.status(400).json({
-                            msg: i18n.__('notExistProduct'),
+                            msg: i18n.__('notExistStatus'),
                             result
                         });
                     } else {
                         res.json({
-                            product
+                            status
                         });
                     }
                 }
@@ -200,7 +201,7 @@ const getProductId = (req, res) => {
 }
 
 
-module.exports = { getProduct, insertProduct, updateProduct, deleteProduct, getProductId };
+module.exports = { getStatus, insertStatus, updateStatus, deleteStatus, getStatusId };
 
 
 

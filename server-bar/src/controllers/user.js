@@ -6,7 +6,7 @@ const i18n = require('i18n');
 
 
 //show all user
-const getUser = (_req, res) => {
+const getUser = (req, res) => {
     const query = 'CALL selectUser';
 
     //////////////////////////////////////////////////////////////////////
@@ -17,7 +17,7 @@ const getUser = (_req, res) => {
             const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
 
             ////////////////////////////////////////////////////////////////////
-            
+
             try {
                 if (error) {
                     res.status(500).json({
@@ -108,12 +108,13 @@ const insertUser = async (req, res) => {
 //update user
 const updateUser = async (req, res) => {
     const { id, name, email, password, id_status, id_rol } = req.body;
+    const hashPassword = await bcrypt.hash(password, 10);
     const query = 'CALL updateUser(?,?,?,?,?,?)';
 
     ///////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name, email, password, id_status, id_rol], (error, result) => {
+        connection.query(query, [id, name, email, hashPassword, id_status, id_rol], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -143,7 +144,7 @@ const updateUser = async (req, res) => {
 
 
 //delete user
-const deleteUser = async (req, res) => {
+const deleteUser = (req, res) => {
     const { id } = req.params;
     const query = 'CALL deleteUser(?)';
 
@@ -180,7 +181,7 @@ const deleteUser = async (req, res) => {
 
 
 //login user
-const loginUser = async (req, res) => {
+const loginUser = (req, res) => {
     const { email, password } = req.body;
     const userExist = 'CALL selectUserEmail(?)';
 
@@ -232,7 +233,7 @@ const loginUser = async (req, res) => {
 
 
 //show user id
-const getUserId = async (req, res) => {
+const getUserId = (req, res) => {
     const { id } = req.params;
 
     ////////////////////////////////////////////////////////////////////
@@ -240,7 +241,7 @@ const getUserId = async (req, res) => {
     try {
         const query = 'CALL selectUserId(?)'
 
-        connection.query(query, id, async (error, result) => {
+        connection.query(query, id, (error, result) => {
             const userData = result[0]; // access the first element of result
             const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
 

@@ -5,24 +5,33 @@
 	"acessDeneged": "Access denied",
 	"serverport": "Server on in port:",
 	"connectionBD": "Connection success to DB!",
-
 	"errorInsert": "Error to insert",
 	"errorUpdate": "Error to update",
 	"errorDelete": "Error to delete",
-
 	"notExistUserEmail": "There is no user with this email",
 	"notExistUser": "No user found",
 	"existUserEmail": "There is already a user with this email",
 	"newUser": "New user created",
 	"updateUser": "Updated user",
 	"deleteUser": "Deleted user",
-
+	"notExistEvent": "No event found",
 	"newEvent": "New event created",
 	"updateEvent": "Updated event",
 	"deleteEvent": "Deleted event",
-
 	"notExistProduct": "No product found",
 	"newProduct": "New product created",
 	"updateProduct": "Updated product",
-	"deleteProduct": "Deleted product"
+	"deleteProduct": "Deleted product",
+	"notExistTable": "No table found",
+	"newTable": "New table created",
+	"updateTable": "Updated table",
+	"deleteTable": "Deleted table",
+	"notExistStatus": "No status found",
+	"newStatus": "New status created",
+	"updateStatus": "Updated status",
+	"deleteStatus": "Deleted status",
+	"notExistRol": "No rol found",
+	"newRol": "New rol created",
+	"updateRol": "Updated rol",
+	"deleteRol": "Deleted rol"
 }

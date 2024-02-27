@@ -309,6 +309,201 @@ END //
 DELIMITER ;
 
 
+-----------------------------------------------------------TABLES
+--SELECT
+DELIMITER //
+CREATE PROCEDURE selectTable ()
+BEGIN 
+	SELECT * FROM `table` ;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT tableid
+DELIMITER //
+CREATE PROCEDURE selectTableId(
+	IN id_t INTEGER
+)
+BEGIN
+	SELECT * FROM `table` WHERE id = id_t;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertTable (
+		IN name_table_t VARCHAR(20),
+		IN id_status_t INTEGER
+)
+BEGIN 
+	SET @maxId = (SELECT MAX(id) FROM `table`);
+	SET @sql = CONCAT('ALTER TABLE `table` AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	INSERT INTO `table`(name_table, id_status) VALUES(name_table_t, id_status_t);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateTable(
+		IN id_t INTEGER,
+		IN name_table_t VARCHAR(20),
+		IN id_status_t INTEGER
+)
+BEGIN 
+	UPDATE `table` SET name_table = name_table_t, id_status = id_status_t WHERE id = id_t;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteTable(
+		IN id_t INTEGER
+)
+BEGIN 
+	DELETE FROM `table` WHERE id = id_t;
+END //
+DELIMITER ;
+
+
+-----------------------------------------------------------STATUS
+--SELECT
+DELIMITER //
+CREATE PROCEDURE selectStatus ()
+BEGIN 
+	SELECT * FROM status ;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT statusid
+DELIMITER //
+CREATE PROCEDURE selectStatusId(
+	IN id_s INTEGER
+)
+BEGIN
+	SELECT * FROM status WHERE id = id_s;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertStatus (
+		IN name_s VARCHAR(255)
+)
+BEGIN 
+	SET @maxId = (SELECT MAX(id) FROM status);
+	SET @sql = CONCAT('ALTER TABLE status AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	INSERT INTO status(name) VALUES(name_s);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateStatus(
+		IN id_s INTEGER,
+		IN name_s VARCHAR(255),
+)
+BEGIN 
+	UPDATE status SET name = name_s WHERE id = id_s;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteStatus(
+		IN id_s INTEGER
+)
+BEGIN 
+	DELETE FROM status WHERE id = id_s;
+END //
+DELIMITER ;
+
+
+-----------------------------------------------------------ROL
+--SELECT
+DELIMITER //
+CREATE PROCEDURE selectRol ()
+BEGIN 
+	SELECT * FROM rol ;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT rolid
+DELIMITER //
+CREATE PROCEDURE selectRolId(
+	IN id_r INTEGER
+)
+BEGIN
+	SELECT * FROM rol WHERE id = id_r;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertRol (
+		IN name_r VARCHAR(255)
+)
+BEGIN 
+	SET @maxId = (SELECT MAX(id) FROM rol);
+	SET @sql = CONCAT('ALTER TABLE rol AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	INSERT INTO rol(name) VALUES(name_r);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateRol(
+		IN id_r INTEGER,
+		IN name_r VARCHAR(255),
+)
+BEGIN 
+	UPDATE rol SET name = name_r WHERE id = id_r;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteRol(
+		IN id_r INTEGER
+)
+BEGIN 
+	DELETE FROM rol WHERE id = id_r;
+END //
+DELIMITER ;
+
+
+
 /*Procedure for update status where stock is 0 or less*/
 
 DELIMITER //

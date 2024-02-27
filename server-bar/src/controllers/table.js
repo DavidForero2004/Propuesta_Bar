@@ -1,18 +1,18 @@
-//controllers/products.js
+//controllers/table.js
 const connection = require('../db/connection');
 const i18n = require('i18n');
 
 
-//show all products
-const getProduct = (req, res) => {
-    const query = 'CALL selectProduct';
+//show all tables
+const getTable = (req, res) => {
+    const query = 'CALL selectTable';
 
     //////////////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+            const tableData = result[0]; // access the first element of result
+            const table = tableData[0]; // the first element of userData contains the RowDataPacket object with the user data
 
             ////////////////////////////////////////////////////////////
 
@@ -24,7 +24,7 @@ const getProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        product
+                        table
                     });
                 }
             } catch (error) {
@@ -43,15 +43,15 @@ const getProduct = (req, res) => {
 }
 
 
-//insert products
-const insertProduct = (req, res) => {
-    const { name_product, price, stock, id_status } = req.body;
-    const query = 'CALL insertProduct(?,?,?,?)';
+//insert table
+const insertTable = (req, res) => {
+    const { name_table, id_status } = req.body;
+    const query = 'CALL insertTable(?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [name_product, price, stock, id_status], (error, result) => {
+        connection.query(query, [name_table, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -60,7 +60,7 @@ const insertProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('newProduct'),
+                        msg: i18n.__('newTable'),
                         result
                     });
                 }
@@ -80,15 +80,15 @@ const insertProduct = (req, res) => {
 }
 
 
-//update product
-const updateProduct = (req, res) => {
-    const { id, name_product, price, stock, id_status } = req.body;
-    const query = 'CALL updateProduct(?,?,?,?,?)';
+//update table
+const updateTable = (req, res) => {
+    const { id, name_table, id_status } = req.body;
+    const query = 'CALL updateTable(?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name_product, price, stock, id_status], (error, result) => {
+        connection.query(query, [id, name_table, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -97,7 +97,7 @@ const updateProduct = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('updateProduct'),
+                        msg: i18n.__('updateTable'),
                         result
                     });
                 }
@@ -117,10 +117,10 @@ const updateProduct = (req, res) => {
 }
 
 
-//delete product
-const deleteProduct = (req, res) => {
+//delete table
+const deleteTable = (req, res) => {
     const { id } = req.parameters;
-    const query = 'CALL deleteProduct(?)';
+    const query = 'CALL deleteTable(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -153,18 +153,19 @@ const deleteProduct = (req, res) => {
     }
 }
 
-//show product id
-const getProductId = (req, res) => {
+
+//show table id
+const getTableId = (req, res) => {
     const { id } = req.params;
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectProductId(?)'
+        const query = 'CALL selectTableId(?)'
 
         connection.query(query, id, (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
+            const tableData = result[0]; // access the first element of result
+            const table = tableData[0]; // the first element of userData contains the RowDataPacket object with the user data
 
             try {
                 if (error) {
@@ -180,7 +181,7 @@ const getProductId = (req, res) => {
                         });
                     } else {
                         res.json({
-                            product
+                            table
                         });
                     }
                 }
@@ -200,7 +201,7 @@ const getProductId = (req, res) => {
 }
 
 
-module.exports = { getProduct, insertProduct, updateProduct, deleteProduct, getProductId };
+module.exports = { getTable, insertTable, updateTable, deleteTable, getTableId };
 
 
 
