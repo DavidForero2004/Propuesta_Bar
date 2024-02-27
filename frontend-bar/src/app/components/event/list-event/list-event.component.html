@@ -1,22 +1,20 @@
-
-
 <div class="title">
-    <button class="btn btn-primary" routerLink="/event/insert">{{"addEvent" | translate}}</button>
+    <button class="btn btn-primary" routerLink="/event/insert">{{ "addEvent" | translate }}</button>
 </div>
 
-    <div class="language-buttons">
-        <button class="ESEN" (click)="es()">ES</button>|<button class="ESEN" (click)="en()">EN</button>
-    </div>
+<div class="language-buttons">
+    <button class="ESEN" (click)="es()">ES</button>|<button class="ESEN" (click)="en()">EN</button>
+</div>
 
 <div class="container mt-2 text-center">
-    <h1>{{"events" | translate}}</h1>
+    <h1>{{ "events" | translate }}</h1>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">{{ "name" | translate}}</th>
-                <th scope="col">{{ "date" | translate}}</th>
-                <th scope="col">{{ "actions" | translate}}</th>
+                <th scope="col">{{ "name" | translate }}</th>
+                <th scope="col">{{ "date" | translate }}</th>
+                <th scope="col">{{ "actions" | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,34 +23,24 @@
                 <td>{{ event.name_event }}</td>
                 <td>{{ event.date | date: 'short' }}</td>
                 <td>
-                    <button class="btn btn-info">{{ "edit" | translate}}</button> 
-                    <button class="btn btn-secondary" (click)="deleteEvent(event.id)">{{"delete" | translate}}</button>
+                    <button class="openButton btn btn-info" (click)="selectEventId(event.id)">{{ "edit" | translate}}</button>
+                    <button class="btn btn-secondary" (click)="deleteEvent(event.id)">{{ "delete" | translate }}</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div id="card">
+    <form [formGroup]="form" (ngSubmit)="updateEvent()">
+        <div *ngIf="listEventId.length > 0">
+            <input type="hidden" formControlName="id" [value]="listEventId[0].id">
+            <label>{{ "name" | translate }}</label>
+            <input type="text" formControlName="name_event" [value]="listEventId[0].name_event">
+            <label>{{ "date" | translate }}</label>
+            <input type="datetime-local" formControlName="date" [value]="listEventId[0].date">
+        </div>
+        <button type="submit" class="acceptButton">{{ "accept" | translate }}</button>
+        <button type="button" class="closeButton">{{ "cancel" | translate }}</button>
+    </form>
+</div>

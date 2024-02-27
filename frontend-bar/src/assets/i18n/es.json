@@ -17,5 +17,7 @@
     "alertDelete": "!Esta acción no se puede deshacer¡",
     "successDelete": "El evento se elimino correctamente",
     "errorDelete": "El evento no se pudo eliminar",
-    "addEvent": "Agregar evento"
+    "addEvent": "Agregar evento",
+    "GeneralError": "Ha ocurrido un error inesperado",
+    "accept": "Aceptar"
 }

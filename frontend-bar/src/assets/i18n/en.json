@@ -17,5 +17,7 @@
     "alertDelete":  "!This action  can't be undone¡",
     "successDelete": "Event deleted",
     "errorDelete": "Error to delete event",
-    "addEvent": "Add event"
+    "addEvent": "Add event",
+    "GeneralError": "An unexpected error has occurred",
+    "accept": "Accept"
 }

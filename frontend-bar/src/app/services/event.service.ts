@@ -28,8 +28,15 @@ export class EventService {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/deleteevent/${id}`);
   }
 
+  updateEvent(event: Event): Observable<any> {
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/updateevent`, event);
+  }
+
+  selectEventId(id?: number): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+  }
+
   updateServerLanguage(lang: string): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}language`, { lang });
   }
-
 }
