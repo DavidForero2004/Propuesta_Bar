@@ -107,12 +107,14 @@ DELIMITER ;
 --SELECT eventid
 DELIMITER //
 CREATE PROCEDURE selectEventId(
-	IN id_e INTEGER
+    IN id_e INTEGER
 )
 BEGIN
-	SELECT * FROM event WHERE id = id_e;
+    SELECT id, name_event, DATE_FORMAT(date, '%Y-%m-%d %H:%i') AS date
+    FROM event WHERE id = id_e;
 END //
 DELIMITER ;
+
 
 -------------
 
