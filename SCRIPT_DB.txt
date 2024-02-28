@@ -92,7 +92,7 @@ CREATE PROCEDURE insertEvent (
     IN date_e DATETIME 
 )
 BEGIN 
-    SET @maxId = (SELECT MAX(id) FROM `event`);
+    SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM `event`);
     SET @sql = CONCAT('ALTER TABLE `event` AUTO_INCREMENT = ', @maxId + 1);
     PREPARE stmt FROM @sql;
     EXECUTE stmt;
@@ -186,7 +186,7 @@ CREATE PROCEDURE insertProduct (
 		IN id_status_p INTEGER
 )
 BEGIN 
-	SET @maxId = (SELECT MAX(id) FROM product);
+	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM product);
 	SET @sql = CONCAT('ALTER TABLE product AUTO_INCREMENT = ', @maxId + 1);
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
@@ -269,7 +269,7 @@ CREATE PROCEDURE insertUser (
     IN id_rol_u INTEGER
 )
 BEGIN 
-    SET @maxId = (SELECT MAX(id) FROM user);
+    SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM user);
     SET @sql = CONCAT('ALTER TABLE user AUTO_INCREMENT = ', @maxId + 1);
     PREPARE stmt FROM @sql;
     EXECUTE stmt;
