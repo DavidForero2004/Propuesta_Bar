@@ -19,5 +19,8 @@
     "errorDelete": "Error to delete event",
     "addEvent": "Add event",
     "GeneralError": "An unexpected error has occurred",
-    "accept": "Accept"
+    "accept": "Accept",
+    "products": "Products",
+    "users": "Users",
+    "exit": "Exit"
 }

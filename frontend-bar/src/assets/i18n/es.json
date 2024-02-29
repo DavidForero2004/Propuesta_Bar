@@ -19,5 +19,8 @@
     "errorDelete": "El evento no se pudo eliminar",
     "addEvent": "Agregar evento",
     "GeneralError": "Ha ocurrido un error inesperado",
-    "accept": "Aceptar"
+    "accept": "Aceptar",
+    "products": "Productos",
+    "users": "Usuarios",
+    "exit": "Salir"
 }
