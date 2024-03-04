@@ -22,5 +22,8 @@
     "accept": "Aceptar",
     "products": "Productos",
     "users": "Usuarios",
-    "exit": "Salir"
+    "exit": "Salir",
+    "home": "Inicio",
+    "contactUs": "Contáctenos",
+    "order": "Pedir"
 }

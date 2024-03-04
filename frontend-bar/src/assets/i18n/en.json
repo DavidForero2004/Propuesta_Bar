@@ -22,5 +22,9 @@
     "accept": "Accept",
     "products": "Products",
     "users": "Users",
-    "exit": "Exit"
+    "exit": "Exit",
+    "home": "Home",
+    "contactUs": "Contact Us",
+    "order": "Order"
+
 }
