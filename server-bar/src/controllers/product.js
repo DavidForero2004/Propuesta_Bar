@@ -2,19 +2,15 @@
 const connection = require('../db/connection');
 const i18n = require('i18n');
 
+
 //show all products
-const getProducts = async (req, res) => {
+const getProduct = (req, res) => {
     const query = 'CALL selectProduct';
 
     //////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, async (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            ////////////////////////////////////////////////////////////
-
+        connection.query(query, (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -23,7 +19,7 @@ const getProducts = async (req, res) => {
                     });
                 } else {
                     res.json({
-                        product
+                        result
                     });
                 }
             } catch (error) {
@@ -43,7 +39,7 @@ const getProducts = async (req, res) => {
 
 
 //insert products
-const insertProduct = async (req, res) => {
+const insertProduct = (req, res) => {
     const { name_product, price, stock, id_status } = req.body;
     const query = 'CALL insertProduct(?,?,?,?)';
 
@@ -66,8 +62,7 @@ const insertProduct = async (req, res) => {
             } catch (error) {
                 res.status(400).json({
                     msg: 'Error',
-                    error,
-                    result
+                    error
                 });
             }
         });
@@ -81,14 +76,14 @@ const insertProduct = async (req, res) => {
 
 
 //update product
-const updateProduct = async (req, res) => {
+const updateProduct = (req, res) => {
     const { id, name_product, price, stock, id_status } = req.body;
     const query = 'CALL updateProduct(?,?,?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name_product, price, stock, id_status], async (error, result) => {
+        connection.query(query, [id, name_product, price, stock, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -118,14 +113,14 @@ const updateProduct = async (req, res) => {
 
 
 //delete product
-const deletepProduct = async (req, res) => {
+const deleteProduct = (req, res) => {
     const { id } = req.parameters;
     const query = 'CALL deleteProduct(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, id, async (error, result) => {
+        connection.query(query, id, (error, result) => {
             try {
                 if (error) {
                     res.json({
@@ -153,8 +148,9 @@ const deletepProduct = async (req, res) => {
     }
 }
 
+
 //show product id
-const getProductId = async (req, res) => {
+const getProductId = (req, res) => {
     const { id } = req.params;
 
     ////////////////////////////////////////////////////////////////////
@@ -162,10 +158,7 @@ const getProductId = async (req, res) => {
     try {
         const query = 'CALL selectProductId(?)'
 
-        connection.query(query, id, async (error, result) => {
-            const productData = result[0]; // access the first element of result
-            const product = productData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
+        connection.query(query, id, (error, result) => {
             try {
                 if (error) {
                     res.status(400).json({
@@ -180,7 +173,7 @@ const getProductId = async (req, res) => {
                         });
                     } else {
                         res.json({
-                            product
+                            result
                         });
                     }
                 }
@@ -200,7 +193,7 @@ const getProductId = async (req, res) => {
 }
 
 
-module.exports = { getProducts, insertProduct, updateProduct, deletepProduct };
+module.exports = { getProduct, insertProduct, updateProduct, deleteProduct, getProductId };
 
 
 

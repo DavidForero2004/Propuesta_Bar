@@ -1,20 +1,20 @@
-//controllers/event.js
+//controllers/table.js
 const connection = require('../db/connection');
 const i18n = require('i18n');
 
 
-//show all event active
-const getEventActive = (req, res) => {
-    const query = 'CALL selectEventActive';
+//show all tables
+const getTable = (req, res) => {
+    const query = 'CALL selectTable';
 
-    //////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
-                        msg: "Error",
+                        msg: 'Error',
                         error
                     });
                 } else {
@@ -38,15 +38,15 @@ const getEventActive = (req, res) => {
 }
 
 
-//insert event
-const insertEvent = (req, res) => {
-    const { name_event, date } = req.body;
-    const query = 'CALL insertEvent (?,?)';
+//insert table
+const insertTable = (req, res) => {
+    const { name_table, id_status } = req.body;
+    const query = 'CALL insertTable(?,?)';
 
-    //////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [name_event, date], (error, result) => {
+        connection.query(query, [name_table, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -55,7 +55,7 @@ const insertEvent = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('newEvent'),
+                        msg: i18n.__('newTable'),
                         result
                     });
                 }
@@ -75,15 +75,15 @@ const insertEvent = (req, res) => {
 }
 
 
-//update event
-const updateEvent = (req, res) => {
-    const { id, name_event, date } = req.body;
-    const query = 'CALL updateEvent(?,?,?)';
+//update table
+const updateTable = (req, res) => {
+    const { id, name_table, id_status } = req.body;
+    const query = 'CALL updateTable(?,?,?)';
 
-    ///////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name_event, date], (error, result) => {
+        connection.query(query, [id, name_table, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -92,7 +92,7 @@ const updateEvent = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('updateEvent'),
+                        msg: i18n.__('updateTable'),
                         result
                     });
                 }
@@ -102,7 +102,7 @@ const updateEvent = (req, res) => {
                     error
                 });
             }
-        })
+        });
     } catch (error) {
         res.status(400).json({
             msg: 'Error',
@@ -112,24 +112,24 @@ const updateEvent = (req, res) => {
 }
 
 
-//delete event
-const deleteEvent = (req, res) => {
-    const { id } = req.params;
-    const query = 'CALL deleteEvent(?)';
+//delete table
+const deleteTable = (req, res) => {
+    const { id } = req.parameters;
+    const query = 'CALL deleteTable(?)';
 
-    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
 
     try {
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {
-                    res.status(500).json({
+                    res.json({
                         msg: i18n.__('errorDelete'),
                         error
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('deleteEvent'),
+                        msg: i18n.__('deleteProduct'),
                         result
                     });
                 }
@@ -149,14 +149,15 @@ const deleteEvent = (req, res) => {
 }
 
 
-//show event id
-const getEventId = (req, res) => {
+//show table id
+const getTableId = (req, res) => {
     const { id } = req.params;
-    const query = 'CALL selectEventId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
+        const query = 'CALL selectTableId(?)'
+
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {
@@ -165,9 +166,9 @@ const getEventId = (req, res) => {
                         error
                     });
                 } else {
-                    if (!result) {
+                    if (!user) {
                         res.status(400).json({
-                            msg: i18n.__('notExistEvent'),
+                            msg: i18n.__('notExistProduct'),
                             result
                         });
                     } else {
@@ -192,4 +193,7 @@ const getEventId = (req, res) => {
 }
 
 
-module.exports = { insertEvent, getEventActive, updateEvent, deleteEvent, getEventId };
+module.exports = { getTable, insertTable, updateTable, deleteTable, getTableId };
+
+
+

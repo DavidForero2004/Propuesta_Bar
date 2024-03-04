@@ -5,6 +5,9 @@ const connection = require('./src/db/connection');
 const userRoutes = require('./src/routes/user');
 const productRoutes = require('./src/routes/product');
 const languageRoutes = require('./src/routes/language');
+const tableRoutes = require('./src/routes/table');
+const statusRoutes = require('./src/routes/status');
+const rolRoutes = require('./src/routes/rol');
 const eventsRoutes = require('./src/routes/event');
 const cors = require('cors');
 const app = express();
@@ -37,6 +40,9 @@ app.use(bodyParser.json());
 app.use('/users', userRoutes);
 app.use('/language', languageRoutes);
 app.use('/products', productRoutes);
+app.use('/tables', tableRoutes);
+app.use('/state', statusRoutes);
+app.use('/rols', rolRoutes);
 app.use('/events', eventsRoutes);
 
 app.listen(process.env.PORT || port, () => {
