@@ -1,155 +1,241 @@
+@font-face {
+    font-family: "Acumin Variable Concept";
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot");
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept")format("svg");
+    font-weight: 400;
+}
+
+
+
 .navbar {
+    background-color: #3A0709;
     width: 100%;
-    height: 55px;
-    background-color: #552d2e;
-    padding: 5px;
+    height: 65px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    gap: 1%;
 }
 
-.logo {
-    height: 100%;
-    width: 75px;
-    margin-left: 10px;
-}
-
-.logo img {
-    width: 100%;
-    height: 100%;
-}
-
-.options {
-    display: flex;
-    justify-content: flex-end;
-    gap: 2%;
+.option_container {
     width: 80%;
-}
-.options_dropdown{
-    display: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
 }
 
-.options a {
-    color: white;
+.option_container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
-    font-size: 16px;
-    padding: 0 10px;
-    transition: color 0.3s;
+    color: white;
+    font-family: "Acumin Variable Concept";
+    font-size: 17px;
+    height: 60%;
 }
 
-.options a:hover {
-    color: gray;
+.option_container a:hover {
+    border-bottom: 3px solid white;
+}
+
+.logo_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo_nav img {
+    width: 70px;
+    height: 100%;
+    margin-left: 15px;
+}
+
+.logo_nav img:hover {
+    -webkit-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    border-radius: 50%;
     transition: 1s;
 }
 
-.options p {
-    color: white;
-    font-size: 16px;
-    margin-right: 20px;
-}
-
-.exit {
-    margin-right: 10px;
+fa-icon {
+    margin-right: 5px;
 }
 
 .language-buttons {
     display: flex;
     align-items: center;
     color: white;
-}
-
-.language-buttons button {
-    margin-right: 5px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: color 0.3s;
+    height: 10px;
 }
 
 .language-buttons button:hover {
-    color: gray;
-    transition: 1s;
+    -webkit-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+    border-radius: 50%;
 }
-.menu_ham{
+
+.language-buttons button {
+    color: white;
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    margin: 0;
+    height: 30px;
+    
+}
+
+.es {
+    border-right: 1px solid white !important;
+    font-family: "Acumin Variable Concept";
+}
+.en {
+    border-left: 1px solid white !important;
+    font-family: "Acumin Variable Concept";
+}
+
+
+.es:focus {
+    text-decoration: underline;
+}
+
+.en:focus {
+    text-decoration: underline;
+}
+
+.option_container_menu {
     display: none;
 }
 
-@media screen and (min-width: 300px) and (max-width: 520px) {
-    .navbar{
-        padding: 10px;
-    }
-    .options{
+.menu_hamburguer {
+    display: none;
+}
+
+
+
+
+
+
+@media screen and (min-width: 240px) and (max-width: 520px) {
+    .option_container {
         display: none;
     }
-    .menu_ham{
-        color: white;
+
+    .language-buttons {
+        display: none;
+    }
+
+    .menu_hamburguer {
         display: block;
-        justify-content: center;
-        align-items: center;
     }
-    .menu_ham p{
-        margin: 0 !important;
+
+    .navbar {
+        justify-content: space-around;
+        gap: 50%;
+        width: 100% !important;
     }
-    .logo {
-        height: 100%;
-        width: 65px;
-        margin-left: 10px;
-    }
-    .options_dropdown.show{
+
+    .option_container_menu.show {
         display: block;
+        background-color: rgb(57 7 8);
         flex-direction: column;
-        padding: 5px;
-        color: white;
-        background-color: #552d2e;
-    }.exit{
-        display: flex;
-        justify-content: center;
         align-items: center;
-        margin: 0;
-    }
-    .links{
-        display: flex;
-        flex-direction: column;
         justify-content: center;
-        align-items: center;
-    }
-    .links a{
         width: 100%;
+    }
+
+    .logo_nav img {
+        width: 60px;
+    }
+
+    .option_container_menu a {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: none; 
-        border-top: 2px solid #ffffff; 
+        width: 100%;
         padding: 10px;
-        color: #ffffff;
+        color: white;
         text-decoration: none;
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        font-family: 'Oswald Regular', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
     }
-    .links a:hover {
-        color: gray;
-        transition: 1s;
+
+    .menu_hamburguer fa-icon {
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
     }
-    .exit a{
-        width: 100%;
+
+    .language-buttons_h {
         display: flex;
-        justify-content: center;
         align-items: center;
-        border: none; 
-        border-top: 2px solid #ffffff; 
+        justify-content: end;
+        font-family: 'Oswald Regular', sans-serif;
+        color: white;
         padding: 10px;
-    
+        letter-spacing: 2px;
+
     }
-    .exit a:hover {
-        color: gray;
-        transition: 1s;
+
+    .language-buttons_h button:hover {
+        -webkit-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+        -moz-box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+        box-shadow: 0px -1px 10px 1.5px rgba(255, 255, 255, 1);
+        border-radius: 50%;
+    }
+
+    .language-buttons_h button {
+        color: white;
+        background-color: rgba(240, 248, 255, 0);
+        border: none;
+        margin: 0;
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 521px) and (max-width:720px) {
+    .option_container{
+        width: 70%;
+    }
+    .option_container a{
+        font-size: 14px;
+    }
+    .language-buttons .es,.en{
+        font-size: 14px;
+    }
+    .logo_nav img{
+        width: 60px;
+        margin-left: 5px;
+    }
+    
+}
+
+@media screen and (min-width: 721px) and (max-width:1024px) {
+    .option_container{
+        width: 60%;
+    }
+    .option_container a{
+        font-size: 14px;
+    }
+    .language-buttons .es,.en{
+        font-size: 14px;
     }
     .language-buttons{
-        width: 100%;
-        padding: 10px;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        border-top: 2px solid #ffffff; 
+        margin-left: 15px;
     }
+    .logo_nav img{
+        width: 60px;
+        margin-left: 15px;
+    }
+    
 }

@@ -18,7 +18,7 @@ const routes: Routes = [{
     {path: 'event', component: ListEventComponent, canActivate: [AuthGuard]},
     {path: 'event/insert', component: InsertEventComponent, canActivate: [AuthGuard]},
     //LANDING
-    {path: 'HollowBar-initial/client', component: StructureComponent},
+    {path: 'hollowbar-initial/client', component: StructureComponent},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 

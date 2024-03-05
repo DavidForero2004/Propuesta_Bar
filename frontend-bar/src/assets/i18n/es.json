@@ -5,7 +5,7 @@
     "required": "Todos los campos son obligatorios",
     "accessDeneged": "Acceso denegado",
     "errorOccurred": "Ocurrió un error, contacte al Administrador",
-    "events": "Eventos",
+    "events": "EVENTOS",
     "name": "Nombre",
     "date": "Fecha",
     "actions": "Acciones",
@@ -20,10 +20,10 @@
     "addEvent": "Agregar evento",
     "GeneralError": "Ha ocurrido un error inesperado",
     "accept": "Aceptar",
-    "products": "Productos",
-    "users": "Usuarios",
-    "exit": "Salir",
-    "home": "Inicio",
-    "contactUs": "Contáctenos",
-    "order": "Pedir"
+    "products": "PRODUCTOS",
+    "users": "USUARIOS",
+    "exit": "SALIR",
+    "home": "INICIO",
+    "contactUs": "CONTACTENOS",
+    "order": "PEDIR"
 }

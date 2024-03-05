@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/localstorage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/user.service';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  iconMenu = faBars;
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,

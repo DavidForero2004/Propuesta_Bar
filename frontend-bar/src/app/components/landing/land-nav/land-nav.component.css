@@ -1,19 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Cabin:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Patua+One&family=Protest+Revolution&display=swap');
+@font-face {
+    font-family: "Acumin Variable Concept";
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot");
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept")format("svg");
+    font-weight: 400;
+}
+
+
 
 .navbar {
-    background-color: rgb(57 7 8);
+    background-color: #3A0709;
     width: 100%;
     height: 65px;
     display: flex;
     justify-content: center;
-    gap: 4%;
+    gap: 1%;
 }
 
 .option_container {
-    width: 75%;
+    width: 80%;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 3%;
 }
@@ -24,10 +35,8 @@
     align-items: center;
     text-decoration: none;
     color: white;
-    font-family: "Arima", system-ui;
+    font-family: "Acumin Variable Concept";
     font-size: 17px;
-    font-weight: 350;
-    letter-spacing: 1.5px;
     height: 60%;
 }
 
@@ -40,12 +49,12 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 10%;
 }
 
 .logo_nav img {
     width: 70px;
     height: 100%;
+    margin-left: 15px;
 }
 
 .logo_nav img:hover {
@@ -63,8 +72,6 @@ fa-icon {
 .language-buttons {
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
-    font-weight: 350;
     color: white;
     height: 10px;
 }
@@ -81,15 +88,17 @@ fa-icon {
     background-color: rgba(240, 248, 255, 0);
     border: none;
     margin: 0;
-    font-family: Arial, sans-serif;
-    font-weight: 350;
+    height: 30px;
+    
 }
 
 .es {
     border-right: 1px solid white !important;
+    font-family: "Acumin Variable Concept";
 }
 .en {
     border-left: 1px solid white !important;
+    font-family: "Acumin Variable Concept";
 }
 
 
@@ -155,6 +164,8 @@ fa-icon {
         text-decoration: none;
         border-bottom: 1px solid white;
         border-top: 1px solid white;
+        font-family: 'Oswald Regular', sans-serif;
+        letter-spacing: 2px;
     }
 
     .menu_hamburguer fa-icon {
@@ -167,9 +178,10 @@ fa-icon {
         display: flex;
         align-items: center;
         justify-content: end;
-        font-family: Arial, sans-serif;
+        font-family: 'Oswald Regular', sans-serif;
         color: white;
         padding: 10px;
+        letter-spacing: 2px;
 
     }
 
@@ -187,4 +199,41 @@ fa-icon {
         margin: 0;
         font-size: 12px;
     }
+}
+
+@media screen and (min-width: 521px) and (max-width:720px) {
+    .option_container{
+        width: 70%;
+    }
+    .option_container a{
+        font-size: 14px;
+    }
+    .language-buttons .es,.en{
+        font-size: 14px;
+    }
+    .logo_nav img{
+        width: 60px;
+        margin-left: 5px;
+    }
+    
+}
+
+@media screen and (min-width: 721px) and (max-width:1024px) {
+    .option_container{
+        width: 60%;
+    }
+    .option_container a{
+        font-size: 14px;
+    }
+    .language-buttons .es,.en{
+        font-size: 14px;
+    }
+    .language-buttons{
+        margin-left: 15px;
+    }
+    .logo_nav img{
+        width: 60px;
+        margin-left: 15px;
+    }
+    
 }

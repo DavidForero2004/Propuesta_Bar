@@ -153,6 +153,27 @@ BEGIN
 END //
 DELIMITER ;
 
+-------
+
+--SELECT TOP
+DELIMITER //
+CREATE PROCEDURE selectEventTop()
+BEGIN
+    SET lc_time_names = 'es_ES';
+    SELECT 
+		name_event,
+		date,
+		YEAR(`date`) AS year,
+		MONTHNAME(`date`) AS month,
+		DAY(`date`) AS day,
+		CONCAT(HOUR(`date`), ':', MINUTE(`date`)) AS hour
+    FROM `event`
+    	WHERE `date` >= NOW()
+    ORDER BY `date` DESC
+    LIMIT 15;
+END //
+DELIMITER ;
+
 
 -----------------------------------------------------------PRODUCTS
 --SELECT

@@ -1,30 +1,31 @@
 <nav class="navbar">
-    <div class="logo_nav">
-        <a href="HollowBar-initial/client"><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
-    </div>
+    
     <div class="option_container">
-        <a href="HollowBar-initial/client"><fa-icon [icon]="iconHouse"></fa-icon>| {{"home" | translate}}</a>
-        <a href="#"><fa-icon [icon]="iconPhone"></fa-icon>| {{"contactUs" | translate }}</a>
-        <a href="#"><fa-icon [icon]="iconCalendar"></fa-icon>| {{"events" | translate }}</a>
-        <a href="#footer"><fa-icon [icon]="iconCar"></fa-icon>| {{"order" | translate}}</a>
+        <a href="hollowbar-initial/client"> {{"home" | translate}}</a>
+        <a href="#"> {{"contactUs" | translate }}</a>
+        <a href="#"> {{"events" | translate }}</a>
+        <a href="#footer"> {{"order" | translate}}</a>
     </div>
     <div class="language-buttons">
         <button (click)="es()" class="es">ES</button>
         <button (click)="en()" class="en">EN</button>
-    </div>   
+    </div>  
     <div class="menu_hamburguer">
         <fa-icon [icon]="iconMenu" id="manu_hamb"></fa-icon>
     </div>
+    <div class="logo_nav">
+        <a href="hollowbar-initial/client"><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
+    </div>
+   
 </nav>
 <div class="option_container_menu">
-    <a href="HollowBar-initial/client"><fa-icon [icon]="iconHouse"></fa-icon> | {{"home" | translate}}</a>
-    <a href="#"> <fa-icon [icon]="iconPhone"></fa-icon> | {{"contactUs" | translate }}</a>
-    <a href="#footer"><fa-icon [icon]="iconCar"></fa-icon>| {{"order" | translate}}</a>
+    <a href="HollowBar-initial/client"> {{"home" | translate}}</a>
+    <a href="#">  {{"contactUs" | translate }}</a>
+    <a href="#footer"> {{"order" | translate}}</a>
     
     <div class="language-buttons_h">
         <button (click)="es()" class="es">ES</button>
         <button (click)="en()" class="en">EN</button>
-        
     </div>  
+   
 </div>
-<script src="../../../../assets/js/landing/landing.js"></script>
