@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { faShoppingCart, faBars, faPhone, faHouse,faLanguage } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faBars, faPhone, faHouse,faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 
@@ -17,7 +17,9 @@ export class LandNavComponent implements OnInit {
   iconPhone = faPhone;
   iconHouse = faHouse;
   iconLanguage = faLanguage;
+  iconCalendar = faCalendar;
 
+  
   constructor(
     private renderer: Renderer2,
     private translate: TranslateService,
