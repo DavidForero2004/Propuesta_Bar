@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
 import { faShoppingCart, faBars, faPhone, faHouse,faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
@@ -19,11 +19,12 @@ export class LandNavComponent implements OnInit {
   iconLanguage = faLanguage;
   iconCalendar = faCalendar;
 
-  
+
   constructor(
     private renderer: Renderer2,
     private translate: TranslateService,
-    private _userService: UserService
+    private _userService: UserService,
+    private el: ElementRef
   ) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
@@ -33,14 +34,20 @@ export class LandNavComponent implements OnInit {
     this.loadScript('../../../../assets/js/landing/landing.js');
   }
 
+
   private loadScript(url: string): void {
-    const script = this.renderer.createElement('script');
-    script.src = url;
-    script.type = 'text/javascript';
-    script.async = true;
-    script.defer = true;
-    this.renderer.appendChild(document.body, script);
+    if (typeof document !== 'undefined') {
+      const script = document.createElement('script');
+      script.src = url;
+      script.type = 'text/javascript';
+      script.async = true;
+      script.defer = true;
+      this.el.nativeElement.appendChild(script);
+    }
   }
+  
+  
+
   
 
   es() {
