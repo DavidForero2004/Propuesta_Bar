@@ -20,22 +20,26 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 //Components
 import { LoginComponent } from './components/user/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListComponent } from './components/user/list/list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
 import { InsertEventComponent } from './components/event/insert-event/insert-event.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import { LandNavComponent } from './components/landing/land-nav/land-nav.component';
+import { FooterComponent } from './components/landing/footer/footer.component';
+import { StructureComponent } from './components/landing/structure/structure.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
     ListComponent,
     NavbarComponent,
     ListEventComponent,
-    InsertEventComponent
+    InsertEventComponent,
+    LandNavComponent,
+    FooterComponent,
+    StructureComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    FontAwesomeModule
   ],
   providers: [
     // No se necesita provideHttpClient

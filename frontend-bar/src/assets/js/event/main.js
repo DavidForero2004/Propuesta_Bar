@@ -20,3 +20,7 @@ buttonAccept.forEach(button =>{
         card.style.display = "none"
     })
 })
+
+
+
+

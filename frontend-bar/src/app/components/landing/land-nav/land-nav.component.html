@@ -1,9 +1,10 @@
 <nav class="navbar">
+    
     <div class="option_container">
-        <a href="hollowbar-initial/client"> {{"users" | translate}}</a>
-        <a href="/user"> {{"products" | translate }}</a>
-        <a href="/event"> {{"events" | translate }}</a>
-        <a (click)="logOut()">{{"exit" | translate}}</a>
+        <a href="hollowbar-initial/client"> {{"home" | translate}}</a>
+        <a href="#"> {{"contactUs" | translate }}</a>
+        <a href="#"> {{"events" | translate }}</a>
+        <a href="#footer"> {{"order" | translate}}</a>
     </div>
     <div class="language-buttons">
         <button (click)="es()" class="es">ES</button>
@@ -13,15 +14,15 @@
         <fa-icon [icon]="iconMenu" id="manu_hamb"></fa-icon>
     </div>
     <div class="logo_nav">
-        <a href=""><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
+        <a href="hollowbar-initial/client"><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
     </div>
-    
+   
 </nav>
 <div class="option_container_menu">
-    <a href="hollowbar-initial/client"> {{"users" | translate}}</a>
-    <a href="#"> {{"products" | translate }}</a>
-    <a href="/events"> {{"events" | translate }}</a>
-    <a (click)="logOut()">{{"exit" | translate}}</a>
+    <a href="HollowBar-initial/client"> {{"home" | translate}}</a>
+    <a href="#">  {{"contactUs" | translate }}</a>
+    <a href="#footer"> {{"order" | translate}}</a>
+    
     <div class="language-buttons_h">
         <button (click)="es()" class="es">ES</button>
         <button (click)="en()" class="en">EN</button>

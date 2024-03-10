@@ -191,5 +191,37 @@ const getEventId = (req, res) => {
     }
 }
 
+const selectTop = (req, res)=>{
+    const query = 'CALL selectEventTop';
 
-module.exports = { insertEvent, getEventActive, updateEvent, deleteEvent, getEventId };
+    //////////////////////////////////////
+
+    try {
+        connection.query(query,(error, result)=>{
+            if (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            } else {
+                if (!result) {
+                    res.status(400).json({
+                        msg: i18n.__('notExistEvent'),
+                        result
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            }
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
+    }
+
+}
+module.exports = { insertEvent, getEventActive, updateEvent, deleteEvent, getEventId, selectTop };

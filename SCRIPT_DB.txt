@@ -92,7 +92,7 @@ CREATE PROCEDURE insertEvent (
     IN date_e DATETIME 
 )
 BEGIN 
-    SET @maxId = (SELECT MAX(id) FROM `event`);
+    SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM `event`);
     SET @sql = CONCAT('ALTER TABLE `event` AUTO_INCREMENT = ', @maxId + 1);
     PREPARE stmt FROM @sql;
     EXECUTE stmt;
@@ -153,6 +153,27 @@ BEGIN
 END //
 DELIMITER ;
 
+-------
+
+--SELECT TOP
+DELIMITER //
+CREATE PROCEDURE selectEventTop()
+BEGIN
+    SET lc_time_names = 'es_ES';
+    SELECT 
+		name_event,
+		date,
+		YEAR(`date`) AS year,
+		MONTHNAME(`date`) AS month,
+		DAY(`date`) AS day,
+		CONCAT(HOUR(`date`), ':', MINUTE(`date`)) AS hour
+    FROM `event`
+    	WHERE `date` >= NOW()
+    ORDER BY `date` DESC
+    LIMIT 15;
+END //
+DELIMITER ;
+
 
 -----------------------------------------------------------PRODUCTS
 --SELECT
@@ -186,7 +207,7 @@ CREATE PROCEDURE insertProduct (
 		IN id_status_p INTEGER
 )
 BEGIN 
-	SET @maxId = (SELECT MAX(id) FROM product);
+	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM product);
 	SET @sql = CONCAT('ALTER TABLE product AUTO_INCREMENT = ', @maxId + 1);
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
@@ -269,7 +290,7 @@ CREATE PROCEDURE insertUser (
     IN id_rol_u INTEGER
 )
 BEGIN 
-    SET @maxId = (SELECT MAX(id) FROM user);
+    SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM user);
     SET @sql = CONCAT('ALTER TABLE user AUTO_INCREMENT = ', @maxId + 1);
     PREPARE stmt FROM @sql;
     EXECUTE stmt;
@@ -419,7 +440,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE updateStatus(
 		IN id_s INTEGER,
-		IN name_s VARCHAR(255),
+		IN name_s VARCHAR(255)
 )
 BEGIN 
 	UPDATE status SET name = name_s WHERE id = id_s;
@@ -483,7 +504,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE updateRol(
 		IN id_r INTEGER,
-		IN name_r VARCHAR(255),
+		IN name_r VARCHAR(255)
 )
 BEGIN 
 	UPDATE rol SET name = name_r WHERE id = id_r;

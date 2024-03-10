@@ -5,7 +5,7 @@
     "required": "All fields are required",
     "accessDeneged": "Access deneged",
     "errorOccurred": "An error occurred, contact the Administrator",
-    "events": "Events",
+    "events": "EVENTS",
     "name": "Name",
     "date": "Date",
     "actions": "Actions",
@@ -19,5 +19,12 @@
     "errorDelete": "Error to delete event",
     "addEvent": "Add event",
     "GeneralError": "An unexpected error has occurred",
-    "accept": "Accept"
+    "accept": "Accept",
+    "products": "PRODUCTS",
+    "users": "USERS",
+    "exit": "ESXIT",
+    "home": "HOME",
+    "contactUs": "CONTACT US",
+    "order": "ORDER"
+
 }

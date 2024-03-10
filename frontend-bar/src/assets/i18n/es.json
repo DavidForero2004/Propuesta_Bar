@@ -5,7 +5,7 @@
     "required": "Todos los campos son obligatorios",
     "accessDeneged": "Acceso denegado",
     "errorOccurred": "Ocurrió un error, contacte al Administrador",
-    "events": "Eventos",
+    "events": "EVENTOS",
     "name": "Nombre",
     "date": "Fecha",
     "actions": "Acciones",
@@ -19,5 +19,11 @@
     "errorDelete": "El evento no se pudo eliminar",
     "addEvent": "Agregar evento",
     "GeneralError": "Ha ocurrido un error inesperado",
-    "accept": "Aceptar"
+    "accept": "Aceptar",
+    "products": "PRODUCTOS",
+    "users": "USUARIOS",
+    "exit": "SALIR",
+    "home": "INICIO",
+    "contactUs": "CONTACTENOS",
+    "order": "PEDIR"
 }
