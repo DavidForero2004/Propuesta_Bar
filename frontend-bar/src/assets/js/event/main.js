@@ -3,24 +3,20 @@ const buttonsClose = document.querySelectorAll('.closeButton');
 const buttonAccept = document.querySelectorAll('.acceptButton');
 const card = document.getElementById('card');
 
-buttonsOpen.forEach(button => {
+Array.from(buttonsOpen).forEach(button => {
     button.addEventListener('click', () => {
-        card.style.display = "block";
+        card.style.display = "flex";
     });
 });
 
-buttonsClose.forEach(button => {
+Array.from(buttonsClose).forEach(button => {
     button.addEventListener('click', () => {
         card.style.display = "none";
     });
 });
 
-buttonAccept.forEach(button =>{
-    button.addEventListener('click',()=>{
-        card.style.display = "none"
-    })
-})
-
-
-
-
+Array.from(buttonAccept).forEach(button => {
+    button.addEventListener('click', () => {
+        card.style.display = "none";
+    });
+});

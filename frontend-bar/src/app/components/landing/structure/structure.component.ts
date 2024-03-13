@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { EventService } from '../../../services/event.service';
+import { Event } from '../../../interfaces/event';
 
 @Component({
   selector: 'app-structure',
@@ -38,11 +39,11 @@ export class StructureComponent implements OnInit {
 
   getEvent(){
     this._eventService.selectEventTop().subscribe((data: any) => {
+     
       if (data && data.result && Array.isArray(data.result)) {
         const events = data.result[0];
         if (Array.isArray(events)) {
           this.listEvent = events;
-         
         }
       }
     });
