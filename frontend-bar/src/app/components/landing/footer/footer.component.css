@@ -1,24 +1,23 @@
-.footer{
+.footer {
     width: 100%;
     height: 150px;
     background-color: #3A0709;
     margin-top: 5px;
-}
-.container{
+  }
+  .container {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.social_net{
+  }
+  .social_net {
     display: flex;
     justify-content: center;
     background-color: #3A0709;
     align-items: center;
-}
-
-.icons_{
+  }
+  .icons_ {
     width: 150px;
     display: flex;
     justify-content: center;
@@ -26,52 +25,53 @@
     background-color: #3A0709;
     gap: 15px;
     z-index: 1;
-}
-
-.hr {
+  }
+  .hr {
     border: 1px solid #ffffff;
     width: 100%;
     position: absolute;
     overflow: hidden;
     z-index: 0;
-}
-#Icons {
+  }
+  #Icons {
     color: white;
     font-size: 22px;
-}
-.logo{
+  }
+  .logo {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: -40px;
-}
-.img{
+  }
+  .img {
     width: 100px;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.img img{
+  }
+  .img img {
     width: 100%;
     height: auto;
     animation: scaleAnimation 1s infinite;
-}
-
-@keyframes scaleAnimation {
+  }
+  @keyframes scaleAnimation {
     0% {
-      transform: scale(1); /* Escala inicial (normal) */
+      transform: scale(1);
+      /* Escala inicial (normal) */
     }
     50% {
-      transform: scale(1.1); /* Escala al 120% a la mitad de la animación */
+      transform: scale(1.05);
+      /* Escala al 120% a la mitad de la animación */
     }
     100% {
-      transform: scale(1); /* Escala final (normal) */
+      transform: scale(1);
+      /* Escala final (normal) */
     }
   }
-  
   .elemento-a-animar {
-    animation: scaleAnimation 1s infinite; /* Aplica la animación durante 1 segundo y se repite infinitamente */
+    animation: scaleAnimation 0.5s infinite;
+    /* Aplica la animación durante 1 segundo y se repite infinitamente */
   }
   
