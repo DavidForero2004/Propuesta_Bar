@@ -21,7 +21,6 @@ export class LandNavComponent implements OnInit {
 
 
   constructor(
-    private renderer: Renderer2,
     private translate: TranslateService,
     private _userService: UserService,
     private el: ElementRef

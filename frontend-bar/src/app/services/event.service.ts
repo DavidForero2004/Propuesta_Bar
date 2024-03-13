@@ -35,6 +35,10 @@ export class EventService {
   selectEventId(id?: number): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
+  selectEventTop(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/selectTop`)
+  }
+  
 
   updateServerLanguage(lang: string): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}language`, { lang });
