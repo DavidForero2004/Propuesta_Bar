@@ -11,13 +11,13 @@
             <li *ngFor="let e of listEvent">
                 <div class="card_event">
                     <div class="card_head">
-                        <h1></h1>
+                        <h1>{{e.name_event}}</h1>
                     </div>
                     <div class="card_body">
-                        <h3>Año</h3>
-                        <h3>Mes</h3>
-                        <h3>Dia</h3>
-                        <h3>Hora</h3>
+                        <h3>{{e.year}}</h3>
+                        <h3>{{e.month}}</h3>
+                        <h3>{{e.day}}</h3>
+                        <h3>{{e.hour}}</h3>
                     </div>
                 </div>
             </li>
