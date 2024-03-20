@@ -40,13 +40,13 @@ const getProduct = (req, res) => {
 
 //insert products
 const insertProduct = (req, res) => {
-    const { name_product, price, stock, id_status } = req.body;
-    const query = 'CALL insertProduct(?,?,?,?)';
+    const { name_product, image, price, stock, id_status } = req.body;
+    const query = 'CALL insertProduct(?,?,?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [name_product, price, stock, id_status], (error, result) => {
+        connection.query(query, [name_product, image, price, stock, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({

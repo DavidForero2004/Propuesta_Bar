@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS user(
 CREATE TABLE IF NOT EXISTS product(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name_product VARCHAR(255) UNIQUE NOT NULL,
+	image TEXT NOT NULL,
 	price DECIMAL(65, 2) NOT NULL,
 	stock INTEGER NOT NULL,	
 	id_status INTEGER,
@@ -202,6 +203,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE insertProduct (
 		IN name_product_p VARCHAR(255),
+		IN image_p TEXT,
 		IN price_p DECIMAL(65, 2),
 		IN stock_p INTEGER,	
 		IN id_status_p INTEGER
@@ -212,7 +214,7 @@ BEGIN
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-	INSERT INTO product(name_product, price, stock, id_status) VALUES(name_product_p, price_p, stock_p, id_status_p);
+	INSERT INTO product(name_product, image, price, stock, id_status) VALUES(name_product_p, image_p, price_p, stock_p, id_status_p);
 END //
 DELIMITER ;
 
@@ -223,12 +225,13 @@ DELIMITER //
 CREATE PROCEDURE updateProduct(
 		IN id_p INTEGER,
 		IN name_product_p VARCHAR(255),
+		IN image_p TEXT,
 		IN price_p DECIMAL(65, 2),
 		IN stock_p INTEGER,	
 		IN id_status_p INTEGER
 )
 BEGIN 
-	UPDATE product SET name_product = name_product_p, price = price_p, stock = stock_p, id_status= id_status_p WHERE id = id_p;
+	UPDATE product SET name_product = name_product_p, image = image_p, price = price_p, stock = stock_p, id_status= id_status_p WHERE id = id_p;
 END //
 DELIMITER ;
 
