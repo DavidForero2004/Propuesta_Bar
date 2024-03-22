@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { time } from 'console';
 
 @Component({
   selector: 'app-list-event',
@@ -139,10 +140,11 @@ export class ListEventComponent implements OnInit {
     };
 
     this._eventService.updateEvent(event).subscribe({
-      next: () => {
+      next: () => {   
         this.toastr.success('El evento se actualizó correctamente', 'Éxito');
-        this.form.reset();
-        this.getEvent();
+        setTimeout(()=>{
+          this.getEvent();
+        },3000)
       },
       error: (error) => {
         this.toastr.error('Ocurrió un error al actualizar el evento', 'Error');
