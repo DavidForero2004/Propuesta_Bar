@@ -159,7 +159,6 @@ export class ListEventComponent implements OnInit {
       console.log('Idioma del servidor actualizado a español.');
     });
   }
-
   en() {
     this.translate.use('en');
     this._eventService.updateServerLanguage('en').subscribe(() => {

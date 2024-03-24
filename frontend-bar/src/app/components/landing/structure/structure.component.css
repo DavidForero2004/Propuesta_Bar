@@ -4,6 +4,9 @@
     src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff") format("woff"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept") format("svg");
     font-weight: 400;
 }
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Cabin:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Patua+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Revolution&family=Unbounded:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Cabin:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Patua+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Revolution&family=Skranji:wght@400;700&family=Unbounded:wght@200..900&display=swap');
+
 
   .carousel {
     margin-top: 20px;
@@ -110,3 +113,295 @@
     text-align: center;
   }
   
+.about_bar {
+  width: 100%;
+  background-color: rgba(159, 159, 159, 0.2);
+  height: 450px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 80px;
+  padding-top: 70px;
+  margin: 10px 0px 10px 0px;
+}
+.content {
+  width: 50%;
+  height: 100%;
+}
+.images {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+#first {
+  width: 230px;
+  height: 320px;
+}
+#second {
+  width: 230px;
+  height: 150px;
+}
+#third {
+  width: 220px;
+  height: 130px;
+  position: absolute;
+  margin-top: 270px;
+  margin-right: 100px;
+}
+#first,
+#second,
+#third {
+  border: 8px solid white;
+}
+.images img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.text_a {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.text_a p {
+  margin-left: 100px;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 65px;
+}
+#life_ {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 3.5em;
+  color: #F0037F;
+}
+#disfrut {
+  color: #3A0709;
+  font-weight: bold;
+  display: inline;
+  font-family: "Skranji", system-ui !important;
+  font-weight: 400 !important;
+  font-size: 3em;
+}
+#more_t {
+  width: 70%;
+  font-weight: 600;
+  font-family: system-ui;
+  height: auto !important;
+  box-sizing: border-box;
+  text-align: justify;
+}
+#first:hover,
+#second:hover,
+#third:hover {
+  transform: scale(1.02);
+}
+  
+
+@media screen and (min-width: 200px) and (max-width: 320px) {
+  .about_bar {
+    height: 400px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    flex-direction: column;
+  }
+  .images {
+    width: 100%;
+    justify-content: center;
+  }
+  #first {
+    width: 100px;
+    height: 140px;
+    border: 5px solid white;
+  }
+  #second {
+    width: 90px;
+    height: 60px;
+    border: 5px solid white;
+  }
+  #third {
+    width: 90px;
+    height: 60px;
+    margin-top: 120px;
+    margin-right: 0px;
+    border: 5px solid white;
+  }
+  .text_a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .text_a #life_ {
+    margin-top: 15px;
+    height: 25px;
+  }
+  #life_ {
+    font-size: 1.3em;
+    text-align: center;
+    height: 30px;
+  }
+  #disfrut {
+    font-size: 1.3em;
+    text-align: center;
+    height: 30px;
+  }
+  #more_t {
+    font-size: 12px;
+    text-align: justify;
+    width: 100%;
+  }
+  .text_a p {
+    margin-left: 0px;
+    box-sizing: border-box;
+    /* Incluye el padding en el ancho y alto total */
+    padding: 10px;
+    /* Agrega un padding de 10px alrededor del texto */
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 520px) {
+  .about_bar {
+    height: 400px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    flex-direction: column;
+  }
+  .images {
+    width: 100%;
+    justify-content: center;
+  }
+  #first {
+    width: 140px;
+    height: 160px;
+    border: 5px solid white;
+   
+  }
+  #second {
+    width: 120px;
+    height: 70px;
+    border: 5px solid white;
+  }
+  #third {
+    width: 120px;
+    height: 70px;
+    margin-top: 120px;
+    margin-right: -40px;
+    border: 5px solid white;
+  }
+  .text_a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: -25px;
+  }
+  .text_a #life_ {
+    margin-top: 0;
+    height: 25px;
+  }
+  #life_ {
+    font-size: 1.5em;
+    text-align: center;
+    height: 25px;
+    
+  }
+  #disfrut {
+    font-size: 1.5em;
+    text-align: center;
+    height: 30px;
+  }
+  #more_t {
+    font-size: 14px;
+    text-align: justify;
+    width: 100%;
+  }
+  .text_a p {
+    margin-left: 0px;
+    box-sizing: border-box;
+    /* Incluye el padding en el ancho y alto total */
+    padding: 10px;
+    /* Agrega un padding de 10px alrededor del texto */
+  }
+}
+@media screen and (min-width: 521px) and (max-width: 720px) {
+  .about_bar {
+    padding-bottom: 0;
+    padding-top: 0;
+    height: 300px;
+  }
+  .images {
+    width: 50%;
+  }
+  #first {
+    width: 120px;
+    height: 200px;
+    border: 8px solid white;
+  }
+  #second {
+    width: 140px;
+    height: 90px;
+    border: 8px solid white;
+  }
+  #third {
+    width: 140px;
+    height: 90px;
+    margin-top: 160px;
+    margin-right: 60px;
+    border: 8px solid white;
+  }
+  .text_a {
+    width: 40%;
+  }
+  .text_a p {
+    margin-left: 20px;
+  }
+  #life_,
+  #disfrut {
+    height: 35px;
+    font-size: 2em;
+  }
+  #more_t {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: justify;
+    font-size: 13px;
+    padding: 15px;
+    margin-left: 0;
+  }
+}
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  #first {
+    width: 200px;
+    height: 301px;
+  }
+  #second {
+    width: 200px;
+    height: 130px;
+  }
+  #third {
+    width: 200px;
+    height: 120px;
+    position: absolute;
+    margin-top: 210px;
+    margin-right: 100px;
+  }
+  .text_a p {
+    margin-left: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 40px;
+  }
+  #life_,
+  #disfrut {
+    font-size: 2.5em;
+  }
+  #more_t {
+    width: 100%;
+    font-size: 1em;
+    margin: 0;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 15px;
+    box-sizing: border-box;
+    text-align: justify;
+  }
+}
