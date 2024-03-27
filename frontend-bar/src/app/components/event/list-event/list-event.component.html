@@ -5,9 +5,9 @@
 </div>
 
 
-<div class="container mt-2 text-center">
+<div class="Table_events">
     <h1>{{ "events" | translate }}</h1>
-    <table class="table table-striped">
+    <table class="table" id="table information">
         <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -22,8 +22,12 @@
                 <td>{{ event.name_event }}</td>
                 <td>{{ event.date | date: 'short' }}</td>
                 <td>
-                    <button class="openButton btn btn-info" (click)="selectEventId(event.id)">{{ "edit" | translate}}</button>
-                    <button class="btn btn-secondary" (click)="deleteEvent(event.id)">{{ "delete" | translate }}</button>
+                    <div id="buttonContainer">
+                        <button class="openButton btn btn-info" (click)="selectEventId(event.id)">{{ "edit" |
+                            translate}}</button>
+                        <button class="btn btn-secondary" (click)="deleteEvent(event.id)">{{ "delete" | translate
+                            }}</button>
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -32,19 +36,25 @@
 
 
 
-
-
-
 <div id="card">
-    <form [formGroup]="form" (ngSubmit)="updateEvent()">
-        <div *ngIf="listEventId.length > 0">
-            <input type="hidden" formControlName="id" [value]="listEventId[0].id">
-            <label>{{ "name" | translate }}</label>
-            <input type="text" formControlName="name_event" [value]="listEventId[0].name_event">
-            <label>{{ "date" | translate }}</label>
-            <input type="datetime-local" formControlName="date" [value]="listEventId[0].date">
+    <form [formGroup]="form" (ngSubmit)="updateEvent()" class="form_up">
+        <div class="title">
+            <h2>Editar Evento</h2>
         </div>
-        <button type="submit" class="acceptButton">{{ "accept" | translate }}</button>
-        <button type="button" class="closeButton">{{ "cancel" | translate }}</button>
+        <div *ngIf="listEventId.length > 0" class="information_event">
+            <input type="hidden" formControlName="id" [value]="listEventId[0].id">
+            <div class="body_section">
+                <label>{{ "name" | translate }}:</label>
+                <input type="text" formControlName="name_event" [value]="listEventId[0].name_event">
+            </div>
+            <div class="body_section">
+                <label>{{ "date" | translate }}:</label>
+                <input type="datetime-local" formControlName="date" [value]="listEventId[0].date" id="date_format">
+            </div>
+        </div>
+        <div class="options_button">
+            <button type="submit" class="acceptButton">{{ "accept" | translate }}</button>
+            <button type="button" class="closeButton">{{ "cancel" | translate }}</button>
+        </div>
     </form>
 </div>

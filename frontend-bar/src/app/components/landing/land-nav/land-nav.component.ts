@@ -47,8 +47,6 @@ export class LandNavComponent implements OnInit {
   
   
 
-  
-
   es() {
     this.translate.use('es');
     this._userService.updateServerLanguage('es').subscribe(() => {

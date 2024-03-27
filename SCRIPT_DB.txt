@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS event(
 
 CREATE TABLE IF NOT EXISTS `table`(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	name_table VARCHAR(20) NOT NULL,
+	name_table VARCHAR(20)  NOT NULL,
 	id_status INTEGER,
 	FOREIGN KEY(id_status) REFERENCES status(id)
 );
@@ -170,8 +170,7 @@ BEGIN
 		CONCAT(HOUR(`date`), ':', MINUTE(`date`)) AS hour
     FROM `event`
     	WHERE `date` >= NOW()
-    ORDER BY `date` DESC
-    LIMIT 15;
+    ORDER BY `date` ASC;
 END //
 DELIMITER ;
 
