@@ -22,6 +22,7 @@
     "newProduct": "Nuevo producto creado",
     "updateProduct": "Producto actualizado",
     "deleteProduct": "Producto eliminado",
+	"imageExtension": "El formato de la imagen no es válido. Debe ser .jpg, .png. o jpeg",
     "notExistTable": "No se encontro ninguna mesa",
     "newTable": "Nueva mesa creada",
     "updateTable": "Mesa actualizado",

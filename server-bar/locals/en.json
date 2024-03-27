@@ -22,6 +22,7 @@
 	"newProduct": "New product created",
 	"updateProduct": "Updated product",
 	"deleteProduct": "Deleted product",
+	"imageExtension": "The image format is invalid. It must be .jpg, .png. or jpeg",
 	"notExistTable": "No table found",
 	"newTable": "New table created",
 	"updateTable": "Updated table",

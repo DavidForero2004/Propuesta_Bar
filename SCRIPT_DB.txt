@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS user(
 CREATE TABLE IF NOT EXISTS product(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name_product VARCHAR(255) UNIQUE NOT NULL,
-	image TEXT NOT NULL,
+	image VARCHAR(255) NOT NULL,
 	price DECIMAL(65, 2) NOT NULL,
 	stock INTEGER NOT NULL,	
 	id_status INTEGER,
@@ -180,7 +180,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectProduct ()
 BEGIN 
-	SELECT * FROM product ;
+	SELECT * FROM product;
 END //
 DELIMITER ;
 
@@ -202,7 +202,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE insertProduct (
 		IN name_product_p VARCHAR(255),
-		IN image_p TEXT,
+		IN image_p VARCHAR(255),
 		IN price_p DECIMAL(65, 2),
 		IN stock_p INTEGER,	
 		IN id_status_p INTEGER
@@ -224,7 +224,7 @@ DELIMITER //
 CREATE PROCEDURE updateProduct(
 		IN id_p INTEGER,
 		IN name_product_p VARCHAR(255),
-		IN image_p TEXT,
+		IN image_p VARCHAR(255),
 		IN price_p DECIMAL(65, 2),
 		IN stock_p INTEGER,	
 		IN id_status_p INTEGER
