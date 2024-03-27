@@ -4,9 +4,8 @@ import { Event } from '../../../interfaces/event';
 import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { TranslateService } from '@ngx-translate/core';
-import { Calendar } from '@fullcalendar/core';
 import esLocale from '@fullcalendar/core/locales/es';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -18,7 +17,6 @@ export class StructureComponent implements OnInit {
 
   listEvent: Event[] = [];
   public eventCalendar: any[] = [];
-  eventsPromise: Promise<EventInput[]>;
 
 
   constructor(
@@ -74,6 +72,7 @@ export class StructureComponent implements OnInit {
             end: event.date,
             backgroundColor: '#3A0709',
             borderColor: '#3A0709',
+            
           }));
 
           // Aquí inicializamos calendarOptions con los eventos actualizados
@@ -85,6 +84,8 @@ export class StructureComponent implements OnInit {
             },
             locale: esLocale,
             initialView: 'dayGridMonth',
+            windowResize: function(arg) {
+            },
             plugins: [dayGridPlugin, interactionPlugin],
             navLinks: true,
             events: this.eventCalendar,
