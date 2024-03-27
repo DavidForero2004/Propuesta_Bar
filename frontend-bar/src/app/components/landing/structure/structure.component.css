@@ -195,7 +195,30 @@
 #third:hover {
   transform: scale(1.02);
 }
-  
+
+.event-container{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.informative-text{
+  width: 50%;
+  height: 100%;
+}
+.calendar{
+  width: 45%;
+  height: 100%;
+}
+#calendar-events{
+  height: 100%;
+  width: 100%;
+  margin-bottom: 1.1em;
+  font-size: 12px;
+}
+
+
 
 @media screen and (min-width: 200px) and (max-width: 320px) {
   .about_bar {
@@ -256,6 +279,28 @@
     /* Incluye el padding en el ancho y alto total */
     padding: 10px;
     /* Agrega un padding de 10px alrededor del texto */
+  }
+  .event-container{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .informative-text{
+    display: none;
+  }
+  .calendar{
+    width: 100%;
+    height: 100%;
+  }
+  #calendar-events{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 10px;
   }
 }
 @media screen and (min-width: 321px) and (max-width: 520px) {
@@ -321,6 +366,28 @@
     padding: 10px;
     /* Agrega un padding de 10px alrededor del texto */
   }
+  .event-container{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .informative-text{
+    display: none;
+  }
+  .calendar{
+    width: 100%;
+    height: 100%;
+  }
+  #calendar-events{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 11px;
+  }
 }
 @media screen and (min-width: 521px) and (max-width: 720px) {
   .about_bar {
@@ -357,7 +424,7 @@
   #life_,
   #disfrut {
     height: 35px;
-    font-size: 2em;
+    font-size: 1.8em;
   }
   #more_t {
     width: 100%;
@@ -366,6 +433,28 @@
     font-size: 13px;
     padding: 15px;
     margin-left: 0;
+  }
+  .event-container{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .informative-text{
+    display: none;
+  }
+  .calendar{
+    width: 100%;
+    height: 100%;
+  }
+  #calendar-events{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 11px;
   }
 }
 @media screen and (min-width: 721px) and (max-width: 1024px) {

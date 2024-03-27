@@ -169,8 +169,7 @@ BEGIN
 		CONCAT(HOUR(`date`), ':', MINUTE(`date`)) AS hour
     FROM `event`
     	WHERE `date` >= NOW()
-    ORDER BY `date` DESC
-    LIMIT 15;
+    ORDER BY `date` ASC;
 END //
 DELIMITER ;
 

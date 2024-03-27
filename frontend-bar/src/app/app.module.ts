@@ -29,6 +29,7 @@ import { LandNavComponent } from './components/landing/land-nav/land-nav.compone
 import { FooterComponent } from './components/landing/footer/footer.component';
 import { StructureComponent } from './components/landing/structure/structure.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         deps: [HttpClient]
       }
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    FullCalendarModule
   ],
   providers: [
     // No se necesita provideHttpClient
