@@ -64,12 +64,12 @@ export class StructureComponent implements OnInit {
       if (data && data.result && Array.isArray(data.result)) {
         const events = data.result[0];
         if (Array.isArray(events)) {
+          console.log(events)
           this.eventCalendar = events.map(event => ({
             //le pasamos a un objeto los datos que va a usar el calendario
             title: event.name_event + ' \u2013 ' + 'El Evento: ' + event.name_event + ' es el día: ' + event.day + ' de ' + event.month + ' a las: ' + event.hour,
-            date: event.date ? new Date(event.date).toISOString().split('T')[0] : null,
-            start: event.date,
-            end: event.date,
+            date: event.date,
+            end: event.date ,
             backgroundColor: '#3A0709',
             borderColor: '#3A0709',
             
@@ -84,8 +84,6 @@ export class StructureComponent implements OnInit {
             },
             locale: esLocale,
             initialView: 'dayGridMonth',
-            windowResize: function(arg) {
-            },
             plugins: [dayGridPlugin, interactionPlugin],
             navLinks: true,
             events: this.eventCalendar,
