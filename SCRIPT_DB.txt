@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	id_order INTEGER,
 	id_product INTEGER,
-	acount INTEGER NOT NULL,
+	count INTEGER NOT NULL,
 	total DECIMAL(65,2),
 	id_status INTEGER,
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
@@ -362,7 +362,7 @@ CREATE PROCEDURE insertTable (
 		IN id_status_t INTEGER
 )
 BEGIN 
-	SET @maxId = (SELECT MAX(id) FROM `table`);
+	SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM `table`);
 	SET @sql = CONCAT('ALTER TABLE `table` AUTO_INCREMENT = ', @maxId + 1);
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
@@ -403,7 +403,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectStatus ()
 BEGIN 
-	SELECT * FROM status ;
+	SELECT * FROM `status` ;
 END //
 DELIMITER ;
 
@@ -415,7 +415,7 @@ CREATE PROCEDURE selectStatusId(
 	IN id_s INTEGER
 )
 BEGIN
-	SELECT * FROM status WHERE id = id_s;
+	SELECT * FROM `status` WHERE id = id_s;
 END //
 DELIMITER ;
 
@@ -428,11 +428,11 @@ CREATE PROCEDURE insertStatus (
 )
 BEGIN 
 	SET @maxId = (SELECT MAX(id) FROM status);
-	SET @sql = CONCAT('ALTER TABLE status AUTO_INCREMENT = ', @maxId + 1);
+	SET @sql = CONCAT('ALTER TABLE `status` AUTO_INCREMENT = ', @maxId + 1);
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-	INSERT INTO status(name) VALUES(name_s);
+	INSERT INTO `status`(name) VALUES(name_s);
 END //
 DELIMITER ;
 
@@ -445,7 +445,7 @@ CREATE PROCEDURE updateStatus(
 		IN name_s VARCHAR(255)
 )
 BEGIN 
-	UPDATE status SET name = name_s WHERE id = id_s;
+	UPDATE `status` SET name = name_s WHERE id = id_s;
 END //
 DELIMITER ;
 
@@ -457,7 +457,7 @@ CREATE PROCEDURE deleteStatus(
 		IN id_s INTEGER
 )
 BEGIN 
-	DELETE FROM status WHERE id = id_s;
+	DELETE FROM `status` WHERE id = id_s;
 END //
 DELIMITER ;
 
@@ -525,6 +525,145 @@ BEGIN
 END //
 DELIMITER ;
 
+
+-----------------------------------------------------------ORDER
+--SELECT
+DELIMITER //
+CREATE PROCEDURE selectOrder ()
+BEGIN 
+	SELECT * FROM `order`;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT productid
+DELIMITER //
+CREATE PROCEDURE selectOrderId(
+	IN id_o INTEGER
+)
+BEGIN
+	SELECT * FROM `order` WHERE id = id_o;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertOrder (
+		IN type_document_o VARCHAR(255),
+		IN num_document_o INTEGER,
+		IN id_table_o INTEGER
+)
+BEGIN 
+	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM `order`);
+	SET @sql = CONCAT('ALTER TABLE `order` AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	INSERT INTO `order`(type_document, num_document, id_table) VALUES(type_document_o, num_document_o, id_table_o);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateOrder(
+		IN id_o INTEGER,
+		IN type_document_o VARCHAR(255),
+		IN num_document_o INTEGER,
+		IN id_table_o INTEGER
+)
+BEGIN 
+	UPDATE `order` SET type_document = type_document_o, num_document = num_document_o, id_table = id_table_o WHERE id = id_o;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteOrder(
+		IN id_o INTEGER
+)
+BEGIN 
+	DELETE FROM `order` WHERE id = id_o;
+END //
+DELIMITER ;
+
+
+-----------------------------------------------------------ORDER PRODUCTS
+--SELECT
+DELIMITER //
+CREATE PROCEDURE selectOrderProducts ()
+BEGIN 
+	SELECT * FROM order_product;
+END //
+DELIMITER ;
+
+--------------
+
+--SELECT productid
+DELIMITER //
+CREATE PROCEDURE selectOrderProductId(
+	IN id_op INTEGER
+)
+BEGIN
+	SELECT * FROM order_product WHERE id = id_op;
+END //
+DELIMITER ;
+
+------
+
+--INSERT
+DELIMITER //
+CREATE PROCEDURE insertOrderProduct (
+		IN id_order_op INTEGER,
+		IN id_product_op INTEGER,
+		IN count_op INTEGER,
+		IN total_op DECIMAL(65,2),
+		IN id_status_op INTEGER
+)
+BEGIN 
+	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM order_product);
+	SET @sql = CONCAT('ALTER TABLE order_product AUTO_INCREMENT = ', @maxId + 1);
+	PREPARE stmt FROM @sql;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	INSERT INTO order_product(id_order, id_product, count, total, id_status) VALUES(id_order_op, id_product_op, count_op, total_op, id_status_op);
+END //
+DELIMITER ;
+
+---------
+
+--UPDATE
+DELIMITER //
+CREATE PROCEDURE updateOrderProduct(
+		IN id_op INTEGER,
+		IN id_order_op INTEGER,
+		IN id_product_op INTEGER,
+		IN count_op INTEGER,
+		IN total_op DECIMAL(65,2),
+		IN id_status_op INTEGER
+)
+BEGIN 
+	UPDATE order_product SET id_order = id_order_op, id_product = id_product_op, count = count_op, total = total_op, id_status = id_status_op WHERE id = id_op;
+END //
+DELIMITER ;
+
+---------
+
+--DELETE
+DELIMITER //
+CREATE PROCEDURE deleteOrderProduct(
+		IN id_op INTEGER
+)
+BEGIN 
+	DELETE FROM order_product WHERE id = id_op;
+END //
+DELIMITER ;
 
 
 /*Procedure for update status where stock is 0 or less*/

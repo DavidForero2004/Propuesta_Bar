@@ -26,7 +26,7 @@
     "notExistTable": "No se encontro ninguna mesa",
     "newTable": "Nueva mesa creada",
     "updateTable": "Mesa actualizado",
-    "deleteTable": "Mesa eliminado",
+    "deleteTable": "Mesa eliminada",
     "notExistStatus": "No se encontro ningún estado",
     "newStatus": "Nuevo estado creado",
     "updateStatus": "Estado actualizado",
@@ -34,5 +34,13 @@
     "notExistRol": "No se encontro ningún rol",
     "newRol": "Nuevo rol creado",
     "updateRol": "Rol actualizado",
-    "deleteRol": "Rol eliminado"
+    "deleteRol": "Rol eliminado",
+    "notExistOrder": "No se encontro ninguna orden",
+	"newOrder": "Nueva orden creada",
+	"updateOrder": "Orden actualizada",
+	"deleteOrder": "Orden eliminada",
+    "notExistOrderProduct": "No se encontro ningún producto en este pedido",
+	"newOrderProduct": "Nuevo producto en el pedido",
+	"updateOrderProduct": "Producto en el pedido actulizado",
+	"deleteOrderProduct": "Producto en el pedido eliminado"
 }

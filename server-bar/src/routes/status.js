@@ -11,9 +11,9 @@ const { validateToken } = require('../routes/validate-token.js');
 //routes call all methods
 router.get('/', validateToken, getStatus);
 router.get('/:id', validateToken, getStatusId);
-router.post('/insertuser', validateToken, insertStatus);
-router.put('/updateuser', validateToken, updateStatus);
-router.delete('/deleteuser/:id', validateToken, deleteStatus);
+router.post('/insertstatus', validateToken, insertStatus);
+router.put('/updatestatus', validateToken, updateStatus);
+router.delete('/deletestatus/:id', validateToken, deleteStatus);
 
 
 module.exports = router;

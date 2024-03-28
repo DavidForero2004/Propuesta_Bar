@@ -114,7 +114,7 @@ const updateRol = (req, res) => {
 
 //delete rol
 const deleteRol = (req, res) => {
-    const { id } = req.parameters;
+    const { id } = req.params;
     const query = 'CALL deleteRol(?)';
 
     ///////////////////////////////////////////////////////////////////////////////

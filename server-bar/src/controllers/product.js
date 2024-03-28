@@ -130,7 +130,7 @@ const updateProduct = (req, res) => {
 
 //delete product
 const deleteProduct = (req, res) => {
-    const { id } = req.parameters;
+    const { id } = req.params;
     const query = 'CALL deleteProduct(?)';
 
     ///////////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@ const statusRoutes = require('./src/routes/status');
 const rolRoutes = require('./src/routes/rol');
 const eventsRoutes = require('./src/routes/event');
 const ordersRoutes = require('./src/routes/order');
+const orderProductsRoutes = require('./src/routes/order-products');
 
 const cors = require('cors');
 const app = express();
@@ -49,6 +50,7 @@ app.use('/state', statusRoutes);
 app.use('/rols', rolRoutes);
 app.use('/events', eventsRoutes);
 app.use('/orders', ordersRoutes);
+app.use('/order-products', orderProductsRoutes);
 
 app.listen(process.env.PORT || port, () => {
     console.log(i18n.__('serverport') + ` ${port}`);

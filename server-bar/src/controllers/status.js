@@ -114,7 +114,7 @@ const updateStatus = (req, res) => {
 
 //delete status
 const deleteStatus = (req, res) => {
-    const { id } = req.parameters;
+    const { id } = req.params;
     const query = 'CALL deleteStatus(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -152,12 +152,11 @@ const deleteStatus = (req, res) => {
 //show status id
 const getStatusId = (req, res) => {
     const { id } = req.params;
+    const query = 'CALL selectStatusId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectStatusId(?)'
-
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {

@@ -34,5 +34,13 @@
 	"notExistRol": "No rol found",
 	"newRol": "New rol created",
 	"updateRol": "Updated rol",
-	"deleteRol": "Deleted rol"
+	"deleteRol": "Deleted rol",
+	"notExistOrder": "No order found",
+	"newOrder": "New order created",
+	"updateOrder": "Updated order",
+	"deleteOrder": "Deleted order",
+	"notExistOrderProduct": "No order product found",
+	"newOrderProduct": "New order product created",
+	"updateOrderProduct": "Updated order product",
+	"deleteOrderProduct": "Deleted order product"
 }

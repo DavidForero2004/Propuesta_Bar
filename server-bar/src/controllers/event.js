@@ -191,6 +191,7 @@ const getEventId = (req, res) => {
     }
 }
 
+
 const selectTop = (req, res)=>{
     const query = 'CALL selectEventTop';
 
@@ -224,4 +225,6 @@ const selectTop = (req, res)=>{
     }
 
 }
+
+
 module.exports = { insertEvent, getEventActive, updateEvent, deleteEvent, getEventId, selectTop };
