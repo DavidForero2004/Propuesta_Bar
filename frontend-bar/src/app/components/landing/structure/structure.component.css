@@ -1488,3 +1488,66 @@ h3 {
     font-size: 12px;
   }
 }
+
+
+.section_products{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider {
+  width: 1200px;
+  display: flex;
+  padding: 20px 20px;
+  position: relative;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product_ {
+  width: 200px; /* Ancho fijo para las tarjetas */
+  height: 300px;
+  overflow: hidden;
+  box-shadow: 0 0 10px 5px gainsboro;
+  border-radius: 10px;
+  margin-right: 40px;
+  transition: 0.5s;
+  flex-shrink: 0; /* Evita que se ajusten al contenedor */
+}
+
+.image_product img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+ .information_product {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider .arrows {
+  display: flex;
+  width: 95%;
+  position: absolute;
+  justify-content: space-between;
+  top: 40%;
+}
+
+.slider .arrows button {
+  width: 35px;
+  height: 35px;
+  margin: 0 10px;
+}
+
+.slider .arrows button p {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
