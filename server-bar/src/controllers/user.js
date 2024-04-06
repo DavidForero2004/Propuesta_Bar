@@ -48,55 +48,62 @@ const insertUser = async (req, res) => {
 
     /////////////////////////////////////////////////////////////////////////////////////
 
-    connection.query(userExist, email, (error, result) => {
-        try {
-            const userData = result[0]; // access the first element of result
-            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            if (error) {
-                res.status(500).json({
-                    msg: i18n.__('errorDatabaseServer'),
-                    error
-                });
-            } else {
-                if (user) {
-                    res.status(400).json({
-                        msg: i18n.__('existUserEmail') + ` ${email}`
+    try {
+        connection.query(userExist, email, (error, result) => {
+            try {
+                const userData = result[0]; // access the first element of result
+                const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
+    
+                if (error) {
+                    res.status(500).json({
+                        msg: i18n.__('errorDatabaseServer'),
+                        error
                     });
-                    return;
-                }
-
-                const query = 'CALL insertUser(?,?,?,?,?)';
-
-                connection.query(query, [name, email, hashPassword, id_status, id_rol], (error, result) => {
-                    try {
-                        if (error) {
-                            res.json({
-                                msg: i18n.__('errorInsert'),
+                } else {
+                    if (user) {
+                        res.status(400).json({
+                            msg: i18n.__('existUserEmail') + ` ${email}`
+                        });
+                        return;
+                    }
+    
+                    const query = 'CALL insertUser(?,?,?,?,?)';
+    
+                    connection.query(query, [name, email, hashPassword, id_status, id_rol], (error, result) => {
+                        try {
+                            if (error) {
+                                res.json({
+                                    msg: i18n.__('errorInsert'),
+                                    error
+                                });
+                                return
+                            } else {
+                                res.json({
+                                    msg: i18n.__('newUser'),
+                                    result
+                                });
+                            }
+                        } catch (error) {
+                            res.status(502).json({
+                                msg: 'Error',
                                 error
                             });
-                            return
-                        } else {
-                            res.json({
-                                msg: i18n.__('newUser'),
-                                result
-                            });
                         }
-                    } catch (error) {
-                        res.status(502).json({
-                            msg: 'Error',
-                            error
-                        });
-                    }
+                    });
+                }
+            } catch (error) {
+                res.status(502).json({
+                    msg: 'Error',
+                    error
                 });
             }
-        } catch (error) {
-            res.status(502).json({
-                msg: 'Error',
-                error
-            });
-        }
-    });
+        });
+    } catch (error) {
+        res.status(502).json({
+            msg: 'Error',
+            error
+        });
+    }
 }
 
 
@@ -182,60 +189,66 @@ const loginUser = (req, res) => {
 
     /////////////////////////////////////////////////////////////////////////////////////
 
-    connection.query(userExist, [email], async (error, result) => {
-        try {
-            const userData = result[0]; // access the first element of result
-            const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
-
-            if (error) {
-                res.status(500).json({
-                    msg: i18n.__('errorDatabaseServer'),
+    try {
+        connection.query(userExist, [email], async (error, result) => {
+            try {
+                const userData = result[0]; // access the first element of result
+                const user = userData[0]; // the first element of userData contains the RowDataPacket object with the user data
+    
+                if (error) {
+                    res.status(500).json({
+                        msg: i18n.__('errorDatabaseServer'),
+                        error
+                    });
+                } else {
+                    if (!user) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistUserEmail') + ` ${email}`
+                        });
+                        return;
+                    }
+    
+                    const passwordvalidate = await bcrypt.compare(password, user.password);
+    
+                    if (!passwordvalidate) {
+                        res.status(400).json({
+                            msg: i18n.__('incorrectPassword')
+                        });
+                        return;
+                    }
+    
+                    const token = jwt.sign({
+                        username: email
+                    }, process.env.SECRET_K || 'contrasena123');
+    
+                    res.json({
+                        token
+                    });
+                }
+            } catch (error) {
+                res.status(502).json({
+                    msg: 'Error',
                     error
                 });
-            } else {
-                if (!user) {
-                    res.status(400).json({
-                        msg: i18n.__('notExistUserEmail') + ` ${email}`
-                    });
-                    return;
-                }
-
-                const passwordvalidate = await bcrypt.compare(password, user.password);
-
-                if (!passwordvalidate) {
-                    res.status(400).json({
-                        msg: i18n.__('incorrectPassword')
-                    });
-                    return;
-                }
-
-                const token = jwt.sign({
-                    username: email
-                }, process.env.SECRET_K || 'contrasena123');
-
-                res.json({
-                    token
-                });
             }
-        } catch (error) {
-            res.status(502).json({
-                msg: 'Error',
-                error
-            });
-        }
-    });
+        });
+    } catch (error) {
+        res.status(502).json({
+            msg: 'Error',
+            error
+        });
+    }
 }
 
 
 //show user id
 const getUserId = (req, res) => {
     const { id } = req.params;
+    const query = 'CALL selectUserId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectUserId(?)'
-
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {

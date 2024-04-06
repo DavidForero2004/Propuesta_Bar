@@ -114,7 +114,7 @@ const updateTable = (req, res) => {
 
 //delete table
 const deleteTable = (req, res) => {
-    const { id } = req.parameters;
+    const { id } = req.params;
     const query = 'CALL deleteTable(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ const deleteTable = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('deleteProduct'),
+                        msg: i18n.__('deleteTable'),
                         result
                     });
                 }
@@ -152,12 +152,11 @@ const deleteTable = (req, res) => {
 //show table id
 const getTableId = (req, res) => {
     const { id } = req.params;
+    const query = 'CALL selectTableId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectTableId(?)'
-
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {

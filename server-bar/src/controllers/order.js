@@ -1,11 +1,11 @@
-//controllers/status.js
+//controllers/order.js
 const connection = require('../db/connection');
 const i18n = require('i18n');
 
 
-//show all status
-const getStatus = (req, res) => {
-    const query = 'CALL selectStatus';
+//show all order
+const getOrder = (req, res) => {
+    const query = 'CALL selectOrder';
 
     //////////////////////////////////////////////////////////////////////////////
 
@@ -38,15 +38,15 @@ const getStatus = (req, res) => {
 }
 
 
-//insert status
-const insertStatus = (req, res) => {
-    const { name } = req.body;
-    const query = 'CALL insertStatus(?)';
+//insert order
+const insertOrder = (req, res) => {
+    const { type_document, num_document, id_table } = req.body;
+    const query = 'CALL insertOrder(?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, name, (error, result) => {
+        connection.query(query, [type_document, num_document, id_table], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -55,7 +55,7 @@ const insertStatus = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('newStatus'),
+                        msg: i18n.__('newOrder'),
                         result
                     });
                 }
@@ -75,15 +75,15 @@ const insertStatus = (req, res) => {
 }
 
 
-//update status
-const updateStatus = (req, res) => {
-    const { id, name } = req.body;
-    const query = 'CALL updateStatus(?,?)';
+//update order
+const updateOrder = (req, res) => {
+    const { id, type_document, num_document, id_table } = req.body;
+    const query = 'CALL updateOrder(?,?,?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, name], (error, result) => {
+        connection.query(query, [id, type_document, num_document, id_table], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
@@ -92,7 +92,7 @@ const updateStatus = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('updateStatus'),
+                        msg: i18n.__('updateOrder'),
                         result
                     });
                 }
@@ -112,10 +112,10 @@ const updateStatus = (req, res) => {
 }
 
 
-//delete status
-const deleteStatus = (req, res) => {
+//delete order
+const deleteOrder = (req, res) => {
     const { id } = req.params;
-    const query = 'CALL deleteStatus(?)';
+    const query = 'CALL deleteOrder(?)';
 
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -129,7 +129,7 @@ const deleteStatus = (req, res) => {
                     });
                 } else {
                     res.json({
-                        msg: i18n.__('deleteStatus'),
+                        msg: i18n.__('deleteOrder'),
                         result
                     });
                 }
@@ -149,14 +149,15 @@ const deleteStatus = (req, res) => {
 }
 
 
-//show status id
-const getStatusId = (req, res) => {
+//show order id
+const getOrderId = (req, res) => {
     const { id } = req.params;
-    const query = 'CALL selectStatusId(?)';
 
     ////////////////////////////////////////////////////////////////////
 
     try {
+        const query = 'CALL selectOrderId(?)'
+
         connection.query(query, id, (error, result) => {
             try {
                 if (error) {
@@ -167,7 +168,7 @@ const getStatusId = (req, res) => {
                 } else {
                     if (!user) {
                         res.status(400).json({
-                            msg: i18n.__('notExistStatus'),
+                            msg: i18n.__('notExistOrder'),
                             result
                         });
                     } else {
@@ -192,7 +193,4 @@ const getStatusId = (req, res) => {
 }
 
 
-module.exports = { getStatus, insertStatus, updateStatus, deleteStatus, getStatusId };
-
-
-
+module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId };
