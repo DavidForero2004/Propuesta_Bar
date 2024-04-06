@@ -64,7 +64,6 @@ export class StructureComponent implements OnInit {
       if (data && data.result && Array.isArray(data.result)) {
         const events = data.result[0];
         if (Array.isArray(events)) {
-          console.log(events)
           this.eventCalendar = events.map(event => ({
             //le pasamos a un objeto los datos que va a usar el calendario
             title: event.name_event + ' \u2013 ' + 'El Evento: ' + event.name_event + ' es el día: ' + event.day + ' de ' + event.month + ' a las: ' + event.hour,
