@@ -26,14 +26,14 @@
     <button class="arrow next">⇨</button>
 </div> -->
   
+<div *ngFor="let product of listProduct">
+  <h1>{{ product.id }}</h1>
+</div>
+
 <div class="event-container">
-
- 
-
   <div class="calendar">
     <full-calendar [options]="calendarOptions"  id="calendar-events"></full-calendar>
   </div>
-
 </div>
 
 

@@ -6,6 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { TranslateService } from '@ngx-translate/core';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../interfaces/product';
 
 
 @Component({
@@ -16,12 +18,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class StructureComponent implements OnInit {
 
   listEvent: Event[] = [];
+  listProduct: Product[] = [];
   public eventCalendar: any[] = [];
 
 
   constructor(
     private el: ElementRef,
     private _eventService: EventService,
+    private _productService: ProductService,
     private translate: TranslateService,
   ) {
     this.translate.addLangs(['es', 'en']);
@@ -31,6 +35,7 @@ export class StructureComponent implements OnInit {
   ngOnInit(): void {
     this.loadScript('../../../../assets/js/landing/landing.js');
     this.getEvent();
+    this.getProduct();
     this.getEventCalendar();
   }
 
@@ -48,6 +53,18 @@ export class StructureComponent implements OnInit {
 
 
   getEvent() {
+    this._productService.getproducts().subscribe((data: any) => {
+
+      if (data && data.result && Array.isArray(data.result)) {
+        const product = data.result[0];
+        if (Array.isArray(product)) {
+          this.listProduct = product;
+        }
+      }
+    });
+  }
+
+  getProduct() {
     this._eventService.selectEventTop().subscribe((data: any) => {
 
       if (data && data.result && Array.isArray(data.result)) {
@@ -58,6 +75,7 @@ export class StructureComponent implements OnInit {
       }
     });
   }
+
 
   getEventCalendar() {
     this._eventService.selectEventTop().subscribe((data: any) => {
