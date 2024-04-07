@@ -7,110 +7,28 @@
 
 
 
- 
-  <div class="section_products">
-    <div class="slider">
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://toppng.com/uploads/preview/coca-cola-bottle-11550195905vlqu5zl7fr.png" alt="">
-        </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
-        </div>
+
+<div class="section_products">
+  <div class="slider">
+    <div class="product_" *ngFor="let product of listProduct">
+      <div class="image_product">
+        <img src="https://toppng.com/uploads/preview/coca-cola-bottle-11550195905vlqu5zl7fr.png" alt="">
       </div>
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://w7.pngwing.com/pngs/571/647/png-transparent-pepsi-one-fizzy-drinks-cola-pepsi-wild-cherry-pepsi-pet-plastic-bottle-electric-blue-thumbnail.png" alt="">
+      <div class="information_product">
+        <div class="title">
+          {{ product.name_product }}
         </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
+        <div class="price">
+          {{ product.price }}
         </div>
-      </div>
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://w7.pngwing.com/pngs/571/647/png-transparent-pepsi-one-fizzy-drinks-cola-pepsi-wild-cherry-pepsi-pet-plastic-bottle-electric-blue-thumbnail.png" alt="">
-        </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
-        </div>
-      </div>
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://w7.pngwing.com/pngs/571/647/png-transparent-pepsi-one-fizzy-drinks-cola-pepsi-wild-cherry-pepsi-pet-plastic-bottle-electric-blue-thumbnail.png" alt="">
-        </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
-        </div>
-      </div>
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://w7.pngwing.com/pngs/571/647/png-transparent-pepsi-one-fizzy-drinks-cola-pepsi-wild-cherry-pepsi-pet-plastic-bottle-electric-blue-thumbnail.png" alt="">
-        </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
-        </div>
-      </div>
-      <div class="product_">
-        <div class="image_product">
-          <img src="https://w7.pngwing.com/pngs/571/647/png-transparent-pepsi-one-fizzy-drinks-cola-pepsi-wild-cherry-pepsi-pet-plastic-bottle-electric-blue-thumbnail.png" alt="">
-        </div>
-        <div class="information_product">
-          <div class="title">
-            Coca-cola
-          </div>
-          <div class="price">
-            3.500
-          </div>
-        </div>
-      </div>
-      <div class="arrows">
-        <button class="left" onclick="left()"><p> < </p></button>
-        <button class="right" onclick="right()"><p> > </p></button>
       </div>
     </div>
+    <div class="arrows">
+      <button class="left" onclick="left()">
+        < </button>
+          <button class="right" onclick="right()"> > </button>
+    </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div *ngFor="let product of listProduct">
-  <h1>{{ product.id }}</h1>
 </div>
 
 <div class="event-container">
