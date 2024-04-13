@@ -162,15 +162,15 @@ CREATE PROCEDURE selectEventTop()
 BEGIN
     SET lc_time_names = 'es_ES';
     SELECT 
-		name_event,
-		date,
-		YEAR(`date`) AS year,
-		MONTHNAME(`date`) AS month,
-		DAY(`date`) AS day,
-		CONCAT(HOUR(`date`), ':', MINUTE(`date`)) AS hour
-    FROM `event`
-    	WHERE `date` >= NOW()
-    ORDER BY `date` ASC;
+    name_event,
+    DATE_ADD(date, INTERVAL 1 SECOND) AS date,
+    YEAR(date) AS year,
+    MONTHNAME(date) AS month,
+    DAY(date) AS day,
+    CONCAT(HOUR(date), ':', MINUTE(date)) AS hour
+FROM `event`
+WHERE date >= NOW()
+ORDER BY date ASC;
 END //
 DELIMITER ;
 

@@ -4,56 +4,61 @@
 
 </div>
 
-<!-- <div id="carousel" class="carousel">
-    <button class="arrow prev">⇦</button>
-    <div class="gallery">
-        <ul>
-            <li *ngFor="let e of listEvent">
-                <div class="card_event">
-                    <div class="card_head">
-                        <h1>{{e.name_event}}</h1>
-                    </div>
-                    <div class="card_body">
-                        <h3>{{e.year}}</h3>
-                        <h3>{{e.month}}</h3>
-                        <h3>{{e.day}}</h3>
-                        <h3>{{e.hour}}</h3>
-                    </div>
-                </div>
-            </li>
-        </ul>
+
+
+
+
+<div class="section_products">
+  <div class="slider">
+    <div class="product_" *ngFor="let product of listProduct">
+      <div class="image_product">
+        <img src="https://toppng.com/uploads/preview/coca-cola-bottle-11550195905vlqu5zl7fr.png" alt="">
+      </div>
+      <div class="information_product">
+        <div class="title">
+          {{ product.name_product }}
+        </div>
+        <div class="price">
+          {{ product.price }}
+        </div>
+      </div>
     </div>
-    <button class="arrow next">⇨</button>
-</div> -->
-  
-<div class="event-container">
-
- 
-
-  <div class="calendar">
-    <full-calendar [options]="calendarOptions"  id="calendar-events"></full-calendar>
+    <div class="arrows">
+      <button class="left" onclick="left()">
+        < </button>
+          <button class="right" onclick="right()"> > </button>
+    </div>
   </div>
+</div>
 
+<div class="event-container">
+  <div class="calendar">
+    <full-calendar [options]="calendarOptions" id="calendar-events"></full-calendar>
+  </div>
 </div>
 
 
 <div class="about_bar">
-    <div class="images content">
-      <div id="first">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Takumi_in_Sailing_Bar.jpg/170px-Takumi_in_Sailing_Bar.jpg" alt="">
-      </div>
-      <div id="second">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR87fyBhllB7fXmszqCqvD_5rbbVGgjyKbhJUF6KH2URw&s" alt="">
-      </div>
-      <div id="third">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxrh1if21jtQ9viKnY3UDDYLwTwh5izG1ZmxHflufgwA&s" alt="">
-      </div>
+  <div class="images content">
+    <div id="first">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Takumi_in_Sailing_Bar.jpg/170px-Takumi_in_Sailing_Bar.jpg"
+        alt="">
     </div>
-    <div class="text_a content">
-      <p id="life_">{{"life" | translate}}</p>
-      <p id="disfrut">{{"disfrut" | translate}}</p>
-      <p id="more_t">{{"moreText" | translate}}</p>
+    <div id="second">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR87fyBhllB7fXmszqCqvD_5rbbVGgjyKbhJUF6KH2URw&s"
+        alt="">
+    </div>
+    <div id="third">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxrh1if21jtQ9viKnY3UDDYLwTwh5izG1ZmxHflufgwA&s"
+        alt="">
     </div>
   </div>
+  <div class="text_a content">
+    <p id="life_">{{"life" | translate}}</p>
+    <p id="disfrut">{{"disfrut" | translate}}</p>
+    <p id="more_t">{{"moreText" | translate}}</p>
+  </div>
+</div>
 
 <app-footer></app-footer>

@@ -8,6 +8,8 @@ const { validateToken } = require('../routes/validate-token.js');
 
 
 //routes call all methods
+
+router.get('/selectProduct', getProduct);
 router.get('/', validateToken, getProduct);
 router.get('/:id', validateToken, getProductId);
 router.post('/insertproduct', validateToken, insertProduct);

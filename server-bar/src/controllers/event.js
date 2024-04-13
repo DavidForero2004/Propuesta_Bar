@@ -38,50 +38,65 @@ const getEventActive = (req, res) => {
 }
 
 
-//insert event
 const insertEvent = (req, res) => {
     const { name_event, date } = req.body;
+    const fechaActual = new Date();
+    const fechaEvento = new Date(date); // Convertir la cadena de texto en objeto Date
     const query = 'CALL insertEvent (?,?)';
+    console.log(fechaActual.getTime(), fechaEvento.getTime());
 
-    //////////////////////////////////////////////////////////////////////////
-
-    try {
-        connection.query(query, [name_event, date], (error, result) => {
-            try {
-                if (error) {
-                    res.status(500).json({
-                        msg: i18n.__('errorInsert'),
-                        error
-                    });
-                } else {
-                    res.json({
-                        msg: i18n.__('newEvent'),
-                        result
+    if (fechaEvento.getTime() < fechaActual.getTime()) {
+        res.status(500).json({
+            msg: i18n.__('dateError'),
+            error: i18n.__('dateError') // Cambio aquí
+        });
+    } else {
+        try {
+            connection.query(query, [name_event, date], (error, result) => {
+                try {
+                    if (error) {
+                        res.status(500).json({
+                            msg: i18n.__('errorInsert'),
+                            error: 'Error inserting event' // Cambio aquí
+                        });
+                    } else {
+                        res.json({
+                            msg: i18n.__('newEvent'),
+                            result
+                        });
+                    }
+                } catch (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error: 'Error' // Cambio aquí
                     });
                 }
-            } catch (error) {
-                res.status(400).json({
-                    msg: 'Error',
-                    error
-                });
-            }
-        });
-    } catch (error) {
-        res.status(400).json({
-            msg: 'Error',
-            error
-        });
+            });
+        } catch (error) {
+            res.status(400).json({
+                msg: 'Error',
+                error: 'Error' // Cambio aquí
+            });
+        }
     }
 }
+
+
 
 
 //update event
 const updateEvent = (req, res) => {
     const { id, name_event, date } = req.body;
     const query = 'CALL updateEvent(?,?,?)';
-
     ///////////////////////////////////////////////////////////////////////////
-
+    const fechaActual = new Date();
+    const fechaEvento = new Date(date); // Convertir la cadena de texto en objeto Date
+    if (fechaEvento.getTime() < fechaActual.getTime()) {
+        res.status(500).json({
+            msg: i18n.__('dateError'),
+            error: i18n.__('dateError') // Cambio aquí
+        });
+    } else {
     try {
         connection.query(query, [id, name_event, date], (error, result) => {
             try {
@@ -108,6 +123,7 @@ const updateEvent = (req, res) => {
             msg: 'Error',
             error
         });
+    }
     }
 }
 
@@ -192,13 +208,13 @@ const getEventId = (req, res) => {
 }
 
 
-const selectTop = (req, res)=>{
+const selectTop = (req, res) => {
     const query = 'CALL selectEventTop';
 
     //////////////////////////////////////
 
     try {
-        connection.query(query,(error, result)=>{
+        connection.query(query, (error, result) => {
             if (error) {
                 res.status(400).json({
                     msg: 'Error',
