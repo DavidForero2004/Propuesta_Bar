@@ -22,7 +22,7 @@ const port = 3000;
 i18n.configure({
     locales: ['en', 'es'],
     directory: __dirname + '/locals/',
-    defaultLocale: 'es', 
+    defaultLocale: 'en', 
     objectNotation: true 
 });
 

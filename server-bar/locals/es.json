@@ -8,6 +8,7 @@
     "errorInsert": "Error al insertar",
     "errorUpdate": "Error al actualizar",
     "errorDelete": "Error al eliminar",
+    "dateError": "Error, la fecha debe ser valida!",
     "existUserEmail": "Ya existe un usuario con este correo electronico",
     "notExistUserEmail": "No existe ningún usuario con este correo electronico",
     "notExistUser": "No se encontro ningún usuario",
