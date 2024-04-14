@@ -56,7 +56,9 @@ CREATE TABLE IF NOT EXISTS `order`(
 	type_document VARCHAR(255) NOT NULL,
 	num_document INTEGER NOT NULL,
 	id_table INTEGER,
-	FOREIGN KEY(id_table) REFERENCES `table`(id)
+	id_status INTEGER,
+	FOREIGN KEY(id_table) REFERENCES `table`(id),
+	FOREIGN KEY(id_status) REFERENCES status(id)
 );
 
 CREATE TABLE IF NOT EXISTS order_product(
@@ -67,8 +69,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 	total DECIMAL(65,2),
 	id_status INTEGER,
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
-	FOREIGN KEY(id_product) REFERENCES product(id),
-	FOREIGN KEY(id_status) REFERENCES status(id)
+	FOREIGN KEY(id_product) REFERENCES product(id)
 );
 
 
@@ -547,6 +548,17 @@ BEGIN
 END //
 DELIMITER ;
 
+
+--SELECT productid
+DELIMITER //
+CREATE PROCEDURE selectOrderNumDocument(
+	IN num_document_o INTEGER
+)
+BEGIN
+	SELECT * FROM `order` WHERE num_document = num_document_o AND id_status = 1;
+END //
+DELIMITER ;
+
 ------
 
 --INSERT
@@ -554,7 +566,8 @@ DELIMITER //
 CREATE PROCEDURE insertOrder (
 		IN type_document_o VARCHAR(255),
 		IN num_document_o INTEGER,
-		IN id_table_o INTEGER
+		IN id_table_o INTEGER,
+		IN id_status_o INTEGER
 )
 BEGIN 
 	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM `order`);
@@ -562,7 +575,7 @@ BEGIN
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-	INSERT INTO `order`(type_document, num_document, id_table) VALUES(type_document_o, num_document_o, id_table_o);
+	INSERT INTO `order`(type_document, num_document, id_table, id_status) VALUES(type_document_o, num_document_o, id_table_o, id_status_o);
 END //
 DELIMITER ;
 
@@ -572,12 +585,10 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE updateOrder(
 		IN id_o INTEGER,
-		IN type_document_o VARCHAR(255),
-		IN num_document_o INTEGER,
-		IN id_table_o INTEGER
+		IN id_status_o INTEGER
 )
 BEGIN 
-	UPDATE `order` SET type_document = type_document_o, num_document = num_document_o, id_table = id_table_o WHERE id = id_o;
+	UPDATE `order` SET id_status = id_status_o WHERE id = id_o;
 END //
 DELIMITER ;
 
@@ -623,8 +634,7 @@ CREATE PROCEDURE insertOrderProduct (
 		IN id_order_op INTEGER,
 		IN id_product_op INTEGER,
 		IN count_op INTEGER,
-		IN total_op DECIMAL(65,2),
-		IN id_status_op INTEGER
+		IN total_op DECIMAL(65,2)
 )
 BEGIN 
 	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM order_product);
@@ -632,7 +642,7 @@ BEGIN
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-	INSERT INTO order_product(id_order, id_product, count, total, id_status) VALUES(id_order_op, id_product_op, count_op, total_op, id_status_op);
+	INSERT INTO order_product(id_order, id_product, count, total) VALUES(id_order_op, id_product_op, count_op, total_op);
 END //
 DELIMITER ;
 
@@ -649,7 +659,7 @@ CREATE PROCEDURE updateOrderProduct(
 		IN id_status_op INTEGER
 )
 BEGIN 
-	UPDATE order_product SET id_order = id_order_op, id_product = id_product_op, count = count_op, total = total_op, id_status = id_status_op WHERE id = id_op;
+	UPDATE order_product SET id_order = id_order_op, id_product = id_product_op, count = count_op, total = total_op WHERE id = id_op;
 END //
 DELIMITER ;
 

@@ -37,6 +37,7 @@
     "updateRol": "Rol actualizado",
     "deleteRol": "Rol eliminado",
     "notExistOrder": "No se encontro ninguna orden",
+	"existOrderActive": "Ya existe una orden activa con este número de identificación",
 	"newOrder": "Nueva orden creada",
 	"updateOrder": "Orden actualizada",
 	"deleteOrder": "Orden eliminada",

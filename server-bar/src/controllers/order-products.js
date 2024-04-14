@@ -40,8 +40,8 @@ const getOrderProduct = (req, res) => {
 
 //insert order product
 const insertOrderProduct = (req, res) => {
-    const { id_order, id_product, count, id_status } = req.body;
-    const query = 'CALL insertOrderProduct(?,?,?,?,?)';
+    const { id_order, id_product, count } = req.body;
+    const query = 'CALL insertOrderProduct(?,?,?,?)';
     const queryProduct = 'CALL selectProductId(?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ const insertOrderProduct = (req, res) => {
                     const productPrice = parseInt(product.price);
                     const total = productPrice * count;
 
-                    connection.query(query, [id_order, id_product, count, total, id_status], (error, resultOrderProduct) => {
+                    connection.query(query, [id_order, id_product, count, total], (error, resultOrderProduct) => {
                         try {
                             if (error) {
                                 res.status(500).json({
@@ -99,8 +99,8 @@ const insertOrderProduct = (req, res) => {
 
 //update order product
 const updateOrderProduct = (req, res) => {
-    const { id, id_order, id_product, count, id_status } = req.body;
-    const query = 'CALL updateOrderProduct(?,?,?,?,?,?)';
+    const { id, id_order, id_product, count } = req.body;
+    const query = 'CALL updateOrderProduct(?,?,?,?,?)';
     const queryProduct = 'CALL selectProductId(?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ const updateOrderProduct = (req, res) => {
                     const productPrice = parseInt(product.price);
                     const total = productPrice * count;
 
-                    connection.query(query, [id, id_order, id_product, count, total, id_status], (error, resultOrderProduct) => {
+                    connection.query(query, [id, id_order, id_product, count, total], (error, resultOrderProduct) => {
                         try {
                             if (error) {
                                 res.status(500).json({

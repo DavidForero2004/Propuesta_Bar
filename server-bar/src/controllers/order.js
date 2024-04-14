@@ -40,35 +40,59 @@ const getOrder = (req, res) => {
 
 //insert order
 const insertOrder = (req, res) => {
-    const { type_document, num_document, id_table } = req.body;
-    const query = 'CALL insertOrder(?,?,?)';
+    const { type_document, num_document, id_table, id_status } = req.body;
+    const query = 'CALL insertOrder(?,?,?,?)';
+    const queryNumDocument = 'CALL selectOrderNumDocument(?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [type_document, num_document, id_table], (error, result) => {
+        connection.query(queryNumDocument, [num_document], (error, resultData) => {
             try {
                 if (error) {
                     res.status(500).json({
-                        msg: i18n.__('errorInsert'),
+                        msg: 'Error',
                         error
                     });
                 } else {
-                    res.json({
-                        msg: i18n.__('newOrder'),
-                        result
-                    });
+                    const count = resultData[0].length;
+                    if (count > 0) {
+                        res.json({
+                            msg: i18n.__('existOrderActive'),
+                        });
+                    } else if(count == 0) {
+                        connection.query(query, [type_document, num_document, id_table, id_status], (error, result) => {
+                            try {
+                                if (error) {
+                                    res.status(500).json({
+                                        msg: i18n.__('errorInsert'),
+                                        error
+                                    });
+                                } else {
+                                    res.json({
+                                        msg: i18n.__('newOrder'),
+                                        result
+                                    });
+                                }
+                            } catch (error) {
+                                res.status(400).json({
+                                    msg: 'Error 2',
+                                    error
+                                });
+                            }
+                        });
+                    }
                 }
             } catch (error) {
-                res.status(400).json({
-                    msg: 'Error',
+                res.status(500).json({
+                    msg: 'Error 3',
                     error
                 });
             }
         });
     } catch (error) {
         res.status(400).json({
-            msg: 'Error',
+            msg: 'Error 4',
             error
         });
     }
@@ -77,13 +101,13 @@ const insertOrder = (req, res) => {
 
 //update order
 const updateOrder = (req, res) => {
-    const { id, type_document, num_document, id_table } = req.body;
-    const query = 'CALL updateOrder(?,?,?,?)';
+    const { id, id_status } = req.body;
+    const query = 'CALL updateOrder(?,?)';
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     try {
-        connection.query(query, [id, type_document, num_document, id_table], (error, result) => {
+        connection.query(query, [id, id_status], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({
