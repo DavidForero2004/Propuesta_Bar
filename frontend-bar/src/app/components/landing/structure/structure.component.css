@@ -1474,14 +1474,17 @@ h3 {
 }
 
 .banner{
-  height: 350px;
+  height: 450px;
   background: linear-gradient(90deg, rgba(252,221,217,1) 59%, rgba(252,226,212,1) 81%, rgba(251,233,211,1) 93%, rgba(253,234,213,1) 100%);
   margin-top: -16px;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
 }
 .text_info{
   width: 50%;
   height: 100%;
+
 }
 .text_h{
   height: 100%;
@@ -1490,9 +1493,12 @@ h3 {
   justify-content: center;
   width: 50%;
   margin-left: 15%;
+  gap: 12px;
 }
 .images_info{
   width: 50%;
+  display: flex;
+  justify-content: end;
 }
 .text_info p{
   margin: 0 !important;
@@ -1505,19 +1511,47 @@ h3 {
 #design1{
   font-family: "fontmy";
   font-weight: bolder;
-  font-size: 3em;
+  font-size: 3.4em;
   color: rgb(255 128 0);
 }
 #design2{
   color: #e8057d;
   font-weight: bolder;
-  font-size: 2.5em;
+  font-size: 3em;
+  width: 200%;
 }
 #design3{
   color: rgb(255 128 0);
   font-weight: bolder;
-  font-size: 2.6em;
+  font-size: 3em;
 }
+#design4{
+  position: absolute;
+  font-size: 1em;
+  font-weight: 500;
+  margin-left: 150px !important;
+  width: 300px;
+  text-align: justify;
+}
+.back{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  
+}
+
+.image_back{
+  width: 80%;
+  overflow: hidden;
+}
+.image_back img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  margin-left: 22%;
+}
+
+
 @media screen and (min-width: 200px) and (max-width: 320px) {
   .about_bar {
     height: 400px;
