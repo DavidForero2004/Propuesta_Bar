@@ -1,43 +1,112 @@
 <app-land-nav></app-land-nav>
 
 <div class="banner">
-
-</div>
-
-
-
-
-
-<div class="section_products">
-  <div class="slider">
-    <div class="product_" *ngFor="let product of listProduct">
-      <div class="image_product">
-        <img src="https://toppng.com/uploads/preview/coca-cola-bottle-11550195905vlqu5zl7fr.png" alt="">
+  <div class="text_info">
+      <div class="text_h">
+          <p  id="design1">{{ "cold" | translate}}</p>
+          <p  id="design1">{{ "cold" | translate}}</p>
+          <p  id="design2">{{ "cold2" | translate}}</p>
+          <p  id="design4">{{ "banner" | translate}}</p>
+          <p  id="design3">{{ "cold" | translate}}</p>
+          <p  id="design1">{{ "cold" | translate}}</p>
+          <p  id="design1">{{ "cold" | translate}}</p>
+          <p  id="design1">{{ "cold" | translate}}</p>
       </div>
-      <div class="information_product">
-        <div class="title">
-          {{ product.name_product }}
+  </div>
+  <div class="images_info">
+    <div class="back">
+        <div class="image_back">
+          <img src="../../../../assets/img/Back-gorunds/womanBanner.png" alt="woman.png">
         </div>
-        <div class="price">
-          {{ product.price }}
-        </div>
-      </div>
-    </div>
-    <div class="arrows">
-      <button class="left" onclick="left()">
-        < </button>
-          <button class="right" onclick="right()"> > </button>
     </div>
   </div>
 </div>
+<div class="about_us">
+  <div class="image_about">
+    <img src="../../../../assets/img/products/Petra.png" alt="log">
+  </div>
+  <div class="information_about">
+    <p id="title">{{ "whoAre" | translate }}</p>
+    <p id="body">{{ "aboutUs" | translate}}</p>
+  </div>
+</div>
 
+<div class="products">
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      
+      <img src="../../../../assets/img/products/Poker.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Cerveza | Poker</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 3500</p>
+    </div>
+  </div>
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      <img src="../../../../assets/img/products/Ron.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Ron | Caldas</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 100000</p>
+    </div>
+  </div>
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      <img src="../../../../assets/img/products/Coctel.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Coctel</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 25000</p>
+    </div>
+  </div>
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      <img src="../../../../assets/img/products/Heineken.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Cerveza | Heineken</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 3500</p>
+    </div>
+  </div>
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      <img src="../../../../assets/img/products/Budweiser.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Cerveza | Budweiser</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 4000</p>
+    </div>
+  </div>
+  <div class="list_products" class="list_products">
+    <div class="image_product">
+      <img src="../../../../assets/img/products/Aguardiente.png" alt="product">
+    </div>
+    <div class="name_produc">
+      <p>Aguardiente | Antioqueño</p>
+    </div>
+    <div class="value_product">
+      <p>Desde: 50000</p>
+    </div>
+  </div>
+
+
+</div>
 <div class="event-container">
   <div class="calendar">
     <full-calendar [options]="calendarOptions" id="calendar-events"></full-calendar>
   </div>
 </div>
-
-
 <div class="about_bar">
   <div class="images content">
     <div id="first">
@@ -60,5 +129,4 @@
     <p id="more_t">{{"moreText" | translate}}</p>
   </div>
 </div>
-
 <app-footer></app-footer>

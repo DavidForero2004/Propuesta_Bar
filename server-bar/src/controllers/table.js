@@ -165,7 +165,7 @@ const getTableId = (req, res) => {
                         error
                     });
                 } else {
-                    if (!user) {
+                    if (!result) {
                         res.status(400).json({
                             msg: i18n.__('notExistProduct'),
                             result

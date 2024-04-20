@@ -1,12 +1,18 @@
 <app-navbar></app-navbar>
 
-<div class="title">
-    <button class="btn btn-primary" routerLink="/event/insert">{{ "addEvent" | translate }}</button>
-</div>
+
+
+<h1>{{ "events" | translate }}</h1>
+
+    <button class="btn add" routerLink="/event/insert"> + </button>
+
 
 
 <div class="Table_events">
-    <h1>{{ "events" | translate }}</h1>
+
+    <label for="search">Buscar por nombre</label>
+    <input type="text" [(ngModel)]="searchTerm" id="search" class="search">
+
     <table class="table" id="table information">
         <thead>
             <tr>
@@ -17,7 +23,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let event of listEvent; let i=index">
+            <tr *ngFor="let event of listEvent; let i=index"
+                [hidden]="event.name_event?.toLowerCase()?.indexOf(searchTerm.toLowerCase()) === -1">
                 <td>{{ counter + i }}</td>
                 <td>{{ event.name_event }}</td>
                 <td>{{ event.date | date: 'short' }}</td>
@@ -33,6 +40,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 
@@ -58,3 +66,5 @@
         </div>
     </form>
 </div>
+
+<app-footer></app-footer>

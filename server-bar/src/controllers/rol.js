@@ -156,7 +156,7 @@ const getRolId = (req, res) => {
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectRolId(?)'
+        const query = 'CALL selectRolId( ? )'
 
         connection.query(query, id, (error, result) => {
             try {
@@ -166,14 +166,14 @@ const getRolId = (req, res) => {
                         error
                     });
                 } else {
-                    if (!user) {
+                    if (!result) {
                         res.status(400).json({
                             msg: i18n.__('notExistRol'),
                             result
                         });
                     } else {
                         res.json({
-                            rol
+                            result
                         });
                     }
                 }

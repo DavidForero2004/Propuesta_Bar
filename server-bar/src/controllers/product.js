@@ -167,12 +167,13 @@ const deleteProduct = (req, res) => {
 
 //show product id
 const getProductId = (req, res) => {
+
     const { id } = req.params;
 
     ////////////////////////////////////////////////////////////////////
 
     try {
-        const query = 'CALL selectProductId(?)'
+        const query = 'CALL selectProductId( ? )'
 
         connection.query(query, id, (error, result) => {
             try {
@@ -182,7 +183,7 @@ const getProductId = (req, res) => {
                         error
                     });
                 } else {
-                    if (!user) {
+                    if (!result) {
                         res.status(400).json({
                             msg: i18n.__('notExistProduct'),
                             result

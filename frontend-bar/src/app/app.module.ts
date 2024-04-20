@@ -30,6 +30,19 @@ import { FooterComponent } from './components/landing/footer/footer.component';
 import { StructureComponent } from './components/landing/structure/structure.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +63,13 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSortModule,
+    MatPaginatorModule,
     ToastrModule.forRoot({
       timeOut: 3500,
       preventDuplicates: true,
@@ -68,7 +88,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   ],
   providers: [
     // No se necesita provideHttpClient
-    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
