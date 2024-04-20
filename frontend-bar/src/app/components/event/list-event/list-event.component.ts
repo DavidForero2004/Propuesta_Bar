@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { time } from 'console';
 
 @Component({
   selector: 'app-list-event',
@@ -19,6 +18,7 @@ export class ListEventComponent implements OnInit {
   listEventId: Event[] = [];
   counter: number = 1;
   form: FormGroup;
+ 
 
   constructor(
     private _eventService: EventService,
@@ -56,6 +56,9 @@ export class ListEventComponent implements OnInit {
     return this.counter++;
   }
 
+
+  searchTerm: string = '';
+  
   getEvent() {
     this._eventService.selectEvent().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
@@ -119,6 +122,7 @@ export class ListEventComponent implements OnInit {
     }
   }
 
+
   updateFormWithSelectedEvent() {
     const selectedEvent = this.listEventId[0];
     this.form.patchValue({
@@ -144,7 +148,8 @@ export class ListEventComponent implements OnInit {
         this.toastr.success('El evento se actualizó correctamente', 'Éxito');
         setTimeout(()=>{
           this.getEvent();
-        },3000)
+          this.listEvent;
+        },1000)
       },
       error: (error) => {
         this.toastr.error('Ocurrió un error al actualizar el evento', 'Error');
@@ -152,6 +157,9 @@ export class ListEventComponent implements OnInit {
       }
     });
   }
+
+ 
+
 
   es() {
     this.translate.use('es');
