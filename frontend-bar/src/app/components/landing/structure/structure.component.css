@@ -1141,6 +1141,8 @@
   src: url(https://fonts.gstatic.com/s/unbounded/v7/Yq6F-LOTXCb04q32xlpat-6uR42XTqtG67H2040.ttf) format('truetype');
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumar+One+Outline&family=Londrina+Outline&display=swap');
 .carousel {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -1476,6 +1478,45 @@ h3 {
   background: linear-gradient(90deg, rgba(252,221,217,1) 59%, rgba(252,226,212,1) 81%, rgba(251,233,211,1) 93%, rgba(253,234,213,1) 100%);
   margin-top: -16px;
   overflow: hidden;
+}
+.text_info{
+  width: 50%;
+  height: 100%;
+}
+.text_h{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  margin-left: 15%;
+}
+.images_info{
+  width: 50%;
+}
+.text_info p{
+  margin: 0 !important;
+  height: 60px;
+}
+@font-face {
+  font-family: 'fontmy';
+  src: url(../../../../assets/fonts/Newfonts/Londrina_Outline/LondrinaOutline-Regular.ttf);
+}
+#design1{
+  font-family: "fontmy";
+  font-weight: bolder;
+  font-size: 3em;
+  color: rgb(255 128 0);
+}
+#design2{
+  color: #e8057d;
+  font-weight: bolder;
+  font-size: 2.5em;
+}
+#design3{
+  color: rgb(255 128 0);
+  font-weight: bolder;
+  font-size: 2.6em;
 }
 @media screen and (min-width: 200px) and (max-width: 320px) {
   .about_bar {
