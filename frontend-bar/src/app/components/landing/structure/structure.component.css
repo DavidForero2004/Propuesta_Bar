@@ -1475,7 +1475,11 @@ h3 {
 
 .banner{
   height: 450px;
-  background: linear-gradient(90deg, rgba(252,221,217,1) 59%, rgba(252,226,212,1) 81%, rgba(251,233,211,1) 93%, rgba(253,234,213,1) 100%);
+  background-image: url(../../../../assets/img/Back-gorunds/back.jpg);
+  object-fit: fill;
+  /* background-repeat: round; */
+  background-size: cover;
+
   margin-top: -16px;
   overflow: hidden;
   display: flex;
