@@ -38,6 +38,7 @@
 	"deleteRol": "Deleted rol",
 	"notExistOrder": "No order found",
 	"newOrder": "New order created",
+	"existOrderActive": "There is already an active order with this identification number",
 	"updateOrder": "Updated order",
 	"deleteOrder": "Deleted order",
 	"notExistOrderProduct": "No order product found",

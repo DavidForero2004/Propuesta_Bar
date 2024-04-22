@@ -43,7 +43,7 @@ const insertEvent = (req, res) => {
     const fechaActual = new Date();
     const fechaEvento = new Date(date); // Convertir la cadena de texto en objeto Date
     const query = 'CALL insertEvent (?,?)';
-    console.log(fechaActual.getTime(), fechaEvento.getTime());
+    // console.log(fechaActual.getTime(), fechaEvento.getTime());
 
     if (fechaEvento.getTime() < fechaActual.getTime()) {
         res.status(500).json({
