@@ -114,6 +114,11 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      z-index: 1;
+      position: relative;
+    }
+    .option_container_menu a{
+      font-size: 12px;
     }
     .logo_nav img {
       width: 60px;
