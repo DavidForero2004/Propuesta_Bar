@@ -24,6 +24,22 @@ export class UserService {
     return this.http.get<User[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
 
+  getUserId(id: number):Observable<User> {
+    return this.http.get<User>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+  }
+
+  addUser(user: User): Observable<any> {
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertuser`, user);
+  }
+
+  updateUser(user: User): Observable<void> {
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/updateuser`, user);
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/deleteuser/${id}`);
+  }
+
   updateServerLanguage(lang: string): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}language`, { lang });
   }

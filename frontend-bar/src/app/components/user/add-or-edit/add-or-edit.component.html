@@ -1,0 +1,72 @@
+<div class="container-tittleadduser">
+    <h2 mat-dialog-title>{{ operation }} {{ "user" | translate }}</h2>
+    <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+</div>
+<form [formGroup]="form" (ngSubmit)="addUser()">
+    <mat-dialog-content class="mat-typography">
+
+        <!-- Name Input -->
+        <mat-form-field>
+            <mat-label>{{ "name" | translate }}</mat-label>
+            <input formControlName="name" matInput>
+        </mat-form-field>
+        <div class="error">
+            <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">{{ "requiredUser" | translate }}</mat-error>
+        </div>
+
+        <!-- Email Input -->
+        <mat-form-field>
+            <mat-label>{{ "email" | translate }}</mat-label>
+            <input formControlName="email" matInput placeholder="pat@example.com">
+        </mat-form-field>
+        <div class="error">
+            <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">{{ "requiredEmail" | translate }}</mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">{{ "invalidEmail" | translate }}</mat-error>
+        </div>
+
+        <!-- Password Input -->
+        <mat-form-field>
+            <mat-label>{{ "password" | translate }}</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="error">
+            <mat-error *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">{{ "requiredPassword" | translate }}</mat-error>
+            <mat-error *ngIf="form.get('password')?.hasError('minlength')  && form.get('password')?.touched">{{ "minPassword" | translate }} </mat-error>
+        </div>
+
+        <!-- Status Select -->
+        <mat-form-field>
+            <mat-label>{{ "status" | translate }}</mat-label>
+            <mat-select formControlName="status">
+                @for (state of status; track state) {
+                <mat-option [value]="state.id">{{state.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <div class="error">
+            <mat-error *ngIf="form.get('status')?.hasError('required') && form.get('status')?.touched">{{ "requiredStatus" | translate }}</mat-error>
+        </div>
+
+        <!-- Rol Select -->
+        <mat-form-field>
+            <mat-label>{{ "rol" | translate }}</mat-label>
+            <mat-select formControlName="rol">
+                @for (rols of rol; track rols) {
+                <mat-option [value]="rols.id">{{ rols.name }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <div class="error">
+            <mat-error *ngIf="form.get('rol')?.hasError('required') && form.get('rol')?.touched">{{ "requiredRol" | translate }}</mat-error>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" (click)="cancel()" mat-button mat-dialog-close>{{ "cancel" | translate }}</button>
+        <button type="submit" [disabled]="form.invalid" mat-button>{{ "accept" | translate }}</button>
+    </mat-dialog-actions>
+</form>

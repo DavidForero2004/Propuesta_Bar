@@ -33,7 +33,24 @@
     "aboutUs":"¡Bienvenidos a Hollow-Bar! Somos un bar acogedor ubicado en Bogotá av 11 #1, conocido por nuestra excelente selección de bebidas y ambiente amigable. ¡Ven y disfruta de una experiencia única con nosotros!",
     "cold": "FRIA",
     "cold2": "QUE TAL UNA FRIA",
-    "banner": "Solo pidela, nosotros nos encargamos del resto. Ponle vida a los momentos con una fria."
-
-
+    "banner": "Solo pidela, nosotros nos encargamos del resto. Ponle vida a los momentos con una fria.",
+    "add": "Agregar",
+    "status": "Estado",
+    "rol": "Rol",
+    "user": "usuario",
+    "requiredUser": "El nombre es obligatorio",
+    "requiredEmail": "El correo es obligatorio",
+    "requiredPassword": "La contraseña es obligatoria",
+    "requiredStatus": "El estado es obligatorio",
+    "requiredRol": "El rol es obligatorio",
+    "invalidEmail": "El correo electrónico no es valido",
+    "minPassword": "La contraseña debe ser mínimo de 3 caracteres",
+    "saveUser": "Usuario agregado correctamente",
+    "editUser": "Usuario editado correctamente",
+    "aggregate": "Agregado",
+    "edited": "Editado",
+    "removed": "Eliminado",
+    "deleteUser": "Usuario eliminado correctamente",
+    "paginteUser": "Usuarios por página",
+    "of": "de"
 }

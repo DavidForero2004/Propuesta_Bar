@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
 import { faShoppingCart, faBars, faPhone, faHouse,faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class LandNavComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private _userService: UserService,
-    private el: ElementRef
+    private el: ElementRef,
+    private router: Router
   ) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
@@ -31,6 +33,10 @@ export class LandNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript('../../../../assets/js/landing/landing.js');
+  }
+
+  navigateToFooter() {
+    this.router.navigate(['/hollowbar-initial/client/'], { fragment: 'footer' });
   }
 
 
@@ -44,7 +50,6 @@ export class LandNavComponent implements OnInit {
       this.el.nativeElement.appendChild(script);
     }
   }
-  
   
 
   es() {

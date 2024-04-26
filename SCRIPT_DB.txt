@@ -66,8 +66,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 	id_order INTEGER,
 	id_product INTEGER,
 	count INTEGER NOT NULL,
-	total DECIMAL(65,2),
-	id_status INTEGER,
+	total DECIMAL(65,2)
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
 	FOREIGN KEY(id_product) REFERENCES product(id)
 );
@@ -655,8 +654,7 @@ CREATE PROCEDURE updateOrderProduct(
 		IN id_order_op INTEGER,
 		IN id_product_op INTEGER,
 		IN count_op INTEGER,
-		IN total_op DECIMAL(65,2),
-		IN id_status_op INTEGER
+		IN total_op DECIMAL(65,2)
 )
 BEGIN 
 	UPDATE order_product SET id_order = id_order_op, id_product = id_product_op, count = count_op, total = total_op WHERE id = id_op;

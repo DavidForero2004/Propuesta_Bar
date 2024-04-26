@@ -1,9 +1,9 @@
-@font-face {
+/* @font-face {
   font-family: "Acumin Variable Concept";
   src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot");
   src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff") format("woff"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept") format("svg");
   font-weight: 400;
-}
+} */
 
 @font-face {
   font-family: 'Arima';
@@ -1141,8 +1141,8 @@
   src: url(https://fonts.gstatic.com/s/unbounded/v7/Yq6F-LOTXCb04q32xlpat-6uR42XTqtG67H2040.ttf) format('truetype');
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kumar+One+Outline&family=Londrina+Outline&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumar+One+Outline&family=Londrina+Outline&display=swap'); */
 .carousel {
   margin-top: 20px;
   margin-bottom: 20px;

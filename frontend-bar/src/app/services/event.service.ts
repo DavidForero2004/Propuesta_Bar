@@ -39,7 +39,6 @@ export class EventService {
     return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/selectTop`)
   }
   
-
   updateServerLanguage(lang: string): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}language`, { lang });
   }

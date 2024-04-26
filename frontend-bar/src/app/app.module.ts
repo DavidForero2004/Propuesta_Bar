@@ -38,9 +38,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AddOrEditComponent } from './components/user/add-or-edit/add-or-edit.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginatorIntlService } from './services/custom-paginator-intl.service';
 
 
 @NgModule({
@@ -53,7 +57,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     InsertEventComponent,
     LandNavComponent,
     FooterComponent,
-    StructureComponent
+    StructureComponent,
+    AddOrEditComponent
   ],
   imports: [
     BrowserModule,
@@ -84,11 +89,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
       }
     }),
     FontAwesomeModule,
-    FullCalendarModule
+    FullCalendarModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     // No se necesita provideHttpClient
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntlService },
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
