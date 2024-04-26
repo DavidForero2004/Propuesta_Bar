@@ -13,14 +13,13 @@ export class EventService {
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'events';
-
   }
 
-  selectEvent(): Observable<Event[]> {
+  getEvent(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/`)
   }
 
-  insertEvent(event: Event): Observable<any> {
+  addEvent(event: Event): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertevent`, event);
   }
 
