@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class CustomPaginatorIntlService extends MatPaginatorIntl {
-  override itemsPerPageLabel: string = '';
+  override itemsPerPageLabel: string = 'Elemento por página';
   override nextPageLabel: string = 'Página siguiente';
   override previousPageLabel: string = 'Página anterior';
   override firstPageLabel: string = 'Primera página';
@@ -15,8 +15,8 @@ export class CustomPaginatorIntlService extends MatPaginatorIntl {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('paginteUser').subscribe((res: string) => {
-      this.itemsPerPageLabel = res;
-    });
+    // this.translate.get('paginteUser').subscribe((res: string) => {
+    //   this.itemsPerPageLabel = res;
+    // });
   }
 }

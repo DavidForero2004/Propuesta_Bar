@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { EventService } from '../../../services/event.service';
-import { Event } from '../../../interfaces/event';
+import { Events } from '../../../interfaces/event';
 import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -17,17 +17,15 @@ import { Product } from '../../../interfaces/product';
 })
 export class StructureComponent implements OnInit {
 
-  listEvent: Event[] = [];
+  listEvent: Events[] = [];
   listProduct: Product[] = [];
   public eventCalendar: any[] = [];
-
 
   constructor(
     private el: ElementRef,
     private _eventService: EventService,
     private _productService: ProductService,
-    private translate: TranslateService,
-  ) {
+    private translate: TranslateService) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
   }
@@ -50,11 +48,8 @@ export class StructureComponent implements OnInit {
     }
   }
 
-
-
   getEvent() {
     this._productService.getproducts().subscribe((data: any) => {
-
       if (data && data.result && Array.isArray(data.result)) {
         const product = data.result[0];
         if (Array.isArray(product)) {
@@ -65,8 +60,7 @@ export class StructureComponent implements OnInit {
   }
 
   getProduct() {
-    this._eventService.selectEventTop().subscribe((data: any) => {
-
+    this._eventService.getEventTop().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const events = data.result[0];
         if (Array.isArray(events)) {
@@ -78,7 +72,7 @@ export class StructureComponent implements OnInit {
 
 
   getEventCalendar() {
-    this._eventService.selectEventTop().subscribe((data: any) => {
+    this._eventService.getEventTop().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const events = data.result[0];
         if (Array.isArray(events)) {
@@ -86,10 +80,10 @@ export class StructureComponent implements OnInit {
             //le pasamos a un objeto los datos que va a usar el calendario
             title: event.name_event + ' \u2013 ' + 'El Evento: ' + event.name_event + ' es el día: ' + event.day + ' de ' + event.month + ' a las: ' + event.hour,
             date: event.date,
-            end: event.date ,
+            end: event.date,
             backgroundColor: '#3A0709',
             borderColor: '#3A0709',
-            
+
           }));
 
           // Aquí inicializamos calendarOptions con los eventos actualizados
@@ -110,6 +104,7 @@ export class StructureComponent implements OnInit {
       }
     });
   }
+
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev next today dayGridMonth',
@@ -122,7 +117,6 @@ export class StructureComponent implements OnInit {
     navLinks: true,
     events: this.eventCalendar,
   };
-
 
   es() {
     this.translate.use('es');
@@ -137,6 +131,4 @@ export class StructureComponent implements OnInit {
       console.log('Server language updated to English.');
     });
   }
-
-
 }

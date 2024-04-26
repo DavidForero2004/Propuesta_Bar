@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Event } from '../interfaces/event';
+import { Events } from '../interfaces/event';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,11 +15,11 @@ export class EventService {
     this.myApiUrl = 'events';
   }
 
-  getEvent(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/`)
+  getEvent(): Observable<Events[]> {
+    return this.http.get<Events[]>(`${this.myAppUrl}${this.myApiUrl}/`)
   }
 
-  addEvent(event: Event): Observable<any> {
+  addEvent(event: Events): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertevent`, event);
   }
 
@@ -27,15 +27,16 @@ export class EventService {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/deleteevent/${id}`);
   }
 
-  updateEvent(event: Event): Observable<any> {
+  updateEvent(event: Events): Observable<any> {
     return this.http.put(`${this.myAppUrl}${this.myApiUrl}/updateevent`, event);
   }
 
-  selectEventId(id?: number): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+  getEventId(id?: number): Observable<Events[]> {
+    return this.http.get<Events[]>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
-  selectEventTop(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.myAppUrl}${this.myApiUrl}/selectTop`)
+
+  getEventTop(): Observable<Events[]> {
+    return this.http.get<Events[]>(`${this.myAppUrl}${this.myApiUrl}/selectTop`)
   }
   
   updateServerLanguage(lang: string): Observable<any> {

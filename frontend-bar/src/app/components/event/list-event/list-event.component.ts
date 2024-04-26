@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Event } from '../../../interfaces/event';
+import { Events } from '../../../interfaces/event';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EventService } from '../../../services/event.service';
@@ -18,8 +18,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './list-event.component.css'
 })
 export class ListEventComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
-  dataSource = new MatTableDataSource<Event>;
+  displayedColumns: string[] = ['name_event', 'date', 'action'];
+  dataSource = new MatTableDataSource<Events>;
   userDelete: string = '';
   removed: string = '';
 
@@ -47,7 +47,7 @@ export class ListEventComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getEvent();
   }
 
   ngAfterViewInit(): void {
@@ -64,8 +64,8 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getUser() {
-    this._eventService.getUser().subscribe((data: any) => {
+  getEvent() {
+    this._eventService.getEvent().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         // Check if the first element of result is an array of users
@@ -78,7 +78,7 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     });
   }
 
-  addUser(id?: number) {
+  addEvent(id?: number) {
     // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditEventComponent, {
       width: '550px',
@@ -89,22 +89,22 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
       if (result) {
-        this.getUser();
+        this.getEvent();
       }
     });
   }
 
-  // deleteUser(id: number) {
-  //   this._eventService.deleteUser(id).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       this._errorService.msjError(error);
-  //       return throwError(error);
-  //     })
-  //   ).subscribe(() => {
-  //     this.getUser();
-  //     this.toastr.success(this.userDelete, this.removed);
-  //   });;
-  // }
+  deleteEvent(id: number) {
+    this._eventService.deleteEvent(id).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+        return throwError(error);
+      })
+    ).subscribe(() => {
+      this.getEvent();
+      this.toastr.success(this.userDelete, this.removed);
+    });;
+  }
 
   es() {
     this.translate.use('es');
