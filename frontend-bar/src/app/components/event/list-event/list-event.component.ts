@@ -18,81 +18,81 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './list-event.component.css'
 })
 export class ListEventComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
-  dataSource = new MatTableDataSource<Event>;
-  userDelete: string = '';
-  removed: string = '';
+  // displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
+  // dataSource = new MatTableDataSource<Event>;
+  // userDelete: string = '';
+  // removed: string = '';
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatSort) sort!: MatSort;
+  // // listUser: User[] = [];
 
-  constructor(private _eventService: EventService,
-    public dialog: MatDialog,
-    private _errorService: ErrorService,
-    private toastr: ToastrService,
-    private translate: TranslateService) {
-    this.dataSource = new MatTableDataSource();
+  // constructor(private _eventService: EventService,
+  //   public dialog: MatDialog,
+  //   private _errorService: ErrorService,
+  //   private toastr: ToastrService,
+  //   private translate: TranslateService) {
+  //   this.dataSource = new MatTableDataSource();
 
-    this.translate.addLangs(['es', 'en']);
-    this.translate.setDefaultLang('es');
+  //   this.translate.addLangs(['es', 'en']);
+  //   this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteUser').subscribe((res: string) => {
-      this.userDelete = res;
-    });
+  //   this.translate.get('deleteUser').subscribe((res: string) => {
+  //     this.userDelete = res;
+  //   });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
-    });
-  }
+  //   this.translate.get('removed').subscribe((res: string) => {
+  //     this.removed = res;
+  //   });
+  //}
 
   ngOnInit(): void {
-    this.getUser();
+   // this.getUser();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    //this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort = this.sort;
   }
 
-  eventFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  // eventFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
 
-  getUser() {
-    this._eventService.getUser().subscribe((data: any) => {
-      if (data && data.result && Array.isArray(data.result)) {
-        const result = data.result[0];
-        // Check if the first element of result is an array of users
-        if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
-          this.dataSource.data = result;
-        }
-      }
-    });
-  }
+  // getUser() {
+  //   this._eventService.getUser().subscribe((data: any) => {
+  //     if (data && data.result && Array.isArray(data.result)) {
+  //       const result = data.result[0];
+  //       // Check if the first element of result is an array of users
+  //       if (Array.isArray(result)) {
+  //         // Assign users to listUser
+  //         // this.listUser = result;
+  //         this.dataSource.data = result;
+  //       }
+  //     }
+  //   });
+  // }
 
-  addUser(id?: number) {
-    // console.log(id);
-    const dialogRef = this.dialog.open(AddOrEditEventComponent, {
-      width: '550px',
-      disableClose: true,
-      data: { id: id },
-    });
+  // addUser(id?: number) {
+  //   // console.log(id);
+  //   const dialogRef = this.dialog.open(AddOrEditEventComponent, {
+  //     width: '550px',
+  //     disableClose: true,
+  //     data: { id: id },
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
-      if (result) {
-        this.getUser();
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // console.log(`Dialog result: ${result}`);
+  //     if (result) {
+  //       this.getUser();
+  //     }
+  //   });
+  // }
 
   // deleteUser(id: number) {
   //   this._eventService.deleteUser(id).pipe(
@@ -106,13 +106,13 @@ export class ListEventComponent implements OnInit, AfterViewInit {
   //   });;
   // }
 
-  es() {
-    this.translate.use('es');
-    this._eventService.updateServerLanguage('es').subscribe(() => { });
-  }
+  // es() {
+  //   this.translate.use('es');
+  //   this._eventService.updateServerLanguage('es').subscribe(() => { });
+  // }
 
-  en() {
-    this.translate.use('en');
-    this._eventService.updateServerLanguage('en').subscribe(() => { });
-  }
+  // en() {
+  //   this.translate.use('en');
+  //   this._eventService.updateServerLanguage('en').subscribe(() => { });
+  // }
 }
