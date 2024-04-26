@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { User } from '../../../interfaces/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,12 +11,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Status } from '../../../interfaces/status';
 import { Rol } from '../../../interfaces/rol';
 
+
 @Component({
-  selector: 'app-add-or-edit',
-  templateUrl: './add-or-edit.component.html',
-  styleUrl: './add-or-edit.component.css'
+  selector: 'app-add-or-edit-user',
+  templateUrl: './add-or-edit-user.component.html',
+  styleUrl: './add-or-edit-user.component.css'
 })
-export class AddOrEditComponent {
+export class AddOrEditUserComponent implements OnInit {
   hide = true;
   form: FormGroup;
   loading: boolean = false;
@@ -36,7 +37,7 @@ export class AddOrEditComponent {
     { id: 1, name: 'Administrador' }
   ]
 
-  constructor(public dialogRef: MatDialogRef<AddOrEditComponent>,
+  constructor(public dialogRef: MatDialogRef<AddOrEditUserComponent>,
     private fb: FormBuilder,
     private _userServices: UserService,
     private _errorService: ErrorService,

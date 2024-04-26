@@ -20,10 +20,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 //Components
 import { LoginComponent } from './components/user/login/login.component';
-import { ListComponent } from './components/user/list/list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
-import { InsertEventComponent } from './components/event/insert-event/insert-event.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LandNavComponent } from './components/landing/land-nav/land-nav.component';
 import { FooterComponent } from './components/landing/footer/footer.component';
@@ -42,23 +40,25 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AddOrEditComponent } from './components/user/add-or-edit/add-or-edit.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntlService } from './services/custom-paginator-intl.service';
+import { AddOrEditEventComponent } from './components/event/add-or-edit-event/add-or-edit-event.component';
+import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-or-edit-user.component';
+import { ListUserComponent } from './components/user/list-user/list-user.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ListComponent,
     NavbarComponent,
     ListEventComponent,
-    InsertEventComponent,
     LandNavComponent,
     FooterComponent,
     StructureComponent,
-    AddOrEditComponent
+    AddOrEditEventComponent,
+    AddOrEditUserComponent,
+    ListUserComponent
   ],
   imports: [
     BrowserModule,

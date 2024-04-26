@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListComponent } from './list.component';
+import { AddOrEditUserComponent } from './add-or-edit-user.component';
 
-describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+describe('AddOrEditUserComponent', () => {
+  let component: AddOrEditUserComponent;
+  let fixture: ComponentFixture<AddOrEditUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListComponent]
+      declarations: [AddOrEditUserComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListComponent);
+    fixture = TestBed.createComponent(AddOrEditUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

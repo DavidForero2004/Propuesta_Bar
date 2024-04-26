@@ -3,7 +3,6 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../interfaces/user';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AddOrEditComponent } from '../add-or-edit/add-or-edit.component';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from '../../../services/error.service';
@@ -11,14 +10,14 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AddOrEditUserComponent } from '../add-or-edit-user/add-or-edit-user.component';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  selector: 'app-list-user',
+  templateUrl: './list-user.component.html',
+  styleUrl: './list-user.component.css'
 })
-
-export class ListComponent implements OnInit, AfterViewInit {
+export class ListUserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
   dataSource = new MatTableDataSource<User>;
   userDelete: string = '';
@@ -81,7 +80,7 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   addUser(id?: number) {
     // console.log(id);
-    const dialogRef = this.dialog.open(AddOrEditComponent, {
+    const dialogRef = this.dialog.open(AddOrEditUserComponent, {
       width: '550px',
       disableClose: true,
       data: { id: id },
