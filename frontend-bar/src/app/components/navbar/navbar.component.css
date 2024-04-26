@@ -108,7 +108,7 @@
       gap: 50%;
       width: 100% !important;
     }
-    .option_container_menu.show {
+    .show {
       display: block;
       background-color: #390708;
       flex-direction: column;

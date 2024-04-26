@@ -149,7 +149,7 @@ export class AddOrEditUserComponent implements OnInit {
           this.dialogRef.close(true);
           this.toastr.success(this.userSave, this.aggregate);
         });
-      }, 500);
+      }, 200);
     } else {
       const user: User = {
         id: this.id,
@@ -171,7 +171,7 @@ export class AddOrEditUserComponent implements OnInit {
           this.dialogRef.close(true);
           this.toastr.success(this.userUpdate, this.edited);
         });
-      }, 500);
+      }, 200);
     }
   }
 
