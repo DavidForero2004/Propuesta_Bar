@@ -1,1 +1,47 @@
-<p>add-or-edit-event works!</p>
+<div class="container-tittleadduser">
+    <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+    <h2 mat-dialog-title id="t">{{ operation }} {{ "event" | translate }}</h2>
+</div>
+<form [formGroup]="form" (ngSubmit)="addEvent()">
+    <mat-dialog-content class="mat-typography">
+        <div class="form_group">
+            <!-- Name Input -->
+            <mat-form-field>
+                <mat-label>{{ "nameEvent" | translate }}</mat-label>
+                <input formControlName="name_event" matInput>
+            </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('name_event')?.hasError('required') && form.get('name_event')?.touched">{{ "requiredNameEvent"
+                    | translate }}</mat-error>
+            </div>
+
+            <!-- Date Input -->
+            <mat-form-field class="example-full-width">
+                <mat-label>{{ "dateEvent" | translate }}</mat-label>
+                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">{{ "requiredDateEvent"
+                    | translate }}</mat-error>
+            </div>
+
+            <!-- Time Input -->
+            <mat-form-field>
+                <mat-label>{{ "timeEvent" | translate }}</mat-label>
+                <input type="time" matInput formControlName="time">
+                <mat-hint>HH:mm</mat-hint>
+            </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('time')?.hasError('required') && form.get('time')?.touched">{{ "requiredTimeEvent"
+                    | translate }}</mat-error>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" (click)="cancel()" mat-button mat-dialog-close>{{ "cancel" | translate }}</button>
+        <button type="submit" [disabled]="form.invalid" mat-button>{{ "accept" | translate }}</button>
+    </mat-dialog-actions>
+</form>

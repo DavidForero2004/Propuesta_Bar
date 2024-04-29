@@ -39,25 +39,24 @@ const getEventActive = (req, res) => {
 
 
 const insertEvent = (req, res) => {
-    const { name_event, date } = req.body;
+    const { name_event, dateString } = req.body;
     const fechaActual = new Date();
-    const fechaEvento = new Date(date); // Convertir la cadena de texto en objeto Date
+    const fechaEvento = new Date(dateString);
     const query = 'CALL insertEvent (?,?)';
-    // console.log(fechaActual.getTime(), fechaEvento.getTime());
 
     if (fechaEvento.getTime() < fechaActual.getTime()) {
         res.status(500).json({
             msg: i18n.__('dateError'),
-            error: i18n.__('dateError') // Cambio aquí
+            error: i18n.__('dateError')
         });
     } else {
         try {
-            connection.query(query, [name_event, date], (error, result) => {
+            connection.query(query, [name_event, dateString], (error, result) => {
                 try {
                     if (error) {
                         res.status(500).json({
                             msg: i18n.__('errorInsert'),
-                            error: 'Error inserting event' // Cambio aquí
+                            error: error 
                         });
                     } else {
                         res.json({
@@ -68,37 +67,35 @@ const insertEvent = (req, res) => {
                 } catch (error) {
                     res.status(400).json({
                         msg: 'Error',
-                        error: 'Error' // Cambio aquí
+                        error: 'Error'
                     });
                 }
             });
         } catch (error) {
             res.status(400).json({
                 msg: 'Error',
-                error: 'Error' // Cambio aquí
+                error: 'Error'
             });
         }
     }
 }
 
 
-
-
 //update event
 const updateEvent = (req, res) => {
-    const { id, name_event, date } = req.body;
+    const { id, name_event, dateString } = req.body;
     const query = 'CALL updateEvent(?,?,?)';
     ///////////////////////////////////////////////////////////////////////////
     const fechaActual = new Date();
-    const fechaEvento = new Date(date); // Convertir la cadena de texto en objeto Date
+    const fechaEvento = new Date(dateString);
     if (fechaEvento.getTime() < fechaActual.getTime()) {
         res.status(500).json({
             msg: i18n.__('dateError'),
-            error: i18n.__('dateError') // Cambio aquí
+            error: i18n.__('dateError')
         });
     } else {
     try {
-        connection.query(query, [id, name_event, date], (error, result) => {
+        connection.query(query, [id, name_event, dateString], (error, result) => {
             try {
                 if (error) {
                     res.status(500).json({

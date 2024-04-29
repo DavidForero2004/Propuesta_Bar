@@ -12,7 +12,7 @@
                 <input formControlName="name" matInput>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">{{ "requiredUser"
+                <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">{{ "requiredNameUser"
                     | translate }}</mat-error>
             </div>
 

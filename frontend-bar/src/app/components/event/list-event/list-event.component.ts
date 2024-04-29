@@ -20,7 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ListEventComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name_event', 'date', 'action'];
   dataSource = new MatTableDataSource<Events>;
-  userDelete: string = '';
+  eventDelete: string = '';
   removed: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,8 +37,10 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteUser').subscribe((res: string) => {
-      this.userDelete = res;
+    this._eventService.updateServerLanguage('es').subscribe(() => { });
+
+    this.translate.get('deleteEvent').subscribe((res: string) => {
+      this.eventDelete = res;
     });
 
     this.translate.get('removed').subscribe((res: string) => {
@@ -68,10 +70,7 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     this._eventService.getEvent().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
           this.dataSource.data = result;
         }
       }
@@ -87,7 +86,6 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
         this.getEvent();
       }
@@ -102,7 +100,7 @@ export class ListEventComponent implements OnInit, AfterViewInit {
       })
     ).subscribe(() => {
       this.getEvent();
-      this.toastr.success(this.userDelete, this.removed);
+      this.toastr.success(this.eventDelete, this.removed);
     });;
   }
 
