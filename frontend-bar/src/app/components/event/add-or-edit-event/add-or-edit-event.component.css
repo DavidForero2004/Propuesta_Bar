@@ -1,0 +1,38 @@
+h2 {
+    text-align: center;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_group input {
+    width: 100%;
+}
+
+.error {
+    margin-top: -10px !important;
+    margin-bottom: 15px;
+    font-size: 11px;
+}
+
+mat-hint {
+    font-size: 11px;
+    margin-bottom: 10px !important;
+}
+
+mat-spinner {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+#t {
+    text-align: center;
+}

@@ -41,7 +41,7 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button type="button" (click)="cancel()" mat-button mat-dialog-close>{{ "cancel" | translate }}</button>
-        <button type="submit" [disabled]="form.invalid" mat-button>{{ "accept" | translate }}</button>
+        <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate }}</button>
+        <button type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept" | translate }}</button>
     </mat-dialog-actions>
 </form>

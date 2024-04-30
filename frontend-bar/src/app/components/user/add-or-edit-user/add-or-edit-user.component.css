@@ -1,36 +1,41 @@
-.form_group{
+.form_group {
     display: flex;
     flex-direction: column;
 }
+
 .formGroup {
     display: flex;
     justify-content: space-between;
 }
 
-
-.form_group input{
+.form_group input {
     width: 100%;
 }
-#status{
+
+#status {
     width: 100% !important;
 }
 
-mat-spinner{
+mat-spinner {
     position: absolute;
     right: 5%;
     top: 5%;
 }
-#t{
+
+#t {
     text-align: center;
 }
-.error{
+
+.error {
     margin: 5px !important;
     font-size: 12px;
 }
-.error mat-error{
+
+.error mat-error {
     margin-top: -20px !important;
 }
-.select_div{
+
+.select_div {
     display: flex;
     flex-direction: column;
 }
