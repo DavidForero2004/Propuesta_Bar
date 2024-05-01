@@ -7,14 +7,17 @@ import { AuthGuard } from './utils/auth.guard';
 import { StructureComponent } from './components/landing/structure/structure.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
+import { ListProductComponent } from './components/products/list-product/list-product.component';
 
 const routes: Routes = [{
   path: '', children: [
     //USERS
     {path: 'login', component: LoginComponent},
     {path: 'users', component: ListUserComponent, canActivate: [AuthGuard]},
-    ///EVENTS
+    //EVENTS
     {path: 'events', component: ListEventComponent, canActivate: [AuthGuard]},
+    //PRODUCTS
+    {path: 'products', component: ListProductComponent, canActivate: [AuthGuard]},
     //LANDING
     {path: 'hollowbar-initial/client', component: StructureComponent},
     //ERRORS

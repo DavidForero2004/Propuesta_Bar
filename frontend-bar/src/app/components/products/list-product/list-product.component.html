@@ -9,44 +9,49 @@
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
             <!-- <button (click)="addUser()" mat-flat-button color="primary">{{ "add" | translate }}</button> -->
-            <button (click)="addUser()" mat-flat-button color="primary">
+            <button (click)="addProduct()" mat-flat-button color="primary">
                 <mat-icon class="btn-delete">person_add</mat-icon>
             </button>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <!-- Name Product Column -->
+            <ng-container matColumnDef="name_product">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "name" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.name_product }}</td>
             </ng-container>
 
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
                 <th mat-header-cell *matHeaderCellDef>{{ "email" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.image }}</td>
             </ng-container>
 
-            <!-- Status Column -->
-            <ng-container matColumnDef="status">
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef>{{ "status" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.price }}</td>
             </ng-container>
 
-            <!-- Rol Column -->
-            <ng-container matColumnDef="rol">
+            <!-- Stock Column -->
+            <ng-container matColumnDef="stock">
                 <th mat-header-cell *matHeaderCellDef>{{ "rol" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>{{ "rol" | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.status }}</td>
             </ng-container>
 
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> </th>
                 <td mat-cell *matCellDef="let element" id="tdaction">
-                    <mat-icon (click)="addUser(element.id)" class="btn-edit"
-                        matTooltip="{{ 'edit' | translate }} {{ element.name }}">edit</mat-icon>
-                    <mat-icon (click)="deleteUser(element.id)" class="btn-delete"
-                        matTooltip="{{ 'delete' | translate }} {{ element.name }}" >delete</mat-icon>
+                    <mat-icon (click)="addProduct(element.id)" class="btn-edit"
+                        matTooltip="{{ 'edit' | translate }} {{ element.name_product }}">edit</mat-icon>
+                    <mat-icon (click)="deleteProduct(element.id)" class="btn-delete"
+                        matTooltip="{{ 'delete' | translate }} {{ element.name_product }}" >delete</mat-icon>
                 </td>
             </ng-container>
 

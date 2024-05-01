@@ -17,6 +17,7 @@
     "status": "Status",
     "rol": "Role",
     "user": "User",
+    "filter": "Filter",
     "invalidTime": "The entered time is earlier than the current time",
     "required": "All fields are required",
     "accessDenied": "Access denied",

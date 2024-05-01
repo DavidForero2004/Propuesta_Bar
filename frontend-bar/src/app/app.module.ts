@@ -49,6 +49,8 @@ import { StructureComponent } from './components/landing/structure/structure.com
 import { AddOrEditEventComponent } from './components/event/add-or-edit-event/add-or-edit-event.component';
 import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-or-edit-user.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
+import { ListProductComponent } from './components/products/list-product/list-product.component';
+import { AddOrEditProductComponent } from './components/products/add-or-edit-product/add-or-edit-product.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { ListUserComponent } from './components/user/list-user/list-user.compone
     StructureComponent,
     AddOrEditEventComponent,
     AddOrEditUserComponent,
-    ListUserComponent
+    ListUserComponent,
+    ListProductComponent,
+    AddOrEditProductComponent
   ],
   imports: [
     BrowserModule,
