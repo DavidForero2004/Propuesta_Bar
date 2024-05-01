@@ -7,6 +7,7 @@ import { AuthGuard } from './utils/auth.guard';
 import { StructureComponent } from './components/landing/structure/structure.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
+import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -17,6 +18,8 @@ const routes: Routes = [{
     {path: 'events', component: ListEventComponent, canActivate: [AuthGuard]},
     //LANDING
     {path: 'hollowbar-initial/client', component: StructureComponent},
+    //ROLS
+    {path: 'rols', component: ListRolComponent, canActivate: [AuthGuard]},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 
