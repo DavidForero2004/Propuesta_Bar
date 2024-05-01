@@ -2,10 +2,14 @@
     "login": "Iniciar sesión",
     "name": "Nombre",
     "nameEvent": "Nombre del evento",
+<<<<<<< HEAD
     "imageProduct": "Imagen del producto",
     "nameProduct": "Nombre del producto",
     "price": "Precio",
     "stock": "Cantidad",
+=======
+    "nameRol": "Nombre del rol",
+>>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
     "actions": "Acciones",
     "edit": "Editar",
     "delete": "Eliminar",
@@ -20,6 +24,7 @@
     "add": "Agregar",
     "status": "Estado",
     "rol": "Rol",
+    "rols": "rol",
     "user": "usuario",
     "filter": "Filtrar",
     "invalidTime": "La hora ingresada es menor que la hora actual",
@@ -42,8 +47,10 @@
     "invalidEmail": "El correo electrónico no es valido",
     "minPassword": "La contraseña debe ser mínimo de 3 caracteres",
     "saveUser": "Usuario agregado correctamente",
+    "saveRol": "Rol agregado correctamente",
     "saveEvent": "Evento agregado correctamente",
     "editUser": "Usuario editado correctamente",
+    "editRol": "Rol editado correctamente",
     "editEvent": "Evento editado correctamente",
     "aggregate": "Agregado",
     "edited": "Editado",

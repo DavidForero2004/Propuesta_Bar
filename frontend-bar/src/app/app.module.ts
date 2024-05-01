@@ -49,8 +49,13 @@ import { StructureComponent } from './components/landing/structure/structure.com
 import { AddOrEditEventComponent } from './components/event/add-or-edit-event/add-or-edit-event.component';
 import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-or-edit-user.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
+<<<<<<< HEAD
 import { ListProductComponent } from './components/products/list-product/list-product.component';
 import { AddOrEditProductComponent } from './components/products/add-or-edit-product/add-or-edit-product.component';
+=======
+import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
+import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-edit-rol.component';
+>>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
 
 @NgModule({
   declarations: [
@@ -64,8 +69,13 @@ import { AddOrEditProductComponent } from './components/products/add-or-edit-pro
     AddOrEditEventComponent,
     AddOrEditUserComponent,
     ListUserComponent,
+<<<<<<< HEAD
     ListProductComponent,
     AddOrEditProductComponent
+=======
+    ListRolComponent,
+    AddOrEditRolComponent
+>>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
   ],
   imports: [
     BrowserModule,
