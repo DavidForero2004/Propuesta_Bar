@@ -1,30 +1,30 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { RolService } from '../../../services/rol.service';
 import { ErrorService } from '../../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { format } from 'date-fns';
-import { RolService } from '../../../services/rol.service';
-import { Rol } from '../../../interfaces/rol';
-
+import { Status } from '../../../interfaces/status';
+import { StatusService } from '../../../services/status.service';
 
 @Component({
-  selector: 'app-add-or-edit-rol',
-  templateUrl: './add-or-edit-rol.component.html',
-  styleUrl: './add-or-edit-rol.component.css'
+  selector: 'app-add-or-edit-status',
+  templateUrl: './add-or-edit-status.component.html',
+  styleUrl: './add-or-edit-status.component.css'
 })
-export class AddOrEditRolComponent implements OnInit {
+export class AddOrEditStatusComponent implements OnInit{
   hide = true;
   form: FormGroup;
   loading: boolean = false;
-  rolSave: string = '';
+  statusSave: string = '';
   aggregate: string = '';
-  rolUpdate: string = '';
+  statusUpdate: string = '';
   edited: string = '';
 
   operation: string = '';
@@ -38,12 +38,14 @@ export class AddOrEditRolComponent implements OnInit {
   //   { id: 1, name: 'Administrador' }
   // ]
 
-  constructor(public dialogRef: MatDialogRef<AddOrEditRolComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<AddOrEditStatusComponent>,
     private fb: FormBuilder,
-    private _rolServices: RolService,
+    private _StatusServices: StatusService,
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
+
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       name: ['', Validators.required]
@@ -58,8 +60,8 @@ export class AddOrEditRolComponent implements OnInit {
       this.operation = res;
     });
 
-    this.translate.get('saveRol').subscribe((res: string) => {
-      this.rolSave = res;
+    this.translate.get('saveStatus').subscribe((res: string) => {
+      this.statusSave = res;
     });
 
     this.translate.get('aggregate').subscribe((res: string) => {
@@ -67,7 +69,7 @@ export class AddOrEditRolComponent implements OnInit {
     });
 
     this.translate.get('editRol').subscribe((res: string) => {
-      this.rolUpdate = res;
+      this.statusUpdate = res;
     });
 
     this.translate.get('edited').subscribe((res: string) => {
@@ -88,12 +90,12 @@ export class AddOrEditRolComponent implements OnInit {
         this.operation = res;
       });
       // this.operation = 'Editar ';
-      this.getRolId(id);
+      this.getStatusId(id);
     }
   }
 
-  getRolId(id: number) {
-    this._rolServices.getRolId(id).subscribe((data: any) => {
+  getStatusId(id: number) {
+    this._StatusServices.getStatusId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const resultArray = data.result;
         // console.log(resultArray);
@@ -113,7 +115,7 @@ export class AddOrEditRolComponent implements OnInit {
     });
   }
 
-  addRol() {
+  addStatus() {
     // console.log(this.form);
     if (this.form.invalid) {
       return;
@@ -123,12 +125,12 @@ export class AddOrEditRolComponent implements OnInit {
     this.loading = true;
 
     if (this.id === undefined) {
-      const rol: Rol = {
+      const status: Status = {
         name: this.form.value.name
       }
 
       setTimeout(() => {
-        this._rolServices.addRol(rol).pipe(
+        this._StatusServices.addStatus(status).pipe(
           catchError((error: HttpErrorResponse) => {
             this.loading = false;
             this._errorService.msjError(error);
@@ -137,16 +139,16 @@ export class AddOrEditRolComponent implements OnInit {
         ).subscribe(() => {
           this.loading = false;
           this.dialogRef.close(true);
-          this.toastr.success(this.rolSave, this.aggregate);
+          this.toastr.success(this.statusSave, this.aggregate);
         });
       }, 200);
     } else {
-      const rol: Rol = {
+      const status: Status = {
         id: this.id,
         name: this.form.value.name
       }
       setTimeout(() => {
-        this._rolServices.updateRol(rol).pipe(
+        this._StatusServices.updateStatus(status).pipe(
           catchError((error: HttpErrorResponse) => {
             this.loading = false;
             this._errorService.msjError(error);
@@ -155,7 +157,7 @@ export class AddOrEditRolComponent implements OnInit {
         ).subscribe(() => {
           this.loading = false;
           this.dialogRef.close(true);
-          this.toastr.success(this.rolUpdate, this.edited);
+          this.toastr.success(this.statusUpdate, this.edited);
         });
       }, 200);
     }
@@ -163,11 +165,11 @@ export class AddOrEditRolComponent implements OnInit {
 
   es() {
     this.translate.use('es');
-    this._rolServices.updateServerLanguage('es').subscribe(() => { });
+    this._StatusServices.updateServerLanguage('es').subscribe(() => { });
   }
 
   en() {
     this.translate.use('en');
-    this._rolServices.updateServerLanguage('en').subscribe(() => { });
+    this._StatusServices.updateServerLanguage('en').subscribe(() => { });
   }
 }

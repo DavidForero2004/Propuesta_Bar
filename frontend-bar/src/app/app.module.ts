@@ -51,6 +51,8 @@ import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-o
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-edit-rol.component';
+import { AddOrEditStatusComponent } from './components/status/add-or-edit-status/add-or-edit-status.component';
+import { ListStatusComponent } from './components/status/list-status/list-status.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-e
     AddOrEditUserComponent,
     ListUserComponent,
     ListRolComponent,
-    AddOrEditRolComponent
+    AddOrEditRolComponent,
+    AddOrEditStatusComponent,
+    ListStatusComponent
   ],
   imports: [
     BrowserModule,

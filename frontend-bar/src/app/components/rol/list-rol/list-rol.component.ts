@@ -13,6 +13,8 @@ import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AddOrEditRolComponent } from '../add-or-edit-rol/add-or-edit-rol.component';
 
+
+
 @Component({
   selector: 'app-list-rol',
   templateUrl: './list-rol.component.html',
@@ -102,6 +104,7 @@ export class ListRolComponent implements OnInit, AfterViewInit{
       })
     ).subscribe(() => {
       this.getRol();
+      
       this.toastr.success(this.rolDelete, this.removed);
     });;
   }
