@@ -34,6 +34,7 @@ import { CustomPaginatorIntlService } from './services/custom-paginator-intl.ser
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,6 +50,8 @@ import { StructureComponent } from './components/landing/structure/structure.com
 import { AddOrEditEventComponent } from './components/event/add-or-edit-event/add-or-edit-event.component';
 import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-or-edit-user.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
+import { ListProductComponent } from './components/products/list-product/list-product.component';
+import { AddOrEditProductComponent } from './components/products/add-or-edit-product/add-or-edit-product.component';
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-edit-rol.component';
 import { AddOrEditStatusComponent } from './components/status/add-or-edit-status/add-or-edit-status.component';
@@ -68,7 +71,10 @@ import { AddOrEditTableComponent } from './components/table/add-or-edit-table/ad
     AddOrEditEventComponent,
     AddOrEditUserComponent,
     ListUserComponent,
+    ListProductComponent,
+    AddOrEditProductComponent,
     ListRolComponent,
+    AddOrEditRolComponent,
     AddOrEditRolComponent,
     AddOrEditStatusComponent,
     ListStatusComponent,
@@ -111,7 +117,8 @@ import { AddOrEditTableComponent } from './components/table/add-or-edit-table/ad
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    DatePipe
+    DatePipe,
+    MatMenuModule
   ],
   providers: [
     // No se necesita provideHttpClient

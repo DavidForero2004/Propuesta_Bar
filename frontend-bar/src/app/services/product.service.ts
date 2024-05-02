@@ -20,4 +20,27 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.myAppUrl}${this.myApiUrl}/selectProduct`);
   }
 
+  getProduct(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.myAppUrl}${this.myApiUrl}/`)
+  }
+
+  getProductId(id: number):Observable<Product> {
+    return this.http.get<Product>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+  }
+
+  addProduct(product: Product): Observable<any> {
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertproduct`, product);
+  }
+
+  updateProduct(product: Product): Observable<void> {
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/updateproduct`, product);
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/deleteproduct/${id}`);
+  }
+
+  updateServerLanguage(lang: string): Observable<any> {
+    return this.http.post<any>(`${this.myAppUrl}language`, { lang });
+  }
 }

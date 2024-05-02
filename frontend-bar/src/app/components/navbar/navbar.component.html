@@ -1,27 +1,36 @@
 <nav class="navbar">
     <div class="option_container">
-        <a href="/users"> {{"users" | translate}}</a>
-        <a href="/events"> {{"events" | translate }}</a>
+        <a href="/users">{{"users" | translate}}</a>
+        <a href="/events">{{"events" | translate }}</a>
+        <a href="/products"> {{"products" | translate }}</a>
+        <a type="button" mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</a>
         <a (click)="logOut()">{{"exit" | translate}}</a>
     </div>
     <div class="language-buttons">
         <button (click)="es()" class="es">ES</button>
         <button (click)="en()" class="en">EN</button>
-    </div>  
+    </div>
     <div class="menu_hamburguer">
         <fa-icon [icon]="iconMenu" id="manu_hamb"></fa-icon>
     </div>
     <div class="logo_nav">
         <a href=""><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
     </div>
-    
+
 </nav>
 <div class="option_container_menu">
     <a href="/users"> {{"users" | translate}}</a>
     <a href="/events"> {{"events" | translate }}</a>
+    <a href="/products"> {{"products" | translate }}</a>
+    <button mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</button>
     <a (click)="logOut()">{{"exit" | translate}}</a>
     <div class="language-buttons_h">
         <button (click)="es()" class="es">ES</button>
         <button (click)="en()" class="en">EN</button>
-    </div>  
+    </div>
 </div>
+
+<mat-menu #setting>
+    <button mat-menu-item><a href="/rols">{{ "rolNav" | translate }}</a></button>
+    <button mat-menu-item><a href="/status">{{ "stateNav" | translate }}</a></button>
+</mat-menu>
