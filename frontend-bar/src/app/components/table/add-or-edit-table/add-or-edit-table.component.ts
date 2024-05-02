@@ -1,23 +1,22 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
-import { User } from '../../../interfaces/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { ErrorService } from '../../../services/error.service';
-import { UserService } from '../../../services/user.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Status } from '../../../interfaces/status';
-import { Rol } from '../../../interfaces/rol';
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TableService } from '../../../services/table.service';
+import { ErrorService } from '../../../services/error.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+import { Table } from '../../../interfaces/table';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
+import { StatusService } from '../../../services/status.service';
 
 @Component({
-  selector: 'app-add-or-edit-user',
-  templateUrl: './add-or-edit-user.component.html',
-  styleUrl: './add-or-edit-user.component.css'
+  selector: 'app-add-or-edit-table',
+  templateUrl: './add-or-edit-table.component.html',
+  styleUrl: './add-or-edit-table.component.css'
 })
-export class AddOrEditUserComponent implements OnInit {
+export class AddOrEditTableComponent implements OnInit {
   hide = true;
   form: FormGroup;
   loading: boolean = false;
@@ -29,28 +28,21 @@ export class AddOrEditUserComponent implements OnInit {
   operation: string = '';
   id: number | undefined;
 
-  status: Status[] = [
-    { id: 1, name: 'Activo'}
-  ];
-
-  rol: Rol[] = [
-    { id: 1, name: 'Administrador' }
-  ]
+  status: Status[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<AddOrEditUserComponent>,
+    public dialogRef: MatDialogRef<AddOrEditTableComponent>,
     private fb: FormBuilder,
-    private _userServices: UserService,
+    private _tableServices: TableService,
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _statusService: StatusService
+    ) {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
-      status: ['', Validators.required],
-      rol: ['', Validators.required]
+      name_table: ['', Validators.required],
+      id_status: ['', Validators.required]
     });
 
     this.id = data.id;
@@ -80,7 +72,8 @@ export class AddOrEditUserComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.isEdit(this.id)
+    this.getStatus();
+    this.isEdit(this.id);
   }
   cancel() {
     this.dialogRef.close(false);
@@ -92,27 +85,22 @@ export class AddOrEditUserComponent implements OnInit {
         this.operation = res;
       });
       // this.operation = 'Editar ';
-      this.getUserId(id);
+      this.getTableId(id);
     }
   }
 
-  getUserId(id: number) {
-    this._userServices.getUserId(id).subscribe((data: any) => {
+  getTableId(id: number) {
+    this._tableServices.getTableId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const resultArray = data.result;
-        // console.log(resultArray);
-
         // Verificar si hay al menos un elemento en el array
         if (resultArray.length > 0) {
           const firstArray = resultArray[0];
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
-            const userObject = firstArray[0];
-            // console.log('Información del usuario:', userObject.name);
+            const tableObject = firstArray[0];
             this.form.patchValue({
-              name: userObject.name,
-              email: userObject.email,
-              status: userObject.id_status,
-              rol: userObject.id_rol
+              name_table: tableObject.name_table,
+              id_status: tableObject.id_status
             });
           }
         }
@@ -120,7 +108,7 @@ export class AddOrEditUserComponent implements OnInit {
     });
   }
 
-  addUser() {
+  addTable() {
     // console.log(this.form);
     if (this.form.invalid) {
       return;
@@ -130,16 +118,12 @@ export class AddOrEditUserComponent implements OnInit {
     this.loading = true;
 
     if (this.id === undefined) {
-      const user: User = {
-        name: this.form.value.name,
-        email: this.form.value.email,
-        password: this.form.value.password,
-        id_status: this.form.value.status,
-        id_rol: this.form.value.rol,
+      const table: Table = {
+        name_table: this.form.value.name_table,
+        id_status: this.form.value.id_status
       }
-
       setTimeout(() => {
-        this._userServices.addUser(user).pipe(
+        this._tableServices.addTable(table).pipe(
           catchError((error: HttpErrorResponse) => {
             this.loading = false;
             this._errorService.msjError(error);
@@ -152,16 +136,13 @@ export class AddOrEditUserComponent implements OnInit {
         });
       }, 200);
     } else {
-      const user: User = {
+      const table: Table = {
         id: this.id,
-        name: this.form.value.name,
-        email: this.form.value.email,
-        password: this.form.value.password,
-        id_status: this.form.value.status,
-        id_rol: this.form.value.rol,
+        name_table: this.form.value.name_table,
+        id_status: this.form.value.id_status
       }
       setTimeout(() => {
-        this._userServices.updateUser(user).pipe(
+        this._tableServices.updateTable(table).pipe(
           catchError((error: HttpErrorResponse) => {
             this.loading = false;
             this._errorService.msjError(error);
@@ -176,13 +157,26 @@ export class AddOrEditUserComponent implements OnInit {
     }
   }
 
+  getStatus() {
+    this._statusService.getStatus().subscribe((data: any) => {
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
+        // Check if the first element of result is an array of users
+        if (Array.isArray(result)) {
+          this.status = result;
+        }
+      }
+    });
+  }
+
   es() {
     this.translate.use('es');
-    this._userServices.updateServerLanguage('es').subscribe(() => { });
+    this._tableServices.updateServerLanguage('es').subscribe(() => { });
   }
 
   en() {
     this.translate.use('en');
-    this._userServices.updateServerLanguage('en').subscribe(() => { });
+    this._tableServices.updateServerLanguage('en').subscribe(() => { });
   }
+
 }

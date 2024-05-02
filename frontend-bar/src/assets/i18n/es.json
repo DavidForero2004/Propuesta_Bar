@@ -48,6 +48,7 @@
     "deleteEvent": "Evento eliminado correctamente",
     "deleteStatus": "Estado eliminado correctamente",
     "deleteRol": "Rol eliminado correctamente",
+    "deleteTable": "Mesa eliminada correctamente",
     "events": "EVENTOS",
     "products": "PRODUCTOS",
     "users": "USUARIOS",

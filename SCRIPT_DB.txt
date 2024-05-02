@@ -337,7 +337,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectTable ()
 BEGIN 
-	SELECT * FROM `table` ;
+	SELECT T.id, T.name_table, T.id_status, S.name FROM `table` T INNER JOIN status S on T.id_status = S.id;
 END //
 DELIMITER ;
 
