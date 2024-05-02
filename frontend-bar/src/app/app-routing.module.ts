@@ -9,6 +9,7 @@ import { ListUserComponent } from './components/user/list-user/list-user.compone
 import { ListEventComponent } from './components/event/list-event/list-event.component';
 import { ListProductComponent } from './components/products/list-product/list-product.component';
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
+import { ListStatusComponent } from './components/status/list-status/list-status.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -23,6 +24,8 @@ const routes: Routes = [{
     {path: 'hollowbar-initial/client', component: StructureComponent},
     //ROLS
     {path: 'rols', component: ListRolComponent, canActivate: [AuthGuard]},
+    //STATUS
+    {path: 'status', component: ListStatusComponent, canActivate: [AuthGuard]},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 

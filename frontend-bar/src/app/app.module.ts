@@ -55,7 +55,12 @@ import { AddOrEditProductComponent } from './components/products/add-or-edit-pro
 =======
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-edit-rol.component';
+<<<<<<< HEAD
 >>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
+=======
+import { AddOrEditStatusComponent } from './components/status/add-or-edit-status/add-or-edit-status.component';
+import { ListStatusComponent } from './components/status/list-status/list-status.component';
+>>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
 
 @NgModule({
   declarations: [
@@ -74,8 +79,14 @@ import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-e
     AddOrEditProductComponent
 =======
     ListRolComponent,
+<<<<<<< HEAD
     AddOrEditRolComponent
 >>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
+=======
+    AddOrEditRolComponent,
+    AddOrEditStatusComponent,
+    ListStatusComponent
+>>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
   ],
   imports: [
     BrowserModule,

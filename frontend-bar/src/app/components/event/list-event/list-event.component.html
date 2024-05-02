@@ -28,9 +28,15 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
                     <mat-icon (click)="addEvent(element.id)" class="btn-edit"
+<<<<<<< HEAD
                         matTooltip="{{ 'edit' | translate }} {{ 'event' | translate }}">edit</mat-icon>
                     <mat-icon (click)="deleteEvent(element.id)" class="btn-delete"
                         matTooltip="{{ 'delete' | translate }} {{ 'event' | translate }}">delete</mat-icon>
+=======
+                        matTooltip="{{ 'edit' | translate }} {{ element.name_event }}">edit</mat-icon>
+                    <mat-icon (click)="deleteEvent(element.id)" class="btn-delete"
+                        matTooltip="{{ 'delete' | translate }} {{ element.name_event }}">delete</mat-icon>
+>>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
                 </td>
             </ng-container>
 
