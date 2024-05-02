@@ -2,24 +2,19 @@
     "login": "Iniciar sesión",
     "name": "Nombre",
     "nameEvent": "Nombre del evento",
-<<<<<<< HEAD
     "imageProduct": "Imagen del producto",
     "nameProduct": "Nombre del producto",
     "price": "Precio",
     "stock": "Cantidad",
-=======
     "nameRol": "Nombre del rol",
-<<<<<<< HEAD
->>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
-=======
     "nameStatus": "Nombre del estado",
->>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
     "actions": "Acciones",
     "edit": "Editar",
     "delete": "Eliminar",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
     "dateEvent": "Fecha del evento",
+    "setting": "CONFIGURACIÓN",
     "timeEvent": "Hora del evento",
     "email": "Correo electrónico",
     "password": "Contraseña",
@@ -28,6 +23,8 @@
     "add": "Agregar",
     "status": "estado",
     "rol": "Rol",
+    "rolNav": "ROLES",
+    "stateNav": "ESTADOS",
     "rols": "rol",
     "user": "usuario",
     "filter": "Filtrar",

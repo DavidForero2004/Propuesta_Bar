@@ -34,6 +34,7 @@ import { CustomPaginatorIntlService } from './services/custom-paginator-intl.ser
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -112,7 +113,8 @@ import { ListStatusComponent } from './components/status/list-status/list-status
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    DatePipe
+    DatePipe,
+    MatMenuModule
   ],
   providers: [
     // No se necesita provideHttpClient
