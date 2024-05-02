@@ -7,11 +7,8 @@ import { AuthGuard } from './utils/auth.guard';
 import { StructureComponent } from './components/landing/structure/structure.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { ListEventComponent } from './components/event/list-event/list-event.component';
-<<<<<<< HEAD
 import { ListProductComponent } from './components/products/list-product/list-product.component';
-=======
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
->>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
 
 const routes: Routes = [{
   path: '', children: [
