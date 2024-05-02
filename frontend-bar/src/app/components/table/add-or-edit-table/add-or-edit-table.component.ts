@@ -20,9 +20,9 @@ export class AddOrEditTableComponent implements OnInit {
   hide = true;
   form: FormGroup;
   loading: boolean = false;
-  userSave: string = '';
+  tableSave: string = '';
   aggregate: string = '';
-  userUpdate: string = '';
+  tableUpdate: string = '';
   edited: string = '';
 
   operation: string = '';
@@ -54,16 +54,16 @@ export class AddOrEditTableComponent implements OnInit {
       this.operation = res;
     });
 
-    this.translate.get('saveUser').subscribe((res: string) => {
-      this.userSave = res;
+    this.translate.get('saveTable').subscribe((res: string) => {
+      this.tableSave = res;
     });
 
     this.translate.get('aggregate').subscribe((res: string) => {
       this.aggregate = res;
     });
 
-    this.translate.get('editUser').subscribe((res: string) => {
-      this.userUpdate = res;
+    this.translate.get('editTable').subscribe((res: string) => {
+      this.tableUpdate = res;
     });
 
     this.translate.get('edited').subscribe((res: string) => {
@@ -132,7 +132,7 @@ export class AddOrEditTableComponent implements OnInit {
         ).subscribe(() => {
           this.loading = false;
           this.dialogRef.close(true);
-          this.toastr.success(this.userSave, this.aggregate);
+          this.toastr.success(this.tableSave, this.aggregate);
         });
       }, 200);
     } else {
@@ -151,7 +151,7 @@ export class AddOrEditTableComponent implements OnInit {
         ).subscribe(() => {
           this.loading = false;
           this.dialogRef.close(true);
-          this.toastr.success(this.userUpdate, this.edited);
+          this.toastr.success(this.tableUpdate, this.edited);
         });
       }, 200);
     }

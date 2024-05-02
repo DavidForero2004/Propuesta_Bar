@@ -1,6 +1,6 @@
 <div class="container-tittleadduser">
     <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
-    <h2 mat-dialog-title id="t">{{ operation }} {{ "user" | translate }}</h2>
+    <h2 mat-dialog-title id="t">{{ operation }} {{ "table" | translate }}</h2>
 </div>
 <form [formGroup]="form" (ngSubmit)="addTable()">
     <mat-dialog-content class="mat-typography">
@@ -12,7 +12,7 @@
                 <input formControlName="name_table" matInput>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name_table')?.hasError('required') && form.get('name')?.touched">{{ "requiredNameUser"
+                <mat-error *ngIf="form.get('name_table')?.hasError('required') && form.get('name_table')?.touched">{{ "requiredNameUser"
                     | translate }}</mat-error>
             </div>
         </div>
@@ -26,7 +26,7 @@
                     </mat-select>                    
                 </mat-form-field>
                 <div class="error">
-                    <mat-error *ngIf="form.get('status')?.hasError('required') && form.get('status')?.touched">{{
+                    <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{
                         "requiredStatus" | translate }}</mat-error>
                 </div>
             </div>
