@@ -49,18 +49,12 @@ import { StructureComponent } from './components/landing/structure/structure.com
 import { AddOrEditEventComponent } from './components/event/add-or-edit-event/add-or-edit-event.component';
 import { AddOrEditUserComponent } from './components/user/add-or-edit-user/add-or-edit-user.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
-<<<<<<< HEAD
 import { ListProductComponent } from './components/products/list-product/list-product.component';
 import { AddOrEditProductComponent } from './components/products/add-or-edit-product/add-or-edit-product.component';
-=======
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { AddOrEditRolComponent } from './components/rol/add-or-edit-rol/add-or-edit-rol.component';
-<<<<<<< HEAD
->>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
-=======
 import { AddOrEditStatusComponent } from './components/status/add-or-edit-status/add-or-edit-status.component';
 import { ListStatusComponent } from './components/status/list-status/list-status.component';
->>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
 
 @NgModule({
   declarations: [
@@ -74,19 +68,13 @@ import { ListStatusComponent } from './components/status/list-status/list-status
     AddOrEditEventComponent,
     AddOrEditUserComponent,
     ListUserComponent,
-<<<<<<< HEAD
     ListProductComponent,
-    AddOrEditProductComponent
-=======
+    AddOrEditProductComponent,
     ListRolComponent,
-<<<<<<< HEAD
-    AddOrEditRolComponent
->>>>>>> 272f981e9993d10a10a916d59b8b5b49e36e6a70
-=======
+    AddOrEditRolComponent,
     AddOrEditRolComponent,
     AddOrEditStatusComponent,
     ListStatusComponent
->>>>>>> 6244d0a39cfbec32654325c0676603df7bbb4bbb
   ],
   imports: [
     BrowserModule,
