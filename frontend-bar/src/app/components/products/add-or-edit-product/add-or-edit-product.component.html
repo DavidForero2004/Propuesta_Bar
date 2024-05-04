@@ -29,23 +29,34 @@
             <!-- Price Input -->
             <mat-form-field floatLabel="always">
                 <mat-label>{{ "price" | translate }}</mat-label>
-                <input matInput type="number" class="example-right-align" placeholder="0" min="0"
-                    formControlName="price">
+                <input matInput type="number" class="example-right-align" placeholder="0" min="0" formControlName="price">
                 <span matTextPrefix>$&nbsp;</span>
                 <span matTextSuffix>.00</span>
-                <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredPrice" | translate }}</mat-error>
-                </div>
             </mat-form-field>
-
+            <div class="error">
+                <mat-error *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">{{ "requiredPrice" | translate }}</mat-error>
+            </div>
             <!-- Stock Input -->
             <mat-form-field>
                 <mat-label>{{ "stock" | translate }}</mat-label>
                 <input type="number" matInput placeholder="0" min="0" formControlName="stock">
-                <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredStock" | translate }}</mat-error>
-                </div>
             </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">{{ "requiredStock" | translate }}</mat-error>
+            </div>
+            <!-- Status Input -->
+            <div class="select_div">
+                <mat-form-field>
+                    <mat-label>{{ "status" | translate }}</mat-label>
+                    <mat-select formControlName="id_status">
+                        <mat-option *ngFor="let state of status" [value]="state.id">{{ state.name }}</mat-option>
+                    </mat-select>                    
+                </mat-form-field>
+                <div class="error">
+                    <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{
+                        "requiredStatus" | translate }}</mat-error>
+                </div>
+            </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">

@@ -10,6 +10,8 @@ import { UserService } from '../../../services/user.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Status } from '../../../interfaces/status';
 import { Rol } from '../../../interfaces/rol';
+import { StatusService } from '../../../services/status.service';
+import { RolService } from '../../../services/rol.service';
 
 
 @Component({
@@ -29,13 +31,9 @@ export class AddOrEditUserComponent implements OnInit {
   operation: string = '';
   id: number | undefined;
 
-  status: Status[] = [
-    { id: 1, name: 'Activo'}
-  ];
+  status: Status[] = [];
 
-  rol: Rol[] = [
-    { id: 1, name: 'Administrador' }
-  ]
+  rol: Rol[] = []
 
   constructor(
     public dialogRef: MatDialogRef<AddOrEditUserComponent>,
@@ -44,6 +42,8 @@ export class AddOrEditUserComponent implements OnInit {
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
+    private _statusService: StatusService,
+    private _rolService: RolService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -80,7 +80,9 @@ export class AddOrEditUserComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.isEdit(this.id)
+    this.isEdit(this.id);
+    this.getStatus();
+    this.getRol();
   }
   cancel() {
     this.dialogRef.close(false);
@@ -174,6 +176,29 @@ export class AddOrEditUserComponent implements OnInit {
         });
       }, 200);
     }
+  }
+
+  getStatus() {
+    this._statusService.getStatus().subscribe((data: any) => {
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
+        // Check if the first element of result is an array of users
+        if (Array.isArray(result)) {
+          this.status = result;
+        }
+      }
+    });
+  }
+  getRol() {
+    this._rolService.getRol().subscribe((data: any) => {
+      // console.log(data);
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
+        if (Array.isArray(result)) {
+          this.rol = result;
+        }
+      }
+    });
   }
 
   es() {

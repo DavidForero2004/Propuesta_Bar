@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Product } from '../../../interfaces/product';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { StatusService } from '../../../services/status.service';
 
 @Component({
   selector: 'app-add-or-edit-product',
@@ -27,9 +28,7 @@ export class AddOrEditProductComponent implements OnInit {
   operation: string = '';
   id: number | undefined;
 
-  status: Status[] = [
-    { id: 1, name: 'Activo' }
-  ];
+  status: Status[] = [];
 
   constructor(public dialogRef: MatDialogRef<AddOrEditUserComponent>,
     private fb: FormBuilder,
@@ -37,12 +36,14 @@ export class AddOrEditProductComponent implements OnInit {
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
+    private _statusService: StatusService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       name_product: ['', Validators.required],
       image: ['', Validators.required],
       price: ['', Validators.required],
       stock: ['', Validators.required],
+      id_status: ['', Validators.required]
     });
 
     this.id = data.id;
@@ -72,7 +73,8 @@ export class AddOrEditProductComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.isEdit(this.id)
+    this.isEdit(this.id);
+    this.getStatus();
   }
 
   selectedFile: any = null;
@@ -102,9 +104,14 @@ export class AddOrEditProductComponent implements OnInit {
         if (resultArray.length > 0) {
           const firstArray = resultArray[0];
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
-            const userObject = firstArray[0];
+            const productObject = firstArray[0];
             this.form.patchValue({
-              name: userObject.name,
+              name_product: productObject.name_product,
+              //image es input tipo file y no deja poner string
+              //image: productObject.image,
+              price: productObject.price,
+              stock: productObject.stock,
+              id_status: productObject.id_status
             });
           }
         }
@@ -121,9 +128,12 @@ export class AddOrEditProductComponent implements OnInit {
 
     if (this.id === undefined) {
       const product: Product = {
-        name_product: this.form.value.name,
+        name_product: this.form.value.name_product,
+        image: this.form.value.image,
+        price: this.form.value.price,
+        stock: this.form.value.stock,
+        id_status: this.form.value.id_status
       }
-
       setTimeout(() => {
         this._productServices.addProduct(product).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -140,7 +150,11 @@ export class AddOrEditProductComponent implements OnInit {
     } else {
       const product: Product = {
         id: this.id,
-        name_product: this.form.value.name,
+        name_product: this.form.value.name_product,
+        image: this.form.value.image,
+        price: this.form.value.price,
+        stock: this.form.value.stock,
+        id_status: this.form.value.id_status
       }
       setTimeout(() => {
         this._productServices.updateProduct(product).pipe(
@@ -157,7 +171,17 @@ export class AddOrEditProductComponent implements OnInit {
       }, 200);
     }
   }
-
+  getStatus() {
+    this._statusService.getStatus().subscribe((data: any) => {
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
+        // Check if the first element of result is an array of users
+        if (Array.isArray(result)) {
+          this.status = result;
+        }
+      }
+    });
+  }
   es() {
     this.translate.use('es');
     this._productServices.updateServerLanguage('es').subscribe(() => { });
