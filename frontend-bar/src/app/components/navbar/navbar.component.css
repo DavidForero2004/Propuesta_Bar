@@ -29,7 +29,15 @@
     font-family: "Acumin Variable Concept";
     font-size: 17px;
     height: 60%;
+    width: auto;
   }
+  a{
+    text-decoration: none !important;
+  }
+  .mat-menu.settings {
+    background-color: lightblue !important;
+  }
+  
   .option_container a:hover {
     border-bottom: 3px solid white;
   }

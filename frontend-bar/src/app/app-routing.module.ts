@@ -10,6 +10,7 @@ import { ListEventComponent } from './components/event/list-event/list-event.com
 import { ListProductComponent } from './components/products/list-product/list-product.component';
 import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { ListStatusComponent } from './components/status/list-status/list-status.component';
+import { ListTableComponent } from './components/table/list-table/list-table.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -26,6 +27,8 @@ const routes: Routes = [{
     {path: 'rols', component: ListRolComponent, canActivate: [AuthGuard]},
     //STATUS
     {path: 'status', component: ListStatusComponent, canActivate: [AuthGuard]},
+    //TABLE
+    {path: 'table', component: ListTableComponent, canActivate: [AuthGuard]},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 

@@ -23,8 +23,15 @@
     "add": "Agregar",
     "status": "estado",
     "rol": "Rol",
+<<<<<<< HEAD
     "rolNav": "ROLES",
     "stateNav": "ESTADOS",
+=======
+    "table": "mesa",
+    "rolNav": "ROLES",
+    "stateNav": "ESTADOS",
+    "tableNav": "MESAS",
+>>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     "rols": "rol",
     "user": "usuario",
     "filter": "Filtrar",
@@ -51,9 +58,11 @@
     "saveRol": "Rol agregado correctamente",
     "saveEvent": "Evento agregado correctamente",
     "saveStatus": "Estado agregado correctamente",
+    "saveTable": "Mesa agregada correctamente",
     "editUser": "Usuario editado correctamente",
     "editRol": "Rol editado correctamente",
     "editEvent": "Evento editado correctamente",
+    "editTable": "Mesa editada correctamente",
     "aggregate": "Agregado",
     "edited": "Editado",
     "removed": "Eliminado",
@@ -61,6 +70,7 @@
     "deleteEvent": "Evento eliminado correctamente",
     "deleteStatus": "Estado eliminado correctamente",
     "deleteRol": "Rol eliminado correctamente",
+    "deleteTable": "Mesa eliminada correctamente",
     "events": "EVENTOS",
     "products": "PRODUCTOS",
     "users": "USUARIOS",
@@ -75,5 +85,11 @@
     "aboutUs":"¡Bienvenidos a Hollow-Bar! Somos un bar acogedor ubicado en Bogotá av 11 #1, conocido por nuestra excelente selección de bebidas y ambiente amigable. ¡Ven y disfruta de una experiencia única con nosotros!",
     "cold": "FRIA",
     "cold2": "QUE TAL UNA FRIA",
-    "banner": "Solo pidela, nosotros nos encargamos del resto. Ponle vida a los momentos con una fria."
+    "banner": "Solo pidela, nosotros nos encargamos del resto. Ponle vida a los momentos con una fria.",
+    "navUser":"Usuarios",
+    "navEvent":"Eventos",
+    "navRol":"Roles",
+    "navStatus":"Estados",
+    "navTable":"Mesas",
+    "navProduct":"Productos"
 }

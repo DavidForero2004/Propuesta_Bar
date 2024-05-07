@@ -1,44 +1,50 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Table } from '../../../interfaces/table';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from '../../../interfaces/product';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ProductService } from '../../../services/product.service';
+import { TableService } from '../../../services/table.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorService } from '../../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { AddOrEditProductComponent } from '../add-or-edit-product/add-or-edit-product.component';
-import { catchError, throwError } from 'rxjs';
+import { StatusService } from '../../../services/status.service';
+import { Status } from '../../../interfaces/status';
+import { AddOrEditTableComponent } from '../add-or-edit-table/add-or-edit-table.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
-  selector: 'app-list-product',
-  templateUrl: './list-product.component.html',
-  styleUrl: './list-product.component.css'
+  selector: 'app-list-table',
+  templateUrl: './list-table.component.html',
+  styleUrl: './list-table.component.css'
 })
-export class ListProductComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name_product', 'image', 'price', 'stock', 'status', 'action'];
-  dataSource = new MatTableDataSource<Product>;
-  userDelete: string = '';
+export class ListTableComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['name_table', 'name_status', 'action'];
+  dataSource = new MatTableDataSource<Table>;
+  dataSourceStatus = new MatTableDataSource<Status>;
+  tableDelete: string = '';
   removed: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   // listUser: User[] = [];
 
-  constructor(private _productService: ProductService,
+  constructor(
+    private _tableService: TableService,
+    private _statusService: StatusService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
     private toastr: ToastrService,
-    private translate: TranslateService) {
+    private translate: TranslateService
+  ) {
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteUser').subscribe((res: string) => {
-      this.userDelete = res;
+    this.translate.get('deleteTable').subscribe((res: string) => {
+      this.tableDelete = res;
     });
 
     this.translate.get('removed').subscribe((res: string) => {
@@ -47,14 +53,14 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getProduct();
+    this.getTable();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  
+
   eventFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -64,30 +70,23 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getProduct() {
-    this._productService.getProduct().subscribe((data: any) => {
+  getTable() {
+    this._tableService.getTable().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-<<<<<<< HEAD
           // Assign users to listUser
           // this.listUser = result;
-=======
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
           this.dataSource.data = result;
         }
       }
     });
   }
 
-  addProduct(id?: number) {
-<<<<<<< HEAD
+  addTable(id?: number) {
     // console.log(id);
-=======
-    //console.log(id);
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
-    const dialogRef = this.dialog.open(AddOrEditProductComponent, {
+    const dialogRef = this.dialog.open(AddOrEditTableComponent, {
       width: '550px',
       disableClose: true,
       data: { id: id },
@@ -96,30 +95,31 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
       if (result) {
-        this.getProduct();
+        this.getTable();
       }
     });
   }
 
-  deleteProduct(id: number) {
-    this._productService.deleteProduct(id).pipe(
+  deleteUser(id: number) {
+    this._tableService.deleteTable(id).pipe(
       catchError((error: HttpErrorResponse) => {
         this._errorService.msjError(error);
         return throwError(error);
       })
     ).subscribe(() => {
-      this.getProduct();
-      this.toastr.success(this.userDelete, this.removed);
+      this.getTable();
+      this.toastr.success(this.tableDelete, this.removed);
     });;
   }
 
   es() {
     this.translate.use('es');
-    this._productService.updateServerLanguage('es').subscribe(() => { });
+    this._tableService.updateServerLanguage('es').subscribe(() => { });
   }
 
   en() {
     this.translate.use('en');
-    this._productService.updateServerLanguage('en').subscribe(() => { });
+    this._tableService.updateServerLanguage('en').subscribe(() => { });
   }
+
 }
