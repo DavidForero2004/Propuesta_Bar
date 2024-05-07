@@ -26,7 +26,8 @@
     "table": "Table",
     "rolNav": "ROLES",
     "stateNav": "STATES",
-    "rols": "roles",
+    "tableNav": "TABLES",
+    "rols": "rols",
     "user": "user",
     "filter": "Filter",
     "invalidTime": "The entered time is earlier than the current time",
@@ -79,5 +80,11 @@
     "aboutUs": "Welcome to Hollow-Bar! We are a cozy bar located in Bogotá, av 11 #1, known for our excellent selection of drinks and friendly atmosphere. Come and enjoy a unique experience with us!",
     "cold": "COLD",
     "cold2": "HOW ABOUT A COLD ONE",
-    "banner": "Just order it, we'll take care of the rest. Bring life to the moments with a cold one."
+    "banner": "Just order it, we'll take care of the rest. Bring life to the moments with a cold one.",
+    "navUser": "Users",
+    "navEvent": "Events",
+    "navRol": "Rols",
+    "navStatus": "Status",
+    "navTable": "Tables",
+    "navProduct":"Products"
 }
