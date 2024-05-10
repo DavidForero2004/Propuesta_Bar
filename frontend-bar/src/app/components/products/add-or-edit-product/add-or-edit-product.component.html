@@ -1,10 +1,6 @@
 <div class="container-tittleadduser">
     <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
-<<<<<<< HEAD
-    <h2 mat-dialog-title id="t">{{ operation }} {{ "user" | translate }}</h2>
-=======
     <h2 mat-dialog-title id="t">{{ operation }} {{ "navProduct" | translate }}</h2>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
 </div>
 <form [formGroup]="form" (ngSubmit)="addProduct()">
     <mat-dialog-content class="mat-typography">
@@ -20,16 +16,6 @@
             </div>
 
             <!-- Image Input -->
-<<<<<<< HEAD
-            <div>
-                <mat-label>{{ "imageProduct" | translate }}</mat-label>
-                <button type="button" mat-raised-button (click)="fileInput.click()">{{ "chooseImage" | translate }}</button>
-                <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image" accept="image/*">
-                <span class="file-name">{{ selectedFile?.name }}</span>
-                <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredImageProduct" | translate }}</mat-error>
-                </div>
-=======
             <div class="image_product">
                 <mat-label>{{ "imageProduct" | translate }}</mat-label>
                 <div>
@@ -40,23 +26,11 @@
                     <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredImageProduct" | translate }}</mat-error>
                 </div>
                 </div>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
             </div>
 
             <!-- Price Input -->
             <mat-form-field floatLabel="always">
                 <mat-label>{{ "price" | translate }}</mat-label>
-<<<<<<< HEAD
-                <input matInput type="number" class="example-right-align" placeholder="0" min="0"
-                    formControlName="price">
-                <span matTextPrefix>$&nbsp;</span>
-                <span matTextSuffix>.00</span>
-                <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredPrice" | translate }}</mat-error>
-                </div>
-            </mat-form-field>
-
-=======
                 <input matInput type="number" class="example-right-align" placeholder="0" min="0" formControlName="price">
                 <span matTextPrefix>$&nbsp;</span>
                 <span matTextSuffix>.00</span>
@@ -64,17 +38,10 @@
             <div class="error">
                 <mat-error *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">{{ "requiredPrice" | translate }}</mat-error>
             </div>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
             <!-- Stock Input -->
             <mat-form-field>
                 <mat-label>{{ "stock" | translate }}</mat-label>
                 <input type="number" matInput placeholder="0" min="0" formControlName="stock">
-<<<<<<< HEAD
-                <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredStock" | translate }}</mat-error>
-                </div>
-            </mat-form-field>
-=======
             </mat-form-field>
             <div class="error">
                 <mat-error *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">{{ "requiredStock" | translate }}</mat-error>
@@ -92,7 +59,6 @@
                         "requiredStatus" | translate }}</mat-error>
                 </div>
             </div>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
         </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">

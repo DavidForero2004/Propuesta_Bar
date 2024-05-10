@@ -22,11 +22,7 @@
     <a href="/users"> {{"users" | translate}}</a>
     <a href="/events"> {{"events" | translate }}</a>
     <a href="/products"> {{"products" | translate }}</a>
-<<<<<<< HEAD
-    <button mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</button>
-=======
     <a mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</a>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     <a (click)="logOut()">{{"exit" | translate}}</a>
     <div class="language-buttons_h">
         <button (click)="es()" class="es">ES</button>
@@ -35,12 +31,7 @@
 </div>
 
 <mat-menu #setting>
-<<<<<<< HEAD
-    <button mat-menu-item><a href="/rols">{{ "rolNav" | translate }}</a></button>
-    <button mat-menu-item><a href="/status">{{ "stateNav" | translate }}</a></button>
-=======
     <a href="/rols"><button mat-menu-item>{{ "rolNav" | translate }}</button></a>
     <a href="/status"><button mat-menu-item>{{ "stateNav" | translate }}</button></a>
     <a href="/table"><button mat-menu-item>{{ "tableNav" | translate }}</button></a>
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
 </mat-menu>

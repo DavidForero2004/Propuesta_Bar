@@ -2,13 +2,10 @@
     margin-left: 1rem;
     /* or whatever margin you require */
 }
-<<<<<<< HEAD
-=======
 .image_product{
     display: flex;
     flex-direction: column;
 }
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
 
 .example-right-align {
     text-align: right;
@@ -20,9 +17,6 @@ input.example-right-align::-webkit-inner-spin-button {
 }
 
 input.example-right-align {
-<<<<<<< HEAD
-    -moz-appearance: textfield;
-=======
     text-align: right;
 }
 
@@ -66,5 +60,4 @@ mat-spinner {
 .select_div {
     display: flex;
     flex-direction: column;
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
 }

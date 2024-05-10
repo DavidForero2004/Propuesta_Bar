@@ -23,17 +23,11 @@
     "add": "Add",
     "status": "status",
     "rol": "Role",
-<<<<<<< HEAD
-    "rolNav": "ROLES",
-    "stateNav": "STATES",
-    "rols": "roles",
-=======
     "table": "Table",
     "rolNav": "ROLES",
     "stateNav": "STATES",
     "tableNav": "TABLES",
     "rols": "rols",
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     "user": "user",
     "filter": "Filter",
     "invalidTime": "The entered time is earlier than the current time",
@@ -63,22 +57,15 @@
     "editUser": "User edited successfully",
     "editRol": "Role edited successfully",
     "editEvent": "Event edited successfully",
-<<<<<<< HEAD
-=======
     "editTable": "Table edited successfully",
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     "aggregate": "Added",
     "edited": "Edited",
     "removed": "Deleted",
     "deleteUser": "User deleted successfully",
     "deleteEvent": "Event deleted successfully",
     "deleteStatus": "Status deleted successfully",
-<<<<<<< HEAD
-    "deleteRol": "Role deleted successfully",
-=======
     "deleteRol": "Rol deleted deleted",
     "deleteTable": "Table deleted deleted",
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     "events": "EVENTS",
     "products": "PRODUCTS",
     "users": "USERS",
@@ -93,9 +80,6 @@
     "aboutUs": "Welcome to Hollow-Bar! We are a cozy bar located in Bogotá, av 11 #1, known for our excellent selection of drinks and friendly atmosphere. Come and enjoy a unique experience with us!",
     "cold": "COLD",
     "cold2": "HOW ABOUT A COLD ONE",
-<<<<<<< HEAD
-    "banner": "Just order it, we'll take care of the rest. Bring life to the moments with a cold one."
-=======
     "banner": "Just order it, we'll take care of the rest. Bring life to the moments with a cold one.",
     "navUser": "Users",
     "navEvent": "Events",
@@ -103,5 +87,4 @@
     "navStatus": "Status",
     "navTable": "Tables",
     "navProduct":"Products"
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
 }

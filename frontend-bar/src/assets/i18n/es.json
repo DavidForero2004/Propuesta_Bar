@@ -23,15 +23,10 @@
     "add": "Agregar",
     "status": "estado",
     "rol": "Rol",
-<<<<<<< HEAD
-    "rolNav": "ROLES",
-    "stateNav": "ESTADOS",
-=======
     "table": "mesa",
     "rolNav": "ROLES",
     "stateNav": "ESTADOS",
     "tableNav": "MESAS",
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     "rols": "rol",
     "user": "usuario",
     "filter": "Filtrar",

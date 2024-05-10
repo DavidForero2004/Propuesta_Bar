@@ -70,11 +70,8 @@ export class ListProductComponent implements OnInit, AfterViewInit {
         const result = data.result[0];
         // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-<<<<<<< HEAD
           // Assign users to listUser
           // this.listUser = result;
-=======
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
           this.dataSource.data = result;
         }
       }
@@ -82,11 +79,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   }
 
   addProduct(id?: number) {
-<<<<<<< HEAD
     // console.log(id);
-=======
-    //console.log(id);
->>>>>>> adcd591855b2fbfe64118ab4fefc8c0b5103789a
     const dialogRef = this.dialog.open(AddOrEditProductComponent, {
       width: '550px',
       disableClose: true,
