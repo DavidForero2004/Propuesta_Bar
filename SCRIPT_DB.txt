@@ -537,7 +537,7 @@ DELIMITER ;
 
 --------------
 
---SELECT productid
+--SELECT orderid
 DELIMITER //
 CREATE PROCEDURE selectOrderId(
 	IN id_o INTEGER
@@ -548,7 +548,7 @@ END //
 DELIMITER ;
 
 
---SELECT productid
+--SELECT ordernumdocument
 DELIMITER //
 CREATE PROCEDURE selectOrderNumDocument(
 	IN num_document_o INTEGER

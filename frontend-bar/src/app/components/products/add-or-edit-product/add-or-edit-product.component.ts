@@ -11,6 +11,8 @@ import { Product } from '../../../interfaces/product';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StatusService } from '../../../services/status.service';
+import { FileService } from '../../../services/file.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-add-or-edit-product',
@@ -33,6 +35,7 @@ export class AddOrEditProductComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddOrEditUserComponent>,
     private fb: FormBuilder,
     private _productServices: ProductService,
+    private _fileServices: FileService,
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
@@ -78,9 +81,15 @@ export class AddOrEditProductComponent implements OnInit {
   }
 
   selectedFile: any = null;
+  nameProduct: any = null;
 
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0] ?? null;
+    // this.selectedFile = event.target.files[0] ?? null;
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
+    } else {
+      this.selectedFile = null;
+    }
   }
 
   cancel() {
@@ -106,13 +115,11 @@ export class AddOrEditProductComponent implements OnInit {
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
             const productObject = firstArray[0];
             this.form.patchValue({
-              name_product: productObject.name_product,
-              //image es input tipo file y no deja poner string
-              //image: productObject.image,
               price: productObject.price,
               stock: productObject.stock,
               id_status: productObject.id_status
             });
+            this.nameProduct = productObject.name_product;
           }
         }
       }
@@ -120,20 +127,31 @@ export class AddOrEditProductComponent implements OnInit {
   }
 
   addProduct() {
-    if (this.form.invalid) {
-      return;
-    }
+    const today = new Date();
+    const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
+    const extensionFile = this.selectedFile.name.split('.').pop();
+    const formattedDate = today.getFullYear().toString().padStart(4, '0') +
+      (today.getMonth() + 1).toString().padStart(2, '0') +
+      today.getDate().toString().padStart(2, '0');
+    const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
+    const newFile = new File([this.selectedFile], newNameFile);
 
     this.loading = true;
 
     if (this.id === undefined) {
+      if (this.form.invalid) {
+        return;
+      }
+
       const product: Product = {
         name_product: this.form.value.name_product,
-        image: this.form.value.image,
+        image: newNameFile,
         price: this.form.value.price,
         stock: this.form.value.stock,
         id_status: this.form.value.id_status
       }
+      console.log(product);
+      
       setTimeout(() => {
         this._productServices.addProduct(product).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -145,6 +163,10 @@ export class AddOrEditProductComponent implements OnInit {
           this.loading = false;
           this.dialogRef.close(true);
           this.toastr.success(this.userSave, this.aggregate);
+
+          this._fileServices.addFile(newFile).subscribe(res => {
+            console.log(`Respuesta del servidor`, res);
+          });
         });
       }, 200);
     } else {
@@ -171,6 +193,7 @@ export class AddOrEditProductComponent implements OnInit {
       }, 200);
     }
   }
+
   getStatus() {
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

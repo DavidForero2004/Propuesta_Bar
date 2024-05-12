@@ -49,7 +49,7 @@
             <!-- Status Select -->
             <div class="select_div">
                 <mat-form-field>
-                    <mat-label>{{ "status" | translate }}</mat-label>
+                    <mat-label>{{ "statusList" | translate }}</mat-label>
                     <mat-select formControlName="status">
                         @for (state of status; track state) {
                         <mat-option [value]="state.id">{{state.name}}</mat-option>

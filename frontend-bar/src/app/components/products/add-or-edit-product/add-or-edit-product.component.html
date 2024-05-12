@@ -7,10 +7,14 @@
 
         <div class="form_group">
             <!-- Name Input -->
-            <mat-form-field>
+            <mat-form-field *ngIf="id === undefined">
                 <mat-label>{{ "nameProduct" | translate }}</mat-label>
                 <input formControlName="name_product" matInput>
             </mat-form-field>
+            <mat-form-field class="example-full-width" *ngIf="id !== undefined">
+                <mat-label>{{ "nameProduct" | translate }}</mat-label>
+                <input matInput disabled value="nameProduct">
+              </mat-form-field>
             <div class="error">
                 <mat-error *ngIf="form.get('name_product')?.hasError('required') && form.get('name_product')?.touched">{{ "requiredNameProduct" | translate }}</mat-error>
             </div>
@@ -49,7 +53,7 @@
             <!-- Status Input -->
             <div class="select_div">
                 <mat-form-field>
-                    <mat-label>{{ "status" | translate }}</mat-label>
+                    <mat-label>{{ "statusList" | translate }}</mat-label>
                     <mat-select formControlName="id_status">
                         <mat-option *ngFor="let state of status" [value]="state.id">{{ state.name }}</mat-option>
                     </mat-select>                    

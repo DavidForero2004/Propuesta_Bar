@@ -43,7 +43,7 @@ const insertProduct = (req, res) => {
     const { name_product, image, price, stock, id_status } = req.body;
     const query = 'CALL insertProduct(?,?,?,?,?)';
 
-    const imageExtension = /\.(jpg|jpeg|png)$/i;
+    const imageExtension = /\.(jpg|jpeg|png|webp)$/i;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -86,5 +86,6 @@
     "navRol":"Roles",
     "navStatus":"Estados",
     "navTable":"Mesas",
-    "navProduct":"Productos"
+    "navProduct":"Productos",
+    "statusList": "Estado"
 }

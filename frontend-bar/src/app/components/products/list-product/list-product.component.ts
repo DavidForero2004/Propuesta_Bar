@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AddOrEditProductComponent } from '../add-or-edit-product/add-or-edit-product.component';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-list-product',
@@ -22,6 +23,9 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Product>;
   userDelete: string = '';
   removed: string = '';
+  baseUrl: string = '';
+  private myAppUrl: string;
+  private myApiUrl: string;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,6 +36,8 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService) {
+    this.myAppUrl = environment.endpoint;
+    this.myApiUrl = 'file';
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
@@ -48,6 +54,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getProduct();
+    this.baseUrl = `${this.myAppUrl}${this.myApiUrl}/`;
   }
 
   ngAfterViewInit(): void {
