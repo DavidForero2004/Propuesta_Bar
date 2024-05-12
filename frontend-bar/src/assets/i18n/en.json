@@ -4,10 +4,12 @@
     "nameEvent": "Event Name",
     "imageProduct": "Product Image",
     "nameProduct": "Product Name",
+    "nameUser": "User Name",
     "price": "Price",
     "stock": "Quantity",
     "nameRol": "Role Name",
     "nameStatus": "Status Name",
+    "nameTable": "Table Name",
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
@@ -86,5 +88,6 @@
     "navRol": "Rols",
     "navStatus": "Status",
     "navTable": "Tables",
-    "navProduct":"Products"
+    "navProduct":"Products",
+    "statusList": "Status"
 }
