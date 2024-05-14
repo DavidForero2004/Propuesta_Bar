@@ -14,7 +14,21 @@ const viewFile = async (req, res) => {
 }
 
 const saveFile = (req, res) => {
-    res.send({data: 'Imagen cargada'});
+    // res.send({data: 'Imagen cargada'});
 };
 
-module.exports = { saveFile, viewFile };
+const deleteFile = async (req, res) => {
+    const file = req.params.image;
+    const pathImage = path.join(__dirname, '../assets/img/', file);
+    if (await fs.existsSync(pathImage)) {
+        fs.unlink(pathImage, (err) => {
+            if (err) {
+                // console.error('Error al eliminar el archivo:', err);
+            } else {
+                // console.log('Archivo eliminado con éxito');
+            }
+        });
+    }
+};
+
+module.exports = { saveFile, viewFile, deleteFile };

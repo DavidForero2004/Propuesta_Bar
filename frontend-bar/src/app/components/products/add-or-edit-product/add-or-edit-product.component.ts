@@ -12,7 +12,7 @@ import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StatusService } from '../../../services/status.service';
 import { FileService } from '../../../services/file.service';
-import { response } from 'express';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-add-or-edit-product',
@@ -22,10 +22,13 @@ import { response } from 'express';
 export class AddOrEditProductComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
-  userSave: string = '';
+  productSave: string = '';
   aggregate: string = '';
-  userUpdate: string = '';
+  productUpdate: string = '';
   edited: string = '';
+  baseUrl: string = '';
+  private myAppUrl: string;
+  private myApiUrl: string;
 
   operation: string = '';
   id: number | undefined;
@@ -49,6 +52,9 @@ export class AddOrEditProductComponent implements OnInit {
       id_status: ['', Validators.required]
     });
 
+    this.myAppUrl = environment.endpoint;
+    this.myApiUrl = 'file';
+
     this.id = data.id;
 
     this.translate.addLangs(['es', 'en']);
@@ -58,16 +64,16 @@ export class AddOrEditProductComponent implements OnInit {
       this.operation = res;
     });
 
-    this.translate.get('saveUser').subscribe((res: string) => {
-      this.userSave = res;
+    this.translate.get('saveProduct').subscribe((res: string) => {
+      this.productSave = res;
     });
 
     this.translate.get('aggregate').subscribe((res: string) => {
       this.aggregate = res;
     });
 
-    this.translate.get('editUser').subscribe((res: string) => {
-      this.userUpdate = res;
+    this.translate.get('editProduct').subscribe((res: string) => {
+      this.productUpdate = res;
     });
 
     this.translate.get('edited').subscribe((res: string) => {
@@ -78,13 +84,14 @@ export class AddOrEditProductComponent implements OnInit {
   ngOnInit(): void {
     this.isEdit(this.id);
     this.getStatus();
+    this.baseUrl = `${this.myAppUrl}${this.myApiUrl}/`;
   }
 
   selectedFile: any = null;
   nameProduct: any = null;
+  imageProduct: any = null;
 
   onFileSelected(event: any): void {
-    // this.selectedFile = event.target.files[0] ?? null;
     if (event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
     } else {
@@ -101,7 +108,6 @@ export class AddOrEditProductComponent implements OnInit {
       this.translate.get('edit').subscribe((res: string) => {
         this.operation = res;
       });
-      // this.operation = 'Editar ';
       this.getProductId(id);
     }
   }
@@ -117,9 +123,11 @@ export class AddOrEditProductComponent implements OnInit {
             this.form.patchValue({
               price: productObject.price,
               stock: productObject.stock,
-              id_status: productObject.id_status
+              id_status: productObject.id_status,
+              name_product: productObject.name_product
             });
             this.nameProduct = productObject.name_product;
+            this.imageProduct = productObject.image;
           }
         }
       }
@@ -127,21 +135,21 @@ export class AddOrEditProductComponent implements OnInit {
   }
 
   addProduct() {
-    const today = new Date();
-    const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
-    const extensionFile = this.selectedFile.name.split('.').pop();
-    const formattedDate = today.getFullYear().toString().padStart(4, '0') +
-      (today.getMonth() + 1).toString().padStart(2, '0') +
-      today.getDate().toString().padStart(2, '0');
-    const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
-    const newFile = new File([this.selectedFile], newNameFile);
-
     this.loading = true;
 
     if (this.id === undefined) {
       if (this.form.invalid) {
         return;
       }
+
+      const today = new Date();
+      const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
+      const extensionFile = this.selectedFile.name.split('.').pop();
+      const formattedDate = today.getFullYear().toString().padStart(4, '0') +
+        (today.getMonth() + 1).toString().padStart(2, '0') +
+        today.getDate().toString().padStart(2, '0');
+      const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
+      const newFile = new File([this.selectedFile], newNameFile);
 
       const product: Product = {
         name_product: this.form.value.name_product,
@@ -150,8 +158,7 @@ export class AddOrEditProductComponent implements OnInit {
         stock: this.form.value.stock,
         id_status: this.form.value.id_status
       }
-      console.log(product);
-      
+
       setTimeout(() => {
         this._productServices.addProduct(product).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -162,35 +169,77 @@ export class AddOrEditProductComponent implements OnInit {
         ).subscribe(() => {
           this.loading = false;
           this.dialogRef.close(true);
-          this.toastr.success(this.userSave, this.aggregate);
+          this.toastr.success(this.productSave, this.aggregate);
 
           this._fileServices.addFile(newFile).subscribe(res => {
-            console.log(`Respuesta del servidor`, res);
+            // console.log(`Respuesta del servidor`, res);
           });
         });
       }, 200);
     } else {
-      const product: Product = {
-        id: this.id,
-        name_product: this.form.value.name_product,
-        image: this.form.value.image,
-        price: this.form.value.price,
-        stock: this.form.value.stock,
-        id_status: this.form.value.id_status
-      }
-      setTimeout(() => {
-        this._productServices.updateProduct(product).pipe(
-          catchError((error: HttpErrorResponse) => {
+      if (this.selectedFile == null) {
+        const product: Product = {
+          id: this.id,
+          name_product: this.nameProduct,
+          image: this.imageProduct,
+          price: this.form.value.price,
+          stock: this.form.value.stock,
+          id_status: this.form.value.id_status
+        }
+
+        setTimeout(() => {
+          this._productServices.updateProduct(product).pipe(
+            catchError((error: HttpErrorResponse) => {
+              this.loading = false;
+              this._errorService.msjError(error);
+              return throwError(error);
+            })
+          ).subscribe(() => {
             this.loading = false;
-            this._errorService.msjError(error);
-            return throwError(error);
-          })
-        ).subscribe(() => {
-          this.loading = false;
-          this.dialogRef.close(true);
-          this.toastr.success(this.userUpdate, this.edited);
-        });
-      }, 200);
+            this.dialogRef.close(true);
+            this.toastr.success(this.productUpdate, this.edited);
+          });
+        }, 200);
+      } else {
+        const today = new Date();
+        const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
+        const extensionFile = this.selectedFile.name.split('.').pop();
+        const formattedDate = today.getFullYear().toString().padStart(4, '0') +
+          (today.getMonth() + 1).toString().padStart(2, '0') +
+          today.getDate().toString().padStart(2, '0');
+        const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
+        const newFile = new File([this.selectedFile], newNameFile);
+
+        const product: Product = {
+          id: this.id,
+          name_product: this.nameProduct,
+          image: newNameFile,
+          price: this.form.value.price,
+          stock: this.form.value.stock,
+          id_status: this.form.value.id_status
+        }
+
+        setTimeout(() => {
+          this._productServices.updateProduct(product).pipe(
+            catchError((error: HttpErrorResponse) => {
+              this.loading = false;
+              this._errorService.msjError(error);
+              return throwError(error);
+            })
+          ).subscribe(() => {
+            this.loading = false;
+            this.dialogRef.close(true);
+            this.toastr.success(this.productUpdate, this.edited);
+            this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
+              // console.log(`Respuesta del servidor`, res);
+            });
+
+            this._fileServices.addFile(newFile).subscribe(res => {
+              // console.log(`Respuesta del servidor`, res);
+            });
+          });
+        }, 200);
+      }
     }
   }
 
@@ -198,13 +247,13 @@ export class AddOrEditProductComponent implements OnInit {
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
           this.status = result;
         }
       }
     });
   }
+
   es() {
     this.translate.use('es');
     this._productServices.updateServerLanguage('es').subscribe(() => { });

@@ -88,7 +88,7 @@ const updateProduct = (req, res) => {
     const { id, name_product, image, price, stock, id_status } = req.body;
     const query = 'CALL updateProduct(?,?,?,?,?,?)';
 
-    const imageExtension = /\.(jpg|jpeg|png)$/i;
+    const imageExtension = /\.(jpg|jpeg|png|webp)$/i;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 

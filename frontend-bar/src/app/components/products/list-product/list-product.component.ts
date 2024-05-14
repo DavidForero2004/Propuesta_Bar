@@ -12,6 +12,7 @@ import { AddOrEditProductComponent } from '../add-or-edit-product/add-or-edit-pr
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { FileService } from '../../../services/file.service';
 
 @Component({
   selector: 'app-list-product',
@@ -21,7 +22,7 @@ import { environment } from '../../../../environments/environment';
 export class ListProductComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name_product', 'image', 'price', 'stock', 'status', 'action'];
   dataSource = new MatTableDataSource<Product>;
-  userDelete: string = '';
+  productDelete: string = '';
   removed: string = '';
   baseUrl: string = '';
   private myAppUrl: string;
@@ -34,6 +35,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   constructor(private _productService: ProductService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
+    private _fileServices: FileService,
     private toastr: ToastrService,
     private translate: TranslateService) {
     this.myAppUrl = environment.endpoint;
@@ -43,8 +45,8 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteUser').subscribe((res: string) => {
-      this.userDelete = res;
+    this.translate.get('deleteProduct').subscribe((res: string) => {
+      this.productDelete = res;
     });
 
     this.translate.get('removed').subscribe((res: string) => {
@@ -75,10 +77,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     this._productService.getProduct().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
           this.dataSource.data = result;
         }
       }
@@ -86,7 +85,6 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   }
 
   addProduct(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditProductComponent, {
       width: '550px',
       disableClose: true,
@@ -94,14 +92,28 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
         this.getProduct();
       }
     });
   }
 
+  imageProduct: any = null;
+
   deleteProduct(id: number) {
+    this._productService.getProductId(id).subscribe((data: any) => {
+      if (data && data.result && Array.isArray(data.result)) {
+        const resultArray = data.result;
+        if (resultArray.length > 0) {
+          const firstArray = resultArray[0];
+          if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
+            const productObject = firstArray[0];
+            this.imageProduct = productObject.image;
+          }
+        }
+      }
+    });
+
     this._productService.deleteProduct(id).pipe(
       catchError((error: HttpErrorResponse) => {
         this._errorService.msjError(error);
@@ -109,8 +121,11 @@ export class ListProductComponent implements OnInit, AfterViewInit {
       })
     ).subscribe(() => {
       this.getProduct();
-      this.toastr.success(this.userDelete, this.removed);
-    });;
+      this.toastr.success(this.productDelete, this.removed);
+      this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
+        // console.log(`Respuesta del servidor`, res);
+      });
+    });
   }
 
   es() {

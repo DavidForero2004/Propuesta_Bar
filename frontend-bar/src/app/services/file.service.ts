@@ -24,4 +24,8 @@ export class FileService {
 
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/save`, formData);
   }
+
+  deleteFile(image?: number){
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/delete/${image}`);
+  }
 }

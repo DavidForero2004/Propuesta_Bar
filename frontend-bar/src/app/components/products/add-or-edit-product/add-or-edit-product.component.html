@@ -13,14 +13,31 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" *ngIf="id !== undefined">
                 <mat-label>{{ "nameProduct" | translate }}</mat-label>
-                <input matInput disabled value="nameProduct">
+                <input matInput disabled [value]="nameProduct">
               </mat-form-field>
             <div class="error">
                 <mat-error *ngIf="form.get('name_product')?.hasError('required') && form.get('name_product')?.touched">{{ "requiredNameProduct" | translate }}</mat-error>
             </div>
 
+            <!-- Image -->
+            <div *ngIf="id !== undefined">
+                <mat-label>{{ "imageProduct" | translate }}</mat-label>
+                <img *ngIf="selectedFile == null" [src]="baseUrl + imageProduct" alt="Product Image">
+
+                <div class="image_product" *ngIf="id !== undefined">
+                    <div>
+                        <button type="button" mat-raised-button (click)="fileInput.click()">{{ "changeImageProduct" | translate }}</button>
+                        <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image" accept="image/*">
+                        <span class="file-name">{{ selectedFile?.name }}</span>
+                        <div class="error">
+                        <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredImageProduct" | translate }}</mat-error>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Image Input -->
-            <div class="image_product">
+            <div class="image_product" *ngIf="id === undefined">
                 <mat-label>{{ "imageProduct" | translate }}</mat-label>
                 <div>
                     <button type="button" mat-raised-button (click)="fileInput.click()">{{ "chooseImage" | translate }}</button>
@@ -68,6 +85,7 @@
     <mat-dialog-actions align="end">
         <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate
             }}</button>
-        <button type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept" | translate }}</button>
+        <button *ngIf="id === undefined" type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept" | translate }}</button>
+        <button *ngIf="id !== undefined" type="submit" mat-button color="primary">{{ "accept" | translate }}</button>
     </mat-dialog-actions>
 </form>
