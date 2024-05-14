@@ -20,10 +20,9 @@
             </div>
 
             <!-- Image -->
-            <div *ngIf="id !== undefined">
+            <div *ngIf="id !== undefined" class="image_2">
                 <mat-label>{{ "imageProduct" | translate }}</mat-label>
-                <img *ngIf="selectedFile == null" [src]="baseUrl + imageProduct" alt="Product Image">
-
+                    <img *ngIf="selectedFile == null" [src]="baseUrl + imageProduct" alt="Product Image">
                 <div class="image_product" *ngIf="id !== undefined">
                     <div>
                         <button type="button" mat-raised-button (click)="fileInput.click()">{{ "changeImageProduct" | translate }}</button>

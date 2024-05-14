@@ -5,6 +5,7 @@
 .image_product{
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 
 .example-right-align {
@@ -60,4 +61,14 @@ mat-spinner {
 .select_div {
     display: flex;
     flex-direction: column;
+}
+img{
+    width: 150px;
+    height: 85px;
+    object-fit: contain;
+}
+.image_2{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
