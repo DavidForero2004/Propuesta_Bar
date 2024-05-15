@@ -43,3 +43,7 @@ td mat-icon{
     height: auto;
     text-align: center;
 }
+
+.add_{
+    color: #FFFFFF !important;
+}

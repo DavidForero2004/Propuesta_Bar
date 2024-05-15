@@ -7,7 +7,7 @@
                 <mat-label>Filter</mat-label>
                 <input matInput #input (keyup)="rolFilter($event)">
             </mat-form-field>
-            <button (click)="addRol()" mat-flat-button color="primary"><mat-icon>add</mat-icon></button>
+            <button (click)="addRol()" mat-flat-button color="primary" class="add_"><mat-icon>add</mat-icon></button>
         </div>
 
         <table mat-table [dataSource]="dataSources" matSort>

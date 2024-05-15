@@ -9,8 +9,8 @@
                 <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
-            <button (click)="addUser()" mat-flat-button color="primary">
-                <mat-icon class="btn-delete">person_add</mat-icon>
+            <button (click)="addUser()" mat-flat-button color="primary" class="add_">
+                <mat-icon>person_add</mat-icon>
             </button>
         </div>
 
