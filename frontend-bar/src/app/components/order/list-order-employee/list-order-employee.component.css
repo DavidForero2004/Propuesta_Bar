@@ -1,0 +1,56 @@
+table {
+    width: 100%;
+}
+.title{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+.search_add{
+    display: flex;
+    height: 80px;
+    padding: 5px;
+    justify-content: space-between;
+}
+.search_add button{
+    width: 50px !important;
+    height: 30px !important;
+    border-radius: 20px;
+}
+.search_add button mat-icon{
+    margin-right: 0 !important;
+}
+mat-form-field{
+    width: 40% !important;
+    border-radius: 20px !important;
+    height: 100%;
+}
+.mat-elevation-z8{
+    width: 100%;
+}
+section{
+ width: 100%;
+ display: flex;
+ align-items: start;
+ padding: 15px;
+}
+
+td mat-icon{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    font-size: 28px;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+table img{
+    width: 150px;
+    height: 100px;
+    object-fit: contain;
+    margin: 8px;
+}
+
+.add_{
+    color: #FFFFFF !important;
+}
+  

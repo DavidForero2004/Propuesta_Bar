@@ -15,23 +15,22 @@ import { AddOrEditUserComponent } from '../add-or-edit-user/add-or-edit-user.com
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrl: './list-user.component.css'
+  styleUrls: ['./list-user.component.css']
 })
 export class ListUserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
-  dataSource = new MatTableDataSource<User>;
+  dataSource = new MatTableDataSource<User>();
   userDelete: string = '';
   removed: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
   constructor(private _userService: UserService,
-    public dialog: MatDialog,
-    private _errorService: ErrorService,
-    private toastr: ToastrService,
-    private translate: TranslateService) {
+              public dialog: MatDialog,
+              private _errorService: ErrorService,
+              private toastr: ToastrService,
+              private translate: TranslateService) {
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
@@ -68,18 +67,33 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     this._userService.getUser().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
+          result.forEach((user: User) => {
+            user.colorStatus = this.getColorBasedOnStatus(user.status!);
+          });
           this.dataSource.data = result;
+          
         }
       }
     });
   }
 
+  getColorBasedOnStatus(status: string): string {
+    switch (status) {
+      case 'Active':
+        return 'green';     // Verde para activo
+      case 'Inactive':
+        return 'red';       // Rojo para inactivo
+      case 'Paid':
+        return 'brown';     // cafe para pagado
+      case 'Canceled':
+        return 'orange';    // Otro color para cancelado
+      default:
+        return 'black';     // Negro para otros casos
+    }
+  }
+
   addUser(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditUserComponent, {
       width: '550px',
       disableClose: true,
@@ -87,7 +101,6 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
         this.getUser();
       }
@@ -103,7 +116,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       this.getUser();
       this.toastr.success(this.userDelete, this.removed);
-    });;
+    });
   }
 
   es() {

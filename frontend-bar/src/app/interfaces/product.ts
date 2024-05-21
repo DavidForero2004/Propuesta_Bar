@@ -5,4 +5,6 @@ export interface Product {
 	price?: number,
 	stock?: number,	
 	id_status?: number,
+	status?: string,
+	colorStatus?: string
 }

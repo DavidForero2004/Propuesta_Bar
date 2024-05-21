@@ -76,8 +76,9 @@ export class ListTableComponent implements OnInit, AfterViewInit {
         const result = data.result[0];
         // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
+          result.forEach((table: Table) => {
+            table.colorStatus = this.getColorBasedOnStatus(table.name!);
+          });
           this.dataSource.data = result;
         }
       }
@@ -110,6 +111,21 @@ export class ListTableComponent implements OnInit, AfterViewInit {
       this.getTable();
       this.toastr.success(this.tableDelete, this.removed);
     });;
+  }
+
+  getColorBasedOnStatus(status: string): string {
+    switch (status) {
+      case 'Active':
+        return 'green';     // Verde para activo
+      case 'Inactive':
+        return 'red';       // Rojo para inactivo
+      case 'Paid':
+        return 'brown';     // cafe para pagado
+      case 'Canceled':
+        return 'orange';    // Otro color para cancelado
+      default:
+        return 'black';     // Negro para otros casos
+    }
   }
 
   es() {

@@ -6,5 +6,6 @@ export interface Events {
     year?: number,
     month?: string,
     day?: number,
-    hour?: string
+    hour?: string,
+    
 }

@@ -18,7 +18,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "nameStatus" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{'color': element.colorStatus}">{{ element.name }}</td>
             </ng-container>
 
             <ng-container matColumnDef="action">

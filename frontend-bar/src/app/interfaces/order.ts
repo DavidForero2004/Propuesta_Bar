@@ -4,4 +4,7 @@ export interface Order {
 	num_document?: number,
 	id_table?: number,	
 	id_status?: number,
+	status?: string,
+	name?: string,
+	colorStatus?: string
 }

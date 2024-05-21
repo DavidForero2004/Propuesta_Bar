@@ -6,5 +6,6 @@ export interface User {
     id_status?: number,
     status?: string,
     id_rol?: number,
-    rol?: string
+    rol?: string,
+    colorStatus?: string
 }

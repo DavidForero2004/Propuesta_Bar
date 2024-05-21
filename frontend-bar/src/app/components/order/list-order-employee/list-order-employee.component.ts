@@ -75,6 +75,9 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         if (Array.isArray(result)) {
+          result.forEach((order: Order) => {
+            order.colorStatus = this.getColorBasedOnStatus(order.status!);
+          });
           this.dataSource.data = result;
         }
       }
@@ -107,6 +110,20 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
     });;
   }
 
+  getColorBasedOnStatus(status: string): string {
+    switch (status) {
+      case 'Active':
+        return 'green';     // Verde para activo
+      case 'Inactive':
+        return 'red';       // Rojo para inactivo
+      case 'Paid':
+        return 'brown';     // cafe para pagado
+      case 'Canceled':
+        return 'orange';    // Otro color para cancelado
+      default:
+        return 'black';     // Negro para otros casos
+    }
+  }
   es() {
     this.translate.use('es');
     this._orderService.updateServerLanguage('es').subscribe(() => { });

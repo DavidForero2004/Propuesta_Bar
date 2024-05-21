@@ -180,7 +180,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectProduct ()
 BEGIN 
-	SELECT * FROM product;
+	SELECT P.*, S.name as status FROM product P INNER JOIN status S ON P.id_status = S.id;
 END //
 DELIMITER ;
 
@@ -531,7 +531,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectOrder ()
 BEGIN 
-	SELECT `order`.id, `order`.`type_document`, `order`.`num_document`, `table`.name_table, status.name FROM `order` INNER JOIN `table` ON `table`.`id` = `order`.`id_table` INNER JOIN status ON status.id = `order`.`id_status`;
+	SELECT R.*, T.name_table, S.name as status FROM `order` R INNER JOIN `table` T ON T.id = R.id_table INNER JOIN status S ON S.id = R.id_status;
 END //
 DELIMITER ;
 
@@ -543,7 +543,7 @@ CREATE PROCEDURE selectOrderId(
 	IN id_o INTEGER
 )
 BEGIN
-	SELECT * FROM `order` WHERE id = id_o;
+	SELECT O.*, T.name_table FROM `order` O INNER JOIN `table` T ON O.id_table = T.id WHERE O.id = id_o;
 END //
 DELIMITER ;
 

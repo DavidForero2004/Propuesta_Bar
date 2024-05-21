@@ -1,0 +1,76 @@
+.file-name {
+    margin-left: 1rem;
+    /* or whatever margin you require */
+}
+.image_product{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.example-right-align {
+    text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.example-right-align {
+    text-align: right;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form_group input {
+    width: 100%;
+}
+
+#status {
+    width: 100% !important;
+}
+
+mat-spinner {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+#t {
+    text-align: center;
+}
+
+.error {
+    margin: 5px !important;
+    font-size: 12px;
+}
+
+.error mat-error {
+    margin-top: -20px !important;
+}
+
+.select_div {
+    display: flex;
+    flex-direction: column;
+}
+img{
+    width: 150px;
+    height: 85px;
+    object-fit: contain;
+}
+.image_2{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}

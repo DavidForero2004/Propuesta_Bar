@@ -121,13 +121,13 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
             this.form.patchValue({
               id_status: Object.id_status
             });
-
+            // console.log(Object);
             this.type_doc = Object.type_document,
             this.num_doc = Object.num_document,
-
-            this.translate.get('gridTable').subscribe((res: string) => {
-              this.id_tab = `${res} ${Object.id_table}`;
-            });
+            this.id_tab = Object.name_table
+            // this.translate.get('gridTable').subscribe((res: string) => {
+            //   this.id_tab = `${res} ${Object.id_table}`;
+            // });
           }
         }
       }
@@ -148,7 +148,6 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
         id_table: this.form.value.id_table,
         id_status: 1
       }
-
       setTimeout(() => {
         this._orderServices.addOrder(order).pipe(
           catchError((error: HttpErrorResponse) => {

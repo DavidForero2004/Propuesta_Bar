@@ -21,7 +21,7 @@
             </mat-form-field>
             <div class="error">
                 <mat-error *ngIf="form.get('type_document')?.hasError('required') && form.get('type_document')?.touched">{{
-                    "requiredNameUser"
+                    "requiredTipeDocument"
                     | translate }}</mat-error>
             </div>
 
@@ -36,10 +36,10 @@
             </mat-form-field>
             <div class="error">
                 <mat-error *ngIf="form.get('num_document')?.hasError('required') && form.get('num_document')?.touched">{{
-                    "requiredStatus" | translate }}</mat-error>
+                    "requiredNumberDocument" | translate }}</mat-error>
             </div>
         </div>
-        <div class="formGroup">
+        <div class="formGroup2">
             <!-- Table Select -->
             <div class="select_div">
                 <mat-form-field *ngIf="id === undefined">
@@ -55,7 +55,7 @@
                 </mat-form-field>
                 <div class="error">
                     <mat-error *ngIf="form.get('id_table')?.hasError('required') && form.get('id_table')?.touched">{{
-                        "requiredStatus" | translate }}</mat-error>
+                        "requireTable" | translate }}</mat-error>
                 </div>
             </div>
 
