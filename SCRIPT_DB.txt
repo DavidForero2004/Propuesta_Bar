@@ -531,7 +531,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectOrder ()
 BEGIN 
-	SELECT * FROM `order`;
+	SELECT `order`.id, `order`.`type_document`, `order`.`num_document`, `table`.name_table, status.name FROM `order` INNER JOIN `table` ON `table`.`id` = `order`.`id_table` INNER JOIN status ON status.id = `order`.`id_status`;
 END //
 DELIMITER ;
 

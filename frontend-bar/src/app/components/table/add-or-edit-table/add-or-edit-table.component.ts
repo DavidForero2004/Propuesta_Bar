@@ -178,5 +178,4 @@ export class AddOrEditTableComponent implements OnInit {
     this.translate.use('en');
     this._tableServices.updateServerLanguage('en').subscribe(() => { });
   }
-
 }

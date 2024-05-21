@@ -5,7 +5,7 @@
         <div class="search_add">
             <!-- Button Add -->
             <mat-form-field>
-                <mat-label>Filter</mat-label>
+                <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
             <button (click)="addStatus()" mat-flat-button color="primary" class="add_">

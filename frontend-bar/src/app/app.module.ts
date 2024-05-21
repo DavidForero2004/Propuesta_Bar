@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 //Moduls
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'; // Cambia la importación
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr';
@@ -58,6 +58,9 @@ import { AddOrEditStatusComponent } from './components/status/add-or-edit-status
 import { ListStatusComponent } from './components/status/list-status/list-status.component';
 import { ListTableComponent } from './components/table/list-table/list-table.component';
 import { AddOrEditTableComponent } from './components/table/add-or-edit-table/add-or-edit-table.component';
+import { ListOrderEmployeeComponent } from './components/order/list-order-employee/list-order-employee.component';
+import { AddOrEditOrderEmployeeComponent } from './components/order/add-or-edit-order-employee/add-or-edit-order-employee.component';
+import { AddFormOrderClientComponent } from './components/order/add-form-order-client/add-form-order-client.component';
 
 @NgModule({
   declarations: [
@@ -79,13 +82,16 @@ import { AddOrEditTableComponent } from './components/table/add-or-edit-table/ad
     AddOrEditStatusComponent,
     ListStatusComponent,
     ListTableComponent,
-    AddOrEditTableComponent
+    AddOrEditTableComponent,
+    ListOrderEmployeeComponent,
+    AddOrEditOrderEmployeeComponent,
+    AddFormOrderClientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN' }), // Agrega HttpClientXsrfModule
+    HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN' }),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -121,7 +127,6 @@ import { AddOrEditTableComponent } from './components/table/add-or-edit-table/ad
     MatMenuModule
   ],
   providers: [
-    // No se necesita provideHttpClient
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntlService },
     { provide: MAT_DATE_LOCALE, useValue: 'es' },

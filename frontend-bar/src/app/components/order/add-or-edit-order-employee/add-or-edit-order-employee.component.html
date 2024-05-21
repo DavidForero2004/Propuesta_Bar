@@ -1,0 +1,83 @@
+<div class="container-tittleadduser">
+    <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+    <h2 mat-dialog-title id="t" *ngIf="id === undefined">{{ operation }} {{ "titleOrder" | translate }}</h2>
+    <h2 mat-dialog-title id="t" *ngIf="id !== undefined">{{ operation }}</h2>
+</div>
+<form [formGroup]="form" (ngSubmit)="addOrder()">
+    <mat-dialog-content class="mat-typography">
+
+        <div class="form_group">
+            <!-- Type Document Select -->
+            <mat-form-field *ngIf="id === undefined">
+                <mat-label>{{ "typeDocument" | translate }}</mat-label>
+                <mat-select formControlName="type_document">
+                    <mat-option *ngFor="let tyDocument of typeDocument" [value]="tyDocument.name">{{ tyDocument.id }} - {{
+                        tyDocument.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" *ngIf="id !== undefined">
+                <mat-label>{{ "typeDocument" | translate }}</mat-label>
+                <input matInput disabled [value]="type_doc">
+            </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('type_document')?.hasError('required') && form.get('type_document')?.touched">{{
+                    "requiredNameUser"
+                    | translate }}</mat-error>
+            </div>
+
+            <!-- Number Document Input -->
+            <mat-form-field *ngIf="id === undefined">
+                <mat-label>{{ "numDocument" | translate }}</mat-label>
+                <input type="number" matInput min="0" formControlName="num_document">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" *ngIf="id !== undefined">
+                <mat-label>{{ "numDocument" | translate }}</mat-label>
+                <input matInput disabled [value]="num_doc">
+            </mat-form-field>
+            <div class="error">
+                <mat-error *ngIf="form.get('num_document')?.hasError('required') && form.get('num_document')?.touched">{{
+                    "requiredStatus" | translate }}</mat-error>
+            </div>
+        </div>
+        <div class="formGroup">
+            <!-- Table Select -->
+            <div class="select_div">
+                <mat-form-field *ngIf="id === undefined">
+                    <mat-label>{{ "gridTable" | translate }}</mat-label>
+                    <mat-select formControlName="id_table">
+                        <mat-option *ngFor="let tablefor of table" [value]="tablefor.id">{{ "gridTable" | translate }}
+                            {{ tablefor.name_table }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" *ngIf="id !== undefined">
+                    <mat-label>{{ "gridTable" | translate }}</mat-label>
+                    <input matInput disabled [value]="id_tab">
+                </mat-form-field>
+                <div class="error">
+                    <mat-error *ngIf="form.get('id_table')?.hasError('required') && form.get('id_table')?.touched">{{
+                        "requiredStatus" | translate }}</mat-error>
+                </div>
+            </div>
+
+            <!-- Status Select -->
+            <div class="select_div" *ngIf="id !== undefined">
+                <mat-form-field>
+                    <mat-label>{{ "statusList" | translate }}</mat-label>
+                    <mat-select formControlName="id_status">
+                        <mat-option *ngFor="let state of status" [value]="state.id">{{ state.name }}</mat-option>
+                    </mat-select>                    
+                </mat-form-field>
+                <div class="error">
+                    <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{
+                        "requiredStatus" | translate }}</mat-error>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate
+            }}</button>
+        <button type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept" | translate }}</button>
+    </mat-dialog-actions>
+</form>

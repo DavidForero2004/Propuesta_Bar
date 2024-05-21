@@ -4,7 +4,7 @@
     <div class="mat-elevation-z8">
         <div class="search_add">
             <mat-form-field>
-                <mat-label>Filter</mat-label>
+                <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="rolFilter($event)">
             </mat-form-field>
             <button (click)="addRol()" mat-flat-button color="primary" class="add_"><mat-icon>add</mat-icon></button>

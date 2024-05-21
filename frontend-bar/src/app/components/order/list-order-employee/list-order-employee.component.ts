@@ -1,29 +1,29 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Table } from '../../../interfaces/table';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { TableService } from '../../../services/table.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { StatusService } from '../../../services/status.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorService } from '../../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusService } from '../../../services/status.service';
-import { Status } from '../../../interfaces/status';
-import { AddOrEditTableComponent } from '../add-or-edit-table/add-or-edit-table.component';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AddOrEditOrderEmployeeComponent } from '../add-or-edit-order-employee/add-or-edit-order-employee.component';
 import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Status } from '../../../interfaces/status';
+import { OrderService } from '../../../services/order.service';
+import { Order } from '../../../interfaces/order';
 
 @Component({
-  selector: 'app-list-table',
-  templateUrl: './list-table.component.html',
-  styleUrl: './list-table.component.css'
+  selector: 'app-list-order-employee',
+  templateUrl: './list-order-employee.component.html',
+  styleUrl: './list-order-employee.component.css'
 })
-export class ListTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name_table', 'name_status', 'action'];
-  dataSource = new MatTableDataSource<Table>;
+export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['type_document','num_document','table','status','action'];
+  dataSource = new MatTableDataSource<Order>;
   dataSourceStatus = new MatTableDataSource<Status>;
-  tableDelete: string = '';
+  orderDelete: string = '';
   removed: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,7 +31,7 @@ export class ListTableComponent implements OnInit, AfterViewInit {
   // listUser: User[] = [];
 
   constructor(
-    private _tableService: TableService,
+    private _orderService: OrderService,
     private _statusService: StatusService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
@@ -43,8 +43,8 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteTable').subscribe((res: string) => {
-      this.tableDelete = res;
+    this.translate.get('deleteOrder').subscribe((res: string) => {
+      this.orderDelete = res;
     });
 
     this.translate.get('removed').subscribe((res: string) => {
@@ -53,7 +53,7 @@ export class ListTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getTable();
+    this.getOrder();
   }
 
   ngAfterViewInit(): void {
@@ -70,55 +70,50 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getTable() {
-    this._tableService.getTable().subscribe((data: any) => {
+  getOrder() {
+    this._orderService.getOrder().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          // Assign users to listUser
-          // this.listUser = result;
           this.dataSource.data = result;
         }
       }
     });
   }
 
-  addTable(id?: number) {
-    // console.log(id);
-    const dialogRef = this.dialog.open(AddOrEditTableComponent, {
+  addOrder(id?: number) {
+    const dialogRef = this.dialog.open(AddOrEditOrderEmployeeComponent, {
       width: '550px',
       disableClose: true,
       data: { id: id },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
-        this.getTable();
+        this.getOrder();
       }
     });
   }
 
-  deleteUser(id: number) {
-    this._tableService.deleteTable(id).pipe(
+  deleteOrder(id: number) {
+    this._orderService.deleteOrder(id).pipe(
       catchError((error: HttpErrorResponse) => {
         this._errorService.msjError(error);
         return throwError(error);
       })
     ).subscribe(() => {
-      this.getTable();
-      this.toastr.success(this.tableDelete, this.removed);
+      this.getOrder();
+      this.toastr.success(this.orderDelete, this.removed);
     });;
   }
 
   es() {
     this.translate.use('es');
-    this._tableService.updateServerLanguage('es').subscribe(() => { });
+    this._orderService.updateServerLanguage('es').subscribe(() => { });
   }
 
   en() {
     this.translate.use('en');
-    this._tableService.updateServerLanguage('en').subscribe(() => { });
+    this._orderService.updateServerLanguage('en').subscribe(() => { });
   }
 }

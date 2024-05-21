@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TableService {
-
   private myAppUrl: string;
   private myApiUrl: string;
   constructor(private http: HttpClient) {
@@ -16,7 +15,6 @@ export class TableService {
     this.myAppUrl = environment.endpoint;
    }
 
-   
   getTable(): Observable<Table[]> {
     return this.http.get<Table[]>(`${this.myAppUrl}${this.myApiUrl}/`)
   }
@@ -36,6 +34,7 @@ export class TableService {
   getTableId(id?: number): Observable<Table[]> {
     return this.http.get<Table[]>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
+
   updateServerLanguage(lang: string): Observable<any> {
     return this.http.post<any>(`${this.myAppUrl}language`, { lang });
   }

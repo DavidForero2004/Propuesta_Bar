@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<h1 class="title">{{ "navTable" | translate }}</h1>
+<h1 class="title">{{ "navOrder" | translate }}</h1>
 <section>
     <div class="mat-elevation-z8">
         <div class="search_add">
@@ -8,34 +8,44 @@
                 <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
-            <button (click)="addTable()" mat-flat-button color="primary" class="add_">
+            <button (click)="addOrder()" mat-flat-button color="primary" class="add_">
                 <mat-icon class="btn-delete">add</mat-icon>
             </button>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name_table">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "nameTable" | translate }}</th>
+            <!-- Type Document Column -->
+            <ng-container matColumnDef="type_document">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "typeDocument" | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.type_document }}</td>
+            </ng-container>
+
+            <!-- Number Document Column -->
+            <ng-container matColumnDef="num_document">
+                <th mat-header-cell *matHeaderCellDef>{{ "numDocument" | translate }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.num_document }}</td>
+            </ng-container>
+
+            <!-- Table Column -->
+            <ng-container matColumnDef="table">
+                <th mat-header-cell *matHeaderCellDef>{{ "gridTable" | translate }}</th>
                 <td mat-cell *matCellDef="let element">{{ element.name_table }}</td>
             </ng-container>
 
-
             <!-- Status Column -->
-            <ng-container matColumnDef="name_status">
+            <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>{{ "statusList" | translate }}</th>
                 <td mat-cell *matCellDef="let element">{{ element.name }}</td>
             </ng-container>
 
-
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>{{ "actions" | translate }}</th>
                 <td mat-cell *matCellDef="let element" id="tdaction">
-                    <mat-icon (click)="addTable(element.id)" class="btn-edit"
-                        matTooltip="{{ 'edit' | translate }} {{ element.name_table }}">edit</mat-icon>
-                    <mat-icon (click)="deleteUser(element.id)" class="btn-delete"
-                        matTooltip="{{ 'delete' | translate }} {{ element.name_table }}" >delete</mat-icon>
+                    <mat-icon (click)="addOrder(element.id)" class="btn-edit"
+                        matTooltip="{{ 'edit' | translate }}">edit</mat-icon>
+                    <mat-icon (click)="deleteOrder(element.id)" class="btn-delete"
+                        matTooltip="{{ 'delete' | translate }}">delete</mat-icon>
                 </td>
             </ng-container>
 

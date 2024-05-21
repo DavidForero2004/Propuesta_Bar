@@ -2,7 +2,8 @@
     <div class="option_container">
         <a href="/users">{{"users" | translate}}</a>
         <a href="/events">{{"events" | translate }}</a>
-        <a href="/products"> {{"products" | translate }}</a>
+        <a href="/products">{{"products" | translate }}</a>
+        <a href="/order">{{"orders" | translate }}</a>
         <a type="button" mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</a>
         <a (click)="logOut()">{{"exit" | translate}}</a>
     </div>
@@ -14,14 +15,15 @@
         <fa-icon [icon]="iconMenu" id="manu_hamb"></fa-icon>
     </div>
     <div class="logo_nav">
-       <img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo">
+        <a href="/hollowbar-initial/client"><img src="../../../../assets/img/LOGO BAR/bran2-01.png" alt="Logo"></a>
     </div>
 
 </nav>
 <div class="option_container_menu">
-    <a href="/users"> {{"users" | translate}}</a>
-    <a href="/events"> {{"events" | translate }}</a>
-    <a href="/products"> {{"products" | translate }}</a>
+    <a href="/users">{{"users" | translate}}</a>
+    <a href="/events">{{"events" | translate }}</a>
+    <a href="/products">{{"products" | translate }}</a>
+    <a href="/order">{{"orders" | translate }}</a>
     <a mat-menu-item [matMenuTriggerFor]="setting">{{ "setting" | translate }}</a>
     <a (click)="logOut()">{{"exit" | translate}}</a>
     <div class="language-buttons_h">

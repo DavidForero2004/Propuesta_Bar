@@ -14,23 +14,28 @@
             <mat-form-field class="example-full-width" *ngIf="id !== undefined">
                 <mat-label>{{ "nameProduct" | translate }}</mat-label>
                 <input matInput disabled [value]="nameProduct">
-              </mat-form-field>
+            </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name_product')?.hasError('required') && form.get('name_product')?.touched">{{ "requiredNameProduct" | translate }}</mat-error>
+                <mat-error
+                    *ngIf="form.get('name_product')?.hasError('required') && form.get('name_product')?.touched">{{
+                    "requiredNameProduct" | translate }}</mat-error>
             </div>
 
             <!-- Image -->
             <div *ngIf="id !== undefined" class="image_2">
                 <mat-label>{{ "imageProduct" | translate }}</mat-label>
-                    <img *ngIf="selectedFile == null" [src]="baseUrl + imageProduct" alt="Product Image">
+                <img *ngIf="selectedFile == null" [src]="baseUrl + imageProduct" alt="Product Image">
                 <div class="image_product" *ngIf="id !== undefined">
                     <div>
-                        <button type="button" mat-raised-button (click)="fileInput.click()">{{ "changeImageProduct" | translate }}</button>
-                        <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image" accept="image/*">
+                        <button type="button" mat-raised-button (click)="fileInput.click()">{{ "changeImageProduct" |
+                            translate }}</button>
+                        <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image"
+                            accept="image/*">
                         <span class="file-name">{{ selectedFile?.name }}</span>
                         <div class="error">
-                        <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredImageProduct" | translate }}</mat-error>
-                    </div>
+                            <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{
+                                "requiredImageProduct" | translate }}</mat-error>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,24 +44,29 @@
             <div class="image_product" *ngIf="id === undefined">
                 <mat-label>{{ "imageProduct" | translate }}</mat-label>
                 <div>
-                    <button type="button" mat-raised-button (click)="fileInput.click()">{{ "chooseImage" | translate }}</button>
-                    <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image" accept="image/*">
+                    <button type="button" mat-raised-button (click)="fileInput.click()">{{ "chooseImage" | translate
+                        }}</button>
+                    <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image"
+                        accept="image/*">
                     <span class="file-name">{{ selectedFile?.name }}</span>
                     <div class="error">
-                    <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{ "requiredImageProduct" | translate }}</mat-error>
-                </div>
+                        <mat-error *ngIf="form.get('image')?.hasError('required') && form.get('image')?.touched">{{
+                            "requiredImageProduct" | translate }}</mat-error>
+                    </div>
                 </div>
             </div>
 
             <!-- Price Input -->
             <mat-form-field floatLabel="always">
                 <mat-label>{{ "price" | translate }}</mat-label>
-                <input matInput type="number" class="example-right-align" placeholder="0" min="0" formControlName="price">
+                <input matInput type="number" class="example-right-align" placeholder="0" min="0"
+                    formControlName="price">
                 <span matTextPrefix>$&nbsp;</span>
                 <span matTextSuffix>.00</span>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">{{ "requiredPrice" | translate }}</mat-error>
+                <mat-error *ngIf="form.get('price')?.hasError('required') && form.get('price')?.touched">{{
+                    "requiredPrice" | translate }}</mat-error>
             </div>
             <!-- Stock Input -->
             <mat-form-field>
@@ -64,7 +74,8 @@
                 <input type="number" matInput placeholder="0" min="0" formControlName="stock">
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">{{ "requiredStock" | translate }}</mat-error>
+                <mat-error *ngIf="form.get('stock')?.hasError('required') && form.get('stock')?.touched">{{
+                    "requiredStock" | translate }}</mat-error>
             </div>
             <!-- Status Input -->
             <div class="select_div">
@@ -72,7 +83,7 @@
                     <mat-label>{{ "statusList" | translate }}</mat-label>
                     <mat-select formControlName="id_status">
                         <mat-option *ngFor="let state of status" [value]="state.id">{{ state.name }}</mat-option>
-                    </mat-select>                    
+                    </mat-select>
                 </mat-form-field>
                 <div class="error">
                     <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{
@@ -84,7 +95,8 @@
     <mat-dialog-actions align="end">
         <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate
             }}</button>
-        <button *ngIf="id === undefined" type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept" | translate }}</button>
+        <button *ngIf="id === undefined" type="submit" [disabled]="form.invalid" mat-button color="primary">{{ "accept"
+            | translate }}</button>
         <button *ngIf="id !== undefined" type="submit" mat-button color="primary">{{ "accept" | translate }}</button>
     </mat-dialog-actions>
 </form>
