@@ -3,11 +3,12 @@
 <section>
     <div class="mat-elevation-z8">
         <div class="search_add">
-            <!-- Button Add -->
             <mat-form-field>
                 <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
+            <mat-icon (click)="refresh()">refresh</mat-icon>
+            <!-- Button Add -->
             <button (click)="addOrder()" mat-flat-button color="primary" class="add_">
                 <mat-icon class="btn-delete">add</mat-icon>
             </button>

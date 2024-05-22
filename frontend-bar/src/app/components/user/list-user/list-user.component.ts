@@ -65,6 +65,10 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getUser();
+  }
+
   getUser() {
     this._userService.getUser().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

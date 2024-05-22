@@ -64,6 +64,10 @@ export class ListStatusComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getStatus();
+  }
+
   getStatus() {
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

@@ -65,6 +65,10 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getEvent();
+  }
+
   getEvent() {
     this._eventService.getEvent().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

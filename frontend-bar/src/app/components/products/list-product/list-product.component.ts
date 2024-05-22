@@ -17,7 +17,7 @@ import { FileService } from '../../../services/file.service';
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
-  styleUrl: './list-product.component.css'
+  styleUrls: ['./list-product.component.css']
 })
 
 export class ListProductComponent implements OnInit, AfterViewInit {
@@ -26,6 +26,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   productDelete: string = '';
   removed: string = '';
   baseUrl: string = '';
+  refreshTime: number = Date.now();
   private myAppUrl: string;
   private myApiUrl: string;
   imageProduct: any = null;
@@ -50,7 +51,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
 
     this._productService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get(['deleteProduct','removed']).subscribe((res: any) => {
+    this.translate.get(['deleteProduct', 'removed']).subscribe((res: any) => {
       this.productDelete = res.deleteProduct;
       this.removed = res.removed;
     });
@@ -73,6 +74,11 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  refresh() {
+    this.refreshTime = Date.now();
+    this.getProduct();
   }
 
   getProduct() {
@@ -113,20 +119,20 @@ export class ListProductComponent implements OnInit, AfterViewInit {
             const productObject = firstArray[0];
             this.imageProduct = productObject.image;
           }
+          
+          this._productService.deleteProduct(id).pipe(
+            catchError((error: HttpErrorResponse) => {
+              this._errorService.msjError(error);
+              return throwError(error);
+            })
+          ).subscribe(() => {
+            this.getProduct();
+            this.toastr.success(this.productDelete, this.removed);
+            this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
+            });
+          });
         }
       }
-    });
-
-    this._productService.deleteProduct(id).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this._errorService.msjError(error);
-        return throwError(error);
-      })
-    ).subscribe(() => {
-      this.getProduct();
-      this.toastr.success(this.productDelete, this.removed);
-      this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
-      });
     });
   }
 

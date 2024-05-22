@@ -69,6 +69,10 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getTable();
+  }
+
   getTable() {
     this._tableService.getTable().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

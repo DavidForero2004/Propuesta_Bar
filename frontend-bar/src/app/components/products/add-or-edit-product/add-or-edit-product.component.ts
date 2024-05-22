@@ -146,7 +146,7 @@ export class AddOrEditProductComponent implements OnInit {
       const formattedDate = today.getFullYear().toString().padStart(4, '0') + (today.getMonth() + 1).toString().padStart(2, '0') + today.getDate().toString().padStart(2, '0');
       const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
       const newFile = new File([this.selectedFile], newNameFile);
-
+      
       const product: Product = {
         name_product: this.form.value.name_product,
         image: newNameFile,

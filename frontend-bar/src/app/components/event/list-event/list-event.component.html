@@ -7,7 +7,11 @@
                 <mat-label>{{ "filter" | translate }}</mat-label>
                 <input matInput #input (keyup)="eventFilter($event)">
             </mat-form-field>
-            <button (click)="addEvent()" mat-flat-button color="primary" class="add_"><mat-icon>add</mat-icon></button>
+            <mat-icon (click)="refresh()">refresh</mat-icon>
+            <!-- Button Add -->
+            <button (click)="addEvent()" mat-flat-button color="primary" class="add_">
+                <mat-icon>add</mat-icon>
+            </button>
         </div>
         <table mat-table [dataSource]="dataSource" matSort>
             <!-- Name Event Column -->

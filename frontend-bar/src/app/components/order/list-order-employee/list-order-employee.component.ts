@@ -69,6 +69,10 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getOrder();
+  }
+
   getOrder() {
     this._orderService.getOrder().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {

@@ -66,6 +66,10 @@ export class ListRolComponent implements OnInit, AfterViewInit {
     }
   }
 
+  refresh() {
+    this.getRol();
+  }
+
   getRol() {
     this._rolService.getRol().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
