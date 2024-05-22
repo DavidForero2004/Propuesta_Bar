@@ -37,6 +37,38 @@ const getOrder = (req, res) => {
     }
 }
 
+const getOrderSales = (req, res) => {
+    const query = 'CALL selectSales';
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
 
 //insert order
 const insertOrder = (req, res) => {
@@ -217,4 +249,4 @@ const getOrderId = (req, res) => {
 }
 
 
-module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId };
+module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId, getOrderSales };

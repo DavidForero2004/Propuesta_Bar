@@ -51,14 +51,15 @@ CREATE TABLE IF NOT EXISTS `table`(
 );
 
 
-CREATE TABLE IF NOT EXISTS `order`(
-	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	type_document VARCHAR(255) NOT NULL,
-	num_document INTEGER NOT NULL,
-	id_table INTEGER,
-	id_status INTEGER,
-	FOREIGN KEY(id_table) REFERENCES `table`(id),
-	FOREIGN KEY(id_status) REFERENCES status(id)
+CREATE TABLE IF NOT EXISTS `order` (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    type_document VARCHAR(255) NOT NULL,
+    num_document INTEGER NOT NULL,
+    id_table INTEGER,
+    id_status INTEGER,
+    order_date DATE, 
+    FOREIGN KEY (id_table) REFERENCES `table`(id),
+    FOREIGN KEY (id_status) REFERENCES status(id)
 );
 
 CREATE TABLE IF NOT EXISTS order_product(
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 	id_order INTEGER,
 	id_product INTEGER,
 	count INTEGER NOT NULL,
-	total DECIMAL(65,2)
+	total DECIMAL(65,2),
 	FOREIGN KEY(id_order) REFERENCES `order`(id),
 	FOREIGN KEY(id_product) REFERENCES product(id)
 );
@@ -558,20 +559,23 @@ DELIMITER ;
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertOrder (
-		IN type_document_o VARCHAR(255),
-		IN num_document_o INTEGER,
-		IN id_table_o INTEGER,
-		IN id_status_o INTEGER
+    IN type_document_o VARCHAR(255),
+    IN num_document_o INTEGER,
+    IN id_table_o INTEGER,
+    IN id_status_o INTEGER
 )
 BEGIN 
-	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM `order`);
-	SET @sql = CONCAT('ALTER TABLE `order` AUTO_INCREMENT = ', @maxId + 1);
-	PREPARE stmt FROM @sql;
-	EXECUTE stmt;
-	DEALLOCATE PREPARE stmt;
-	INSERT INTO `order`(type_document, num_document, id_table, id_status) VALUES(type_document_o, num_document_o, id_table_o, id_status_o);
+    SET @maxId = (SELECT COALESCE(MAX(id),0) FROM `order`);
+    SET @sql = CONCAT('ALTER TABLE `order` AUTO_INCREMENT = ', @maxId + 1);
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    
+    INSERT INTO `order` (type_document, num_document, id_table, id_status, order_date) 
+    VALUES (type_document_o, num_document_o, id_table_o, id_status_o, CURDATE());
 END //
 DELIMITER ;
+
 
 ---------
 
@@ -680,6 +684,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
   
 CREATE EVENT updateProductStatusEvent
     ON SCHEDULE EVERY 1 HOUR
@@ -690,6 +696,28 @@ SHOW VARIABLES LIKE 'event_scheduler';
 
 SET GLOBAL event_scheduler = ON;
 
+/*Procedure for select Sales agroups*/
+
+DELIMITER //
+CREATE PROCEDURE selectSales()
+BEGIN
+    SELECT 
+        O.type_document,
+        T.name_table,
+        p.name_product, 
+        SUM(p.price) AS price, 
+        SUM(OP.count) AS count, 
+        SUM(OP.total) AS total 
+    FROM `order` O 
+        INNER JOIN order_product OP ON O.id = OP.id_order 
+        INNER JOIN product P ON OP.id_product = P.id
+        INNER JOIN `table` T ON O.id_table = T.id
+    WHERE O.id_status = 3 AND O.order_date BETWEEN DATE_FORMAT(CURDATE(), '%Y-%m-01') AND LAST_DAY(CURDATE())
+    GROUP BY 
+        O.type_document,
+        P.name_product;
+END //
+DELIMITER ;
 
 
 
