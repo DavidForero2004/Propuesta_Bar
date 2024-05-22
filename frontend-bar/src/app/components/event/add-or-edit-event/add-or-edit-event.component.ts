@@ -17,6 +17,7 @@ import { format } from 'date-fns';
   templateUrl: './add-or-edit-event.component.html',
   styleUrl: './add-or-edit-event.component.css'
 })
+
 export class AddOrEditEventComponent implements OnInit {
   myFilter = (d: Date | null): boolean => {
     const today = new Date();
@@ -39,7 +40,8 @@ export class AddOrEditEventComponent implements OnInit {
   operation: string = '';
   id: number | undefined;
 
-  constructor(public dialogRef: MatDialogRef<AddOrEditEventComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<AddOrEditEventComponent>,
     private fb: FormBuilder,
     private _eventService: EventService,
     private _errorService: ErrorService,
@@ -48,7 +50,8 @@ export class AddOrEditEventComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     @Inject(MAT_DATE_LOCALE) private dateLocale: string,
     private datePipe: DatePipe,
-    private dateAdapter: DateAdapter<any>) {
+    private dateAdapter: DateAdapter<any>
+  ) {
     this.form = this.fb.group({
       name_event: ['', Validators.required],
       date: ['', Validators.required],
@@ -62,24 +65,12 @@ export class AddOrEditEventComponent implements OnInit {
 
     this._eventService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
-
-    this.translate.get('saveEvent').subscribe((res: string) => {
-      this.eventSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editEvent').subscribe((res: string) => {
-      this.eventUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add','saveEvent','aggregate','editEvent','edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.eventSave = res.saveEvent;
+      this.aggregate = res.aggregate;
+      this.eventUpdate = res.editEvent;
+      this.edited = res.edited;
     });
   };
 
@@ -161,8 +152,6 @@ export class AddOrEditEventComponent implements OnInit {
     const formatdatetime = combinedDate + ' ' + getTime;
 
     const formatdate = this.datePipe.transform(formatdatetime, 'YYYY-MM-dd HH:mm:ss');
-    // console.log(formatdate);
-
 
     this.loading = true;
 
@@ -189,14 +178,12 @@ export class AddOrEditEventComponent implements OnInit {
       }
     } else {
       if (formatdate !== null) {
-        console.log(formatdate);
-        
         const event: Events = {
           id: this.id,
           name_event: this.form.value.name_event,
           dateString: formatdate,
         }
-  
+
         setTimeout(() => {
           this._eventService.updateEvent(event).pipe(
             catchError((error: HttpErrorResponse) => {

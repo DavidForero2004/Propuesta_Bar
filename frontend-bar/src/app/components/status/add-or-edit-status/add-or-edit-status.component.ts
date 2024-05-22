@@ -18,25 +18,15 @@ import { StatusService } from '../../../services/status.service';
   templateUrl: './add-or-edit-status.component.html',
   styleUrl: './add-or-edit-status.component.css'
 })
-export class AddOrEditStatusComponent implements OnInit{
-  hide = true;
+export class AddOrEditStatusComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   statusSave: string = '';
   aggregate: string = '';
   statusUpdate: string = '';
   edited: string = '';
-
   operation: string = '';
   id: number | undefined;
-
-  // status: Status[] = [
-  //   { id: 1, name: 'Activo' }
-  // ];
-
-  // rol: Rol[] = [
-  //   { id: 1, name: 'Administrador' }
-  // ]
 
   constructor(
     public dialogRef: MatDialogRef<AddOrEditStatusComponent>,
@@ -45,8 +35,8 @@ export class AddOrEditStatusComponent implements OnInit{
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService,
-
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.form = this.fb.group({
       name: ['', Validators.required]
     });
@@ -56,30 +46,21 @@ export class AddOrEditStatusComponent implements OnInit{
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
+    this._StatusServices.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('saveStatus').subscribe((res: string) => {
-      this.statusSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editRol').subscribe((res: string) => {
-      this.statusUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add','saveStatus','aggregate','editStatus','edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.statusSave = res.saveStatus;
+      this.aggregate = res.aggregate;
+      this.statusUpdate = res.editStatus;
+      this.edited = res.edited;
     });
   };
 
   ngOnInit(): void {
     this.isEdit(this.id)
   }
+
   cancel() {
     this.dialogRef.close(false);
   }
@@ -89,7 +70,6 @@ export class AddOrEditStatusComponent implements OnInit{
       this.translate.get('edit').subscribe((res: string) => {
         this.operation = res;
       });
-      // this.operation = 'Editar ';
       this.getStatusId(id);
     }
   }
@@ -98,14 +78,13 @@ export class AddOrEditStatusComponent implements OnInit{
     this._StatusServices.getStatusId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const resultArray = data.result;
-        // console.log(resultArray);
 
-        // Verificar si hay al menos un elemento en el array
         if (resultArray.length > 0) {
           const firstArray = resultArray[0];
+
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
             const userObject = firstArray[0];
-            // console.log('Información del usuario:', userObject.name);
+
             this.form.patchValue({
               name: userObject.name
             });
@@ -116,11 +95,9 @@ export class AddOrEditStatusComponent implements OnInit{
   }
 
   addStatus() {
-    // console.log(this.form);
     if (this.form.invalid) {
       return;
     }
-    // console.log(user);
 
     this.loading = true;
 

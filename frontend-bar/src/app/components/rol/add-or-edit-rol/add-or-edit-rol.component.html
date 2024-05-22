@@ -4,21 +4,16 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="addRol()">
     <mat-dialog-content class="mat-typography">
-
         <div class="form_group">
             <!-- Name Input -->
             <mat-form-field>
-                <mat-label>{{ "name" | translate }}</mat-label>
+                <mat-label>{{ "originalName" | translate }}</mat-label>
                 <input formControlName="name" matInput>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">{{ "requiredNameUser"
-                    | translate }}</mat-error>
+                <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">{{ "requiredNameUser" | translate }}</mat-error>
             </div>
-
-           
         </div>
-  
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate }}</button>

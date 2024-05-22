@@ -19,21 +19,19 @@ import { TableService } from '../../../services/table.service';
   templateUrl: './add-or-edit-order-employee.component.html',
   styleUrl: './add-or-edit-order-employee.component.css'
 })
+
 export class AddOrEditOrderEmployeeComponent implements OnInit {
-  hide = true;
   form: FormGroup;
   loading: boolean = false;
   orderSave: string = '';
   aggregate: string = '';
   orderUpdate: string = '';
   edited: string = '';
-
   operation: string = '';
   id: number | undefined;
   type_doc: any = null;
   num_doc: any = null;
   id_tab: any = null;
-
   status: Status[] = [];
   table: Table[] = [];
   typeDocument: TypeDocument[] = [
@@ -69,25 +67,15 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
+    
+    this._orderServices.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
-
-    this.translate.get('saveOrder').subscribe((res: string) => {
-      this.orderSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editOrder').subscribe((res: string) => {
-      this.orderUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add','saveOrder','aggregate','editOrder','edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.orderSave = res.saveOrder;
+      this.aggregate = res.aggregate;
+      this.orderUpdate = res.editOrder;
+      this.edited = res.edited;
     });
   };
 
@@ -121,13 +109,10 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
             this.form.patchValue({
               id_status: Object.id_status
             });
-            // console.log(Object);
+
             this.type_doc = Object.type_document,
             this.num_doc = Object.num_document,
             this.id_tab = Object.name_table
-            // this.translate.get('gridTable').subscribe((res: string) => {
-            //   this.id_tab = `${res} ${Object.id_table}`;
-            // });
           }
         }
       }
@@ -148,6 +133,7 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
         id_table: this.form.value.id_table,
         id_status: 1
       }
+
       setTimeout(() => {
         this._orderServices.addOrder(order).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -203,6 +189,15 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
         }
       }
     });
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
   }
 
   es() {

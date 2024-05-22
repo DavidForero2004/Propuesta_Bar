@@ -13,12 +13,12 @@ import { Rol } from '../../../interfaces/rol';
 import { StatusService } from '../../../services/status.service';
 import { RolService } from '../../../services/rol.service';
 
-
 @Component({
   selector: 'app-add-or-edit-user',
   templateUrl: './add-or-edit-user.component.html',
   styleUrl: './add-or-edit-user.component.css'
 })
+
 export class AddOrEditUserComponent implements OnInit {
   hide = true;
   form: FormGroup;
@@ -27,12 +27,9 @@ export class AddOrEditUserComponent implements OnInit {
   aggregate: string = '';
   userUpdate: string = '';
   edited: string = '';
-
   operation: string = '';
   id: number | undefined;
-
   status: Status[] = [];
-
   rol: Rol[] = []
 
   constructor(
@@ -44,38 +41,38 @@ export class AddOrEditUserComponent implements OnInit {
     private translate: TranslateService,
     private _statusService: StatusService,
     private _rolService: RolService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
-      status: ['', Validators.required],
-      rol: ['', Validators.required]
-    });
-
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.id = data.id;
+
+    if (this.id === undefined) {
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(3)]],
+        rol: ['', Validators.required]
+      });
+    } else {
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(3)]],
+        status: ['', Validators.required],
+        rol: ['', Validators.required]
+      });
+    }
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
+    this._userServices.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('saveUser').subscribe((res: string) => {
-      this.userSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editUser').subscribe((res: string) => {
-      this.userUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add','saveUser','aggregate','editUser','edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.userSave = res.saveUser;
+      this.aggregate = res.aggregate;
+      this.userUpdate = res.editUser;
+      this.edited = res.edited;
     });
   };
 
@@ -84,6 +81,7 @@ export class AddOrEditUserComponent implements OnInit {
     this.getStatus();
     this.getRol();
   }
+
   cancel() {
     this.dialogRef.close(false);
   }
@@ -93,7 +91,6 @@ export class AddOrEditUserComponent implements OnInit {
       this.translate.get('edit').subscribe((res: string) => {
         this.operation = res;
       });
-      // this.operation = 'Editar ';
       this.getUserId(id);
     }
   }
@@ -102,14 +99,10 @@ export class AddOrEditUserComponent implements OnInit {
     this._userServices.getUserId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const resultArray = data.result;
-        // console.log(resultArray);
-
-        // Verificar si hay al menos un elemento en el array
         if (resultArray.length > 0) {
           const firstArray = resultArray[0];
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
             const userObject = firstArray[0];
-            // console.log('Información del usuario:', userObject.name);
             this.form.patchValue({
               name: userObject.name,
               email: userObject.email,
@@ -123,11 +116,9 @@ export class AddOrEditUserComponent implements OnInit {
   }
 
   addUser() {
-    // console.log(this.form);
     if (this.form.invalid) {
       return;
     }
-    // console.log(user);
 
     this.loading = true;
 
@@ -136,7 +127,7 @@ export class AddOrEditUserComponent implements OnInit {
         name: this.form.value.name,
         email: this.form.value.email,
         password: this.form.value.password,
-        id_status: this.form.value.status,
+        id_status: 1,
         id_rol: this.form.value.rol,
       }
 
@@ -162,6 +153,7 @@ export class AddOrEditUserComponent implements OnInit {
         id_status: this.form.value.status,
         id_rol: this.form.value.rol,
       }
+
       setTimeout(() => {
         this._userServices.updateUser(user).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -182,16 +174,15 @@ export class AddOrEditUserComponent implements OnInit {
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          this.status = result;
+          this.status = result.filter((state: Status) => state.name !== 'Paid' && state.name !== 'Canceled');
         }
       }
     });
   }
+
   getRol() {
     this._rolService.getRol().subscribe((data: any) => {
-      // console.log(data);
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         if (Array.isArray(result)) {
@@ -199,6 +190,24 @@ export class AddOrEditUserComponent implements OnInit {
         }
       }
     });
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
+
+  translateRolName(rolName: string | undefined): string {
+    if (typeof rolName === 'string') {
+      const translatedName = this.translate.instant(`role.${rolName}`);
+      return translatedName !== `role.${rolName}` ? translatedName : '';
+    } else {
+      return '';
+    }
   }
 
   es() {

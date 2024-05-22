@@ -17,6 +17,7 @@ import { AddOrEditUserComponent } from '../add-or-edit-user/add-or-edit-user.com
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css']
 })
+
 export class ListUserComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'status', 'rol', 'action'];
   dataSource = new MatTableDataSource<User>();
@@ -26,22 +27,23 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _userService: UserService,
-              public dialog: MatDialog,
-              private _errorService: ErrorService,
-              private toastr: ToastrService,
-              private translate: TranslateService) {
+  constructor(
+    private _userService: UserService,
+    public dialog: MatDialog,
+    private _errorService: ErrorService,
+    private toastr: ToastrService,
+    private translate: TranslateService
+  ) {
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteUser').subscribe((res: string) => {
-      this.userDelete = res;
-    });
+    this._userService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get(['deleteUser', 'removed']).subscribe((res: any) => {
+      this.userDelete = res.deleteUser;
+      this.removed = res.removed;
     });
   }
 
@@ -72,7 +74,6 @@ export class ListUserComponent implements OnInit, AfterViewInit {
             user.colorStatus = this.getColorBasedOnStatus(user.status!);
           });
           this.dataSource.data = result;
-          
         }
       }
     });
@@ -81,15 +82,15 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   getColorBasedOnStatus(status: string): string {
     switch (status) {
       case 'Active':
-        return 'green';     // Verde para activo
+        return 'green';
       case 'Inactive':
-        return 'red';       // Rojo para inactivo
+        return 'red';
       case 'Paid':
-        return 'brown';     // cafe para pagado
+        return 'brown';
       case 'Canceled':
-        return 'orange';    // Otro color para cancelado
+        return 'orange';
       default:
-        return 'black';     // Negro para otros casos
+        return 'black';
     }
   }
 
@@ -117,6 +118,24 @@ export class ListUserComponent implements OnInit, AfterViewInit {
       this.getUser();
       this.toastr.success(this.userDelete, this.removed);
     });
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
+
+  translateRolName(roleName: string | undefined): string {
+    if (typeof roleName === 'string') {
+      const translatedName = this.translate.instant(`role.${roleName}`);
+      return translatedName !== `role.${roleName}` ? translatedName : '';
+    } else {
+      return '';
+    }
   }
 
   es() {

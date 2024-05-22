@@ -17,7 +17,6 @@ import { StatusService } from '../../../services/status.service';
   styleUrl: './add-or-edit-table.component.css'
 })
 export class AddOrEditTableComponent implements OnInit {
-  hide = true;
   form: FormGroup;
   loading: boolean = false;
   tableSave: string = '';
@@ -39,35 +38,31 @@ export class AddOrEditTableComponent implements OnInit {
     private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _statusService: StatusService
-    ) {
-    this.form = this.fb.group({
-      name_table: ['', Validators.required],
-      id_status: ['', Validators.required]
-    });
-
+  ) {
     this.id = data.id;
+
+    if (this.id === undefined) {
+      this.form = this.fb.group({
+        name_table: ['', Validators.required],
+      });
+    } else {
+      this.form = this.fb.group({
+        name_table: ['', Validators.required],
+        id_status: ['', Validators.required]
+      });
+    }
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
+    this._tableServices.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('saveTable').subscribe((res: string) => {
-      this.tableSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editTable').subscribe((res: string) => {
-      this.tableUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add', 'saveTable', 'aggregate', 'editTable', 'edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.tableSave = res.saveTable;
+      this.aggregate = res.aggregate;
+      this.tableUpdate = res.editTable;
+      this.edited = res.edited;
     });
   };
 
@@ -75,6 +70,7 @@ export class AddOrEditTableComponent implements OnInit {
     this.getStatus();
     this.isEdit(this.id);
   }
+
   cancel() {
     this.dialogRef.close(false);
   }
@@ -84,7 +80,6 @@ export class AddOrEditTableComponent implements OnInit {
       this.translate.get('edit').subscribe((res: string) => {
         this.operation = res;
       });
-      // this.operation = 'Editar ';
       this.getTableId(id);
     }
   }
@@ -93,7 +88,6 @@ export class AddOrEditTableComponent implements OnInit {
     this._tableServices.getTableId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const resultArray = data.result;
-        // Verificar si hay al menos un elemento en el array
         if (resultArray.length > 0) {
           const firstArray = resultArray[0];
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
@@ -109,19 +103,18 @@ export class AddOrEditTableComponent implements OnInit {
   }
 
   addTable() {
-    // console.log(this.form);
     if (this.form.invalid) {
       return;
     }
-    // console.log(user);
 
     this.loading = true;
 
     if (this.id === undefined) {
       const table: Table = {
         name_table: this.form.value.name_table,
-        id_status: this.form.value.id_status
+        id_status: 1 //Active
       }
+
       setTimeout(() => {
         this._tableServices.addTable(table).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -141,6 +134,7 @@ export class AddOrEditTableComponent implements OnInit {
         name_table: this.form.value.name_table,
         id_status: this.form.value.id_status
       }
+
       setTimeout(() => {
         this._tableServices.updateTable(table).pipe(
           catchError((error: HttpErrorResponse) => {
@@ -161,12 +155,20 @@ export class AddOrEditTableComponent implements OnInit {
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
-          this.status = result;
+          this.status = result.filter((state: Status) => state.name !== 'Paid' && state.name !== 'Canceled');
         }
       }
     });
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
   }
 
   es() {

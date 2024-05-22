@@ -19,6 +19,7 @@ import { FileService } from '../../../services/file.service';
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.css'
 })
+
 export class ListProductComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name_product', 'image', 'price', 'stock', 'status', 'action'];
   dataSource = new MatTableDataSource<Product>;
@@ -27,17 +28,19 @@ export class ListProductComponent implements OnInit, AfterViewInit {
   baseUrl: string = '';
   private myAppUrl: string;
   private myApiUrl: string;
+  imageProduct: any = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
-  constructor(private _productService: ProductService,
+  constructor(
+    private _productService: ProductService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
     private _fileServices: FileService,
     private toastr: ToastrService,
-    private translate: TranslateService) {
+    private translate: TranslateService
+  ) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'file';
     this.dataSource = new MatTableDataSource();
@@ -45,12 +48,11 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteProduct').subscribe((res: string) => {
-      this.productDelete = res;
-    });
+    this._productService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get(['deleteProduct','removed']).subscribe((res: any) => {
+      this.productDelete = res.deleteProduct;
+      this.removed = res.removed;
     });
   }
 
@@ -63,7 +65,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  
+
   eventFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -101,8 +103,6 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  imageProduct: any = null;
-
   deleteProduct(id: number) {
     this._productService.getProductId(id).subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
@@ -126,24 +126,34 @@ export class ListProductComponent implements OnInit, AfterViewInit {
       this.getProduct();
       this.toastr.success(this.productDelete, this.removed);
       this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
-        // console.log(`Respuesta del servidor`, res);
       });
     });
   }
+
   getColorBasedOnStatus(status: string): string {
     switch (status) {
       case 'Active':
-        return 'green';     // Verde para activo
+        return 'green';
       case 'Inactive':
-        return 'red';       // Rojo para inactivo
+        return 'red';
       case 'Paid':
-        return 'brown';      // cafe para pagado
+        return 'brown';
       case 'Canceled':
-        return 'orange';    // Otro color para cancelado
+        return 'orange';
       default:
-        return 'black';     // Negro para otros casos
+        return 'black';
     }
   }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
+
   es() {
     this.translate.use('es');
     this._productService.updateServerLanguage('es').subscribe(() => { });

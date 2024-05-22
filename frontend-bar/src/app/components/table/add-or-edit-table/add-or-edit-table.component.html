@@ -4,7 +4,6 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="addTable()">
     <mat-dialog-content class="mat-typography">
-
         <div class="form_group">
             <!-- Name Input -->
             <mat-form-field>
@@ -12,27 +11,23 @@
                 <input formControlName="name_table" matInput>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name_table')?.hasError('required') && form.get('name_table')?.touched">{{ "requiredNameUser"
-                    | translate }}</mat-error>
+                <mat-error *ngIf="form.get('name_table')?.hasError('required') && form.get('name_table')?.touched">{{ "requiredNameUser" | translate }}</mat-error>
             </div>
         </div>
         <div class="formGroup">
             <!-- Status Select -->
-            <div class="select_div">
+            <div class="select_div" *ngIf="id !== undefined">
                 <mat-form-field>
                     <mat-label>{{ "statusList" | translate }}</mat-label>
                     <mat-select formControlName="id_status">
-                        <mat-option *ngFor="let state of status" [value]="state.id">{{ state.name }}</mat-option>
-                    </mat-select>                    
+                        <mat-option *ngFor="let state of status" [value]="state.id">{{ translateStateName(state.name) }}</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <div class="error">
-                    <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{
-                        "requiredStatus" | translate }}</mat-error>
+                    <mat-error *ngIf="form.get('id_status')?.hasError('required') && form.get('id_status')?.touched">{{ "requiredStatus" | translate }}</mat-error>
                 </div>
             </div>
-
         </div>
-
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button type="button" (click)="cancel()" mat-button mat-dialog-close color="warn">{{ "cancel" | translate }}</button>

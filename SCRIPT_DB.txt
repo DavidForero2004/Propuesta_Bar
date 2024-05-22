@@ -73,12 +73,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 
 
 INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
-INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paied');
-
-
-
-
-
+INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paid'), ('Canceled');
 
 
 

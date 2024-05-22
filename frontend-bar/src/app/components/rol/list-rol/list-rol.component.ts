@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RolService } from '../../../services/rol.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,15 +13,13 @@ import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AddOrEditRolComponent } from '../add-or-edit-rol/add-or-edit-rol.component';
 
-
-
 @Component({
   selector: 'app-list-rol',
   templateUrl: './list-rol.component.html',
   styleUrl: './list-rol.component.css'
 })
-export class ListRolComponent implements OnInit, AfterViewInit{
 
+export class ListRolComponent implements OnInit, AfterViewInit {
   dataSources = new MatTableDataSource<Rol>;
   displayedColumns: string[] = ['name', 'action'];
   rolDelete: string = '';
@@ -36,7 +34,7 @@ export class ListRolComponent implements OnInit, AfterViewInit{
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private translate: TranslateService
-    ) {
+  ) {
     this.dataSources = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
@@ -44,18 +42,16 @@ export class ListRolComponent implements OnInit, AfterViewInit{
 
     this._rolService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('deleteRol').subscribe((res: string) => {
-      this.rolDelete = res;
+    this.translate.get(['deleteRol','removed']).subscribe((res: any) => {
+      this.rolDelete = res.deleteRol;
+      this.removed = res.removed;
     });
+  }
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
-    });
-  } 
   ngOnInit(): void {
     this.getRol();
   }
-  
+
   ngAfterViewInit(): void {
     this.dataSources.paginator = this.paginator;
     this.dataSources.sort = this.sort;
@@ -72,7 +68,6 @@ export class ListRolComponent implements OnInit, AfterViewInit{
 
   getRol() {
     this._rolService.getRol().subscribe((data: any) => {
-     // console.log(data);
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         if (Array.isArray(result)) {
@@ -82,7 +77,6 @@ export class ListRolComponent implements OnInit, AfterViewInit{
     });
   }
   addRol(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditRolComponent, {
       width: '550px',
       disableClose: true,
@@ -104,11 +98,19 @@ export class ListRolComponent implements OnInit, AfterViewInit{
       })
     ).subscribe(() => {
       this.getRol();
-      
+
       this.toastr.success(this.rolDelete, this.removed);
     });;
   }
 
+  translateRolName(rolName: string | undefined): string {
+    if (typeof rolName === 'string') {
+      const translatedName = this.translate.instant(`role.${rolName}`);
+      return translatedName !== `role.${rolName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
 
   es() {
     this.translate.use('es');

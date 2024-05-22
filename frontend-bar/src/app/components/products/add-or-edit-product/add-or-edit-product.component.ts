@@ -19,6 +19,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './add-or-edit-product.component.html',
   styleUrl: './add-or-edit-product.component.css'
 })
+
 export class AddOrEditProductComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
@@ -29,13 +30,15 @@ export class AddOrEditProductComponent implements OnInit {
   baseUrl: string = '';
   private myAppUrl: string;
   private myApiUrl: string;
-
   operation: string = '';
   id: number | undefined;
-
+  selectedFile: any = null;
+  nameProduct: any = null;
+  imageProduct: any = null;
   status: Status[] = [];
 
-  constructor(public dialogRef: MatDialogRef<AddOrEditUserComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<AddOrEditUserComponent>,
     private fb: FormBuilder,
     private _productServices: ProductService,
     private _fileServices: FileService,
@@ -43,41 +46,41 @@ export class AddOrEditProductComponent implements OnInit {
     private toastr: ToastrService,
     private translate: TranslateService,
     private _statusService: StatusService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = this.fb.group({
-      name_product: ['', Validators.required],
-      image: ['', Validators.required],
-      price: ['', Validators.required],
-      stock: ['', Validators.required],
-      id_status: ['', Validators.required]
-    });
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.id = data.id;
+
+    if (this.id === undefined) {
+      this.form = this.fb.group({
+        name_product: ['', Validators.required],
+        image: ['', Validators.required],
+        price: ['', Validators.required],
+        stock: ['', Validators.required],
+      });
+    } else {
+      this.form = this.fb.group({
+        name_product: [null],
+        image: [null],
+        price: ['', Validators.required],
+        stock: ['', Validators.required],
+        id_status: ['', Validators.required]
+      });
+    }
 
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'file';
 
-    this.id = data.id;
-
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('add').subscribe((res: string) => {
-      this.operation = res;
-    });
+    this._productServices.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('saveProduct').subscribe((res: string) => {
-      this.productSave = res;
-    });
-
-    this.translate.get('aggregate').subscribe((res: string) => {
-      this.aggregate = res;
-    });
-
-    this.translate.get('editProduct').subscribe((res: string) => {
-      this.productUpdate = res;
-    });
-
-    this.translate.get('edited').subscribe((res: string) => {
-      this.edited = res;
+    this.translate.get(['add','saveProduct','aggregate','editProduct','edited']).subscribe((res: any) => {
+      this.operation = res.add;
+      this.productSave = res.saveProduct;
+      this.aggregate = res.aggregate;
+      this.productUpdate = res.editProduct;
+      this.edited = res.edited;
     });
   };
 
@@ -86,10 +89,6 @@ export class AddOrEditProductComponent implements OnInit {
     this.getStatus();
     this.baseUrl = `${this.myAppUrl}${this.myApiUrl}/`;
   }
-
-  selectedFile: any = null;
-  nameProduct: any = null;
-  imageProduct: any = null;
 
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
@@ -123,8 +122,7 @@ export class AddOrEditProductComponent implements OnInit {
             this.form.patchValue({
               price: productObject.price,
               stock: productObject.stock,
-              id_status: productObject.id_status,
-              name_product: productObject.name_product
+              id_status: productObject.id_status
             });
             this.nameProduct = productObject.name_product;
             this.imageProduct = productObject.image;
@@ -145,9 +143,7 @@ export class AddOrEditProductComponent implements OnInit {
       const today = new Date();
       const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
       const extensionFile = this.selectedFile.name.split('.').pop();
-      const formattedDate = today.getFullYear().toString().padStart(4, '0') +
-        (today.getMonth() + 1).toString().padStart(2, '0') +
-        today.getDate().toString().padStart(2, '0');
+      const formattedDate = today.getFullYear().toString().padStart(4, '0') + (today.getMonth() + 1).toString().padStart(2, '0') + today.getDate().toString().padStart(2, '0');
       const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
       const newFile = new File([this.selectedFile], newNameFile);
 
@@ -156,7 +152,7 @@ export class AddOrEditProductComponent implements OnInit {
         image: newNameFile,
         price: this.form.value.price,
         stock: this.form.value.stock,
-        id_status: this.form.value.id_status
+        id_status: 1 // Active
       }
 
       setTimeout(() => {
@@ -171,9 +167,7 @@ export class AddOrEditProductComponent implements OnInit {
           this.dialogRef.close(true);
           this.toastr.success(this.productSave, this.aggregate);
 
-          this._fileServices.addFile(newFile).subscribe(res => {
-            // console.log(`Respuesta del servidor`, res);
-          });
+          this._fileServices.addFile(newFile).subscribe(res => {});
         });
       }, 200);
     } else {
@@ -204,9 +198,7 @@ export class AddOrEditProductComponent implements OnInit {
         const today = new Date();
         const nameFile = this.selectedFile.name.split('.').slice(0, -1).join('.');
         const extensionFile = this.selectedFile.name.split('.').pop();
-        const formattedDate = today.getFullYear().toString().padStart(4, '0') +
-          (today.getMonth() + 1).toString().padStart(2, '0') +
-          today.getDate().toString().padStart(2, '0');
+        const formattedDate = today.getFullYear().toString().padStart(4, '0') + (today.getMonth() + 1).toString().padStart(2, '0') + today.getDate().toString().padStart(2, '0');
         const newNameFile = `${nameFile}${formattedDate}.${extensionFile}`;
         const newFile = new File([this.selectedFile], newNameFile);
 
@@ -230,13 +222,9 @@ export class AddOrEditProductComponent implements OnInit {
             this.loading = false;
             this.dialogRef.close(true);
             this.toastr.success(this.productUpdate, this.edited);
-            this._fileServices.deleteFile(this.imageProduct).subscribe(res => {
-              // console.log(`Respuesta del servidor`, res);
-            });
+            this._fileServices.deleteFile(this.imageProduct).subscribe(res => {});
 
-            this._fileServices.addFile(newFile).subscribe(res => {
-              // console.log(`Respuesta del servidor`, res);
-            });
+            this._fileServices.addFile(newFile).subscribe(res => {});
           });
         }, 200);
       }
@@ -248,10 +236,19 @@ export class AddOrEditProductComponent implements OnInit {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         if (Array.isArray(result)) {
-          this.status = result;
+          this.status = result.filter((state: Status) => state.name !== 'Paid' && state.name !== 'Canceled');
         }
       }
     });
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
   }
 
   es() {

@@ -11,10 +11,8 @@
                 <input formControlName="name_event" matInput>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('name_event')?.hasError('required') && form.get('name_event')?.touched">{{ "requiredNameEvent"
-                    | translate }}</mat-error>
+                <mat-error *ngIf="form.get('name_event')?.hasError('required') && form.get('name_event')?.touched">{{ "requiredNameEvent" | translate }}</mat-error>
             </div>
-
             <!-- Date Input -->
             <mat-form-field class="example-full-width">
                 <mat-label>{{ "dateEvent" | translate }}</mat-label>
@@ -24,10 +22,8 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">{{ "requiredDateEvent"
-                    | translate }}</mat-error>
+                <mat-error *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">{{ "requiredDateEvent" | translate }}</mat-error>
             </div>
-
             <!-- Time Input -->
             <mat-form-field>
                 <mat-label>{{ "timeEvent" | translate }}</mat-label>
@@ -35,8 +31,7 @@
                 <mat-hint>HH:mm</mat-hint>
             </mat-form-field>
             <div class="error">
-                <mat-error *ngIf="form.get('time')?.hasError('required') && form.get('time')?.touched">{{ "requiredTimeEvent"
-                    | translate }}</mat-error>
+                <mat-error *ngIf="form.get('time')?.hasError('required') && form.get('time')?.touched">{{ "requiredTimeEvent" | translate }}</mat-error>
             </div>
         </div>
     </mat-dialog-content>

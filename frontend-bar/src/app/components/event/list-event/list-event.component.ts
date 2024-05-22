@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './list-event.component.html',
   styleUrl: './list-event.component.css'
 })
+
 export class ListEventComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name_event', 'date', 'action'];
   dataSource = new MatTableDataSource<Events>;
@@ -25,13 +26,14 @@ export class ListEventComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
-  constructor(private _eventService: EventService,
+  constructor(
+    private _eventService: EventService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
     private toastr: ToastrService,
-    private translate: TranslateService) {
+    private translate: TranslateService
+  ) {
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
@@ -39,12 +41,9 @@ export class ListEventComponent implements OnInit, AfterViewInit {
 
     this._eventService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('deleteEvent').subscribe((res: string) => {
-      this.eventDelete = res;
-    });
-
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get(['deleteEvent','removed']).subscribe((res: any) => {
+      this.eventDelete = res.deleteEvent;
+      this.removed = res.removed;
     });
   }
 
@@ -78,7 +77,6 @@ export class ListEventComponent implements OnInit, AfterViewInit {
   }
 
   addEvent(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditEventComponent, {
       width: '550px',
       disableClose: true,
@@ -101,7 +99,7 @@ export class ListEventComponent implements OnInit, AfterViewInit {
     ).subscribe(() => {
       this.getEvent();
       this.toastr.success(this.eventDelete, this.removed);
-    });;
+    });
   }
 
   es() {

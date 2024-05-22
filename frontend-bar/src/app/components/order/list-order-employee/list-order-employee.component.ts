@@ -19,6 +19,7 @@ import { Order } from '../../../interfaces/order';
   templateUrl: './list-order-employee.component.html',
   styleUrl: './list-order-employee.component.css'
 })
+
 export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['type_document','num_document','table','status','action'];
   dataSource = new MatTableDataSource<Order>;
@@ -28,7 +29,6 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
   constructor(
     private _orderService: OrderService,
@@ -43,12 +43,11 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteOrder').subscribe((res: string) => {
-      this.orderDelete = res;
-    });
+    this._orderService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get('deleteOrder','removed').subscribe((res: any) => {
+      this.orderDelete = res.deleteOrder;
+      this.removed = res.removed;
     });
   }
 
@@ -113,17 +112,27 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
   getColorBasedOnStatus(status: string): string {
     switch (status) {
       case 'Active':
-        return 'green';     // Verde para activo
+        return 'green';
       case 'Inactive':
-        return 'red';       // Rojo para inactivo
+        return 'red';
       case 'Paid':
-        return 'brown';     // cafe para pagado
+        return 'brown';
       case 'Canceled':
-        return 'orange';    // Otro color para cancelado
+        return 'orange';
       default:
-        return 'black';     // Negro para otros casos
+        return 'black';
     }
   }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
+
   es() {
     this.translate.use('es');
     this._orderService.updateServerLanguage('es').subscribe(() => { });

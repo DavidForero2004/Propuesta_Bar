@@ -19,6 +19,7 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './list-table.component.html',
   styleUrl: './list-table.component.css'
 })
+
 export class ListTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name_table', 'name_status', 'action'];
   dataSource = new MatTableDataSource<Table>;
@@ -28,7 +29,6 @@ export class ListTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
   constructor(
     private _tableService: TableService,
@@ -43,12 +43,11 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteTable').subscribe((res: string) => {
-      this.tableDelete = res;
-    });
+    this._tableService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get(['deleteTable','removed']).subscribe((res: any) => {
+      this.tableDelete = res.deleteTable;
+      this.removed = res.removed;
     });
   }
 
@@ -74,7 +73,6 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     this._tableService.getTable().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
           result.forEach((table: Table) => {
             table.colorStatus = this.getColorBasedOnStatus(table.name!);
@@ -86,7 +84,6 @@ export class ListTableComponent implements OnInit, AfterViewInit {
   }
 
   addTable(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditTableComponent, {
       width: '550px',
       disableClose: true,
@@ -94,7 +91,6 @@ export class ListTableComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
         this.getTable();
       }
@@ -116,15 +112,24 @@ export class ListTableComponent implements OnInit, AfterViewInit {
   getColorBasedOnStatus(status: string): string {
     switch (status) {
       case 'Active':
-        return 'green';     // Verde para activo
+        return 'green';
       case 'Inactive':
-        return 'red';       // Rojo para inactivo
+        return 'red';
       case 'Paid':
-        return 'brown';     // cafe para pagado
+        return 'brown';
       case 'Canceled':
-        return 'orange';    // Otro color para cancelado
+        return 'orange';
       default:
-        return 'black';     // Negro para otros casos
+        return 'black';
+    }
+  }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
     }
   }
 

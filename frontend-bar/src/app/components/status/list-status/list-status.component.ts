@@ -17,8 +17,7 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './list-status.component.html',
   styleUrl: './list-status.component.css'
 })
-export class ListStatusComponent implements OnInit, AfterViewInit{
-
+export class ListStatusComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'action'];
   dataSource = new MatTableDataSource<Status>;
   statusDeleteM: string = '';
@@ -26,25 +25,24 @@ export class ListStatusComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // listUser: User[] = [];
 
   constructor(
     private _statusService: StatusService,
     public dialog: MatDialog,
     private _errorService: ErrorService,
     private toastr: ToastrService,
-    private translate: TranslateService) {
+    private translate: TranslateService
+  ) {
     this.dataSource = new MatTableDataSource();
 
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
-    this.translate.get('deleteStatus').subscribe((res: string) => {
-      this.statusDeleteM = res;
-    });
+    this._statusService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('removed').subscribe((res: string) => {
-      this.removed = res;
+    this.translate.get(['deleteStatus', 'removed']).subscribe((res: any) => {
+      this.statusDeleteM = res.deleteStatus;
+      this.removed = res.removed;
     });
   }
 
@@ -70,7 +68,6 @@ export class ListStatusComponent implements OnInit, AfterViewInit{
     this._statusService.getStatus().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
-        // Check if the first element of result is an array of users
         if (Array.isArray(result)) {
           result.forEach((status: Status) => {
             status.colorStatus = this.getColorBasedOnStatus(status.name!);
@@ -82,7 +79,6 @@ export class ListStatusComponent implements OnInit, AfterViewInit{
   }
 
   addStatus(id?: number) {
-    // console.log(id);
     const dialogRef = this.dialog.open(AddOrEditStatusComponent, {
       width: '550px',
       disableClose: true,
@@ -90,7 +86,6 @@ export class ListStatusComponent implements OnInit, AfterViewInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result) {
         this.getStatus();
       }
@@ -112,17 +107,27 @@ export class ListStatusComponent implements OnInit, AfterViewInit{
   getColorBasedOnStatus(status: string): string {
     switch (status) {
       case 'Active':
-        return 'green';     // Verde para activo
+        return 'green';
       case 'Inactive':
-        return 'red';       // Rojo para inactivo
+        return 'red';
       case 'Paid':
-        return 'brown';     // cafe para pagado
+        return 'brown';
       case 'Canceled':
-        return 'orange';    // Otro color para cancelado
+        return 'orange';
       default:
-        return 'black';     // Negro para otros casos
+        return 'black';
     }
   }
+
+  translateStateName(stateName: string | undefined): string {
+    if (typeof stateName === 'string') {
+      const translatedName = this.translate.instant(`statuses.${stateName}`);
+      return translatedName !== `statuses.${stateName}` ? translatedName : '';
+    } else {
+      return '';
+    }
+  }
+
   es() {
     this.translate.use('es');
     this._statusService.updateServerLanguage('es').subscribe(() => { });

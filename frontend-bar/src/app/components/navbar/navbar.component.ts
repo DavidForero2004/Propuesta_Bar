@@ -10,25 +10,27 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
 
+export class NavbarComponent implements OnInit {
   iconMenu = faBars;
+
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,
     private translate: TranslateService,
     private _userService: UserService,
     private renderer: Renderer2
-    ) {
-      this.translate.addLangs(['es', 'en']);
-      this.translate.setDefaultLang('es');
-    }
+  ) {
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setDefaultLang('es');
+    
+    this._userService.updateServerLanguage('es').subscribe(() => {});
+  }
 
   ngOnInit(): void {
     this.loadScript('../../../../assets/js/nav/nav.js');
   }
 
-    
   private loadScript(url: string): void {
     const script = this.renderer.createElement('script');
     script.src = url;
@@ -38,8 +40,6 @@ export class NavbarComponent implements OnInit {
     this.renderer.appendChild(document.body, script);
   }
 
-
-
   logOut() {
     this.localStorageService.clear();
     this.router.navigate(['/login']);
@@ -47,16 +47,11 @@ export class NavbarComponent implements OnInit {
 
   es() {
     this.translate.use('es');
-    this._userService.updateServerLanguage('es').subscribe(() => {
-      console.log('Idioma del servidor actualizado a español.');
-    });
+    this._userService.updateServerLanguage('es').subscribe(() => { });
   }
 
   en() {
     this.translate.use('en');
-    this._userService.updateServerLanguage('en').subscribe(() => {
-      console.log('Server language updated to English.');
-    });
+    this._userService.updateServerLanguage('en').subscribe(() => { });
   }
-
 }
