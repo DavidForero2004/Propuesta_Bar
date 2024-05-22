@@ -105,6 +105,7 @@ export class ListProductComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getProduct();
+        this.refreshTime = Date.now();
       }
     });
   }
