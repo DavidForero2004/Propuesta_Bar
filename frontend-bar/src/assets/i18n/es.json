@@ -118,5 +118,6 @@
         "Admistrator": "Administrador",
         "Employee": "Empleado"
     },
-    "originalName": "Nombre original"
+    "originalName": "Nombre original",
+    "chart": "Gráficos"
 }

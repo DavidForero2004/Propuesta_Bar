@@ -70,6 +70,39 @@ const getOrderSales = (req, res) => {
     }
 }
 
+const getOrderSalesMonth = (req, res) => {
+    const query = 'CALL selectSalesMonth';
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
 //insert order
 const insertOrder = (req, res) => {
     const { type_document, num_document, id_table, id_status } = req.body;
@@ -248,5 +281,102 @@ const getOrderId = (req, res) => {
     }
 }
 
+const getOrderSalesProduct = (req, res) => {
+    const query = 'CALL selectSalesProduct';
 
-module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId, getOrderSales };
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+const getOrderSalesProductMonth = (req, res) => {
+    const query = 'CALL selectSalesProductMonth';
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+const getOrderSalesTable = (req, res) => {
+    const query = 'CALL selectSalesTable';
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        connection.query(query, (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId, getOrderSales,getOrderSalesMonth, getOrderSalesProduct, getOrderSalesProductMonth, getOrderSalesTable };

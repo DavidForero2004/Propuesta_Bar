@@ -719,5 +719,82 @@ BEGIN
 END //
 DELIMITER ;
 
+/*Procedure for sales for month*/
+
+DELIMITER //
+CREATE PROCEDURE selectSalesMonth()
+BEGIN
+ 	SET lc_time_names = 'es_ES';
+   SELECT 
+        DATE_FORMAT(O.order_date, '%M') AS month_name,
+        SUM(OP.count) AS count, 
+        SUM(OP.total) AS total 
+    FROM `order` O 
+        INNER JOIN order_product OP ON O.id = OP.id_order
+    WHERE O.id_status = 3 
+        AND YEAR(O.order_date) = YEAR(CURDATE())
+    GROUP BY
+        DATE_FORMAT(O.order_date, '%M');
+END //
+DELIMITER ;
+
+/*Procedure for select Sales table*/
+
+DELIMITER //
+CREATE PROCEDURE selectSalesTable()
+BEGIN
+    SELECT 
+        T.name_table,
+        SUM(p.price) AS price, 
+        SUM(OP.count) AS count, 
+        SUM(OP.total) AS total 
+    FROM `order` O 
+        INNER JOIN order_product OP ON O.id = OP.id_order 
+        INNER JOIN product P ON OP.id_product = P.id
+        INNER JOIN `table` T ON O.id_table = T.id
+    WHERE O.id_status = 3 AND YEAR(O.order_date) = YEAR(CURDATE())
+    GROUP BY 
+        T.name_table;
+END //
+DELIMITER ;
 
 
+/*Procedure for select Sales product totoal*/
+
+DELIMITER //
+CREATE PROCEDURE selectSalesProduct()
+BEGIN
+    SELECT 
+        P.name_product,
+        SUM(p.price) AS price, 
+        SUM(OP.count) AS count, 
+        SUM(OP.total) AS total 
+    FROM `order` O 
+        INNER JOIN order_product OP ON O.id = OP.id_order 
+        INNER JOIN product P ON OP.id_product = P.id
+        INNER JOIN `table` T ON O.id_table = T.id
+    WHERE O.id_status = 3 AND YEAR(O.order_date) = YEAR(CURDATE())
+    GROUP BY 
+        P.name_product;
+END //
+DELIMITER ;
+
+/*Procedure for select Sales product monthActual*/
+
+DELIMITER //
+CREATE PROCEDURE selectSalesProductMonth()
+BEGIN
+    SELECT 
+        P.name_product,
+        SUM(p.price) AS price, 
+        SUM(OP.count) AS count, 
+        SUM(OP.total) AS total 
+    FROM `order` O 
+        INNER JOIN order_product OP ON O.id = OP.id_order 
+        INNER JOIN product P ON OP.id_product = P.id
+        INNER JOIN `table` T ON O.id_table = T.id
+    WHERE O.id_status = 3 AND O.order_date BETWEEN DATE_FORMAT(CURDATE(), '%Y-%m-01') AND LAST_DAY(CURDATE())
+    GROUP BY 
+        P.name_product;
+END //
+DELIMITER ;

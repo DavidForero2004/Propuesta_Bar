@@ -19,6 +19,23 @@ export class OrderService {
     return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/`)
   }
 
+  getSales(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/sales`);
+  }
+  getSalesMonth(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/salesmonth`);
+  }
+  getSalesProduct(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/salesproduct`);
+  }
+
+  getSalesProductMonth(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/salesproductmonth`);
+  }
+  getSalesTable(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.myAppUrl}${this.myApiUrl}/salestable`);
+  }
+  
   addOrder(order: Order): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertorder`, order);
   }

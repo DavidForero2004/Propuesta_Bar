@@ -1,0 +1,85 @@
+@font-face {
+    font-family: "Acumin Variable Concept";
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot");
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff") format("woff"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept") format("svg");
+    font-weight: 400;
+}
+.title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.title h1{
+    font-family: "Acumin Variable Concept";
+}
+.charts {
+    padding-left: 20px;
+    padding-right: 20px; 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+.top_chart {
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 3%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.top_chart>*,
+.bottom_chart>* {
+    -webkit-box-shadow: 0px 0px 25px 11px rgba(189, 189, 189, 1);
+    -moz-box-shadow: 0px 0px 25px 11px rgba(189, 189, 189, 1);
+    box-shadow: 0px 0px 25px 11px rgba(189, 189, 189, 1);
+}
+
+.bottom_chart {
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 3%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.bars_chart{
+    width: 33%;
+    height: 350px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lines_chart {
+    width: 33%;
+    height: 350px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie_chart,
+.polar_chart,
+.scatter_chart,
+.radar_chart 
+ {
+    width: 33%;
+    height: 350px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#chart, #chartPie{
+    width: 100% !important; 
+    height: 100% !important;
+    object-fit: contain;
+}

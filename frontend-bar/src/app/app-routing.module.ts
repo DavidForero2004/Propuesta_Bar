@@ -12,6 +12,7 @@ import { ListRolComponent } from './components/rol/list-rol/list-rol.component';
 import { ListStatusComponent } from './components/status/list-status/list-status.component';
 import { ListTableComponent } from './components/table/list-table/list-table.component';
 import { ListOrderEmployeeComponent } from './components/order/list-order-employee/list-order-employee.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -32,6 +33,8 @@ const routes: Routes = [{
     {path: 'table', component: ListTableComponent, canActivate: [AuthGuard]},
     //ORDER
     {path: 'order', component: ListOrderEmployeeComponent, canActivate: [AuthGuard]},
+    //CHARTS
+    {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]},
     //ERRORS
     {path: '**', redirectTo: 'login', pathMatch: 'full'}
 
