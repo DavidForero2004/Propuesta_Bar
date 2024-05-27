@@ -119,5 +119,6 @@
         "Employee": "Empleado"
     },
     "originalName": "Original name",
-    "chart": "Charts"
+    "chart": "Charts",
+    "chartNav": "CHARTS"
 }

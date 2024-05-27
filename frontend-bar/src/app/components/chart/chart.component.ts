@@ -77,19 +77,17 @@ export class ChartComponent implements OnInit {
     });
   }
 
-
   getSalesMonth() {
     this._orderService.getSalesMonth().subscribe((data: any) => {
-      if (data && data.result && Array.isArray(data.result)) {  
+      if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         this.chartdata = result;
         if (this.chartdata != null) {
           for (let i = 0; i < this.chartdata.length; i++) {
-            this.labeldataBars.push(this.chartdata[i].month_name)
-            this.realdataBars.push(this.chartdata[i].total)
+            this.labeldataBars.push(this.chartdata[i].month_name);
+            this.realdataBars.push(this.chartdata[i].total);
           }
           this.chartBars(this.labeldataBars, this.realdataBars);
-
         }
       }
     });
@@ -97,15 +95,15 @@ export class ChartComponent implements OnInit {
 
   getSalesProduct() {
     this._orderService.getSalesProduct().subscribe((data: any) => {
-      if (data && data.result && Array.isArray(data.result)) {  
+      if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         this.chartdata = result;
         if (this.chartdata != null) {
           for (let i = 0; i < this.chartdata.length; i++) {
-            this.labeldataPie.push(this.chartdata[i].name_product)
-            this.realdataPie.push(this.chartdata[i].total)
-            this.labeldataPolar.push(this.chartdata[i].name_product)
-            this.realdataPolar.push(this.chartdata[i].count)
+            this.labeldataPie.push(this.chartdata[i].name_product);
+            this.realdataPie.push(this.chartdata[i].total);
+            this.labeldataPolar.push(this.chartdata[i].name_product);
+            this.realdataPolar.push(this.chartdata[i].count);
           }
           this.chartPie(this.labeldataPie, this.realdataPie);
           this.chartPolar(this.labeldataPolar, this.realdataPolar);
@@ -116,16 +114,15 @@ export class ChartComponent implements OnInit {
 
   getSalesProductMonth() {
     this._orderService.getSalesProductMonth().subscribe((data: any) => {
-      if (data && data.result && Array.isArray(data.result)) {  
+      if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
+        this.chartdata = result;  // Asignar result a chartdata
         if (this.chartdata != null) {
           for (let i = 0; i < this.chartdata.length; i++) {
-            console.log(this.chartdata[i])
-            this.labeldataLine.push(this.chartdata[i].name_product)
-            this.realdataLine.push(this.chartdata[i].total)
+            this.labeldataLine.push(this.chartdata[i].name_product);
+            this.realdataLine.push(this.chartdata[i].total);
           }
           this.chartLine(this.labeldataLine, this.realdataLine);
-
         }
       }
     });
@@ -155,7 +152,10 @@ export class ChartComponent implements OnInit {
   }
 
   chartLine(labeldata: any, maindata: any) {
-    new Chart("chart", {
+    if (this.chart) {
+      this.chart.destroy();  // Destruye el gráfico previo si existe
+    }
+    this.chart = new Chart("chartLine", {  // Asegúrate de que el ID del canvas sea "chartLine"
       type: 'line',
       data: {
         labels: labeldata,
@@ -183,7 +183,7 @@ export class ChartComponent implements OnInit {
       }
     });
   }
-  
+
   chartPie(labeldata: any, maindata: any) {
     new Chart("chartPie", {
       type: 'doughnut',
@@ -222,7 +222,6 @@ export class ChartComponent implements OnInit {
       }
     });
   }
-  
 
   chartPolar(labeldata: any, maindata: any) {
     new Chart("chartPolar", {
@@ -270,7 +269,7 @@ export class ChartComponent implements OnInit {
       }
     });
   }
-  
+
   chartScatter(labeldata: any, maindata: any) {
     new Chart("chartScatter", {
       type: 'bar',
@@ -324,7 +323,7 @@ export class ChartComponent implements OnInit {
           },
           y: {
             beginAtZero: true
-          }, 
+          },
         }
       }
     });
@@ -340,4 +339,3 @@ export class ChartComponent implements OnInit {
     this._orderService.updateServerLanguage('en').subscribe(() => { });
   }
 }
-
