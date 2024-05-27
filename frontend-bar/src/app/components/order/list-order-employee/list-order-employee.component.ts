@@ -45,9 +45,9 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
 
     this._orderService.updateServerLanguage('es').subscribe(() => { });
 
-    this.translate.get('deleteOrder','removed').subscribe((res: any) => {
-      this.orderDelete = res.deleteOrder;
-      this.removed = res.removed;
+    this.translate.get(['cancelOrder','canceleds']).subscribe((res: any) => {
+      this.orderDelete = res.cancelOrder;
+      this.removed = res.canceleds;
     });
   }
 

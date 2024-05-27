@@ -598,7 +598,7 @@ CREATE PROCEDURE deleteOrder(
 		IN id_o INTEGER
 )
 BEGIN 
-	DELETE FROM `order` WHERE id = id_o;
+	UPDATE `order` SET id_status = 4 WHERE id = id_o;
 END //
 DELIMITER ;
 

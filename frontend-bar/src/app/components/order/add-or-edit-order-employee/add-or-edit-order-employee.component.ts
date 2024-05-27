@@ -91,8 +91,8 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
 
   isEdit(id: number | undefined) {
     if (id !== undefined) {
-      this.translate.get(['edit', 'statusOrder']).subscribe((res: any) => {
-        this.operation = `${res.edit} ${res.statusOrder}`;
+      this.translate.get(['paided', 'titleOrder']).subscribe((res: any) => {
+        this.operation = `${res.paided} ${res.titleOrder}`;
       });
       this.getOrderId(id);
     }
@@ -107,7 +107,7 @@ export class AddOrEditOrderEmployeeComponent implements OnInit {
           if (firstArray.length > 0 && typeof firstArray[0] === 'object') {
             const Object = firstArray[0];
             this.form.patchValue({
-              id_status: Object.id_status
+              id_status: 3
             });
 
             this.type_doc = Object.type_document,

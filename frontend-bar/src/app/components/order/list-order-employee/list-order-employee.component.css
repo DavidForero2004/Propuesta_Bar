@@ -53,4 +53,11 @@ table img{
 .add_{
     color: #FFFFFF !important;
 }
-  
+
+.buttonaction {
+    background: none;       /* Sin fondo */
+    border: none;           /* Sin borde */
+    padding: 0;             /* Sin relleno */
+    margin: 0;              /* Sin margen */
+    font: inherit;          /* Hereda la fuente */
+}

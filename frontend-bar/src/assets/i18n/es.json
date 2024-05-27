@@ -119,5 +119,9 @@
         "Employee": "Empleado"
     },
     "originalName": "Nombre original",
-    "chart": "Gráficos"
+    "chart": "Gráficos",
+    "canceleds": "Cancelado",
+    "cancelOrder": "Orden cancelada correctamente",
+    "paided": "Pagar",
+    "request": "Pedir"
 }
