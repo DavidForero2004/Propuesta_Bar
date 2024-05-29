@@ -171,37 +171,138 @@
   }
   @media screen and (min-width: 521px) and (max-width: 720px) {
     .option_container {
-      width: 70%;
+      display: none;
     }
-    .option_container a {
-      font-size: 14px;
+    .language-buttons {
+      display: none;
     }
-    .language-buttons .es,
-    .en {
-      font-size: 14px;
+    .menu_hamburguer {
+      display: block;
+    }
+    .navbar {
+      justify-content: space-around;
+      gap: 50%;
+      width: 100% !important;
+    }
+    .show {
+      display: block;
+      background-color: #390708;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
     }
     .logo_nav img {
       width: 60px;
-      margin-left: 5px;
+    }
+    .option_container_menu a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      border-top: 1px solid white;
+      font-family: 'Oswald Regular', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    .menu_hamburguer fa-icon {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .language-buttons_h {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      font-family: 'Oswald Regular', sans-serif;
+      color: white;
+      padding: 10px;
+      letter-spacing: 2px;
+    }
+    .language-buttons_h button:hover {
+      -webkit-box-shadow: 0px -1px 10px 1.5px #ffffff;
+      -moz-box-shadow: 0px -1px 10px 1.5px #ffffff;
+      box-shadow: 0px -1px 10px 1.5px #ffffff;
+      border-radius: 50%;
+    }
+    .language-buttons_h button {
+      color: white;
+      background-color: rgba(240, 248, 255, 0);
+      border: none;
+      margin: 0;
+      font-size: 12px;
     }
   }
   @media screen and (min-width: 721px) and (max-width: 1024px) {
     .option_container {
-      width: 60%;
-    }
-    .option_container a {
-      font-size: 14px;
-    }
-    .language-buttons .es,
-    .en {
-      font-size: 14px;
+      display: none;
     }
     .language-buttons {
-      margin-left: 15px;
+      display: none;
+    }
+    .menu_hamburguer {
+      display: block;
+    }
+    .navbar {
+      justify-content: space-around;
+      gap: 50%;
+      width: 100% !important;
+    }
+    .show {
+      display: block;
+      background-color: #390708;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
     }
     .logo_nav img {
       width: 60px;
-      margin-left: 15px;
+    }
+    .option_container_menu a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      border-top: 1px solid white;
+      font-family: 'Oswald Regular', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    .menu_hamburguer fa-icon {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .language-buttons_h {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      font-family: 'Oswald Regular', sans-serif;
+      color: white;
+      padding: 10px;
+      letter-spacing: 2px;
+    }
+    .language-buttons_h button:hover {
+      -webkit-box-shadow: 0px -1px 10px 1.5px #ffffff;
+      -moz-box-shadow: 0px -1px 10px 1.5px #ffffff;
+      box-shadow: 0px -1px 10px 1.5px #ffffff;
+      border-radius: 50%;
+    }
+    .language-buttons_h button {
+      color: white;
+      background-color: rgba(240, 248, 255, 0);
+      border: none;
+      margin: 0;
+      font-size: 12px;
     }
   }
   

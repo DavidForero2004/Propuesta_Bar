@@ -626,6 +626,18 @@ DELIMITER ;
 
 ------
 
+--SELECT orderid
+DELIMITER //
+CREATE PROCEDURE selectOrderIdProduct(
+	IN id_order_op INTEGER
+)
+BEGIN
+	SELECT OP.*, P.name_product, P.price FROM order_product OP INNER JOIN product P ON OP.id_product = P.id WHERE OP.id_order = id_order_op;
+END //
+DELIMITER ;
+
+------
+
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertOrderProduct (

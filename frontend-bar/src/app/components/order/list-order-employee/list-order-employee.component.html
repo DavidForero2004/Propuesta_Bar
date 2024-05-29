@@ -38,7 +38,7 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>{{ "actions" | translate }}</th>
                 <td mat-cell *matCellDef="let element" id="tdaction">
-                    <button class="buttonaction" [disabled]="element.status === 'Canceled' || element.status === 'Paid' || element.status === 'Inactive'">
+                    <button class="buttonaction" (click)="orderProductId(element.id)" [disabled]="element.status === 'Canceled' || element.status === 'Paid' || element.status === 'Inactive'">
                         <mat-icon *ngIf="element.status === 'Active'" class="btn-delete" matTooltip="{{ 'Pedir' | translate }}">liquor</mat-icon>
                         <mat-icon *ngIf="element.status === 'Canceled' || element.status === 'Paid' || element.status === 'Inactive'" class="btn-delete">liquor</mat-icon>
                     </button>

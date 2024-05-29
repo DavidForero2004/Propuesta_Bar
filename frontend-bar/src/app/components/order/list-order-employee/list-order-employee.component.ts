@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Status } from '../../../interfaces/status';
 import { OrderService } from '../../../services/order.service';
 import { Order } from '../../../interfaces/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-order-employee',
@@ -36,7 +37,8 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private _errorService: ErrorService,
     private toastr: ToastrService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.dataSource = new MatTableDataSource();
 
@@ -135,6 +137,11 @@ export class ListOrderEmployeeComponent implements OnInit, AfterViewInit {
     } else {
       return '';
     }
+  }
+
+  orderProductId(id: number)
+  {
+    this.router.navigate(['/order-product/', id]);
   }
 
   es() {

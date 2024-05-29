@@ -62,6 +62,7 @@ import { ListOrderEmployeeComponent } from './components/order/list-order-employ
 import { AddOrEditOrderEmployeeComponent } from './components/order/add-or-edit-order-employee/add-or-edit-order-employee.component';
 import { AddFormOrderClientComponent } from './components/order/add-form-order-client/add-form-order-client.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ListOrderproductEmployeeComponent } from './components/order-products/list-orderproduct-employee/list-orderproduct-employee.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { ChartComponent } from './components/chart/chart.component';
     ListOrderEmployeeComponent,
     AddOrEditOrderEmployeeComponent,
     AddFormOrderClientComponent,
-    ChartComponent
+    ChartComponent,
+    ListOrderproductEmployeeComponent
   ],
   imports: [
     BrowserModule,

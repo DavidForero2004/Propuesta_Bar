@@ -13,6 +13,7 @@ import { ListStatusComponent } from './components/status/list-status/list-status
 import { ListTableComponent } from './components/table/list-table/list-table.component';
 import { ListOrderEmployeeComponent } from './components/order/list-order-employee/list-order-employee.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ListOrderproductEmployeeComponent } from './components/order-products/list-orderproduct-employee/list-orderproduct-employee.component';
 
 const routes: Routes = [{
   path: '', children: [
@@ -33,6 +34,8 @@ const routes: Routes = [{
     {path: 'table', component: ListTableComponent, canActivate: [AuthGuard]},
     //ORDER
     {path: 'order', component: ListOrderEmployeeComponent, canActivate: [AuthGuard]},
+    //ORDER PRODUCT
+    {path: 'order-product/:id', component: ListOrderproductEmployeeComponent, canActivate: [AuthGuard]},
     //CHARTS
     {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]},
     //ERRORS

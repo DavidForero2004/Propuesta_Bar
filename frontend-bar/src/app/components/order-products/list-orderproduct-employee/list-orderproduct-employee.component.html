@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+<section>
+  <form [formGroup]="form">
+    <!-- Product Select -->
+    <mat-form-field>
+      <mat-label>Seleccionar producto</mat-label>
+      <mat-select formControlName="id_product" (selectionChange)="onSelectionChange($event)" (closed)="onClosed()">
+        <input #productInput (keyup)="onKey($event)" matInput placeholder="{{ 'filter' | translate }}">
+        <mat-option *ngFor="let product of filteredProducts" [value]="product.id">{{ product.name_product }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Name Product Input -->
+    <mat-form-field class="example-full-width">
+      <mat-label>{{ "nameProduct" | translate }}</mat-label>
+      <input matInput disabled [value]="nameProduct">
+    </mat-form-field>
+    <!-- Image Product Img -->
+    <div>
+      <img [src]="baseUrl + imageProduct + '?' + refreshTime" alt="Product Image">
+    </div>
+    <!-- Price Product Input -->
+    <mat-form-field floatLabel="always">
+      <mat-label>{{ "price" | translate }}</mat-label>
+      <input matInput type="number" disabled class="example-right-align" [value]="priceProduct">
+      <span matTextPrefix>$&nbsp;</span>
+      <span matTextSuffix>.00</span>
+    </mat-form-field>
+    <!-- Count Input -->
+    <mat-form-field>
+      <mat-label>{{ "stock" | translate }}</mat-label>
+      <input type="number" matInput placeholder="0" min="0">
+    </mat-form-field>
+  </form>
+</section>
+
+<section>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- # Column -->
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+    <!-- Name Product Column -->
+    <ng-container matColumnDef="name_product">
+      <th mat-header-cell *matHeaderCellDef>nombre producto</th>
+      <td mat-cell *matCellDef="let element">{{ element.name_product }}</td>
+    </ng-container>
+    <!-- Count Column -->
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>cantidad</th>
+      <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+    </ng-container>
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>precio</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }} x und</td>
+    </ng-container>
+    <!-- Total Column -->
+    <ng-container matColumnDef="subtotal">
+      <th mat-header-cell *matHeaderCellDef>sub total</th>
+      <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+    </ng-container>
+    <!-- Action Button -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>{{ "actions" | translate }}</th>
+      <td mat-cell *matCellDef="let element" id="tdaction">
+        <mat-icon class="btn-edit" matTooltip="{{ 'edit' | translate }} {{ element.name_product }}">edit</mat-icon>
+        <mat-icon class="btn-delete" matTooltip="{{ 'delete' | translate }} {{ element.name_product }}">delete</mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
+</section>
