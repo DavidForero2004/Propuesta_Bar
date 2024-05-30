@@ -1,0 +1,72 @@
+@font-face {
+    font-family: "Acumin Variable Concept";
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot");
+    src: url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.woff") format("woff"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/066ce24dae3730ed6c648b09efaea93a.svg#Acumin Variable Concept") format("svg");
+    font-weight: 400;
+}
+.containerOrderProduct{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 1%;
+    margin-top: 20px;
+}
+.left_form, .right_form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.img_{
+    width: 50%;
+}
+.img_ img{
+    width: 90%;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+h1{
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: "Acumin Variable Concept";
+    font-weight: 600;
+    color: #390708;
+}
+
+@media screen and (min-width: 200px) and (max-width: 600px){
+    .containerOrderProduct{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+    .left_form{
+        border-bottom: 1px solid #390708;
+    }
+    .left_form, .right_form{
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px){
+    .containerOrderProduct{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+    .left_form{
+        border-bottom: 1px solid #390708;
+    }
+    .left_form, .right_form{
+        width: 100%;
+    }
+    .img_ img{
+        width: 70%;
+    }
+}

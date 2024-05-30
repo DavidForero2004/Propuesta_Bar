@@ -527,7 +527,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectOrder ()
 BEGIN 
-	SELECT R.*, T.name_table, S.name as status FROM `order` R INNER JOIN `table` T ON T.id = R.id_table INNER JOIN status S ON S.id = R.id_status;
+	SELECT R.*, T.name_table, S.name as status FROM `order` R INNER JOIN `table` T ON T.id = R.id_table INNER JOIN status S ON S.id = R.id_status where R.id_status = 1;
 END //
 DELIMITER ;
 
@@ -810,3 +810,6 @@ BEGIN
         P.name_product;
 END //
 DELIMITER ;
+
+ALTER TABLE order_product DROP FOREIGN KEY order_product_ibfk_1; -- Elimina la clave externa existente
+ALTER TABLE order_product ADD CONSTRAINT order_product_ibfk_1 FOREIGN KEY (id_order) REFERENCES `order` (id) ON DELETE CASCADE; -- Agrega la nueva clave externa con ON DELETE CASCADE

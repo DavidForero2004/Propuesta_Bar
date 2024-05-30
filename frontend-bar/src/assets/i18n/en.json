@@ -122,5 +122,7 @@
     "chart": "Charts",
     "canceleds": "Canceled",
     "cancelOrder": "Order successfully canceled",
-    "paided": "Pay"
+    "paided": "Pay",
+    "askFor": "Ask for",
+    "orderEmployee": "Order"
 }

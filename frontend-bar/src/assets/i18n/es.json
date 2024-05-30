@@ -123,5 +123,7 @@
     "canceleds": "Cancelado",
     "cancelOrder": "Orden cancelada correctamente",
     "paided": "Pagar",
-    "request": "Pedir"
+    "request": "Pedir",
+    "askFor": "Pedir",
+    "orderEmployee": " Pedido"
 }

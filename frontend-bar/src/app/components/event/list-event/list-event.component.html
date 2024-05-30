@@ -13,28 +13,30 @@
                 <mat-icon>add</mat-icon>
             </button>
         </div>
-        <table mat-table [dataSource]="dataSource" matSort>
-            <!-- Name Event Column -->
-            <ng-container matColumnDef="name_event">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "nameEvent" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.name_event }}</td>
-            </ng-container>
-            <!-- Date Column -->
-            <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef>{{ "dateEvent" | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-            </ng-container>
-            <!-- Action Buttons -->
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef>{{ "actions" | translate }}</th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-icon (click)="addEvent(element.id)" class="btn-edit" matTooltip="{{ 'edit' | translate }} {{ 'event' | translate }}">edit</mat-icon>
-                    <mat-icon (click)="deleteEvent(element.id)" class="btn-delete" matTooltip="{{ 'delete' | translate }} {{ 'event' | translate }}">delete</mat-icon>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <!-- Name Event Column -->
+                <ng-container matColumnDef="name_event">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ "nameEvent" | translate }}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name_event }}</td>
+                </ng-container>
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>{{ "dateEvent" | translate }}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <!-- Action Buttons -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>{{ "actions" | translate }}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon (click)="addEvent(element.id)" class="btn-edit" matTooltip="{{ 'edit' | translate }} {{ 'event' | translate }}">edit</mat-icon>
+                        <mat-icon (click)="deleteEvent(element.id)" class="btn-delete" matTooltip="{{ 'delete' | translate }} {{ 'event' | translate }}">delete</mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
         <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
     </div>
 </section>
