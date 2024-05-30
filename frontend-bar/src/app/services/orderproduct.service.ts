@@ -28,6 +28,10 @@ export class OrderproductService {
     return this.http.get<Orderproduct>(`${this.myAppUrl}${this.myApiUrl}/orderid/${id}`);
   }
 
+  getOrderIdProductId(ido: number, idp: number):Observable<Orderproduct> {
+    return this.http.get<Orderproduct>(`${this.myAppUrl}${this.myApiUrl}/orderid/${ido}/productid/${idp}`);
+  }
+
   addOrderProduct(orderProduct: Orderproduct): Observable<any> {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/insertorderproduct`, orderProduct);
   }

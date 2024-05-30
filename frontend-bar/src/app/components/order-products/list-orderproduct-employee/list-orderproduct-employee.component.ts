@@ -12,6 +12,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService } from '../../../services/order.service';
 import { OrderproductService } from '../../../services/orderproduct.service';
+import { Orderproduct } from '../../../interfaces/orderproduct';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-orderproduct-employee',
@@ -34,6 +37,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
   imageProduct: any = null;
   priceProduct: any = null;
   refreshTime: number = Date.now();
+  loading: boolean = false;
 
   @ViewChild('productInput') productInput!: ElementRef;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,12 +51,13 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
     private toastr: ToastrService,
     private translate: TranslateService,
     private _errorService: ErrorService,
-  ) { 
+  ) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
 
     this.form = this.fb.group({
       id_product: ['', Validators.required],
+      count: ['', Validators.required],
     });
 
     this.dataSource = new MatTableDataSource();
@@ -84,14 +89,14 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
     }
   }
 
-  onKey(event: any) { 
+  onKey(event: any) {
     const inputValue = (event.target as HTMLInputElement).value;
     this.filteredProducts = this.search(inputValue);
   }
 
-  search(value: string) { 
+  search(value: string) {
     let filter = value.toLowerCase();
-    return this.products.filter((product: Product) => 
+    return this.products.filter((product: Product) =>
       product.name_product && product.name_product.toLowerCase().startsWith(filter)
     );
   }
@@ -122,7 +127,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
       }
     });
   }
-  
+
   getProduct() {
     this._productService.getProduct().subscribe((data: any) => {
       if (data && data.result && Array.isArray(data.result)) {
@@ -137,7 +142,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
 
   getProductId(id: number) {
     this._productService.getProductId(id).subscribe((data: any) => {
-      if(data && data.result && Array.isArray(data.result)) {
+      if (data && data.result && Array.isArray(data.result)) {
         const result = data.result[0];
         if (Array.isArray(result)) {
           const object = result[0];
@@ -146,6 +151,98 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
           this.priceProduct = object.price;
         }
       }
+    });
+  }
+
+  addProductOrder() {
+    this.loading = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const productId = this.form.value.id_product;
+
+    this._orderProductService.getOrderIdProductId(this.orderId, productId).subscribe((data: any) => {
+      if (data && data.result && Array.isArray(data.result)) {
+        const result = data.result[0];
+        console.log(result[0]);
+
+        if (result[0]) {
+          if (Array.isArray(result)) {
+            const object = result[0];
+            const orderProductId = object.id;
+            const count = object.count
+            const countForm = this.form.value.count;
+            const sumCounts = countForm + count;
+
+            const orderProduct: Orderproduct = {
+              id: orderProductId,
+              id_order: this.orderId,
+              id_product: this.form.value.id_product,
+              count: sumCounts
+            }
+
+            this._orderProductService.updateOrderProduct(orderProduct).pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.loading = false;
+                this._errorService.msjError(error);
+                return throwError(error);
+              })
+            ).subscribe(() => {
+              this.loading = false;
+              this.toastr.success('Se agrego correctamente', 'Agregado');
+              this.getOrderIdProduct();
+              this.resetForm();
+            });
+          }
+        }
+        else {
+          const orderProduct: Orderproduct = {
+            id_order: this.orderId,
+            id_product: this.form.value.id_product,
+            count: this.form.value.count
+          }
+
+          this._orderProductService.addOrderProduct(orderProduct).pipe(
+            catchError((error: HttpErrorResponse) => {
+              this.loading = false;
+              this._errorService.msjError(error);
+              return throwError(error);
+            })
+          ).subscribe(() => {
+            this.loading = false;
+            this.toastr.success('Se agrego correctamente', 'Agregado');
+            this.getOrderIdProduct();
+            this.resetForm();
+          });
+        }
+
+        // if (Array.isArray(result)) {
+        //   const object = result[0];
+        //   console.log(object);
+
+        // }
+      }
+    });
+  }
+
+  resetForm(): void {
+    this.form.reset();
+    this.nameProduct = '';
+    this.priceProduct = null;
+    this.refreshTime = Date.now();
+  }
+
+  deleteOrderProduct(id: number) {
+    this._orderProductService.deleteOrderProduct(id).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+        return throwError(error);
+      })
+    ).subscribe(() => {
+      this.getOrderIdProduct();
+      this.toastr.success('Eliminado correctamente', 'Eliminado');
     });
   }
 

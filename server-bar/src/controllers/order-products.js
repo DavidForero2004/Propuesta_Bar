@@ -277,5 +277,48 @@ const getOrderIdProduct = (req, res) => {
     }
 }
 
+//show order id_order product id_product
+const getOrderIdProductId = (req, res) => {
+    const { ido, idp } = req.params;
 
-module.exports = { getOrderProduct, insertOrderProduct, updateOrderProduct, deleteOrderProduct, getOrderProductId, getOrderIdProduct };
+    ////////////////////////////////////////////////////////////////////
+
+    try {
+        const query = 'CALL selectOrderIdProductId(?,?)'
+
+        connection.query(query, [ido,idp], (error, result) => {
+            try {
+                if (error) {
+                    res.status(400).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    if (!result) {
+                        res.status(400).json({
+                            msg: i18n.__('notExistOrderProduct'),
+                            result
+                        });
+                    } else {
+                        res.json({
+                            result
+                        });
+                    }
+                }
+            } catch (error) {
+                res.status(500).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
+
+module.exports = { getOrderProduct, insertOrderProduct, updateOrderProduct, deleteOrderProduct, getOrderProductId, getOrderIdProduct, getOrderIdProductId };

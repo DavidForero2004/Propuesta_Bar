@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const { getOrderProduct, getOrderProductId, insertOrderProduct, updateOrderProduct, deleteOrderProduct, getOrderIdProduct } = require('../controllers/order-products.js');
+const { getOrderProduct, getOrderProductId, insertOrderProduct, updateOrderProduct, deleteOrderProduct, getOrderIdProduct, getOrderIdProductId } = require('../controllers/order-products.js');
 const { validateToken } = require('../routes/validate-token.js');
 
 
@@ -12,6 +12,7 @@ router.post('/insertorderproduct', insertOrderProduct);
 router.get('/', validateToken, getOrderProduct);
 router.get('/:id', validateToken, getOrderProductId);
 router.get('/orderid/:id', validateToken, getOrderIdProduct);
+router.get('/orderid/:ido/productid/:idp', validateToken, getOrderIdProductId);
 router.put('/updateorderproduct', validateToken, updateOrderProduct);
 router.delete('/deleteorderproduct/:id', validateToken, deleteOrderProduct);
 

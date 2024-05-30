@@ -638,6 +638,21 @@ DELIMITER ;
 
 ------
 
+------
+
+--SELECT orderidproductid
+DELIMITER //
+CREATE PROCEDURE selectOrderIdProductId(
+	IN id_order_op INTEGER,
+	IN id_product_op INTEGER
+)
+BEGIN
+	SELECT * FROM `order_product` WHERE id_order = id_order_op AND id_product = id_product_op;
+END //
+DELIMITER ;
+
+------
+
 --INSERT
 DELIMITER //
 CREATE PROCEDURE insertOrderProduct (
