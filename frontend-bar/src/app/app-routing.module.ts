@@ -39,7 +39,7 @@ const routes: Routes = [{
     //CHARTS
     {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]},
     //ERRORS
-    {path: '**', redirectTo: 'login', pathMatch: 'full'}
+    {path: '**', redirectTo: 'hollowbar-initial/client', pathMatch: 'full'}
 
   ]
 }];

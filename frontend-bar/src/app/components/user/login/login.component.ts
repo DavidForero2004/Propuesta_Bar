@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
     this._userService.login(user).subscribe({
       next: (response: any) => {
-        this.router.navigate(['/users']);
+        this.router.navigate(['/chart']);
         const token = response.token;
         this.localStorageService.setItem('token', token);
       },

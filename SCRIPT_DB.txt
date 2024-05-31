@@ -73,13 +73,91 @@ CREATE TABLE IF NOT EXISTS order_product(
 );
 
 
-INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
 INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paid'), ('Canceled');
+INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
+INSERT INTO user(name, email, password, id_status, id_rol) VALUES ('Brandon Escudero', 'brandonescudero2810@gmail.com', '$2b$10$e/QF0YMmkDYx0/Zxc1MNS.Dly4bJKbUxPj8J5lfmdqkX18z4To3kO', 1, 1);
+
+INSERT INTO product (name_product, image, price, stock, id_status) VALUES
+('Ron Medellin', 'Ron Medellin.jpg', 45000.00, 100, 1),
+('Tequila Jose Cuervo', 'Tequila Jose Cuervo.jpg', 80000.00, 75, 1),
+('Vodka Smirnoff', 'Vodka Smirnoff.jpg', 60000.00, 120, 1),
+('Ginebra Tanqueray', 'Ginebra Tanqueray.jpg', 90000.00, 60, 1),
+('Aguardiente Antioqueño', 'Aguardiente Antioqueño.jpg', 35000.00, 200, 1),
+('Brandy Domecq', 'Brandy Domecq.jpg', 50000.00, 90, 1),
+('Vino Concha y Toro', 'Vino Concha y Toro.jpg', 30000.00, 150, 1),
+('Champaña Moet', 'Champaña Moet.jpg', 200000.00, 30, 1),
+('Cerveza Club Colombia', 'Cerveza Club Colombia.jpg', 6000.00, 500, 1);
+
+INSERT INTO `table`(name_table, id_status) VALUES ('A', 1), ('B', 1), ('C', 1), ('D', 1);
+
+INSERT INTO `order` (type_document, num_document, id_table, id_status, order_date) VALUES
+('Cédula de ciudadanía', 12345678, 1, 3, '2024-05-01'),
+('Cédula de extranjería', 87654321, 2, 3, '2024-05-02'),
+('NIT', 123123123, 3, 3, '2024-05-03'),
+('Cédula de ciudadanía', 23456789, 4, 3, '2024-05-04'),
+('Cédula de extranjería', 98765432, 1, 3, '2024-05-05'),
+('NIT', 234234234, 2, 3, '2024-05-06'),
+('Cédula de ciudadanía', 34567890, 3, 3, '2024-05-07'),
+('Cédula de extranjería', 87654321, 4, 3, '2024-05-08'),
+('NIT', 345345345, 1, 3, '2024-05-09'),
+('Cédula de ciudadanía', 45678901, 2, 3, '2024-05-10'),
+('Cédula de extranjería', 76543210, 3, 1, '2024-05-11'),
+('NIT', 456456456, 4, 2, '2024-05-12'),
+('Cédula de ciudadanía', 56789012, 1, 4, '2024-05-13'),
+('Cédula de extranjería', 65432109, 2, 1, '2024-05-14'),
+('NIT', 567567567, 3, 2, '2024-05-15'),
+('Cédula de ciudadanía', 67890123, 4, 4, '2024-05-16'),
+('Cédula de extranjería', 54321098, 1, 1, '2024-05-17'),
+('NIT', 678678678, 2, 2, '2024-05-18'),
+('Cédula de ciudadanía', 78901234, 3, 4, '2024-05-19'),
+('Cédula de extranjería', 43210987, 4, 1, '2024-05-20');
+
+
+INSERT INTO order_product (id_order, id_product, count, total) VALUES
+(1, 1, 2, 90000.00),
+(1, 2, 1, 80000.00),
+(1, 3, 3, 180000.00),
+(1, 4, 1, 90000.00),
+
+(2, 5, 4, 140000.00),
+(2, 6, 2, 100000.00),
+(2, 7, 1, 30000.00),
+(2, 8, 1, 200000.00),
+
+(3, 9, 6, 36000.00),
+(3, 1, 1, 45000.00),
+(3, 2, 2, 160000.00),
+(3, 3, 1, 60000.00),
+
+(4, 4, 3, 270000.00),
+(4, 5, 1, 35000.00),
+(4, 6, 5, 250000.00),
+(4, 7, 2, 60000.00),
+
+(5, 8, 1, 200000.00),
+(5, 9, 3, 18000.00),
+(5, 1, 1, 45000.00),
+(5, 2, 4, 320000.00),
+
+(6, 3, 2, 120000.00),
+(6, 4, 2, 180000.00),
+(6, 5, 3, 105000.00),
+(6, 6, 1, 50000.00),
+
+(7, 7, 2, 60000.00),
+(7, 8, 1, 200000.00),
+(7, 9, 4, 24000.00),
+(7, 1, 3, 135000.00),
+
+(8, 2, 1, 80000.00),
+(8, 3, 2, 120000.00),
+(8, 4, 1, 90000.00),
+(8, 5, 2, 70000.00);
+
 
 
 
 /*Procedures*/
-
 
 ------------------------------------------------------------EVENTS
 --INSERT
@@ -204,7 +282,7 @@ CREATE PROCEDURE insertProduct (
 		IN id_status_p INTEGER
 )
 BEGIN 
-	SET @maxId = (SELECT COALESCE(MAX(id),0) FROM product);
+	SET @maxId = (SELECT COALESCE(MAX(id), 0) FROM product);
 	SET @sql = CONCAT('ALTER TABLE product AUTO_INCREMENT = ', @maxId + 1);
 	PREPARE stmt FROM @sql;
 	EXECUTE stmt;
@@ -527,7 +605,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE selectOrder ()
 BEGIN 
-	SELECT R.*, T.name_table, S.name as status FROM `order` R INNER JOIN `table` T ON T.id = R.id_table INNER JOIN status S ON S.id = R.id_status where R.id_status = 1;
+	SELECT R.*, T.name_table, S.name as status FROM `order` R INNER JOIN `table` T ON T.id = R.id_table INNER JOIN status S ON S.id = R.id_status;
 END //
 DELIMITER ;
 

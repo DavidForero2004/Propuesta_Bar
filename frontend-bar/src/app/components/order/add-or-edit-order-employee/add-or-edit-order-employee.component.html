@@ -39,7 +39,7 @@
                 <mat-form-field *ngIf="id === undefined">
                     <mat-label>{{ "gridTable" | translate }}</mat-label>
                     <mat-select formControlName="id_table">
-                        <mat-option *ngFor="let tablefor of table" [value]="tablefor.id">{{ "gridTable" | translate }} {{ tablefor.name_table }}</mat-option>
+                        <mat-option *ngFor="let tablefor of table" [value]="tablefor.id">Mesa {{ tablefor.name_table }}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="example-full-width" *ngIf="id !== undefined">

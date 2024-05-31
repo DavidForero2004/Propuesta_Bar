@@ -55,6 +55,7 @@
     "requireTable": "La mesa es obligatoria",
     "minPassword": "La contraseña debe ser mínimo de 3 caracteres",
     "saveUser": "Usuario agregado correctamente",
+    "saveOrderProduct": "El producto se agregado correctamente a la orden",
     "saveRol": "Rol agregado correctamente",
     "saveEvent": "Evento agregado correctamente",
     "saveProduct": "Producto agregado correctamente",
@@ -72,6 +73,7 @@
     "edited": "Editado",
     "removed": "Eliminado",
     "deleteUser": "Usuario eliminado correctamente",
+    "deleteOrderPRoduct": "El producto se eliminado correctamente de la orden",
     "deleteEvent": "Evento eliminado correctamente",
     "deleteStatus": "Estado eliminado correctamente",
     "deleteProduct": "Producto eliminado correctamente",
@@ -124,6 +126,7 @@
     "cancelOrder": "Orden cancelada correctamente",
     "paided": "Pagar",
     "request": "Pedir",
-    "askFor": "Pedir",
-    "orderEmployee": " Pedido"
+    "orderEmployee": " Pedido",
+    "selectProduct": "Seleccionar producto",
+    "subTotal": "Subtotal"
 }

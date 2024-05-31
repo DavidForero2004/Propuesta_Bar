@@ -38,6 +38,12 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
   priceProduct: any = null;
   refreshTime: number = Date.now();
   loading: boolean = false;
+  orderProductDelete: string = '';
+  removed: string = '';
+  orderProductSave: string = '';
+  aggregate: string = '';
+  orderProductUpdate: string = '';
+  edited: string = '';
 
   @ViewChild('productInput') productInput!: ElementRef;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -64,6 +70,13 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
 
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'file';
+
+    this.translate.get(['deleteOrderPRoduct', 'removed','saveOrderProduct','aggregate']).subscribe((res: any) => {
+      this.orderProductDelete = res.deleteOrderPRoduct;
+      this.removed = res.removed;
+      this.orderProductSave = res.saveOrderProduct;
+      this.aggregate = res.aggregate;
+    });
   }
 
   ngOnInit(): void {
@@ -191,7 +204,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
               })
             ).subscribe(() => {
               this.loading = false;
-              this.toastr.success('Se agrego correctamente', 'Agregado');
+              this.toastr.success(this.orderProductSave, this.aggregate);
               this.getOrderIdProduct();
               this.resetForm();
             });
@@ -212,7 +225,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
             })
           ).subscribe(() => {
             this.loading = false;
-            this.toastr.success('Se agrego correctamente', 'Agregado');
+            this.toastr.success(this.orderProductSave, this.aggregate);
             this.getOrderIdProduct();
             this.resetForm();
           });
@@ -242,7 +255,7 @@ export class ListOrderproductEmployeeComponent implements OnInit, AfterViewInit 
       })
     ).subscribe(() => {
       this.getOrderIdProduct();
-      this.toastr.success('Eliminado correctamente', 'Eliminado');
+      this.toastr.success(this.orderProductDelete, this.removed);
     });
   }
 
