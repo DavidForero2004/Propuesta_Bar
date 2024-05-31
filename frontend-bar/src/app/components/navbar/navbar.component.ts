@@ -39,7 +39,11 @@ export class NavbarComponent implements OnInit {
     script.defer = true;
     this.renderer.appendChild(document.body, script);
   }
+  isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   logOut() {
     this.localStorageService.clear();
     this.router.navigate(['/login']);
