@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 
-const { getOrder, getOrderId, insertOrder, updateOrder, deleteOrder, getOrderSales, getOrderSalesMonth, getOrderSalesProduct, getOrderSalesProductMonth, getOrderSalesTable } = require('../controllers/order.js');
+const { getOrder, getOrderId, insertOrder, updateOrder, deleteOrder, getOrderSales, getOrderSalesMonth, getOrderSalesProduct, getOrderSalesProductMonth, getOrderSalesTable, getOrderClient } = require('../controllers/order.js');
 const { validateToken } = require('../routes/validate-token.js');
 
 
 //routes call all methods
+router.post('/orderclient', getOrderClient);
 router.post('/insertorder', insertOrder);
 router.get('/', validateToken, getOrder);
 router.get('/sales', validateToken, getOrderSales);

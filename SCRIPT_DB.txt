@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS order_product(
 
 
 INSERT INTO status(name) VALUES ('Active'), ('Inactive'), ('Paid'), ('Canceled');
-INSERT INTO Rol(name) VALUES ('Admistrator'), ('Employee');
+INSERT INTO rol(name) VALUES ('Admistrator'), ('Employee');
 INSERT INTO user(name, email, password, id_status, id_rol) VALUES ('Brandon Escudero', 'brandonescudero2810@gmail.com', '$2b$10$e/QF0YMmkDYx0/Zxc1MNS.Dly4bJKbUxPj8J5lfmdqkX18z4To3kO', 1, 1);
 
 INSERT INTO product (name_product, image, price, stock, id_status) VALUES
@@ -621,6 +621,21 @@ BEGIN
 END //
 DELIMITER ;
 
+--------------
+
+--SELECT orderClient
+DELIMITER //
+CREATE PROCEDURE selectOrderClient(
+	IN type_document_o VARCHAR(255),
+	IN num_document_o INTEGER,
+	IN id_table_o INTEGER
+)
+BEGIN
+	SELECT * FROM `order` WHERE type_document = type_document_o AND num_document = num_document_o AND id_table = id_table_o AND id_status = 1;
+END //
+DELIMITER ;
+
+--------------
 
 --SELECT ordernumdocument
 DELIMITER //

@@ -37,6 +37,40 @@ const getOrder = (req, res) => {
     }
 }
 
+const getOrderClient = (req, res) => {
+    const query = 'CALL selectOrderClient(?,?,?)';
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    try {
+        const { type_document, num_document, id_table } = req.body;
+        connection.query(query, [type_document, num_document, id_table], (error, result) => {
+            try {
+                if (error) {
+                    res.status(500).json({
+                        msg: 'Error',
+                        error
+                    });
+                } else {
+                    res.json({
+                        result
+                    });
+                }
+            } catch (error) {
+                res.status(400).json({
+                    msg: 'Error',
+                    error
+                });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Error',
+            error
+        });
+    }
+}
+
 const getOrderSales = (req, res) => {
     const query = 'CALL selectSales';
 
@@ -379,4 +413,4 @@ const getOrderSalesTable = (req, res) => {
     }
 }
 
-module.exports = { getOrder, insertOrder, updateOrder, deleteOrder, getOrderId, getOrderSales,getOrderSalesMonth, getOrderSalesProduct, getOrderSalesProductMonth, getOrderSalesTable };
+module.exports = { getOrderClient, getOrder, insertOrder, updateOrder, deleteOrder, getOrderId, getOrderSales,getOrderSalesMonth, getOrderSalesProduct, getOrderSalesProductMonth, getOrderSalesTable };
