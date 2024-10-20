@@ -3,11 +3,11 @@ const mysql = require('mysql');
 
 
 const connection = mysql.createConnection({
-    host: 'sql5.freesqldatabase.com',
+    host: 'mysql-hollowbar.alwaysdata.net',
     port: 3306,
-    database: 'sql5737565',
-    user: 'sql5737565',
-    password: 'VBKfITU5DN'
+    database: 'hollowbar_test',
+    user: 'hollowbar_david',
+    password: 'David.forero2019'
 });
 
 
