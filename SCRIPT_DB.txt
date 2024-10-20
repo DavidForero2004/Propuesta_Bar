@@ -157,6 +157,7 @@ INSERT INTO order_product (id_order, id_product, count, total) VALUES
 
 
 
+
 /*Procedures*/
 
 ------------------------------------------------------------EVENTS
@@ -176,7 +177,16 @@ BEGIN
 END //
 DELIMITER ;
 
-
+CALL insertEvent('Bar Fiesta', '2024-06-01 20:00:00');
+CALL insertEvent('El Rincón', '2024-06-02 21:00:00');
+CALL insertEvent('La Cava', '2024-06-03 22:00:00');
+CALL insertEvent('Taberna Roja', '2024-06-04 23:00:00');
+CALL insertEvent('Bar Elixir', '2024-06-05 18:00:00');
+CALL insertEvent('Cantina Azul', '2024-06-06 19:00:00');
+CALL insertEvent('Pub Encanto', '2024-06-07 20:00:00');
+CALL insertEvent('Taverna de Oro', '2024-06-08 21:00:00');
+CALL insertEvent('El Faro', '2024-06-09 22:00:00');
+CALL insertEvent('La Noche', '2024-06-10 23:00:00');
 --------
 
 --SELECT eventid

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/localstorage.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,6 +29,16 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript('../../../../assets/js/nav/nav.js');
+    this.checkScreenWidth();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    this.isMenuOpen = window.innerWidth <= 720 ? this.isMenuOpen : false;
   }
 
   private loadScript(url: string): void {
@@ -39,7 +49,11 @@ export class NavbarComponent implements OnInit {
     script.defer = true;
     this.renderer.appendChild(document.body, script);
   }
+  isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   logOut() {
     this.localStorageService.clear();
     this.router.navigate(['/login']);

@@ -117,7 +117,8 @@ export class StructureComponent implements OnInit {
     navLinks: true,
     events: this.eventCalendar,
   };
-
+  
+  
   es() {
     this.translate.use('es');
     this._eventService.updateServerLanguage('es').subscribe(() => {

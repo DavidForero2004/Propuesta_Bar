@@ -87,9 +87,9 @@
   .en:focus {
     text-decoration: underline;
   }
-  .option_container_menu {
+  /* .option_container_menu {
     display: none;
-  }
+  } */
   .menu_hamburguer {
     display: none;
   }
@@ -107,7 +107,7 @@
       justify-content: space-around;
       gap: 50%;
     }
-    .option_container_menu.show {
+    .option_container_menu {
       display: block;
       background-color: #390708;
       flex-direction: column;

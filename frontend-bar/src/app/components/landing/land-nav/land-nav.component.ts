@@ -1,14 +1,13 @@
-import { Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
-import { faShoppingCart, faBars, faPhone, faHouse,faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { faShoppingCart, faBars, faPhone, faHouse, faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-land-nav',
   templateUrl: './land-nav.component.html',
-  styleUrl: './land-nav.component.css'
+  styleUrls: ['./land-nav.component.css']
 })
 export class LandNavComponent implements OnInit {
 
@@ -20,6 +19,7 @@ export class LandNavComponent implements OnInit {
   iconLanguage = faLanguage;
   iconCalendar = faCalendar;
 
+  isMenuOpen = false;
 
   constructor(
     private translate: TranslateService,
@@ -33,12 +33,21 @@ export class LandNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript('../../../../assets/js/landing/landing.js');
+    this.checkScreenWidth();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    this.isMenuOpen = window.innerWidth <= 720 ? this.isMenuOpen : false;
   }
 
   navigateToFooter() {
     this.router.navigate(['/hollowbar-initial/client/'], { fragment: 'footer' });
   }
-
 
   private loadScript(url: string): void {
     if (typeof document !== 'undefined') {
@@ -50,7 +59,10 @@ export class LandNavComponent implements OnInit {
       this.el.nativeElement.appendChild(script);
     }
   }
-  
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   es() {
     this.translate.use('es');
