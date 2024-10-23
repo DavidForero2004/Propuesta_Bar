@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    endpoint: 'http://localhost:3000/'
+    endpoint: 'https://propuesta-bar-1.onrender.com/'
   };
   
   /*

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const { getUser, insertUser, loginUser, updateUser, deleteUser, getUserId } = require('../controllers/user');
+const { getUser, insertUser, loginUser, updateUser, deleteUser, getUserId, loginEmail } = require('../controllers/user');
 const { validateToken } = require('../routes/validate-token.js');
 
 
@@ -14,6 +14,7 @@ router.post('/insertuser', validateToken, insertUser);
 router.put('/updateuser', validateToken, updateUser);
 router.delete('/deleteuser/:id', validateToken, deleteUser);
 router.post('/login', loginUser);
+router.post('/loginemail', loginEmail);
 
 
 module.exports = router;
