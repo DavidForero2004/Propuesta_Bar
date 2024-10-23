@@ -44,6 +44,7 @@ const getOrderClient = (req, res) => {
 
     try {
         const { type_document, num_document, id_table } = req.body;
+        
         connection.query(query, [type_document, num_document, id_table], (error, result) => {
             try {
                 if (error) {
