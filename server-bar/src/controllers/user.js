@@ -183,6 +183,46 @@ const loginUser = (req, res) => {
     }
 }
 
+
+const loginEmail = (req, res) => {
+    const { email } = req.body;
+    const query = 'CALL selectUserEmail(?)';
+
+    try {
+        connection.query(query, [email], (error, result) => {
+            if (error) {
+                return res.status(500).json({
+                    msg: i18n.__('errorDatabaseServer'),
+                    error
+                });
+            }
+
+            const userData = result[0];
+            const user = userData[0]; // Accede al primer usuario (si existe)
+
+            if (!user) {
+                return res.status(404).json({
+                    msg: i18n.__('notExistUserEmail') + ` ${email}`
+                });
+            }
+
+            // Genera un token si el email existe
+            const token = jwt.sign(
+                { email },
+                process.env.SECRET_K || 'contrasena123', 
+                { expiresIn: '1h' } // Token válido por 1 hora
+            );
+
+            res.json({ token });
+        });
+    } catch (error) {
+        res.status(502).json({
+            msg: 'Error',
+            error
+        });
+    }
+};
+
 // Show user by id
 const getUserId = (req, res) => {
     const { id } = req.params;
@@ -216,4 +256,4 @@ const getUserId = (req, res) => {
     }
 }
 
-module.exports = { insertUser, loginUser, getUser, deleteUser, updateUser, getUserId };
+module.exports = { insertUser, loginUser, getUser, deleteUser, updateUser, getUserId, loginEmail };
