@@ -34,7 +34,7 @@ export class StructureComponent implements OnInit {
     this.loadScript('../../../../assets/js/landing/landing.js');
     this.getEvent();
     this.getProduct();
-    this.getEventCalendar();
+    //this.getEventCalendar();
   }
 
   private loadScript(url: string): void {

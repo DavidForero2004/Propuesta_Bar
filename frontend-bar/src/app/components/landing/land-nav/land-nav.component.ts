@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { faShoppingCart, faBars, faPhone, faHouse, faLanguage, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-land-nav',
@@ -10,8 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./land-nav.component.css']
 })
 export class LandNavComponent implements OnInit {
-
-  //icons
+  // Icons
   iconCar = faShoppingCart;
   iconMenu = faBars;
   iconPhone = faPhone;
@@ -25,24 +25,31 @@ export class LandNavComponent implements OnInit {
     private translate: TranslateService,
     private _userService: UserService,
     private el: ElementRef,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object // Inyectamos PLATFORM_ID para detectar el entorno
   ) {
     this.translate.addLangs(['es', 'en']);
     this.translate.setDefaultLang('es');
   }
 
   ngOnInit(): void {
-    this.loadScript('../../../../assets/js/landing/landing.js');
-    this.checkScreenWidth();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadScript('../../../../assets/js/landing/landing.js');
+      this.checkScreenWidth();
+    }
   }
 
   @HostListener('window:resize')
   onResize() {
-    this.checkScreenWidth();
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkScreenWidth();
+    }
   }
 
   checkScreenWidth() {
-    this.isMenuOpen = window.innerWidth <= 720 ? this.isMenuOpen : false;
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMenuOpen = window.innerWidth <= 720 ? this.isMenuOpen : false;
+    }
   }
 
   navigateToFooter() {
@@ -50,7 +57,7 @@ export class LandNavComponent implements OnInit {
   }
 
   private loadScript(url: string): void {
-    if (typeof document !== 'undefined') {
+    if (isPlatformBrowser(this.platformId) && typeof document !== 'undefined') {
       const script = document.createElement('script');
       script.src = url;
       script.type = 'text/javascript';

@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Moduls
+
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -135,7 +137,8 @@ import { ListOrderproductEmployeeComponent } from './components/order-products/l
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntlService },
     { provide: MAT_DATE_LOCALE, useValue: 'es' },
     { provide: DatePipe },
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
